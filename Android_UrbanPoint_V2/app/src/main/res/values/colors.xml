@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#44444C</color>
+    <color name="colorPrimaryDark">#44444C</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="orange">#ee8d01</color>
+    <color name="orange_notification">#EE6545</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_background">#A0000000</color>
+    <color name="lst_item_bg">#f7f7f7</color>
+    <color name="splash_bg">#f2f2f2</color>
+
+    <color name="shadow_color">#aadcdada</color>
+    <color name="gray_profile">#adadad</color>
+    <color name="gray">#9A9899</color>
+    <color name="gray_bg">#191717</color>
+    <color name="gray_light">#969696</color>
+    <color name="selected_pin_input">#FFB85C</color>
+    <color name="custom_message_box_button">#006DFE</color>
+    <color name="blue">#000099</color>
+    <color name="black">#000000</color>
+    <color name="drawer_background">#44444C</color>
+    <color name="expndble_lst_color">#a83664</color>
+    <color name="thm_bg_loader">#1e000000</color>
+    <!--<conamename="drawer_change_pin_background">#641930</color>-->
+    <!--<conamename="contact_us_background">#B6B7BB</color>-->
+    <color name="contact_us_background">#F7F7F7</color>
+
+    <color name="purchase_history_header">#ee8d01</color>
+    <color name="purchase_history_footer">#ee8d01</color>
+    <color name="drawer_contact_us_background">#8d345a</color>
+
+    <!--<conamename="tab_color">#4B1127</color>-->
+
+    <color name="main_color">#722B4C</color>
+
+
+    <!-- <conamename="zomato_rating_color">#BD4257</color>-->
+
+
+</resources>

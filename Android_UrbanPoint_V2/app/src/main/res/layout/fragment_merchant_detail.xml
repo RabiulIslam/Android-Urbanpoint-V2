@@ -1,0 +1,333 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ScrollView
+            android:id="@+id/frg_merchant_detail_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp30"
+            android:background="@color/transparent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_top_cntnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+
+                        android:background="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent">
+
+
+                            <ImageView
+                                android:id="@+id/frg_merchant_detail_imv_product"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:adjustViewBounds="true"
+                                android:background="@color/transparent"
+                                android:scaleType="fitXY"
+                                android:visibility="visible" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="85dp"
+                                android:layout_alignParentBottom="true"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/lLyt_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="43dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="#808d345a"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_marginStart="50dp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="1dp">
+
+                                        <Button
+                                            android:id="@+id/frg_merchant_detail_btn_call"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/dp5"
+                                            android:background="@android:color/transparent"
+                                            android:drawablePadding="5dp"
+                                            android:drawableStart="@drawable/call_icon"
+                                            android:enabled="true"
+                                            android:includeFontPadding="false"
+                                            android:padding="@dimen/dp5"
+                                            android:paddingStart="20dp"
+                                            android:text="@string/call"
+                                            android:textAllCaps="false"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/sp14" />
+
+                                        <Button
+                                            android:id="@+id/frg_merchant_detail_btnDirection"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/dp10"
+                                            android:background="@android:color/transparent"
+                                            android:drawablePadding="@dimen/dp5"
+                                            android:drawableStart="@drawable/location_icon"
+                                            android:enabled="true"
+                                            android:padding="@dimen/dp5"
+
+                                            android:text="@string/directions"
+                                            android:textAllCaps="false"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/sp14" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="55dp"
+                                    android:layout_below="@+id/lLyt_transparent"
+                                    android:background="@color/white" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/frg_merchant_detail_imvMerchant"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginStart="@dimen/dp10"
+                                    android:background="@drawable/rmv_place_holder"
+                                    android:elevation="@dimen/dp5"
+                                    android:padding="5dp"
+                                    android:scaleType="centerCrop"
+                                    android:visibility="visible"
+                                    app:civ_border_width="@dimen/dp1"
+                                    app:civ_border_color="@color/shadow_color"/>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/frg_merchant_detail_ll_cntnr_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/rl_top_cntnr"
+                    android:layout_marginEnd="@dimen/dp10"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:id="@+id/ll_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/dp5">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/frg_merchant_detail_txv_merchant_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="@string/itemName"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/fontsize_medium"
+                                 android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/frg_merchant_detail_txv_merchant_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:text="@string/itemName"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/frg_merchant_detail_txv_timmings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:includeFontPadding="false"
+                                android:paddingTop="@dimen/dp2"
+                                android:text="@string/itemName"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp13"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:uber="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/relative_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        tools:context=".views.activities.common.OfferDetailActivity">
+
+                        <!--android:layout_below="@id/uber_estimate_rl_container"-->
+
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/frg_merchant_detail_uber_btn_ll_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/button_height_large"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/gray_background_border"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:visibility="gone"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="14dp"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/icn_uber_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="5dp"
+                                android:text="@string/get_a_ride"
+                                android:textSize="@dimen/fontsize_normal"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/frg_merchant_detail_ll_cntnr_estimate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/frg_merchant_detail_uber_time_duration_txv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 min away"
+                                android:lines="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/frg_merchant_detail_uber_price_estimate_txv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="QR 10-15 on Uber X"
+                                android:lines="1"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/frg_merchant_detail_txv_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="string/empty_string"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fontsize_small"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/frg_merchant_detail_fragment_offers"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fontsize_medium"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="visible" />
+
+                    <com.urbanpoint.UrbanPoint.Utils.ExpandableHeightGridView
+                        android:id="@+id/frg_merchant_detial_lsv_offers"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="@null"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="none"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

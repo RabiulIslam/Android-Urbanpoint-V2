@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp100"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dp4"
+    android:paddingLeft="@dimen/dp4">
+
+    <RelativeLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="-10dp"
+        android:background="@drawable/black_background_border"
+        android:paddingLeft="@dimen/dp5">
+
+
+        <!--clickable for catching white clicks-->
+        <RelativeLayout
+            android:id="@+id/merchantLogoImageLayout"
+            android:layout_width="@dimen/dp90"
+            android:layout_height="@dimen/dp100"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <com.dd.ShadowLayout
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerInParent="true"
+                app:sl_cornerRadius="56dp"
+                app:sl_dx="2dp"
+                app:sl_dy="2dp"
+                app:sl_shadowColor="@color/shadow_color"
+                app:sl_shadowRadius="4dp">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/adptr_expendible_merchintlst_group_merchantLogoImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rmv_place_holder_witth_shadow"
+                    android:scaleType="centerCrop"
+                    app:civ_border_width="@dimen/dp1" />
+            </com.dd.ShadowLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/merchantLogoImageLayout"
+            android:orientation="vertical">
+
+            <!--clickable for catching white clicks-->
+            <RelativeLayout
+                android:id="@+id/adptr_expendible_merchintlst_group_expllMerchntName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp10">
+
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp5" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:layout_toLeftOf="@+id/expfoodLockIcn"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp10">
+
+                    <TextView
+                        android:id="@+id/adptr_expendible_merchintlst_group_merchant_name"
+                        style="@style/view_20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="35dp"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="Macdonald"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fontsize_normal"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/adptr_expendible_merchintlst_group_merchantAddress"
+                        style="@style/view_20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/locationIcon"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="i10/3 islamabad"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fontsize_small"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/adptr_expendible_merchintlst_group_merchantDistance"
+                        style="@style/view_20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/locationIcon"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:text="5km"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fontsize_small"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/expfoodLockIcn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:minHeight="10dp"
+                    android:minWidth="40dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/adptr_expendible_merchintlst_group_groupFestivalImage"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:background="@drawable/burger_icon"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY" />
+
+                    <ImageView
+                        android:id="@+id/adptr_expendible_merchintlst_group_expfoodShowGroupLockOffersIcon"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/lock_offers"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/adptr_expendible_merchintlst_group_rlMerchintDetail"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp15">
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icn_next_purple" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/adptr_expendible_merchintlst_group_ll_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".20" />
+
+            <!--Empty view for catching white clicks-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10"
+                android:clickable="true" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/icn_down_purple" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="See Offers"
+                    android:textColor="@color/expndble_lst_color" />
+            </LinearLayout>
+
+
+            <!--Empty view for catching white clicks-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/adptr_expendible_merchintlst_group_ll_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".20" />
+
+            <!--Empty view for catching white clicks-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10"
+                android:clickable="true" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/icn_up_purple" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Hide Offers"
+                    android:textColor="@color/expndble_lst_color" />
+            </LinearLayout>
+
+
+            <!--Empty view for catching white clicks-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/ll_up"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:visibility="gone">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="8dp"-->
+        <!--android:background="@mipmap/icn_up_purple" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:text="Hide Offers"-->
+        <!--android:textColor="@color/expndble_lst_color" />-->
+        <!--</LinearLayout>-->
+    </RelativeLayout>
+
+
+</RelativeLayout>

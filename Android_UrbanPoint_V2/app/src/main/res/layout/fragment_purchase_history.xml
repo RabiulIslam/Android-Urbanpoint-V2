@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBarHeightLayout"
+        android:orientation="vertical">
+
+        <ExpandableListView
+            android:id="@+id/frg_purchase_history_explsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/transparent"
+            android:childDivider="@color/transparent"
+            android:groupIndicator="@null"
+            android:listSelector="@android:color/transparent"
+            android:orientation="horizontal"/>
+
+        <TextView
+            android:id="@+id/frg_purchase_history_txv_ntfound"
+            style="@style/contact_us_view_20"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/purchase_history_no_data_found"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp22"
+            android:textStyle="normal"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/frg_purchase_history_imv_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:background="@color/gray"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/frg_purchase_history_txv_total_saving"
+            style="@style/view_20"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:lines="1"
+            android:paddingStart="5dp"
+            android:text=""
+            android:layout_alignParentEnd="true"
+            android:textAlignment="textStart"
+            android:textColor="@color/orange"
+            android:visibility="gone"
+            android:textSize="@dimen/fontsize_small"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

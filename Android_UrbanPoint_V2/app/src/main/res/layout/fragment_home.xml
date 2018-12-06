@@ -1,0 +1,605 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/home_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp">
+
+        <RelativeLayout
+            android:id="@+id/frg_home_tool_bar_rl_menu"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:visibility="visible">
+
+            <CheckBox
+                android:id="@+id/frg_home_chkbx_menu"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/slc_chkbx_menu"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/frg_home_tool_bar_rl_search"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:padding="7dp"
+                android:src="@drawable/icn_search" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tab_gradient_line"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="90dp"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="40dp">
+
+                    <RelativeLayout
+                        android:id="@+id/frg_home_rl_member_msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/frg_home_txv_member_msg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/home_screem_member"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp16" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/frg_home_imv_category_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="35dp"
+                            android:background="@color/lst_item_bg" />
+
+
+
+                        <LinearLayout
+                            android:layout_width="2500dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <HorizontalScrollView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:fillViewport="true"
+                                android:scrollbars="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="2000dp"
+                                    android:layout_height="wrap_content">
+                                    <GridView
+                                        android:id="@+id/listviewCategories"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:horizontalSpacing="5dp"
+                                        android:listSelector="#00000000"
+                                        android:numColumns="4"
+                                        android:paddingEnd="10dp"
+                                        android:scrollbars="none"
+                                        android:visibility="visible" />
+                                </LinearLayout>
+                            </HorizontalScrollView>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/frg_home_imv_festival"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_marginTop="2dp"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_toEndOf="@+id/frg_home_imv_festival"
+                            android:text="@string/home_screen_you_can_use_again"
+                            android:textColor="@color/black" />
+
+                        <RelativeLayout
+                            android:id="@+id/frg_home_grd_1_next"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true">
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="15dp"
+                                android:layout_centerInParent="true"
+                                android:background="@mipmap/fwd_icn_blck" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="10dp">
+
+                        <HorizontalScrollView
+                            android:id="@+id/frg_home_horizontal_scroll_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="1500dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <GridView
+                                    android:id="@+id/frg_home_lsv_1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:numColumns="4"
+                                    android:paddingRight="20dp" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                        <RelativeLayout
+                            android:id="@+id/frg_home_rl_progrssbar_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@color/lst_item_bg"
+                            android:visibility="visible">
+
+                            <ProgressBar
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_screen_our_member_loved"
+                            android:textColor="@color/black" />
+
+                        <RelativeLayout
+                            android:id="@+id/frg_home_grd_2_next"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true">
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="15dp"
+                                android:layout_centerInParent="true"
+                                android:background="@mipmap/fwd_icn_blck" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:layout_marginLeft="10dp">
+
+                        <HorizontalScrollView
+                            android:id="@+id/frg_home_horizontal_scroll_view_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="20dp">
+
+                            <LinearLayout
+                                android:layout_width="1500dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <GridView
+                                    android:id="@+id/frg_home_lsv_2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:columnWidth="200dp"
+                                    android:numColumns="4"
+                                    android:paddingRight="20dp" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                        <RelativeLayout
+                            android:id="@+id/frg_home_rl_progrssbar_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@color/lst_item_bg"
+                            android:visibility="visible">
+
+                            <ProgressBar
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="85dp"
+                android:background="@mipmap/vertical_scroll_fade_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/frg_home_screen_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="30dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp18" />
+
+                <LinearLayout
+                    android:id="@+id/frg_home_ll_ist_offer"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/orange_gadient_rectngle"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enjoy_your"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/frg_notification_adapter_txv_date_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp20" />
+
+                        <TextView
+                            android:id="@+id/frg_notification_adapter_txv_date_day2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginLeft="-2dp"
+                            android:gravity="top"
+                            android:text="st"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14" />
+
+                        <TextView
+                            android:id="@+id/frg_notification_adapter_txv_date_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/ist_offer"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp20" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/frg_home_txv_offer_days"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mainLayoutGainAcess"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:gravity="center">
+
+                            <Button
+                                android:id="@+id/frg_home_btn_gain_access"
+                                style="@style/button_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="@drawable/orange_gadient_rectngle_rounded"
+                                android:contentDescription="@string/unlock_offers"
+                                android:gravity="center"
+                                android:padding="@dimen/dp5"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:text="@string/unlock_offers"
+                                android:textAllCaps="false"
+                                android:textSize="@dimen/sp16"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/tab_gradient_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_above="@+id/tab_bottom"
+            android:background="@drawable/orange_gadient_rectngle" />
+
+
+        <LinearLayout
+            android:id="@+id/tab_bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/tab_ll_favorites"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tab_imv_round_favourites"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@+id/tab_img_favorites"
+                        android:background="@drawable/orange_gadient_circular"
+                        android:button="@null"
+                        android:checked="true"
+                        android:clickable="false"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/tab_img_favorites"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@mipmap/icn_home_favorites" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tab_txv_favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favorites"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_ll_notifications"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tab_imv_round_notification"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@+id/tab_img_notifications"
+                        android:background="@drawable/orange_gadient_circular"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/tab_img_notifications"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@mipmap/icn_home_notifications" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tab_txv_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifications"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_ll_offers"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tab_imv_round_offers"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@+id/tab_img_offers"
+                        android:background="@drawable/orange_gadient_circular"
+                        android:button="@null"
+                        android:checked="true"
+                        android:clickable="false"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/tab_img_offers"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@mipmap/icn_home_offers" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tab_txv_offers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:paddingRight="5dp"
+                    android:text="New Offers"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/frg_home_rl_notificatn_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tab_gradient_line"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-15dp"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/icn_notification_reminder" />
+
+                <TextView
+                    android:id="@+id/frg_home_txv_notification_bubble"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:text="5+"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

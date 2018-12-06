@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+<string name="ga_trackingId" translatable="false">UA-92002127-1</string>
+</resources>
+<!--<resources>-->
+    <!--&lt;!&ndash; End current session if app sleeps for a period of time &ndash;&gt;-->
+
+<!--<string name="ga_trackingId">UA-92002127-1</string>-->
+    <!--<integer name="ga_sessionTimeout">300</integer>-->
+
+    <!--&lt;!&ndash; Enable automatic Activity measurement &ndash;&gt;-->
+    <!--<bool name="ga_autoActivityTracking">true</bool>-->
+
+    <!--&lt;!&ndash;  The property id associated with this analytics tracker &ndash;&gt;-->
+    <!--&lt;!&ndash;<strmerchantNamename="ga_trackingId">UA-68418179-3</string>&ndash;&gt;-->
+    <!--&lt;!&ndash;<strmerchantNamename="ga_trackingId">UA-78710226-1</string>&ndash;&gt;-->
+    <!--<string name="ga_sampleFrequency">100.0</string>-->
+
+    <!--<bool name="ga_reportUncaughtExceptions">true</bool>-->
+
+
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.categoryActivities.FoodAndDrinkMainActivity">-->
+        <!--Food and Drink-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.DashboardActivity">-->
+        <!--Dashboard-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.MainActivity">-->
+        <!--App Launch-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.categoryActivities.BeautyAndSpaMainActivity">-->
+        <!--Beauty and Spa-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.categoryActivities.FunActivitiesMainActivity">-->
+        <!--Fun Activity-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.categoryActivities.RetailAndServicesMainActivity">-->
+        <!--Health and Fitness-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.OfferDetailActivity">-->
+        <!--Offer Details-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.MerchantDetailActivity">-->
+        <!--Merchant Details-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.RedeemCreateActivity">-->
+        <!--Redeem Process, User pin confirmation-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.RedeemConfirmPurchaseActivity">-->
+        <!--Redeem Process, Merchant pin confirmation-->
+    <!--</screenName>-->
+
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.SearchFilterActivity">-->
+        <!--Search offers-->
+    <!--</screenName>-->
+
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.paymentSelectionType.PaymentProcessVodafoneSelectionActivity">-->
+        <!--Vodafone Subscription, enter mobile number-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.paymentSelectionType.PaymentProcessVodafoneSuccessActivity">-->
+        <!--Vodafone Subscription Success-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.paymentSelectionType.PaymentProcessVodafoneOTPConfirmation">-->
+        <!--Vodafone Subscription, enter OTP-->
+    <!--</screenName>-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.OfferPackagesActivity">-->
+        <!--Non Vodafone Subscription, select offer packages-->
+    <!--</screenName>-->
+    <!--&lt;!&ndash;<screenNmerchantNamename="com.urbanpoint.UrbanPoint.views.activities.common.PurchaseSuccessActivity">-->
+        <!--Non Vodafone Subscription, payment success.-->
+    <!--</screenName>&ndash;&gt;-->
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.HowItWorksActivity">-->
+        <!--Application how it works.-->
+    <!--</screenName>-->
+
+    <!--<screenName name="com.urbanpoint.UrbanPoint.views.activities.common.ForgotPasswordActivity">-->
+        <!--Application forgot password.-->
+    <!--</screenName>-->
+<!--</resources>-->

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/gray_bg"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:id="@+id/frg_merchant_pin_ll_parentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/gray_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp50"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txvOfferName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Facial"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/sp14" />
+
+            <TextView
+                android:id="@+id/txvMerchantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Beauty Center"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/sp14" />
+
+            <TextView
+                android:id="@+id/txvMerchantAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Al Dafna"
+                android:textAlignment="center"
+                android:textColor="@color/gray_light"
+                android:textColorHint="@color/gray_light"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="@string/show_to_user"
+            android:textColorHint="@color/gray_light"
+            android:textSize="@dimen/fontsize_normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txvShowThisScreen"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+        <com.urbanpoint.UrbanPoint.Utils.PinEntry
+            android:id="@+id/pinEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:accentType="character"
+            app:applyDigitTextSize="true"
+            app:digitBackground="@drawable/pin_custom_square_gray_bg"
+            app:digitHeight="@dimen/button_height_medium"
+            app:digitSpacing="@dimen/dp15"
+            app:digitTextColor="@color/white"
+            app:digitTextSize="@dimen/dp8"
+            app:digitWidth="@dimen/button_height_medium"
+            app:mask="&#8226;"
+            app:pinAccentColor="@color/orange"
+            app:pinInputType="number" >
+
+        </com.urbanpoint.UrbanPoint.Utils.PinEntry>
+
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/view_20"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp15"
+            android:text="@string/enter_merchant_four_digit_pin"
+            android:textColor="@color/gray_light" />
+
+
+
+        <Button
+            android:id="@+id/btnConfirmPurchase"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="0.10"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edge_purple_button"
+            android:text="@string/confirm_purchase"
+            android:textSize="@dimen/fontsize_normal"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

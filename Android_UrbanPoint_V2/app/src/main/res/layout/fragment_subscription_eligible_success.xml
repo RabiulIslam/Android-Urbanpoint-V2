@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white"-->
+    <!--android:fillViewport="true">-->
+
+    <LinearLayout
+        android:id="@+id/frg_subscription_eligible_success_ll_parentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dp10">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/powered_ooredoo" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:hint="@string/subscription_eligible_success_congratulatn"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/sp22"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/subscribe_eligible_sucess" />
+
+
+                <com.urbanpoint.UrbanPoint.Utils.ExpandableHeightGridView
+                    android:id="@+id/frg_subscription_eligible_success_lsv_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:choiceMode="singleChoice"
+                    android:clickable="false"
+                    android:divider="@color/transparent"
+                    android:listSelector="@color/transparent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:id="@+id/frg_subscription_eligible_success_rl_btn_cnfrm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+
+                        <Button
+                            android:id="@+id/frg_subscription_eligible_success_btn_cnfrm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/button_height_large"
+                            android:background="@drawable/orange_gadient_rectngle_rounded"
+                            android:paddingStart="50dp"
+                            android:paddingEnd="50dp"
+                            android:text="@string/btn_lets_go"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp20" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--</ScrollView>-->
+
+</RelativeLayout>

@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/frg_sub_cnfrm_ll_parentlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icn_free_offers" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/subscription_confirm_enter_code"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/gray_light"
+                    android:textSize="@dimen/fontsize_small" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.urbanpoint.UrbanPoint.Utils.PinEntry
+                    android:id="@+id/frg_sub_cnfrm_pin_entry_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:focusableInTouchMode="true"
+                    android:textStyle="bold"
+                    app:accentType="character"
+                    app:applyDigitTextSize="true"
+                    app:digitBackground="@drawable/pin_custom_square_white_bg"
+                    app:digitHeight="@dimen/button_height_medium"
+                    app:digitSpacing="7dp"
+                    app:digitTextColor="@color/black"
+                    app:digitTextSize="8dp"
+                    app:digitWidth="@dimen/button_height_medium"
+                    app:mask=""
+                    app:numDigits="6"
+                    app:pinAccentColor="@color/orange"
+                    app:pinInputType="number"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_large"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/frg_sub_cnfrm_btn_cnfrm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_height_large"
+                    android:layout_weight="0.30"
+                    android:textColor="@color/white"
+                    android:background="@drawable/orange_gadient_rectngle_rounded"
+                    android:text="@string/btn_subscribe" />
+            </LinearLayout>
+
+           <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/frg_sub_cnfrm_txv_try_again"
+                    android:text="@string/subscription_confirm_sent_code"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/fontsize_small" />
+
+                <TextView
+                    android:id="@+id/frg_sub_cnfrm_txv_try_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/subscription_confirm_try_again"
+                    android:textAlignment="center"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/fontsize_small" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

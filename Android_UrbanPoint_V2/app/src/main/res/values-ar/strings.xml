@@ -1,0 +1,400 @@
+<resources>
+    <string name="app_name">Urban Point</string>
+
+    <!--Button Strings-->
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_getit">Get It</string>
+    <string name="btn_used">Used</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_access_code">Access Code</string>
+    <string name="btn_subscribe">Subscribe</string>
+    <string name="btn_subscribe_free">Subscribe for FREE</string>
+    <string name="btn_subscribe_for_15">Subscribe for QR 15/Month</string>
+    <string name="btn_unsubscribe">UnSubscribe</string>
+    <string name="btn_lets_go">Let\'s Go!</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_search">Search</string>
+
+    <!--Fragments Title-->
+    <string name="frg_Home">Home</string>
+    <string name="frg_category_fragment">Category Offers</string>
+    <string name="frg_search_offers">Search Results</string>
+    <string name="frg_new_offers">New Offers</string>
+    <string name="frg_favorite_offers">Favorite Offers</string>
+    <string name="frg_notification">Notifications</string>
+    <string name="frg_notification_detail">Notification Detail</string>
+    <string name="frg_how_to_use">How to Use</string>
+    <string name="frg_my_reviews">My Reviews</string>
+    <string name="frg_purchaase_history">Purchase History</string>
+    <string name="frg_change_pin">Change PIN</string>
+    <string name="frg_access_code">Access Code</string>
+    <string name="frg_my_contact_us">Contact Us</string>
+    <string name="frg_offer_detail">Offer Detail</string>
+    <string name="frg_merchant_detail">Merchant Detail</string>
+    <string name="frg_merchant_pin">Merchant PIN</string>
+    <string name="frg_purchase_success">Purchase Success</string>
+    <string name="frg_privacy_statement">Privacy Statement</string>
+    <string name="frg_rules_of_purchase">Rules of Purchase</string>
+    <string name="frg_subscription_for_15">Subscribe for QR 15/month</string>
+    <string name="frg_subscription">Subscribe</string>
+    <string name="frg_subscription_success">Congratulations</string>
+    <string name="frg_subscription_eligible">Subscribe for FREE!</string>
+    <string name="frg_un_subscription">UnSubscribe</string>
+
+
+    <!--Custom Alert dialog Strings-->
+    <string name="header_gender">Gender</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="sign_up_enter_account_setup_heading">Account Setup</string>
+    <string name="sign_up_enter_name_message">Please enter your name</string>
+    <string name="sign_up_select_gender_heading">Select your gender</string>
+
+    <string name="sign_in_unsuccess_login_heading">Login UnSuccessful</string>
+    <string name="EmailErrorMessage">Please enter email</string>
+    <string name="networkError">Please check your network connection</string>
+    <string name="loginError">You have been logged in to other device</string>
+    <string name="OfferErrorMessage">Invalid Offer</string>
+    <string name="PasswordErrorMessage">Please enter password</string>
+    <string name="MerchantErrorMessage">Please enter merchant PIN</string>
+    <string name="invalid_email">Please enter a valid email</string>
+
+    <string name="voda_do_unsubscribe_enter_mobile_number">Please enter your phone number</string>
+    <string name="enter_valid_pin_message">Please enter a valid pin</string>
+    <string name="remove_faves_confirm_message">Remove from faves?</string>
+    <string name="enter_mobile_number">Please enter your phone number</string>
+    <string name="enter_subscribed_mobile_number">Please enter your Subscribed number</string>
+    <string name="unsub_successfully">You have been unsubscribed successfully</string>
+
+    <string name="gps_connection_heading">GPS Connection</string>
+    <string name="gps_connection_message">Please wait, while your GPS is trying to get your location.</string>
+    <string name="logout_message">You have been Logged in to other device</string>
+    <string name="enter_current_pin_message">Please enter current pin</string>
+    <string name="enter_new_pin_message">Please enter new pin</string>
+    <string name="enter_new_confirm_pin_message">Please enter confirm New PIN</string>
+    <string name="enter_pin_not_match">The PINs  you entered do not match, please re-enter the PINs</string>
+    <string name="congratulations_access">Congratulations! You now have access to all Urban Point offers!</string>
+
+
+    <string name="contextual_messages_heading">Always know what\'s around</string>
+    <string name="contextual_messages">Enable location to sort offers \nbased on their distance from you.</string>
+    <string name="contextual_uber_messages">Please enable location permission to request an Uber ride.</string>
+    <string name="contextual_uber_btn">Enable.</string>
+    <string name="app_update_messages">Please update to the latest version of the Urban Point app to continue using it.</string>
+
+
+    <!--Progress Dialog Strings-->
+    <string name="progress_dialog_logging_your_account">Logging into your account</string>
+    <string name="progress_dialog_sign_up_loading_message">Getting you setup</string>
+
+
+    <!--Toast Strings-->
+    <string name="MSG_ERROR_PREFIX"> </string>
+    <string name="MSG_ERROR_NETWORK">Network error, please try again.</string>
+    <!--<strnamename="MSG_RIDE_COMPLETED">Ride Completed.</string>-->
+
+
+    <!--   signup screen-->
+    <string name="sign_up_create_account">Create your account</string>
+    <string name="sign_up_are_you_girl_guy">Are you a girl or a guy?</string>
+    <string name="sign_up_girl">Girl</string>
+    <string name="sign_up_guy">Guy</string>
+    <string name="sign_up_number">Phone Number</string>
+    <string name="sign_up_nt_charged">Verification only, you will Not be charged</string>
+    <string name="sign_up_year_of_birth">Year of birth</string>
+    <string name="sign_up_pin">This year will be used as your PIN</string>
+    <string name="sign_up_get_startd">Get Started</string>
+    <string name="sign_up_login">Already a user? <u>Log In</u></string>
+    <string name="login_terms_and_conditions_message_one"> By clicking Finish, you agree to accept our&#160;</string>
+    <string name="login_terms_and_conditions_message_two"><u>Privacy Statement and Terms of Use</u></string>
+
+
+    <!--SignUp Verification Screen-->
+    <string name="sign_up_free_access">You have Free access to Urban Point.\n
+    Please enter the code received by SMS to \n
+    activate it.</string>
+    <string name="sign_up_enter_code">Enter code here</string>
+    <string name="sign_up_confirm">Confirm</string>
+    <string name="sign_up_skip">Skip for now</string>
+    <string name="sign_up_nt_received">Didn\'t receive the code?\n<u>Try again</u></string>
+
+
+    <string name="back">Back</string>
+
+
+    <string name="enter_name_message">Name</string>
+    <string name="enter_email_message">Email</string>
+    <string name="sign_in_enter_email">Please enter your email</string>
+    <string name="forgot_pin">Forgot PIN</string>
+    <string name="sign_in_log_in">Log In</string>
+    <string name="sign_in_email_hint">example@domain.com</string>
+    <string name="sign_in_enter_pin">Enter Pin</string>
+    <string name="sign_in_pin_hint">Your PIN can be your Year of Birth</string>
+    <string name="sign_in_forgot_pin"><u>Forgot PIN</u></string>
+
+
+    <!--Navigatoin Drawer Strings-->
+    <string name="drawer_home">Home</string>
+    <string name="drawer_invite_friends">Invite Friends</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_how_to_use">How to Use</string>
+    <string name="drawer_my_reviews">My Reviews</string>
+    <string name="drawer_purchase_history">Purchase History</string>
+    <string name="drawer_access_code">Access Code</string>
+    <string name="drawer_unsub">UnSubscribe</string>
+    <string name="drawer_contact_us">Contact Us</string>
+    <string name="drawer_logout">Logout</string>
+
+
+    <!-- Login Screen -->
+    <string name="name_heading">Name</string>
+
+    <string name="forgot_password_button_title">Send New PIN</string>
+    <string name="name_hint">User Username</string>
+    <string name="email">Email</string>
+
+
+    <!--    promo code screen-->
+    <string name="enter_access_code">Please enter\naccess code below</string>
+    <string name="promo_code_hint">Access Code</string>
+
+    <!--profile screen-->
+    <string name="natinality_message">Please select your country</string>
+    <string name="save">Save</string>
+
+    <!--Change Pin    -->
+    <string name="change_pin_welcome">Welcome %1$s!</string>
+    <string name="change_pin_your_login_email">Your login email is &#160;</string>
+    <string name="change_pin_current_pin">Current PIN</string>
+    <string name="change_pin_new_pin">New PIN</string>
+    <string name="change_pin_confirm_new_pin">Confirm new PIN</string>
+
+    <!--how to use screen-->
+    <string name="how_to_use_one">1. Visit the place where you\'d \n like to use the offer</string>
+    <string name="how_to_use_two">2. Click on the \'\'Get the deal\'\' button  on the offer screen</string>
+    <string name="how_to_use_three">3. One of the staff member needs to enter their PIN to confirm the offer</string>
+
+    <!-- contact us screen-->
+    <string name="contact_us_how_can_help_you">How can we help you?</string>
+    <string name="contact_us_main_message">Just type your message below, and we will get back to you within 24-48 hours</string>
+    <string name="please_type_here">Please type here...</string>
+
+    <!--my savings sccreen-->
+    <string name="purchase_history_no_data_found">Redeem your first offer now and start saving</string>
+
+    <!--my reviews screen-->
+    <string name="frg_reviews_not_happy">Not Happy</string>
+    <string name="frg_reviews_ok">OK</string>
+    <string name="fglove_it">Love it</string>
+    <string name="my_reviews_no_data_found">No Pending Reviews</string>
+
+
+    <!--Subscription Screen-->
+    <string name="subscription_screen_have_code">Have an access code? Enter it here.</string>
+
+    <!--Subscription Eligible Screen-->
+    <string name="subscription_eligible_screen_get_free">Congratulations! You are eligible for FREE SUBSCRIPTION, thanks to Ooredoo!</string>
+    <string name="subscription_eligible_screen_para_1_string_1">Access 1500+ Offers in Qatar!</string>
+    <string name="subscription_eligible_screen_para_1_string_2">Use every offer, every month!</string>
+    <string name="subscription_eligible_screen_para_1_string_3">Save Money, Live Better!</string>
+    <string name="subscription_eligible_screen_para_2_string_1">Subscribe for FREE in 3 easy steps!</string>
+    <string name="subscription_eligible_screen_para_2_string_2">1)  Log into your Ooredoo App</string>
+    <string name="subscription_eligible_screen_para_2_string_3">2) Click on Deals</string>
+    <string name="subscription_eligible_screen_para_2_string_4">3) Get your FREE subscription!</string>
+    <string name="subscription_eligible_screen_want_access">If you do not want free access\nYou can subscribe for only QR 15/Month</string>
+
+    <!--Subscription Confirmation Screen-->
+    <string name="subscription_confirm_enter_code">Please enter the \ncode sent by SMS</string>
+    <string name="subscription_confirm_sent_code">We have sent the code by SMS to your number \n Didn\'t receive the code?</string>
+    <string name="subscription_confirm_try_again"><u>Try Again</u></string>
+
+    <!--Subscription Eligible Success Screen-->
+    <string name="subscription_eligible_success_congratulatn">Congratulations!</string>
+    <string name="subscription_eligible_success_subscribed">You are now subscribed for FREE to\nUrban Point!</string>
+    <string name="subscription_eligible_success_enjoy">Enjoy your favourite offers every months!</string>
+
+    <!--Subscription Success Screen-->
+    <string name="subscription_success_member">You are now an\nUrban Point member!</string>
+    <string name="subscription_sucess_alomost_there">Your subscription will renew automatically every 30 days and give you access to all offers, that renew every month</string>
+    <string name="subscription_sucess_msg">Let\'s get the most of the hundreds of offers that we created for you!</string>
+
+    <!--Subscription Success Screen-->
+    <string name="unsubscription_terms_text">By clicking Unsubscribe, I understand that I am terminating my access to ALL offers listed in the Urban Point app.</string>
+
+    <!-- location dialogue -->
+    <string name="new_offers_screen_always_know">Always Know What\'s Around</string>
+    <string name="new_offers_enable_location_to_sort">Enable Location to sort offers based on their distance from you</string>
+    <string name="button_text_allow">Allow</string>
+
+    <!--custom update dialog-->
+    <!--contact us screen spinner array-->
+
+    <string-array name="contact_us_reason_array">
+        <item>Reason for contacting</item>
+        <item>Need Help</item>
+        <item>File Complaint</item>
+        <item>Compliment</item>
+        <item>Change Cellular Operator</item>
+        <item>Other</item>
+    </string-array>
+
+
+    <!--    Offer Detail fragment-->
+    <string name="call">Call</string>
+    <string name="directions">Directions</string>
+    <string name="share2">Share</string>
+    <string name="favourite">Favorite</string>
+    <string name="add_to_favs">Added To Favs</string>
+    <string name="approx_saving">Approximate Savings</string>
+    <string name="offers_text">All offers are subject to</string>
+    <string name="rules_of_purchase"><u>Rules of Purchase</u></string>
+    <string name="timing_text">Timings</string>
+    <string name="cancel">Cancel</string>
+    <string name="added_to_ur_wish_list">Added to faves</string>
+    <string name="txt_expiry">Use this offer before: </string>
+    <string name="offer_detail_expires_on_1">Use this offer before: </string>
+    <string name="offer_detail_expires_on_2">Use this offer again on: </string>
+    <string name="offer_detail_expires_on_3">Offer has been used</string>
+
+    <!--navigation saving history screen-->
+
+    <!--notifications screen-->
+    <string name="go_home">Go Home</string>
+
+    <!--  Register Screen String starts here  -->
+    <string name="emailHint2">User@email.com</string>
+
+
+    <!-- Network String Starts here -->
+    <string name="network">Network</string>
+
+    <!-- ShowAlertDialog String Starts here -->
+    <string name="show_to_user">Show this screen to staff \n to get your offer</string>
+    <string name="rate_experience">Rate experience</string>
+    <string name="go_to_home"><u>Go to Home</u></string>
+
+
+    <string name="food_and_drink">Food &amp; Drink</string>
+
+    <string name="received_messages">Received messages</string>
+
+
+    <!--Drawer list items -->
+    <string name="pin">PIN</string>
+
+    <string name="logout">Logout</string>
+
+
+    <string name="change_underline"><u>Change</u></string>
+
+
+    <string name="how_to_use_four">The staff member will then apply the discount to your bill. Enjoy the savings!</string>
+
+
+    <string name="select_reason">Please select any reason</string>
+    <string name="enter_into_comment_box">Please enter text into comment box</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <!--new-->
+
+
+    <string name="logout_confirm_message">Are you sure you want to logout?</string>
+
+
+    <string name="enjoy_your">Enjoy Your</string>
+    <string name="ist_offer">Offer Free</string>
+    <string name="nationality">Nationality</string>
+    <string name="nationality_hint">Please select your country</string>
+    <!--<strnamename="here_how_it_works_header">Here\'s how it works </string>-->
+
+
+    <!--Offer Detail Screen-->
+    <string name="description">Description</string>
+    <string name="itemName">Item Name</string>
+
+    <string name="get_a_ride">Get a ride</string>
+
+    <!--<strnamename="btn_sold_out">Sold Out</string>-->
+
+    <!--<strnamename="saved_to_list">Saved to List</string>-->
+    <!--<strnamename="price_unit">QAR&#160;</string>-->
+
+    <string name="what_need_to_know">What you need to know</string>
+
+
+    <!--Merchant Detail fragment-->
+    <string name="frg_merchant_detail_fragment_offers">Offers</string>
+
+    <!--PurchaseHistory fragment-->
+    <string name="frg_purchase_history_total_savings">Total Savings =</string>
+
+    <!--Search fragment-->
+    <string name="what_are_you_looking_for">What are you looking for?</string>
+    <string name="filter_error">Hey! We don\'t have what you are looking for, but we will work on getting it soon!</string>
+
+
+    <!--<Redeem>-->
+    <string name="enter_merchant_four_digit_pin">Please enter the 4-digit PIN</string>
+    <string name="confirm_purchase">Confirm Purchase</string>
+
+
+    <string name="confirmation_code">Confirmation Code</string>
+
+
+    <!--payment process activity-->
+
+
+    <string name="vodafone">Vodafone Qatar</string>
+
+
+    <!--<strnamename="unlock_offers">Offer Packages</string>-->
+
+
+    <!--Home Screen-->
+    <string name="unlock_offers">&#160; &#160;Gain Access&#160; &#160;</string>
+    <string name="home_screem_member">Already a member?</string>
+    <string name="home_screen_you_can_use_again">Special offers this month</string>
+    <string name="home_screen_our_member_loved">Most loved by our members</string>
+
+
+    <!--New Offers Screen-->
+
+
+    <!--Merchant List Screen-->
+
+
+    <!--<strnamename="login_terms_and_conditions_message_two"><u>Privacy Statement and</u></string>-->
+
+    <!--<strnamename="offer_share_message_text">Hi!\nCheck out this offer on Urban Point! \n%1$s by %2$s\nSave %3$s when you avail this offer!\n\nDownload the app to access this offer:\n\niPhone:&#160;%4$s\n\nAndroid:&#160;%5$s</string>-->
+    <string name="offer_share_message_text">Hi!\nCheck out this offer on Urban Point! \n%1$s by %2$s\nSave %3$s when you avail this offer!\n\nDownload the app to access this offer:\n\n%4$s</string>
+
+
+
+    <!--<strnamename="app_share_message_text">Hey!\n\nCHECK out this app called Urban Point! Download to access hundreds of offers every month to enjoy your city for less!\n\niPhone:&#160;%1$s\n\nAndroid:&#160;%2$s </string>-->
+    <string name="app_share_message_text">Hi! Check out Urban Point for amazing deals on food &amp; drinks, beauty &amp; health, fun &amp; leisure activities, retail and other services. Download now to start saving!\n\n%1$s%2$s </string>
+    <string name="offer_redeem_success_time">Your offer was redeemed on:\n%1$s\nat %2$s</string>
+
+
+    <string name="festival_ramadan">ramadan</string>
+    <string name="festival_burger">burger</string>
+    <string name="festival_biryani">biryani</string>
+
+    <string name="gender_gents">Gents</string>
+    <string name="gender_ladies">Ladies</string>
+
+
+    <string name="enter_access_code_empty_2">Please enter a valid Access Code</string>
+    <string name="country_code">+974</string>
+    <string name="txv_qatar_riyal">QR </string>
+    <string name="facebook_app_id">167219837169256</string>
+    <string name="fb_login_protocol_scheme">fb167219837169256</string>
+
+
+
+</resources>

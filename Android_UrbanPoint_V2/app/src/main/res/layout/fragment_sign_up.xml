@@ -1,0 +1,328 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!--<include-->
+    <!--android:id="@+id/actionBarHeightLayout"-->
+    <!--layout="@layout/blank_layout_height" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/frg_sign_up_scrolview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/frg_sign_up_ll_parentlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:layout_width="160dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/up_logo"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-5dp"
+                    android:background="@drawable/powered_ooredoo"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_create_account"
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10"
+                    android:text="@string/sign_up_create_account"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/fontsize_medium"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="55dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/frg_sign_up_edt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_medium"
+                        android:background="@drawable/custom_input_field_bg"
+                        android:gravity="left|center"
+                        android:hint="@string/enter_name_message"
+                        android:inputType="text|textCapWords"
+                        android:paddingLeft="@dimen/dp10"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="@dimen/fontsize_normal"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:textStyle="normal" />
+
+                    <EditText
+                        android:id="@+id/frg_sign_up_edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_medium"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom_input_field_bg"
+                        android:gravity="left|center"
+                        android:hint="@string/enter_email_message"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/dp10"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="@dimen/fontsize_normal"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/frg_sign_up_txv_gender"
+                        style="@style/view_20"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="@dimen/dp10"
+                        android:text="@string/sign_up_are_you_girl_guy"
+                        android:textSize="@dimen/fontsize_normal"
+                        android:textColor="@color/black"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingEnd="10dp">
+
+                        <TextView
+                            android:id="@+id/frg_sign_up_txv_girl"
+                            style="@style/view_20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="10dp"
+                            android:padding="@dimen/dp10"
+                            android:text="@string/sign_up_girl"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="normal" />
+
+                        <ImageView
+                            android:id="@+id/frg_sign_up_imv_girl"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/icn_girl" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="10dp">
+
+                        <ImageView
+                            android:id="@+id/frg_sign_up_imv_guy"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/icn_guy" />
+
+                        <TextView
+                            android:id="@+id/frg_sign_up_txv_guy"
+                            style="@style/view_20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:padding="@dimen/dp10"
+                            android:text="@string/sign_up_guy"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_phn_numbr"
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="@dimen/dp10"
+                    android:text="@string/sign_up_number"
+                    android:textSize="@dimen/fontsize_normal"
+                    android:textColor="@color/black"
+                    android:textStyle="normal" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country_code"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/sp14" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.urbanpoint.UrbanPoint.Utils.CellNoEntryView
+                        android:id="@+id/frg_sign_up_mobile_entry"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        app:accentType="character"
+                        app:applyDigitTextSize="true"
+                        app:digitBackground="@drawable/pin_custom_square_white_bg"
+                        app:digitHeight="@dimen/button_height_medium"
+                        app:digitSpacing="5dp"
+                        app:digitTextColor="@color/black"
+                        app:digitTextSize="6dp"
+                        app:digitWidth="@dimen/button_height_medium"
+                        app:mask=""
+                        app:numDigits="8"
+                        app:pinAccentColor="@color/orange"
+                        app:pinInputType="number" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_charges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_nt_charged"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/fontsize_small"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_birth"
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="@dimen/dp10"
+                    android:text="@string/sign_up_year_of_birth"
+                    android:textSize="@dimen/fontsize_normal"
+                    android:textColor="@color/black"
+                    android:textStyle="normal" />
+
+                <com.urbanpoint.UrbanPoint.Utils.CellNoEntryView
+                    android:id="@+id/frg_sign_up_pin_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    app:accentType="character"
+                    app:applyDigitTextSize="true"
+                    app:digitBackground="@drawable/pin_custom_square_white_bg"
+                    app:digitHeight="@dimen/button_height_medium"
+                    app:digitSpacing="5dp"
+                    app:digitTextColor="@color/black"
+                    app:digitTextSize="6dp"
+                    app:digitWidth="@dimen/button_height_medium"
+                    app:mask=""
+                    app:numDigits="4"
+                    app:pinAccentColor="@color/orange"
+                    app:pinInputType="number" />
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_pin"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/fontsize_small"
+                    android:textColor="@color/gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp25"
+                    android:layout_marginBottom="@dimen/dp15"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_terms_and_conditions_message_one"
+                        android:textSize="@dimen/fontsize_small" />
+
+                    <TextView
+                        android:id="@+id/frg_sign_up_txv_terms_n_conditions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_terms_and_conditions_message_two"
+                        android:textColor="@color/purchase_history_header"
+                        android:textSize="@dimen/fontsize_small"/>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/frg_sign_up_btn_get_started"
+                    style="@style/button_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_height_xxmedium"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/orange_gadient_rectngle_rounded"
+                    android:contentDescription="@string/unlock_offers"
+                    android:gravity="center"
+                    android:padding="@dimen/dp5"
+                    android:paddingEnd="30dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/sign_up_get_startd"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/sp18"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/frg_sign_up_txv_login"
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="@dimen/dp10"
+                    android:text="@string/sign_up_login"
+                    android:textColor="@color/black"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+</RelativeLayout>

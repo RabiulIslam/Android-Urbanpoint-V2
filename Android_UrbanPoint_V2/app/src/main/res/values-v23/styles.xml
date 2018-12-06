@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--<inamename="colorPrimary">@color/colorPrimary</item>-->
+        <!--<inamename="colorPrimaryDark">@color/white</item>-->
+        <!--<inamename="colorAccent">@color/transparent</item>-->
+        <!--<inamename="android:textColorPrimary">@color/black</item>-->
+        <!--<inamename="android:windowTranslucentStatus">true</item>-->
+        <!--<inamename="android:windowTranslucentNavigation">false</item>-->
+        <!--<inamename="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <!--<inamename="android:statusBarColor">@color/white</item>-->
+
+        <!--<inamename="android:fontFamily" tools:targetApi="21">serif</item>-->
+        <!--<inamename="android:typeface">serif</item>-->
+
+
+        <!--<inamename="android:buttonStyle" tools:targetApi="21">@style/myButtonStyle</item>-->
+        <!--<inamename="android:textViewStyle" tools:targetApi="21">@style/myTextViewStyle</item>-->
+        <!--<inamename="editTextStyle" tools:targetApi="21">@style/myEditTextStyle</item>-->
+
+
+        <!--//this is the statusbar color-->
+        <!--<inamename="android:windowLightStatusBar">true</item>-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+         <item name="colorAccent">@color/transparent</item>
+        <item name="android:textColorPrimary">@color/black</item>
+
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        //this is the statusbar color
+        <item name="android:windowLightStatusBar">true</item>
+
+
+        <item name="android:fontFamily" tools:targetApi="23">serif</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:buttonStyle" tools:targetApi="23">@style/myButtonStyle</item>
+        <item name="android:textViewStyle" tools:targetApi="23">@style/myTextViewStyle</item>
+        <item name="editTextStyle" tools:targetApi="23">@style/myEditTextStyle</item>
+
+
+    </style>
+</resources>

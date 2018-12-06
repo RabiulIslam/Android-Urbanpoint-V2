@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/frg_search_ll_cntnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_medium"
+                android:layout_margin="30dp"
+                android:background="@drawable/black_background_border"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/frg_search_edt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:contentDescription="@string/what_are_you_looking_for"
+                    android:drawableLeft="@drawable/icn_search_gray"
+                    android:drawablePadding="@dimen/dp10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/what_are_you_looking_for"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dp10"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/gray"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="@dimen/sp14" />
+
+                <LinearLayout
+                    android:id="@+id/frg_search_ll_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btn_clear"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp18"
+                        android:src="@drawable/icn_close"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/frg_search_btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_height_xmedium"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/rounded_edge_purple_button"
+                    android:text="@string/btn_search"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/frg_search_offers_lst_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frg_search_ll_cntnr"
+            android:background="@color/shadow_color"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:visibility="gone">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/frg_search_offers_txv_nt_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="25dp"
+            android:text="@string/filter_error"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/fontsize_small"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

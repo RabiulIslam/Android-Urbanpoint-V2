@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/contact_us_background"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/frg_profile_adapter_txv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:paddingLeft="20dp"
+        android:textSize="@dimen/sp14"
+        android:textColor="@color/gray_profile"/>
+
+    <View
+        android:layout_below="@+id/frg_profile_adapter_txv_name"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/gray_profile"></View>
+
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "144540717075",
+    "firebase_url": "https://urban-point-b1b54.firebaseio.com",
+    "project_id": "urban-point-b1b54",
+    "storage_bucket": "urban-point-b1b54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144540717075:android:3de848fe35056b60",
+        "android_client_info": {
+          "package_name": "com.urbanpoint.UrbanPoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144540717075-aae9sc3dbchmcp6vr3lkttf569tg1qol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANs3gr2PF763Bho_EaF-HkUo6mJnvj3Qs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,458 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/frg_merchant_detail_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp30"
+            android:background="@color/transparent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_top_cntnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true">
+
+                    <!--<LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3.1"
+                        android:background="@color/white"
+                        android:layout_height="@dimen/header_dp_200"
+                        android:orientation="vertical">-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+
+                        android:background="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent">
+
+
+                            <ImageView
+                                android:id="@+id/frg_offer_detail_imv_product"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:adjustViewBounds="true"
+                                android:background="@color/transparent"
+                                android:scaleType="fitXY"
+                                 android:visibility="invisible" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="85dp"
+                                android:layout_alignParentBottom="true"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/lLyt_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="43dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="#808d345a"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_marginStart="50dp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="1dp">
+
+                                        <Button
+                                            android:id="@+id/frg_offer_detail_btn_call"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/dp5"
+                                            android:background="@android:color/transparent"
+                                            android:drawablePadding="5dp"
+                                            android:drawableStart="@drawable/call_icon"
+                                            android:enabled="true"
+                                            android:includeFontPadding="false"
+                                            android:padding="@dimen/dp5"
+                                            android:paddingStart="20dp"
+                                            android:text="@string/call"
+                                            android:textAllCaps="false"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/sp14" />
+
+                                        <Button
+                                            android:id="@+id/frg_offer_detail_btnDirection"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/dp10"
+                                            android:background="@android:color/transparent"
+                                            android:drawablePadding="@dimen/dp5"
+                                            android:drawableStart="@drawable/location_icon"
+                                            android:enabled="true"
+                                            android:padding="@dimen/dp5"
+
+                                            android:text="@string/directions"
+                                            android:textAllCaps="false"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/sp14" />
+
+                                        <Button
+                                            android:id="@+id/frg_offer_detail_btn_share"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/dp10"
+                                            android:background="@android:color/transparent"
+                                            android:drawablePadding="5dp"
+                                            android:drawableStart="@drawable/share_icon"
+                                            android:enabled="true"
+                                            android:padding="@dimen/dp5"
+                                            android:text="@string/share2"
+                                            android:textAllCaps="false"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/sp14" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="55dp"
+                                    android:layout_below="@+id/lLyt_transparent"
+                                    android:background="@color/white" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/frg_offer_detail_imvMerchant"
+                                    android:layout_width="@dimen/dp80"
+                                    android:layout_height="@dimen/dp80"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginStart="@dimen/dp10"
+                                    android:background="@drawable/rmv_place_holder"
+                                    android:elevation="@dimen/dp5"
+                                    android:padding="5dp"
+                                    android:scaleType="centerCrop"
+                                    android:visibility="visible"
+                                    app:civ_border_width="@dimen/dp1"
+                                    app:civ_border_color="@color/shadow_color"/>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_top_cntnr"
+                    android:layout_marginEnd="@dimen/dp10"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/dp5">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_merchant_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="@string/itemName"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/fontsize_medium"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_merchant_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:text="@string/itemName"
+                                android:textColor="@color/purchase_history_header"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:includeFontPadding="false"
+                                android:paddingTop="@dimen/dp2"
+                                android:text="@string/itemName"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp13"
+                                android:visibility="invisible" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/lLyt_action_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_2"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/button_height_large"
+                            android:layout_marginEnd="30dp"
+                            android:layout_weight="1">
+
+                            <Button
+                                android:id="@+id/frg_offer_detail_btnGetIt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/btn_redeem"
+                                android:text="@string/btn_getit"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp16"
+                                android:visibility="invisible" />
+
+                            <ImageView
+                                android:id="@+id/frg_offer_detail_imv_lock_btngetit"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/icn_btn_lock"
+                                android:visibility="invisible" />
+                        </RelativeLayout>
+
+                        <Button
+                            android:id="@+id/frg_offer_btn_favourite"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/button_height_large"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_redeem_slc"
+                            android:enabled="true"
+                            android:text="@string/favourite"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp15"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/lLyt_action_buttons"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_title_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:paddingTop="@dimen/dp10"
+                            android:text="@string/description"
+                            android:textColor="@color/purchase_history_header"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:paddingTop="@dimen/dp5"
+                            android:text="@string/description"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_title_what_need_to_know"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:paddingTop="@dimen/dp10"
+                            android:text="@string/what_need_to_know"
+                            android:textColor="@color/purchase_history_header"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_approx_saving"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="@string/approx_saving"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_approx_saving_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp2"
+                                android:includeFontPadding="false"
+                                android:text="QR25"
+                                android:textColor="@color/purchase_history_header"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="invisible" />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_validfor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="string/empty_string"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_offers_subject_to"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="@string/offers_text"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/frg_offer_detail_txv_RulesOfPurchase"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:includeFontPadding="false"
+                                android:paddingStart="@dimen/dp2"
+                                android:text="@string/rules_of_purchase"
+                                android:textAllCaps="false"
+                                android:textColor="@color/purchase_history_header"
+                                android:textSize="@dimen/sp14"
+                                android:visibility="invisible" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_timing_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:includeFontPadding="false"
+                            android:paddingTop="@dimen/dp5"
+                            android:text="@string/timing_text"
+                            android:textColor="@color/purchase_history_header"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/frg_offer_detail_txv_timing_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:paddingTop="@dimen/dp5"
+                            android:text="@string/timing_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp1"
+        android:layout_above="@+id/frg_offer_detail_txv_expiry"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/frg_offer_detail_txv_expiry"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp30"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:includeFontPadding="false"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/dp5"
+        android:paddingStart="@dimen/dp10"
+        android:paddingTop="@dimen/dp5"
+        android:text="@string/txt_expiry"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp14" />
+
+</RelativeLayout>

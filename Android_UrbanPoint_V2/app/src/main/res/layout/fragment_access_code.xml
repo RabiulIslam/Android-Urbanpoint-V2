@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@color/transparent"
+            android:orientation="vertical">
+
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/change_pin_view_20"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/enter_access_code"
+                    android:textSize="@dimen/fontsize_normal"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_medium"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/black_background_border"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/frg_access_code_edt_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:maxLength="10"
+                        android:background="@null"
+                        android:focusable="true"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center|left"
+                        android:hint="@string/promo_code_hint"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:padding="@dimen/dp10"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="@dimen/sp14" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_large"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/frg_access_code_btn_submit"
+                    android:layout_width="@dimen/dp100"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_redeem"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fontsize_normal"
+                    android:text="@string/btn_submit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+</RelativeLayout>

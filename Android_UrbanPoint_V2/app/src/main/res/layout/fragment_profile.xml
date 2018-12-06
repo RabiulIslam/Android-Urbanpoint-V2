@@ -1,0 +1,493 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:ignore="MissingPrefix">
+
+
+
+    <RelativeLayout
+        android:id="@+id/frg_change_pin_mainparentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/frg_profile_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/gray_bg"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp15"
+            android:visibility="visible">
+
+            <include
+                android:id="@+id/actionBarHeightLayout"
+                layout="@layout/blank_layout_height" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp15"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:paddingTop="15dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/name_heading"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+                        <TextView
+                            android:id="@+id/frg_profile_edt_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:background="@color/transparent"
+                            android:hint="@string/name_hint"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray"
+                            android:textCursorDrawable="@drawable/cursor_edit_text"
+                            android:textSize="@dimen/sp14" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:layout_marginRight="@dimen/dp20"
+                            android:layout_marginTop="-2dp"
+                            android:background="@color/gray_light"></View>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/email"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/frg_profile_edt_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:background="@color/transparent"
+                                android:hint="@string/emailHint2"
+                                android:imeOptions="actionDone"
+                                android:inputType="textEmailAddress"
+                                android:textAlignment="center"
+                                android:textColor="@color/gray"
+                                android:textCursorDrawable="@drawable/cursor_edit_text"
+                                android:textSize="@dimen/sp14"
+                                android:focusable="false"/>
+
+                            <RelativeLayout
+                                android:id="@+id/frg_profile_rl_progrssbar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="30dp"
+                                android:paddingBottom="5dp"
+                                android:visibility="gone">
+
+                                <ProgressBar
+                                    style="?android:attr/progressBarStyle"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:layout_marginRight="@dimen/dp20"
+                            android:layout_marginTop="-2dp"
+                            android:background="@color/gray_light"></View>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/network"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+                        <Spinner
+                            android:id="@+id/frg_my_profile_spinner_network"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/custom_spinner_text_bg"
+                            android:gravity="center"
+                            android:popupBackground="@color/white"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center"
+                            android:clickable="false"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:id="@+id/frg_profile_txv_network"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/transparent"
+                            android:hint="@string/vodafone"
+                            android:inputType="text"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_light"
+                            android:textCursorDrawable="@drawable/cursor_edit_text"
+                            android:textSize="@dimen/sp14"
+                            android:visibility="visible" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:layout_marginRight="@dimen/dp20"
+                            android:layout_marginTop="-2dp"
+                            android:background="@color/gray"
+                            android:visibility="visible"></View>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/header_gender"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+
+                        <Spinner
+                            android:id="@+id/frg_my_profile_spinner_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/custom_spinner_text_bg"
+                            android:gravity="center"
+                            android:popupBackground="@color/white"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:id="@+id/frg_my_profile_txv_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Male"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_light"
+                            android:textSize="@dimen/sp14"
+                            />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:layout_marginRight="@dimen/dp20"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/gray"></View>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/pin"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/frg_profile_txv_old_pin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp20"
+                                android:layout_marginTop="5dp"
+                                android:text=""
+                                android:textColor="@color/gray_light"
+                                android:textSize="@dimen/sp14" />
+
+                            <RelativeLayout
+                                android:id="@+id/frg_profile_rl_change_pin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="@dimen/dp20"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp20"
+                                    android:layout_marginRight="@dimen/dp5"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toLeftOf="@+id/frg_profile_icn_pencil"
+                                    android:text="@string/change_underline"
+                                    android:textColor="@color/gray_light"
+                                    android:textSize="@dimen/sp14" />
+
+                                <ImageView
+                                    android:id="@+id/frg_profile_icn_pencil"
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="@dimen/dp5"
+                                    android:background="@mipmap/icn_pencil" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:layout_marginRight="@dimen/dp20"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/gray"></View>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp10">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp5"
+                            android:background="@color/white">
+
+                            <TextView
+                                android:id="@+id/frg_profile_txv_nationality_heading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:text="@string/nationality"
+                                android:textAlignment="center"
+                                android:textColor="@color/gray_bg"
+                                android:textSize="@dimen/sp18" />
+
+                            <TextView
+                                android:id="@+id/frg_profile_edt_nationality"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/frg_profile_txv_nationality_heading"
+                                android:background="@color/transparent"
+                                android:hint="@string/nationality_hint"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:textAlignment="center"
+                                android:textColor="@color/gray_light"
+                                android:textCursorDrawable="@drawable/cursor_edit_text"
+                                android:textSize="@dimen/sp14" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_below="@+id/frg_profile_edt_nationality"
+                                android:layout_marginLeft="@dimen/dp20"
+                                android:layout_marginRight="@dimen/dp20"
+                                android:layout_marginTop="2dp"
+                                android:background="@color/gray"></View>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/frg_profile_txv_profile_percentage"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="1dp"
+                            android:elevation="3dp"
+                            android:background="@drawable/orange_gadient_rectngle"
+                            android:paddingTop="6dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_marginLeft="@dimen/dp20"
+                        android:layout_marginRight="@dimen/dp20"
+                        android:divider="@null"
+                        android:visibility="gone"></ListView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="@dimen/dp15"
+                        android:background="@color/white"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/dp15"
+                        android:paddingTop="15dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/frg_profile_imv_nationality"
+                            android:layout_width="85dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:background="@mipmap/nationality_0"
+                            android:visibility="visible" />
+
+                        <Button
+                            android:id="@+id/frg_profile_update"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp50"
+                            android:layout_marginLeft="@dimen/dp25"
+                            android:layout_marginRight="@dimen/dp25"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/rounded_edge_purple_button"
+                            android:text="@string/save" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/frg_profile_ll_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/gray_bg"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingRight="@dimen/dp15"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/actionBarHeightLayout"
+                layout="@layout/blank_layout_height" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp15"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:id="@+id/frg_profile_list_view_nationality_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/natinality_message"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_bg"
+                    android:textSize="@dimen/sp18" />
+
+                <ListView
+                    android:id="@+id/frg_profile_list_view_nationality_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/ll_nationalitySave"
+                    android:layout_below="@+id/frg_profile_list_view_nationality_msg"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginRight="@dimen/dp20"
+                    android:layout_marginTop="10dp"
+                    android:divider="@null"></ListView>
+
+                <LinearLayout
+                    android:id="@+id/ll_nationalitySave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginRight="@dimen/dp20"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/frg_profile_nationality_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp50"
+                        android:layout_weight="0.40"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rounded_edge_purple_button"
+                        android:text="@string/save" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp10">
+
+            <com.urbanpoint.UrbanPoint.Utils.RoundedImageView
+                android:id="@+id/frg_profile_round__imv_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/nationality_2" />
+
+            <ImageView
+                android:id="@+id/frg_profile_imv_flag"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/frg_profile_imv_close"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/close_purple"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

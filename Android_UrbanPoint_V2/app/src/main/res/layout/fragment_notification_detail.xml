@@ -1,0 +1,173 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
+
+
+    <RelativeLayout
+        android:id="@+id/frg_change_pin_mainparentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/frg_profile_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/gray_bg"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/actionBarHeightLayout"
+                layout="@layout/blank_layout_height" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp15"
+                    android:layout_marginRight="@dimen/dp15"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:id="@+id/frg_notification_detail_imv_close"
+                    android:layout_width="30dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/close_purple"
+                    android:layout_marginTop="5dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginRight="@dimen/dp15"
+                android:layout_weight="0.7"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_light"
+                        android:textSize="@dimen/sp20" />
+
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_day_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:gravity="top"
+                        android:text="st"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_light"
+                        android:textSize="@dimen/sp14" />
+
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="June 2017"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_light"
+                        android:textSize="@dimen/sp20" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp15"
+                        android:layout_margin="5dp"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp17" />
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/frg_notification_detail_txv_1"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="Enjoy your saving and let us know when ever we can help to make your experience impecable."
+                        android:textColor="@color/gray_light"
+                        android:textSize="@dimen/sp16"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/frg_notification_detail_txv_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp15"
+                        android:layout_marginTop="15dp"
+                        android:text="The Urban Point Team."
+                        android:textColor="@color/gray_light"
+                        android:textSize="@dimen/sp15"
+                        android:layout_below="@+id/frg_notification_detail_txv_2"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_weight="0.3"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/frg_notification_detail_btn_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="0.40"
+                    android:textColor="@color/white"
+                    android:background="@drawable/contact_us_submit_round_button"
+                    android:text="@string/go_home" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

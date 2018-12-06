@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp90"
+    android:orientation="vertical"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/search_offers_imv_offer"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/gray_light"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@+id/search_offers_imv_offer"
+            android:layout_toStartOf="@+id/IconContainer"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/search_offers_txv_offer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="offer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dp5"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/search_offers_imv_category"
+                    android:layout_width="@dimen/dp18"
+                    android:layout_height="@dimen/dp18"
+                    android:src="@mipmap/food_icon_small"
+                    android:text="@string/food_and_drink" />
+
+                <TextView
+                    android:id="@+id/search_offers_txv_outlet_name_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp5"
+                    android:text="@string/food_and_drink"
+                    android:textColor="@color/purchase_history_footer"
+                    android:textSize="@dimen/sp12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp5"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/dp15"
+                    android:layout_height="@dimen/dp15"
+                    android:src="@drawable/icn_location"
+                    android:text="@string/food_and_drink"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/search_offers_txv_outlet_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/food_and_drink"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp12" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/IconContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/search_offers_imv_festival"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:background="@drawable/lock_offers"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/search_offers_imv_lock"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/lock_offers"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/fwd_icon" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

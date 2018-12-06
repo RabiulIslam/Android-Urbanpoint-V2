@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="@dimen/dp100"
+            android:layout_height="@dimen/dp100"
+            android:id="@+id/frg_new_offers_imv_location"
+            android:src="@mipmap/location3x"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/frg_new_offers_txv_always_know"
+            android:layout_below="@+id/frg_new_offers_imv_location"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/dp19"
+            android:textAlignment="center"
+            android:text="@string/new_offers_screen_always_know"/>
+
+        <TextView
+            android:layout_width="@dimen/dp250"
+            android:layout_height="wrap_content"
+            android:id="@+id/frg_new_offers_enable_loc"
+            android:layout_below="@+id/frg_new_offers_txv_always_know"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:text="@string/new_offers_enable_location_to_sort"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/frg_new_offers_enable_loc"
+            android:gravity="bottom|center"
+            android:layout_marginTop="@dimen/dp20"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <Button
+                android:id="@+id/frg_location_dialoge_btn_back"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="@string/back"
+                android:background="@drawable/black_background_border"
+                />
+
+            <View
+                android:layout_width="@dimen/dp40"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/frg_location_dialogue_btn_allow"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="@string/button_text_allow"
+                android:textColor="@color/white"
+                android:background="@mipmap/submit2x"
+            />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

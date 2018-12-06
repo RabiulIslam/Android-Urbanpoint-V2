@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp"
+                android:paddingLeft="@dimen/dp15"
+                android:paddingRight="@dimen/dp15">
+
+                <TextView
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/enter_mobile_number"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp15" />
+
+                <TextView
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/country_code"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/sp17" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp15" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.urbanpoint.UrbanPoint.Utils.CellNoEntryView
+                        android:id="@+id/frg_unsub_pinentry_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        app:accentType="character"
+                        app:applyDigitTextSize="true"
+                        app:digitBackground="@drawable/pin_custom_square_white_bg"
+                        app:digitHeight="@dimen/button_height_medium"
+                        app:digitSpacing="5dp"
+                        app:digitTextColor="@color/black"
+                        app:digitTextSize="@dimen/dp8"
+                        app:digitWidth="@dimen/button_height_medium"
+                        app:mask=""
+                        app:numDigits="8"
+                        app:pinAccentColor="@color/black"
+                        app:pinInputType="number" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp15" />
+
+                <TextView
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/unsubscription_terms_text"
+                    android:textColor="@color/drawer_contact_us_background"
+                    android:textSize="@dimen/sp13" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp15" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_large"
+
+                    android:layout_marginTop="@dimen/dp15"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <Button
+                        android:id="@+id/frg_unsub_btn_unsub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_height_xmedium"
+                        android:layout_weight="0.40"
+                        android:textColor="@color/white"
+                        android:background="@drawable/contact_us_submit_round_button"
+                        android:text="@string/btn_unsubscribe" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:gravity="center_horizontal"
+    android:focusableInTouchMode="false">
+
+    <LinearLayout
+        android:id="@+id/adptr_subscribe_ll_cntnr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+
+
+        <ImageView
+            android:id="@+id/adptr_subscribe_text_imv"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/purple_dot" />
+
+        <TextView
+            android:id="@+id/adptr_subscribe_text_txv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/dp2"
+            android:paddingBottom="@dimen/dp2"
+            android:layout_gravity="center_vertical"
+            android:gravity="start"
+            android:text="Access 1000+ offers in QATAR!"
+            android:textColor="@color/main_color"
+            android:textAlignment="center"
+            android:textColorHint="@color/main_color"
+            android:textSize="@dimen/sp17" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/adptr_subscribe_rl_space"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:layout_below="@+id/adptr_subscribe_ll_cntnr"/>
+
+</RelativeLayout>

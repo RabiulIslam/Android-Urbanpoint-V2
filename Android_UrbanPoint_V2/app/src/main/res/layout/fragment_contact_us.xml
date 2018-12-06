@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/contact_us_background">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/contact_us_background"
+        android:fillViewport="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <LinearLayout
+            android:id="@+id/frg_change_pin_mainparentlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+           >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/contact_us_how_can_help_you"
+                    android:textColor="@color/gray"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/fontsize_large"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    style="@style/contact_us_view_20"
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/contact_us_main_message"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/fontsize_medium" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <!-- <Spinner
+                     style="@style/spinnerItemStyle"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/dp30"
+                     android:entries="@array/contact_us_reason_array" />
+     -->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/contactUsCategorySpinner"
+                    style="@style/spinnerItemStyle"
+                    android:gravity="start"
+                    android:entries="@array/contact_us_reason_array"
+                    android:popupBackground="@color/white" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/arrow_down"
+                    android:scaleType="fitXY"
+                    android:layout_marginEnd="15dp"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp15" />
+
+                <EditText
+                    android:id="@+id/contactUsMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_edit_text"
+                    android:gravity="start"
+                    android:hint="@string/please_type_here"
+                    android:maxLines="20"
+                    android:minLines="10"
+                    android:paddingStart="@dimen/dp5"
+                    android:paddingTop="@dimen/dp5"
+                    android:textSize="@dimen/fontsize_normal"
+                    android:textColor="@color/black" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp15">
+
+                    <Button
+                        android:id="@+id/contactUsSubmit"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:background="@drawable/contact_us_submit_round_button"
+                        android:text="@string/btn_submit"
+                        android:textSize="@dimen/fontsize_normal"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

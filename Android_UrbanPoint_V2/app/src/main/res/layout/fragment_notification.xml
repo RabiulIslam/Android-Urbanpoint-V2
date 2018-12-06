@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
+
+    <RelativeLayout
+        android:id="@+id/frg_change_pin_mainparentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_bg"
+        android:layout_below="@+id/actionBarHeightLayout">
+
+
+        <RelativeLayout
+            android:id="@+id/frg_profile_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginRight="@dimen/dp15"
+            android:background="@color/white"
+            android:orientation="vertical"/>
+
+            <LinearLayout
+                android:id="@+id/frg_notification_list_view_txv_heading"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginRight="@dimen/dp15"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp"
+                android:paddingBottom="25dp">
+
+                <TextView
+                    android:id="@+id/frg_notification_heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/received_messages"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_bg"
+                    android:textSize="@dimen/sp20"
+                    android:fontFamily=""
+
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_below="@+id/frg_notification_list_view_txv_heading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="40dp"
+                >
+
+
+                    <ListView
+                        android:id="@+id/frg_notification_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="@null"
+                        ></ListView>
+
+                <TextView
+                    android:id="@+id/frg_notification_txv_no_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You currently do not \nhave any notificatioin"
+                    android:textAlignment="center"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"/>
+
+
+
+            </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
