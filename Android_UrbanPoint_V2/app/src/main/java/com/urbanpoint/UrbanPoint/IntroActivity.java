@@ -71,7 +71,7 @@ public class IntroActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_intro);
-        playVideo();
+        //playVideo();
         AppConfig.getInstance().isCommingFromSplash = true;
 
         AppConfig.getInstance().isComingFromHome =false;
@@ -90,40 +90,40 @@ public class IntroActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void playVideo() {
-        videoView = findViewById(R.id.splash_video);
-        llContainer = findViewById(R.id.splash_cntnr_ll);
-        imvLoader = findViewById(R.id.activity_intro_imv_loader);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-        ViewGroup.LayoutParams params = videoView.getLayoutParams();
-        params.width = width;
-        params.height = (int) (width * 1.6);
-        videoView.setLayoutParams(params);
-
-        String path = "android.resource://" + getPackageName() + "/" + R.raw.video720;
-
-        videoView.setVideoPath(path);
-        videoView.start();
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                videoView.seekTo(100);
-                videoView.setBackgroundColor(Color.TRANSPARENT);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imvLoader.setVisibility(View.GONE);
-                    }
-                },500);
-            }
-        });
-        llContainer.setBackgroundColor(getResources().getColor(R.color.splash_bg));
-    }
+//    private void playVideo() {
+//        videoView = findViewById(R.id.splash_video);
+//        llContainer = findViewById(R.id.splash_cntnr_ll);
+//        imvLoader = findViewById(R.id.activity_intro_imv_loader);
+//
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+//        ViewGroup.LayoutParams params = videoView.getLayoutParams();
+//        params.width = width;
+//        params.height = (int) (width * 1.6);
+//        videoView.setLayoutParams(params);
+//
+//        String path = "android.resource://" + getPackageName() + "/" + R.raw.video720;
+//
+//        videoView.setVideoPath(path);
+//        videoView.start();
+//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                videoView.seekTo(100);
+//                videoView.setBackgroundColor(Color.TRANSPARENT);
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        imvLoader.setVisibility(View.GONE);
+//                    }
+//                },500);
+//            }
+//        });
+//        llContainer.setBackgroundColor(getResources().getColor(R.color.splash_bg));
+//    }
 
     void navToSplash() {
         Intent intent = getIntent();
@@ -153,11 +153,13 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     void navToSignUpFragment() {
-        Fragment fragment = new SignUpFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.FN_SignUpFragment);
-        ft.commit();
+        Intent intent=new Intent(IntroActivity.this,SignupActivity.class);
+        startActivity(intent);
+//        Fragment fragment = new SignUpFragment();
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.FN_SignUpFragment);
+//        ft.commit();
 
     }
 

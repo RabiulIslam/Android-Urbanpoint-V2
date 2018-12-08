@@ -88,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height_xxmedium"
         android:orientation="horizontal"
-        android:paddingStart="10dp">
+        android:paddingLeft="10dp">
 
 
         <TextView
@@ -109,7 +109,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="-5dp"
+                android:layout_marginRight="-5dp"
                 android:background="@drawable/orange_gadient_rectngle"
                 android:paddingTop="6dp"
                 android:text="80%"
@@ -157,7 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height_xxmedium"
         android:orientation="horizontal"
-        android:paddingStart="10dp">
+        android:paddingLeft="10dp">
 
         <TextView
             style="@style/view_20"
@@ -177,7 +177,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="-5dp"
+                android:layout_marginRight="-5dp"
                 android:background="@drawable/orange_gadient_rectngle"
                 android:paddingTop="6dp"
                 android:text="5"

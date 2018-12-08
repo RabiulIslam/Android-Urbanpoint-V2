@@ -288,8 +288,8 @@ public class MyApplication extends Application {
         Log.e(key, "" + value);
     }
 
-    public Typeface getFont() {
-        Typeface typeface = Typeface.createFromAsset(applicationContext.getAssets(), "fonts/openSans_regular.ttf");
+    public Typeface getFont(Context context) {
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/openSans_regular.ttf");
         return typeface;
     }
 

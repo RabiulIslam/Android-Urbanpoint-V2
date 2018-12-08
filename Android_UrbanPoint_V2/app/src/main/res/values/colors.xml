@@ -11,6 +11,22 @@
     <color name="lst_item_bg">#f7f7f7</color>
     <color name="splash_bg">#f2f2f2</color>
 
+
+
+    <color name="point_color">#722B4C</color>
+    <!--<color name="expndble_lst_color">#a83664</color>-->
+    <color name="text_color">#ffffff</color>
+    <color name="point_halo_color">#722B4C</color>
+    <color name="wheel_unactive_color">@null</color>
+    <color name="wheel_active_color">@null</color>
+
+
+    <color name="start_transparent_background_1">#66000000</color>
+    <color name="start_transparent_background_2">#8C000000</color>
+    <color name="start_transparent_background_3">#8D000000</color>
+    <color name="start_transparent_background_4">#8C000000</color>
+    <color name="start_transparent_background_5">#4D000000</color>
+
     <color name="shadow_color">#aadcdada</color>
     <color name="gray_profile">#adadad</color>
     <color name="gray">#9A9899</color>

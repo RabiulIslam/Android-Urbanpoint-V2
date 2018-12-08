@@ -15,7 +15,6 @@ public interface AppConstt {
 
 //    Staging Server
 
-
     public static final String FLURRY_TOKEN = "MH74JX4SNGK89G427BGP";
     public static final String MIXPANEL_TOKEN = "a37d3739dc37b7bfec03e2d4a7c3ff8b";
 

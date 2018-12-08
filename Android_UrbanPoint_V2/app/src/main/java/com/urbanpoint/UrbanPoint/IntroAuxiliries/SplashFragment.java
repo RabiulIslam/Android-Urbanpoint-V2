@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.SignupActivity;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 
@@ -86,8 +87,10 @@ public class SplashFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                Log.e("should","navigate"+shouldNavigate);
                 if (shouldNavigate) {
                     if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+
                         navToHomeActivity();
                     } else {
                         navToGetStartedFragment();
@@ -98,6 +101,7 @@ public class SplashFragment extends Fragment {
     }
 
     private void navToHomeActivity() {
+        Log.e("home","home");
         Bundle b = this.getArguments();
         String id = "";
         String title = "";
@@ -106,6 +110,7 @@ public class SplashFragment extends Fragment {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         if (b != null) {
+            Log.e("home","home11");
             id = b.getString(AppConstt.Notifications.PUSH_NTIFCN_ID);
             title = b.getString(AppConstt.Notifications.PUSH_NTIFCN_TITLE);
             msg = b.getString(AppConstt.Notifications.PUSH_NTIFCN_MSG);
@@ -120,12 +125,17 @@ public class SplashFragment extends Fragment {
         getActivity().finish();
     }
 
-    void navToGetStartedFragment() {
-        Fragment fragment = new SignUpFragment();
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.IntroMainFragment);
-        ft.commitAllowingStateLoss();
+    void navToGetStartedFragment()
+    {
+        Log.e("home","home23");
+        Intent intent= new Intent(getActivity(), SignupActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+//        Fragment fragment = new SignUpFragment();
+//        FragmentManager fm = getActivity().getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.IntroMainFragment);
+//        ft.commitAllowingStateLoss();
     }
 
     @Override

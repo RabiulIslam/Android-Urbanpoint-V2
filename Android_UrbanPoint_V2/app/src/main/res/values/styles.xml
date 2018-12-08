@@ -92,7 +92,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp40</item>
     </style>
-
+    <style name="button_large_style" parent="button_style">
+        <item name="android:layout_width">@dimen/dp175</item>
+        <item name="android:layout_height">@dimen/dp50</item>
+    </style>
 
 </resources>
 

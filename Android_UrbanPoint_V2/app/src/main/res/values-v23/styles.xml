@@ -34,7 +34,6 @@
         //this is the statusbar color
         <item name="android:windowLightStatusBar">true</item>
 
-
         <item name="android:fontFamily" tools:targetApi="23">serif</item>
         <item name="android:typeface">serif</item>
         <item name="android:buttonStyle" tools:targetApi="23">@style/myButtonStyle</item>

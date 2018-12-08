@@ -2,6 +2,7 @@
     <string name="app_name">Urban Point</string>
 
     <!--Button Strings-->
+    <string name="login">Login</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_getit">Get It</string>
@@ -21,6 +22,7 @@
     <string name="sign_up_get_startd">Get Started</string>
     <string name="save">Save</string>
     <string name="button_text_allow">Allow</string>
+    <string name="get_started">Get Started</string>
 
     <!--Fragments Title-->
     <string name="frg_Home">Home</string>
@@ -389,7 +391,36 @@
     <string name="txv_qatar_riyal">QR </string>
     <string name="facebook_app_id">167219837169256</string>
     <string name="fb_login_protocol_scheme">fb167219837169256</string>
+    <string name="logoContentDescription">Splash Logo</string>
+    <string name="forgot_password"><u>Forgot PIN?</u></string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="age_text">What\'s your age?</string>
+    <string name="setup_your_account">Set Up Your Account</string>
+    <string name="finish">Finish</string>
+    <string name="continue_button">Continue</string>
+    <string name="sign_up_step_one_message">Hi! Nice to meet you, tell us your name</string>
+    <string name="sign_up_step_two_message">Are you a girl or guy?</string>
+    <string name="sign_up_step_three_message">Tell us your interests so that we can get you what you like</string>
 
+    <string name="sign_up_step_four_message">Are you a Vodafone Qatar customer?</string>
 
+    <!--<string name="sign_up_step_five_message">Please setup your PIN.\n You can always change it later.</string>-->
+    <string name="sign_up_step_five_message">Please setup your PIN</string>
+
+    <string name="signup_food_and_drink">Food &amp;\nDrink\n&#160; </string>
+    <string name="signup_beauty_and_spa">Beauty &amp;\nHealth\n&#160; </string>
+    <string name="signup_fun_activities">Fun&amp;\nLeisure\n&#160; </string>
+    <string name="signup_health_fitness">Retail &amp;\n Services\n&#160; </string>
+      <!--Intro Fragment Strings-->
+    <string name="intro_screen_message">Enjoy your city for less!</string>
+    <string name="intro_fra_1">Awesome Things\n to do</string>
+    <string name="intro_fra_1_footer">From your favorite restaurants, salons and brands!</string>
+    <string name="intro_fra_2">Monthly Local\n Offers</string>
+    <string name="intro_fra_2_footer">Access great local offers every month!\n&#160;</string>
+    <!--<string name="intro_fra_3">Enjoy Your City</string>-->
+    <string name="intro_fra_3">Simplest Way to\n Enjoy Your City</string>
+    <string name="intro_fra_3_footer">Enjoy a lavish lifestyle without hurting your wallet!</string>
 
 </resources>
