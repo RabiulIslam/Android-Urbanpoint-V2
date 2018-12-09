@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:ignore="MissingPrefix">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/action_bar_layout_height" />
+
+
+    <LinearLayout
+        android:id="@+id/mainParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/actionBarHeightLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp10"
+            android:orientation="vertical">
+
+
+
+            <ImageView
+                android:id="@+id/frg_payment_logo"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/logo_main" />
+
+            <TextView
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/member_screen_msg"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/main_color"
+                android:textSize="@dimen/sp14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp15" />
+
+            <TextView
+                style="@style/view_20"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@string/plus_880"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/sp17" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp15" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.urbanpoint.UrbanPoint.customViews.pinEntry.CellNoEntryView
+                    android:id="@+id/mobileNumberEntry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:focusableInTouchMode="true"
+                    android:textStyle="bold"
+                    app:accentType="character"
+                    app:applyDigitTextSize="true"
+                    app:digitBackground="@drawable/custom_square_gray_button"
+                    app:digitHeight="@dimen/dp25"
+                    app:digitSpacing="@dimen/dp2"
+                    app:digitTextColor="@color/black"
+                    app:digitTextSize="@dimen/dp8"
+                    app:digitWidth="@dimen/dp25"
+                    app:mask=""
+                    app:numDigits="10"
+                    app:pinAccentColor="@color/selected_pin_input"
+                    app:pinInputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp15"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp20"
+                android:weightSum="1">
+                <Button
+                    android:id="@+id/back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/rounded_edge_purple_button"
+                    android:text="@string/back" />
+                <Button
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/doVodafoneSendOTPToPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/rounded_edge_purple_button"
+                    android:text="@string/get_code" />
+            </LinearLayout>
+
+            <TextView
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/member_screen_verify_pay_text"
+                android:textAlignment="center"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_light"
+                android:textSize="@dimen/sp14" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+
+</RelativeLayout>

@@ -422,5 +422,10 @@
     <!--<string name="intro_fra_3">Enjoy Your City</string>-->
     <string name="intro_fra_3">Simplest Way to\n Enjoy Your City</string>
     <string name="intro_fra_3_footer">Enjoy a lavish lifestyle without hurting your wallet!</string>
+    <string name="member_screen_msg">Verify your phone number and access Thousands of offers in Dhaka!</string>
+    <string name="member_screen_verify">Verify</string>
+    <string name="get_code">Get Code</string>
+    <string name="member_screen_verify_pay_text">Pay on your phone bill \n Cancel your membership any time</string>
+    <string name="plus_880">+880</string>
 
 </resources>

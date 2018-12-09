@@ -11,7 +11,7 @@
     <color name="lst_item_bg">#f7f7f7</color>
     <color name="splash_bg">#f2f2f2</color>
 
-
+    <color name='error_text_color'>#FF0000</color>
 
     <color name="point_color">#722B4C</color>
     <!--<color name="expndble_lst_color">#a83664</color>-->
