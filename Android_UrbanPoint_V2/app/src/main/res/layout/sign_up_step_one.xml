@@ -1,0 +1,197 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent_background">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/blank_layout_height" />
+
+    <LinearLayout
+        android:id="@+id/mainParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_below="@+id/actionBarHeightLayout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/logoContentDescription"
+                android:padding="@dimen/dp10"
+                android:src="@drawable/logo_main" />
+            <ImageView
+                android:visibility="visible"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/logo_main" />
+
+
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+                style="@style/view_20"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/opensans_regular"
+                android:padding="@dimen/dp10"
+                android:text="@string/sign_up_step_one_message"
+                android:textStyle="normal" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp60"
+                android:layout_marginRight="@dimen/dp60"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/signUpUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_round_button"
+                    android:contentDescription="@string/enter_email_message"
+                    android:gravity="left|center"
+                    android:inputType="text|textCapWords|textCapSentences"
+                    android:paddingLeft="@dimen/dp10"
+                    android:paddingRight="@dimen/dp10"
+                    android:paddingTop="@dimen/dp5"
+                    android:paddingBottom="@dimen/dp5"
+                    android:singleLine="true"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textStyle="normal"
+                     />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp15"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="bottom|center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/signUpStepOneBackButton"
+                style="@style/button_style"
+                android:layout_width="@dimen/dp100"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/back"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed" />
+
+            <View
+                android:layout_width="@dimen/dp80"
+                android:layout_height="match_parent" />
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/signUpStepOneContinueButton"
+                style="@style/button_style"
+                android:layout_width="@dimen/dp100"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/continue_button"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@string/continue_button"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_fill_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                android:visibility="gone"
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

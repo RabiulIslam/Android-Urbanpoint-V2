@@ -1,0 +1,262 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent_background">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/blank_layout_height" />
+
+    <LinearLayout
+        android:layout_below="@+id/actionBarHeightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/logo_main" />
+
+
+        <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+            style="@style/view_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/age_text"
+            android:textAlignment="center" />
+
+        <RelativeLayout
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/age_dailer">
+
+            <com.urbanpoint.UrbanPoint.Utils.HoloCircleSeekBar
+                android:id="@+id/picker"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="29dp"
+                app:max="70"
+                app:pointer_color="@color/point_color"
+                app:pointer_halo_color="@color/point_halo_color"
+                app:pointer_size="20dp"
+                app:text_color="@color/text_color"
+                app:text_size="65sp"
+                app:wheel_active_color="@color/wheel_active_color"
+                app:wheel_unactive_color="@color/wheel_unactive_color" />
+            
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/frg_sign_up_three_rl_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/frg_sign_up_three_imv_arrow_left"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/frg_sign_up_three_txv_month"
+                    android:background="@mipmap/left_arrow_white" />
+
+                <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+                    android:id="@+id/frg_sign_up_three_txv_month"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="September"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp24" />
+
+                <ImageView
+                    android:id="@+id/frg_sign_up_three_imv_arrow_right"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/frg_sign_up_three_txv_month"
+                    android:background="@mipmap/right_arrow_white" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/frg_sign_up_three_rl_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/frg_sign_up_three_imv_circle_left"
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/frg_sign_up_three_txv_year"
+                    android:background="@mipmap/left_circle_transparent" />
+
+                <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+                    android:id="@+id/frg_sign_up_three_txv_year"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="1990"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp24" />
+
+                <ImageView
+                    android:id="@+id/frg_sign_up_three_imv_circle_right"
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/frg_sign_up_three_txv_year"
+                    android:background="@mipmap/right_circle_transparent" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp15"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/frg_sign_up_three_txv_skip"
+            style="@style/view_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-10dp"
+            android:text="@string/skip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/signUpStepFiveBackButton"
+                style="@style/button_style"
+                android:layout_width="@dimen/dp100"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/back"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed" />
+
+            <View
+                android:layout_width="@dimen/dp80"
+                android:layout_height="match_parent" />
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/signUpStepFiveContinueButton"
+                style="@style/button_style"
+                android:layout_width="@dimen/dp100"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/continue_button"
+                android:text="@string/continue_button"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_fill_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_fill_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_fill_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view" />
+
+            <View
+                android:layout_width="@dimen/dp5"
+                android:layout_height="match_parent" />
+
+            <View
+                style="@style/button_style"
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp10"
+                android:background="@drawable/custom_circle_view"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

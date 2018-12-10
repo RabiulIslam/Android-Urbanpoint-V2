@@ -34,6 +34,7 @@ public class SignIn_WebHit_Post_signIn {
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.signIn;
+        Log.e("login_url",myUrl);
         String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
 
         RequestParams params = new RequestParams();
@@ -42,7 +43,8 @@ public class SignIn_WebHit_Post_signIn {
         params.put("deviceType", AppConstt.DeviceType);
         params.put("device_info", deviceInfo);
         params.put("token", _fcmToken);
-        Log.d("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
+        Log.e("params",params+"");
+        Log.e("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
 
 //        JSONObject jsonObject = new JSONObject();
 //        StringEntity entity = null;
@@ -72,7 +74,7 @@ public class SignIn_WebHit_Post_signIn {
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
 
-                            Log.d("RESPONSE_MESSAGE", strResponse+"");
+                            Log.e("RESPONSE_MESSAGE", strResponse+"");
 
                             switch (statusCode) {
 
@@ -120,6 +122,7 @@ public class SignIn_WebHit_Post_signIn {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("err",statusCode+","+error.getMessage());
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

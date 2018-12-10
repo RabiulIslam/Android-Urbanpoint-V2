@@ -11,7 +11,10 @@ public interface AppConstt {
     String BASE_URL_MOBILE = BASE_URL + "mobile/";
     String BASE_URL_SUBSCRIPTION = BASE_URL + "subscription/";
     String BASE_URL_IMAGES = "http://18.185.217.28/up_qatar/uploads/";
-
+    String mSignupUsername="";
+    String mSignupAge="";
+     String mSignupGender="";
+   String mSignupEmail="";
 
 //    Staging Server
 

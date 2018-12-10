@@ -428,5 +428,9 @@
     <string name="member_screen_verify_pay_text">Pay on your phone bill \n Cancel your membership any time</string>
     <string name="plus_880">+880</string>
     <string name="get1stmonthfree">Get 1st Month Free</string>
-
+    <string name="pin_error">Please enter 4 digit pin</string>
+    <string name="confirm_pin_error">Pin and Confirm Pin should be same</string>
+    <string name="sign_up_select_gender">Please tell us if you are a girl or guy</string>
+    <string name="occupation">Occupation</string>
+    <string name="referral_code">Referral Code</string>
 </resources>

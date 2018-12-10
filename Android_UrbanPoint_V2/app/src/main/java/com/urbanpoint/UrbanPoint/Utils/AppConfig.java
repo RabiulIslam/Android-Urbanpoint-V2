@@ -57,7 +57,10 @@ public class AppConfig {
     public int badgeCounter;
     public boolean isSpaceRequiredToShow;
     public boolean isEligible;
-
+    public static String mSignupUsername="";
+    public static String mSignupAge="";
+    public static String mSignupGender="";
+    public static String mSignupEmail="";
     private AppConfig(Context _mContext) {
         if (_mContext != null) {
 
@@ -74,6 +77,8 @@ public class AppConfig {
 
         }
     }
+
+
 
     private void initUserSessionData() {
         mNotificationStatus = -1;
