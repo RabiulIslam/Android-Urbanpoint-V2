@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,23 +34,25 @@ public class Home_WebHit_Post_homeApi {
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.homeApi;
-
+        Log.e("homeApi",myUrl);
         RequestParams requestParams = new RequestParams();
         requestParams.put("app_version",AppConfig.getInstance().mUser.mAppVersion);
-
+         Log.e("home_params",requestParams+"");
+         Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, requestParams,new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
                         String strResponse;
                         try {
                             Gson gson = new Gson();
                             strResponse = new String(responseBody, "UTF-8");
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
-
+                            Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
                                     if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
@@ -132,6 +135,7 @@ public class Home_WebHit_Post_homeApi {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("errr",error.getMessage()+","+statusCode);
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

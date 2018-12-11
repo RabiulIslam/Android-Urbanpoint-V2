@@ -7,10 +7,11 @@ package com.urbanpoint.UrbanPoint.Utils;
 public interface AppConstt {
 
 //    Live Server
-    String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
-    String BASE_URL_MOBILE = BASE_URL + "mobile/";
+    //String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
+    String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+    String BASE_URL_MOBILE = BASE_URL + "mobile/?method=";
     String BASE_URL_SUBSCRIPTION = BASE_URL + "subscription/";
-    String BASE_URL_IMAGES = "http://18.185.217.28/up_qatar/uploads/";
+    String BASE_URL_IMAGES = "http://34.219.2.69/up_qatar/uploads/";
     String mSignupUsername="";
     String mSignupAge="";
      String mSignupGender="";

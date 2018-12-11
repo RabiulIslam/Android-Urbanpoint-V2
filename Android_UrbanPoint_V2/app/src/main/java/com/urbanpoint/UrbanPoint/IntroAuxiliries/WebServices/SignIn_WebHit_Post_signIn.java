@@ -36,7 +36,6 @@ public class SignIn_WebHit_Post_signIn {
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.signIn;
         Log.e("login_url",myUrl);
         String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
-
         RequestParams params = new RequestParams();
         params.put("email", _emailId);
         params.put("password", _pin);

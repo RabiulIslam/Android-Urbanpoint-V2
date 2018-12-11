@@ -201,12 +201,12 @@
                         app:accentType="character"
                         app:applyDigitTextSize="true"
                         app:digitBackground="@drawable/pin_custom_square_button"
-                        app:digitHeight="@dimen/dp25"
+                        app:digitHeight="@dimen/dp30"
                         app:digitSpacing="@dimen/dp15"
 
                         app:digitTextColor="@color/white"
                         app:digitTextSize="@dimen/dp8"
-                        app:digitWidth="@dimen/dp25"
+                        app:digitWidth="@dimen/dp30"
                         app:mask="&#8226;"
                         app:pinAccentColor="@color/selected_pin_input"
                         app:pinInputType="number" />
@@ -246,11 +246,11 @@
                             app:accentType="character"
                             app:applyDigitTextSize="true"
                             app:digitBackground="@drawable/pin_custom_square_button"
-                            app:digitHeight="@dimen/dp25"
+                            app:digitHeight="@dimen/dp30"
                             app:digitSpacing="@dimen/dp15"
                             app:digitTextColor="@color/white"
                             app:digitTextSize="@dimen/dp8"
-                            app:digitWidth="@dimen/dp25"
+                            app:digitWidth="@dimen/dp30"
                             app:mask="&#8226;"
                             app:pinAccentColor="@color/selected_pin_input"
                             app:pinInputType="number" />

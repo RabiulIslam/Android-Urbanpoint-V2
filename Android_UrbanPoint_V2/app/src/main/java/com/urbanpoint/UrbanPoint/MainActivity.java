@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         setContentView(R.layout.activity_main);
         Log.d("PUSHNOTIFICATN", "onCreateMainActivity: " + AppConfig.getInstance().isCommingFromSplash);
         if (!AppConfig.getInstance().isCommingFromSplash) {
+            Log.e("check","1");
             AppConfig.getInstance().isCommingFromSplash = true;
             //If not coming from splash, redirect to splash
             Intent intent = new Intent(this, IntroActivity.class);
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             this.overridePendingTransition(0, 0);
             this.finish();//Not required in the backstack
         } else {
+            Log.e("check","2");
             initiate();
             bindViews();
             setDefLang("en");
@@ -92,12 +94,14 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             String msg = "";
             String date = "";
             if (intent != null) {
+                Log.e("check","3");
                 Id = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_ID);
                 title = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_TITLE);
                 msg = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_MSG);
                 date = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_DATE);
             }
             if (Id != null && Id.length() > 0) {
+                Log.e("check","4");
                 Bundle b = new Bundle();
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_ID, Id);
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_TITLE, title);
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_DATE, date);
                 navToHomeFragmentWithArguments(b);
             } else {
+                Log.e("check","5");
                 AppConfig.getInstance().isComingFromHome = true;
                 navToHomeFragment();
             }

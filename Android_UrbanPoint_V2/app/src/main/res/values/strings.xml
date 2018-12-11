@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Urban Point</string>
+    <string name="app_name">Biyog</string>
 
     <!--Button Strings-->
     <string name="login">Login</string>
@@ -387,7 +387,7 @@
 
 
     <string name="enter_access_code_empty_2">Please enter a valid Access Code</string>
-    <string name="country_code">+974</string>
+    <string name="country_code">+888</string>
     <string name="txv_qatar_riyal">QR </string>
     <string name="facebook_app_id">167219837169256</string>
     <string name="fb_login_protocol_scheme">fb167219837169256</string>
