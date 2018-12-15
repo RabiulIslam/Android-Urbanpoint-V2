@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,10 +30,11 @@ public class ReviewOrders_Webhit_Get_getMyOrdersWithoutReview {
     public void getReviews(Context _context, final IWebCallbacks iWebCallbacks, int _page) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getMyOrdersWithoutReview;
+        Log.e("getReviewsUrl",myUrl);
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("index", _page);
-
+        Log.e("getreviewparams",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
@@ -67,6 +69,7 @@ public class ReviewOrders_Webhit_Get_getMyOrdersWithoutReview {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("error",error.getMessage());
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

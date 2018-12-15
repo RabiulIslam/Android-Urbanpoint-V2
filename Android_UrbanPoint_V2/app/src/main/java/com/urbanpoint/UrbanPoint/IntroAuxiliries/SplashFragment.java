@@ -44,6 +44,7 @@ public class SplashFragment extends Fragment {
             }
         }
 //                loadOldPrefrencLog();
+
         launchSelection();
         return frg;
 

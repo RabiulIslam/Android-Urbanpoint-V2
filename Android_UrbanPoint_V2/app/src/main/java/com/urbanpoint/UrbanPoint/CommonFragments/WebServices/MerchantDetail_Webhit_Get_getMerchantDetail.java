@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.CommonFragments.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,13 +30,16 @@ public class MerchantDetail_Webhit_Get_getMerchantDetail {
     public void requestOfferDetail(Context _context, final IWebCallbacks iWebCallbacks, int _outletId, int _page) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getOffers;
+        Log.e("get_merchant_detail",myUrl);
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("outlet_id", _outletId);
         params.put("index", _page);
+        Log.e("mrchnt_detail_params",params+"");
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

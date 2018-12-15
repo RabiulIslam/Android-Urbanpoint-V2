@@ -72,6 +72,7 @@ public class IntroActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_intro);
         //playVideo();
+        AppConfig.getInstance().clearSignupData();
         AppConfig.getInstance().isCommingFromSplash = true;
 
         AppConfig.getInstance().isComingFromHome =false;
@@ -155,7 +156,7 @@ public class IntroActivity extends AppCompatActivity {
     void navToSignUpFragment() {
         Intent intent=new Intent(IntroActivity.this,SignupActivity.class);
         startActivity(intent);
-//        Fragment fragment = new SignUpFragment();
+        Fragment fragment = new SignUpFragment();
 //        FragmentManager fm = getSupportFragmentManager();
 //        FragmentTransaction ft = fm.beginTransaction();
 //        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.FN_SignUpFragment);

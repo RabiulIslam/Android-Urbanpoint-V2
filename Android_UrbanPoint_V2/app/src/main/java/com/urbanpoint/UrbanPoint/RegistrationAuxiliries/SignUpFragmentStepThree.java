@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,22 @@ public class SignUpFragmentStepThree extends Fragment implements View.OnClickLis
 //        } else {
 //            picker.setValue(picker.getValue() + 5);
 //        }
+
+        if (AppConfig.getInstance().getAge()!=null && AppConfig.getInstance().getAge()!="null"
+                && !(TextUtils.isEmpty(AppConfig.getInstance().getAge())))
+        {
+            if (AppConfig.getInstance().getAge().equalsIgnoreCase("70+"))
+            {
+                picker.setValue(60);
+            }
+            else {
+                picker.setValue(Float.parseFloat(AppConfig.getInstance().getAge())-10);
+            }
+        }
+        else
+        {
+            picker.setValue(picker.getValue() + 5);
+        }
         mSignUpBackView = (Button) mRootView.findViewById(R.id.signUpStepFiveBackButton);
         mSignUpBackView.setOnClickListener(this);
         mSignUpContinueView = (Button) mRootView.findViewById(R.id.signUpStepFiveContinueButton);
@@ -124,11 +141,11 @@ public class SignUpFragmentStepThree extends Fragment implements View.OnClickLis
 
                 if (picker.getValue() > 70) {
 
-                    AppConfig.mSignupAge = "70+";
-                    Log.d("PICKERR", "bindViews age:" + AppConfig.mSignupAge);
+                    AppConfig.getInstance().setAge( "70+");
+                   // Log.d("PICKERR", "bindViews age:" + AppConfig.mSignupAge);
                 } else {
-                    AppConfig.mSignupAge = picker.getValue() + "";
-                    Log.d("PICKERR", "bindViews age:" + AppConfig.mSignupAge);
+                    AppConfig.getInstance().setAge(picker.getValue() + "");
+                 //   Log.d("PICKERR", "bindViews age:" + AppConfig.mSignupAge);
                 }
 
                 fragmentTransaction.setCustomAnimations(R.anim.right_in, R.anim.left_out);

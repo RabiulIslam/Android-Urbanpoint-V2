@@ -17,6 +17,8 @@ import android.view.inputmethod.InputMethodManager;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.DModel_Badges;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.DModel_User;
 
+import java.sql.Ref;
+
 /**
  * Created by Danish on 1/25/2018.
  */
@@ -29,6 +31,8 @@ public class AppConfig {
     private Context mContext;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
+    private SharedPreferences SignupData;
+    private SharedPreferences.Editor SignupEditor;
     public boolean isComingFromLogout;
     public boolean isComingFromHome;
     public int marginToast;
@@ -57,10 +61,10 @@ public class AppConfig {
     public int badgeCounter;
     public boolean isSpaceRequiredToShow;
     public boolean isEligible;
-    public static String mSignupUsername="";
-    public static String mSignupAge="";
-    public static String mSignupGender="";
-    public static String mSignupEmail="";
+//    public static String mSignupUsername="";
+//    public static String mSignupAge="";
+//    public static String mSignupGender="";
+//    public static String mSignupEmail="";
     private AppConfig(Context _mContext) {
         if (_mContext != null) {
 
@@ -72,6 +76,9 @@ public class AppConfig {
 
             this.marginToast = (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10
                     , mContext.getResources().getDisplayMetrics()));
+
+            this.SignupData=mContext.getSharedPreferences("signup_pref",Context.MODE_PRIVATE);
+            this.SignupEditor=SignupData.edit();
 
             initUserSessionData();
 
@@ -123,6 +130,10 @@ public class AppConfig {
         return ourInstance;
     }
 
+
+
+
+
     public void loadOldPrefrnceData() {
         mUser.mUserId = sharedPref.getString("CUSTOMER_ID", "");
         mUser.mName = sharedPref.getString("user_name", "");
@@ -156,6 +167,72 @@ public class AppConfig {
         }
     }
 
+    public  void clearSignupData()
+    {
+        SignupEditor.clear();
+        SignupEditor.commit();
+    }
+
+
+    public  void setUsername(String username)
+    {
+        SignupEditor.putString("name",username);
+        SignupEditor.commit();
+    }
+    public void setEmail(String Email)
+    {
+        SignupEditor.putString("email",Email);
+        SignupEditor.commit();
+    }
+    public  void  setOccupation(String Occupation)
+    {
+        SignupEditor.putString("occupation",Occupation);
+        SignupEditor.commit();
+    }
+    public void setGender(String Gender)
+    {
+        SignupEditor.putString("gender",Gender);
+        SignupEditor.commit();
+    }
+
+    public void setAge(String Age)
+    {
+        SignupEditor.putString("age",Age);
+        SignupEditor.commit();
+    }
+    public void setReferralCode(String ReferralCode)
+    {
+        SignupEditor.putString("Refcode", ReferralCode);
+        SignupEditor.commit();
+    }
+
+
+    public String getName()
+    {
+        return  SignupData.getString("name","");
+    }
+
+    public String getAge()
+    {
+        return  SignupData.getString("age","");
+    }
+    public String getOccupation()
+    {
+        return  SignupData.getString("occupation","");
+    }
+    public String getEmail()
+    {
+      return  SignupData.getString("email","");
+    }
+
+    public String getReferralCode()
+    {
+       return SignupData.getString("Refcode","");
+    }
+    public String getGender()
+    {
+       return SignupData.getString("gender","");
+    }
     public void loadUserData() {
         mUser.setmUserId(sharedPref.getString("key_user_id", ""));
         mUser.setmName(sharedPref.getString("key_name", ""));

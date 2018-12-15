@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -95,12 +96,12 @@ public class SignUpFragmentStepOne extends Fragment implements View.OnClickListe
         mSignUpContinueView = (Button) mRootView.findViewById(R.id.signUpStepOneContinueButton);
         mSignUpContinueView.setOnClickListener(this);
 
-//        if (AppInstance.signUpUser == null) {
-//            SignUpUser signUpUser = new SignUpUser();
-//            AppInstance.signUpUser = signUpUser;
-//        }
+        if (AppConfig.getInstance().getName()!=null & AppConfig.getInstance().getName()!="null"
+        &!(TextUtils.isEmpty(AppConfig.getInstance().getName())))
 
-//        mSignUpUserName.setText(AppInstance.signUpUser.getFirstName());
+        {
+            mSignUpUserName.setText(AppConfig.getInstance().getName());
+        }
     }
 
 
@@ -118,13 +119,13 @@ public class SignUpFragmentStepOne extends Fragment implements View.OnClickListe
             case R.id.signUpStepOneContinueButton:
 
                 String name = mSignUpUserName.getText().toString();
+               // AppConfig.getInstance().setUsername(name);
                 if (name.trim().length() == 0) {
                     String message = getString(R.string.sign_up_enter_name_message);
                     customAlert.showCustomAlertDialog(getActivity(), null, message, null, null, false, null);
                   //  utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_name), message, null, null, false, null);
                 } else {
-                    AppConfig.mSignupUsername=name;
-//                    AppInstance.signUpUser.setFirstName(name);
+                    AppConfig.getInstance().setUsername(name);
                     fragmentTransaction.setCustomAnimations(R.anim.right_in, R.anim.left_out);
                     fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepTwo());
                     fragmentTransaction.commit();
@@ -132,7 +133,8 @@ public class SignUpFragmentStepOne extends Fragment implements View.OnClickListe
 
                 break;
             case R.id.mainParentLayout:
-                utilObj.keyboardClose(mContext, v);
+                AppConfig.getInstance().closeKeyboard(getActivity());
+               // utilObj.keyboardClose(mContext, v);
                 break;
         }
 

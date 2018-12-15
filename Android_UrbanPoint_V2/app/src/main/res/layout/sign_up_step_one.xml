@@ -71,6 +71,7 @@
                     android:singleLine="true"
                     android:fontFamily="@font/opensans_regular"
                     android:text=""
+                    android:textSize="@dimen/fontsize_normal"
                     android:textColor="@color/white"
                     android:textStyle="normal"
                      />

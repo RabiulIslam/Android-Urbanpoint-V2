@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -31,9 +32,11 @@ public class AccessCode_Webhit_Post_usePromoCode {
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("code", _code);
-
+        Log.e("params",params+"");
+        Log.e("request_free_access_url",myUrl);
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

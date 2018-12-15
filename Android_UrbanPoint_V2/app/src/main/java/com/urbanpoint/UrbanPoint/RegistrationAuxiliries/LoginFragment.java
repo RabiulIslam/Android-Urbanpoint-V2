@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.ForgotPasswordFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
@@ -134,6 +135,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener
 
 
     }
+    private void navToForgotPasswordFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        fragmentTransaction.replace(R.id.containerIntroFragments, new ForgotPasswordFragment());
+        fragmentTransaction.commit();
+    }
 
 
     @Override
@@ -151,7 +159,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             case R.id.forgotPassword:
 //                Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
 //                startActivity(intent);
-                //   navToForgotPasswordFragment();
+                  navToForgotPasswordFragment();
                 break;
 
             case R.id.loginToApp:

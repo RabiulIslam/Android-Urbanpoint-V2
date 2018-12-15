@@ -67,7 +67,7 @@
                     android:layout_gravity="center"
                     android:padding="@dimen/dp5"
                     android:paddingTop="0dp"
-                    android:text="@string/enter_email_message" />
+                    android:text="@string/sign_in_enter_email" />
 
 
                 <RelativeLayout
@@ -94,6 +94,7 @@
                         android:gravity="left|center"
                         android:inputType="textEmailAddress"
                         android:paddingLeft="@dimen/dp10"
+                        android:textSize="@dimen/fontsize_normal"
                         android:singleLine="true"
                         android:textColor="@color/white"
                         android:textStyle="normal" />
@@ -126,7 +127,7 @@
                 android:layout_marginTop="@dimen/dp15"
                 android:paddingTop="0dp"
                 android:text="@string/occupation" />
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/signUpUserOccupation"
                 android:layout_width="match_parent"
                 android:fontFamily="@font/opensans_regular"
@@ -139,6 +140,7 @@
                 android:paddingLeft="@dimen/dp10"
                 android:singleLine="true"
                 android:textColor="@color/white"
+                android:textSize="@dimen/fontsize_normal"
                 android:layout_marginLeft="@dimen/dp60"
                 android:layout_marginRight="@dimen/dp60"
                 android:textStyle="normal" />
@@ -166,6 +168,7 @@
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/dp60"
+                android:textSize="@dimen/fontsize_normal"
                 android:layout_marginRight="@dimen/dp60"
                 android:textStyle="normal" />
 
@@ -203,7 +206,6 @@
                         app:digitBackground="@drawable/pin_custom_square_button"
                         app:digitHeight="@dimen/dp30"
                         app:digitSpacing="@dimen/dp15"
-
                         app:digitTextColor="@color/white"
                         app:digitTextSize="@dimen/dp8"
                         app:digitWidth="@dimen/dp30"

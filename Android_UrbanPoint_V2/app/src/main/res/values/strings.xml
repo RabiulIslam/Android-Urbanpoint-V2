@@ -112,10 +112,24 @@
     <string name="sign_up_year_of_birth">Year of birth</string>
     <string name="sign_up_pin">This year will be used as your PIN</string>
     <string name="sign_up_login">Already a user? <u>Log In</u></string>
-    <string name="login_terms_and_conditions_message_one">By clicking Get Started, you agree to accept our&#160;</string>
+    <string name="login_terms_and_conditions_message_one">By clicking Finish, you agree to accept our&#160;</string>
     <string name="login_terms_and_conditions_message_two"><u>Privacy Statement and Terms of Use</u></string>
 
 
+
+    <string name="occ1">Student</string>
+    <string name="occ2">Service Holder</string>
+    <string name="occ3">Businessman</string>
+    <string name="occ4">Unemployed</string>
+
+
+    <!--Occupation Array-->
+    <string-array name="occupation">
+        <item>@string/occ1</item>
+        <item>@string/occ2</item>
+        <item>@string/occ3</item>
+        <item>@string/occ4</item>
+    </string-array>
     <!--SignUp Verification Screen-->
     <string name="sign_up_free_access">You have Free access to Urban Point.\n
     Please enter the code received by SMS to \n

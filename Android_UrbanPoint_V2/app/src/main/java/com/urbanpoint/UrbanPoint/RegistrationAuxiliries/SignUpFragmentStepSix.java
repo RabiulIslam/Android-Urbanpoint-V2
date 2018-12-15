@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -79,8 +82,10 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private int currentApiVersion;
     private boolean isValidEmail;
     private RelativeLayout rlProgressBar;
+    private AutoCompleteTextView mSignUpOccupation;
+    private EditText mSignUpReferralCode;
 //    private IntroActivityManager introActivityManager;
-
+    ArrayAdapter OccupationAdapter;
 
     public SignUpFragmentStepSix() {
         // Required empty public constructor
@@ -92,13 +97,10 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sign_up_step_six, null);
         // View view = inflater.inflate(R.layout.fragment_change_pin, null);
-
-
         this.mActivity = getActivity();
         this.mContext = mActivity.getApplicationContext();
         this.mRootView = view;
         //  getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
        initialize();
        // MyApplication.getInstance().trackScreenView(getResources().getString(R.string.get_started) + ":" + getResources().getString(R.string.ga_set_up_account_screen));
 
@@ -164,9 +166,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
     private void initialize() {
 
-      //  utilObj = new Utility(mActivity);
-       // mSignUpManagerObj = new SignUpManager(mActivity, this);
-//        introActivityManager = new IntroActivityManager(mContext, this);
         customAlert = new CustomAlert();
         progressDilogue = new ProgressDilogue();
         isValidEmail = false;
@@ -176,6 +175,8 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     }
 
     private void bindViews() {
+        OccupationAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,
+                getContext().getResources().getStringArray(R.array.occupation));
         rlProgressBar = (RelativeLayout) mRootView.findViewById(R.id.frg_sign_up_rl_progrssbar);
 
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -191,10 +192,11 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mSignUpBackView.setOnClickListener(this);
         mSignUpFinishView = (Button) mRootView.findViewById(R.id.signUpStepSixFinishButton);
         mSignUpFinishView.setOnClickListener(this);
-
-
         mSignUpUserEmail = (EditText) mRootView.findViewById(R.id.signUpUserEmail);
-
+        mSignUpOccupation=(AutoCompleteTextView)mRootView.findViewById(R.id.signUpUserOccupation);
+        mSignUpOccupation.setAdapter(OccupationAdapter);
+        mSignUpOccupation.setThreshold(1);
+        mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
         mSignUpNewPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpNewPinEntry);
         mSignUpConfirmPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpConfirmPinEntry);
         mSignUpNewPinEntry.setOnPinEnteredListener(new PinEntryView.OnPinEnteredListener() {
@@ -211,7 +213,8 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             @Override
             public void onPinEntered(String pin) {
                 enteredConfirmPin = pin;
-                utilObj.keyboardClose(mContext, mSignUpConfirmPinEntry);
+             //   utilObj.keyboardClose(mContext, mSignUpConfirmPinEntry);
+                AppConfig.getInstance().closeKeyboard(getActivity());
                 if (currentApiVersion < Build.VERSION_CODES.LOLLIPOP) {
                     mScrollViewMainLayout.fullScroll(View.FOCUS_UP);
                 }
@@ -315,7 +318,9 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             case R.id.signUpStepSixFinishButton:
                 {
                 if ( validatingRequired())
+
                 {
+                    navToVerifyMemberFragment();
 //                 requestSignUp(AppConfig.mSignupUsername,mSignUpUserEmail.getText().toString(),
 //                         AppConfig.mSignupGender,AppConfig.);
                 }
@@ -323,38 +328,12 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                 {
 
                 }
-//                fragmentTransaction.setCustomAnimations(R.anim.right_in, R.anim.left_out);
-//                fragmentTransaction.replace(R.id.containerIntroFragments, new VerifyMemberFragment());
-//                fragmentTransaction.commit();
-//                if (validatingRequired()) {
-//                    if (NetworkUtils.isConnected(mContext)) {
-//                        //                        doValidateEmail(mSignUpUserEmail.getText().toString());
-//
-//                        String email = mSignUpUserEmail.getText().toString();
-//                        String enteredPin = enteredNewPin;
-//                        int pinCode = Integer.parseInt(enteredPin);
-//                        int num4 = pinCode % 10;
-//                        int num1 = pinCode / 1000 % 10;
-//                        AppPreference.setSetting(mContext, Constants.Request.PINCODE, num1 + "**" + num4);
-//
-//
-//                        if (AppInstance.signUpUser != null) {
-//                            utilObj.startiOSLoader(mActivity, R.drawable.image_for_rotation, getString(R.string.sign_up_loading_message), false);
-//                            AppInstance.signUpUser.seteMailId(email);
-//                            AppInstance.signUpUser.setCustomerPin(enteredPin);
-////                                MyApplication.getInstance().trackEvent(getResources().getString(R.string.ga_event_category_get_started_email_finish), getResources().getString(R.string.ga_event_action_get_started_email_finish), getResources().getString(R.string.ga_event_label_get_started_email_finish));
-////                        utilObj.startiOSLoader(mActivity, R.drawable.image_for_rotation, getString(R.string.sign_up_loading_message), false);
-//                            mSignUpManagerObj.doSignUp(AppInstance.signUpUser);
-//                        }
-//
-//                    } else {
-//                        utilObj.showToast(mContext, getString(R.string.no_internet), Toast.LENGTH_LONG);
-//                    }
-//                }
+
+
             }
             break;
             case R.id.mainParentLayout:
-//                 utilObj.keyboardClose(mContext, v);
+
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 break;
             case R.id.loginTermsAndConditions:
@@ -362,11 +341,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
 
             case R.id.loginTermsAndConditions_Two:
-//                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//                intent.putExtra(Constants.Request.PAGE, Constants.StaticHtmlPage.LOGIN_RULES);
-//                intent.putExtra(Constants.DEFAULT_VALUES.ACTION_BAR_HEADER, getString(R.string.privacy_and_terms));
-//
-//                startActivity(intent);
+
                 Log.e("click","terms");
                 Bundle b = new Bundle();
                 b.putString("page", AppConstt.LOGIN_RULES);
@@ -377,52 +352,10 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
     }}
 
-//    private void doValidateEmail(String _email) {
-//        if (NetworkUtils.isConnected(mContext)) {
-//            //            mUpdateUserProfileManager.doUpdateUserProfile(_name, _email, _nationality);
-//            SignUp_WebHit_Get_BriteVerifyEmail signUp_webHit_get_briteVerifyEmail = new SignUp_WebHit_Get_BriteVerifyEmail();
-//            signUp_webHit_get_briteVerifyEmail.checkValidation(getActivity(), this, _email);
-//        } else {
-//            utilObj.showToast(mContext, getString(R.string.no_internet), Toast.LENGTH_LONG);
-//        }
-//    }
 
 
-//    private boolean validatingRequired() {
-//        String message = "";
-//        String email = mSignUpUserEmail.getText().toString();
-//        String enteredPin = enteredNewPin;
-//
-//        String confirmPin = enteredConfirmPin;
-//
-//        //validate the content
-//        if (email.isEmpty()) {
-//            message = getResources().getString(R.string.EmailErrorMessage);
-//            //utilObj.showError(this, message, textViewObj, emailObj);
-//            utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_setup), message, null, null, false, null);
-//        } else if (!utilObj.checkEmail(email)) {
-//            message = getResources().getString(R.string.invalid_email);
-//            utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_setup), message, null, null, false, null);
-//        } else if (enteredPin.length() < 4) {
-//            message = getResources().getString(R.string.sign_up_enter_pin_message);
-//            utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_setup), message, null, null, false, null);
-//        } else if (confirmPin.length() < 4) {
-//            message = getResources().getString(R.string.sign_up_enter_confirm_pin_message);
-//            utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_setup), message, null, null, false, null);
-//        } else if (!confirmPin.equalsIgnoreCase(enteredPin)) {
-//            message = getResources().getString(R.string.enter_pin_not_match);
-//            utilObj.showCustomAlertDialog(mActivity, getString(R.string.header_setup), message, null, null, false, null);
-//            mSignUpConfirmPinEntry.clearText();
-//            mSignUpNewPinEntry.clearText();
-//        }
-//
-//        if (message.equalsIgnoreCase("") || message == null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//
-//    }
+
+
 
     private void logFireBaseEvent() {
         Bundle params = new Bundle();
@@ -489,27 +422,25 @@ private void requestSignUp(String _name, String _email, String _gender, String _
     private void navToTermsAndConditionsFragment(Bundle bundle) {
         Log.e("click","terms111");
         Fragment fr = new WebViewFragment();
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        fr.setArguments(bundle);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        fr.setArguments(bundle);
 //        ft.add(R.id.containerIntroFragments, fr, AppConstt.FRGTAG.WebViewFragment);
 //        ft.addToBackStack(AppConstt.FRGTAG.WebViewFragment);
 //        ft.hide(this);
 //        ft.commit();
-        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
-        fragmentTransaction.replace(R.id.containerIntroFragments, new WebViewFragment());
-        fragmentTransaction.commit();
+//        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        ft.replace(R.id.containerIntroFragments, fr);
+        ft.commit();
     }
 
-    private void navToSignUpVerificationFragment(Bundle b) {
+    private void navToVerifyMemberFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment frg = new SignUpVerificationFragment();
-        frg.setArguments(b);
-        ft.add(R.id.activity_intro_frm, frg, AppConstt.FRGTAG.FN_SignUpVerificationFragment);
-        ft.addToBackStack(AppConstt.FRGTAG.FN_SignUpVerificationFragment);
-        ft.hide(this);
+        Fragment frg = new VerifyMemberFragment();
+        ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        ft.replace(R.id.containerIntroFragments, frg);
         ft.commit();
     }
 
