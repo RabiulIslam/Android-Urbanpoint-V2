@@ -9,6 +9,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -20,6 +23,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +64,8 @@ import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,6 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initialize() {
+        printKeyHash();
         customAlert = new CustomAlert();
         progressDilogue = new ProgressDilogue();
         lstCategories = new ArrayList<>();
@@ -724,7 +731,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lstGrids2 = new ArrayList<>();
         lstCategories = new ArrayList<>();
 
-
         if (Home_WebHit_Post_homeApi.responseObject != null) {
 
             updateGridVwData();
@@ -742,6 +748,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
+
+    public void printKeyHash()
+    {
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "com.s.bikeandtaxi",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+    }
     private void updateGridVwData() {
 
         //Updating Home Screen Msg

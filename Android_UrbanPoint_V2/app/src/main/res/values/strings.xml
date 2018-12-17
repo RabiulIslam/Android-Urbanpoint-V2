@@ -447,4 +447,9 @@
     <string name="sign_up_select_gender">Please tell us if you are a girl or guy</string>
     <string name="occupation">Occupation</string>
     <string name="referral_code">Referral Code</string>
+
+
+    <string name="FACEBOOK_APP_ID">392993371444452</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
+
 </resources>

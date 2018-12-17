@@ -256,6 +256,8 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         String message = "";
         String email = mSignUpUserEmail.getText().toString().trim();
         String fcmToken = AppConfig.getInstance().loadFCMToken();
+        AppConfig.getInstance().setEmail(email);
+        Log.e("check","validation");
 /*  String enteredPin = enteredNewPin;
 
         String confirmPin = enteredConfirmPin;*/
@@ -288,6 +290,12 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             customAlert.showCustomAlertDialog(getActivity(), null, message, null, null, false, null);
         }
         if (message.equalsIgnoreCase("") || message == null) {
+            AppConfig.getInstance().setEmail(email);
+            AppConfig.getInstance().setOccupation(mSignUpOccupation.getText().toString());
+            AppConfig.getInstance().setReferralCode(mSignUpReferralCode.getText().toString());
+            Log.e("entered_pin",enteredNewPin);
+            AppConfig.getInstance().setPin(enteredNewPin);
+           // AppConfig.getInstance().
             return true;
         } else {
             return false;
@@ -316,18 +324,20 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.signUpStepSixFinishButton:
-                {
-                if ( validatingRequired())
+
+                    Log.e("click","finish"+validatingRequired());
+                if ( validatingRequired()==true)
 
                 {
-                    navToVerifyMemberFragment();
-//                 requestSignUp(AppConfig.mSignupUsername,mSignUpUserEmail.getText().toString(),
-//                         AppConfig.mSignupGender,AppConfig.);
-                }
-                else
-                {
-
-                }
+                    Log.e("chkpin",AppConfig.getInstance().getPin()+"mmmmmmmmmm");
+                    requestSignUp(AppConfig.getInstance().getName(),
+                            AppConfig.getInstance().getEmail(),
+                            AppConfig.getInstance().getGender(),
+                            AppConfig.getInstance().getPin(),
+                            AppConfig.getInstance().mFCMToken,
+                            AppConfig.getInstance().getOccupation(),
+                            AppConfig.getInstance().getAge(),
+                            AppConfig.getInstance().getReferralCode());
 
 
             }
@@ -352,11 +362,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
     }}
 
-
-
-
-
-
     private void logFireBaseEvent() {
         Bundle params = new Bundle();
         params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
@@ -378,26 +383,31 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mixpanel.getPeople().set("Created at", timeStamp);
         mixpanel.getPeople().set("Last logged in at", timeStamp);
     }
-private void requestSignUp(String _name, String _email, String _gender, String _phone, String _pin, String _fcmToken) {
+private void requestSignUp(String _name, String _email, String _gender, String _pin, String _fcmToken,
+                           String _occupation,String _age,String _referral_code) {
+        Log.e("pin111",_pin);
+    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
     SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
     signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
         @Override
         public void onWebResult(boolean isSuccess, String strMsg) {
+            Log.e("register_res_boolean",isSuccess+","+strMsg);
             progressDilogue.stopiOSLoader();
             if (isSuccess) {
                 logFireBaseEvent();
                 logFaceBookEvent();
                 logMixPanelEvent();
                 if (SignUp_WebHit_Post_addUser.responseObject != null) {
-                    if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
+//                    if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
                         Bundle b = new Bundle();
-                        b.putString(AppConstt.BundleStrings.premierUserPhone, AppConfig.getInstance().mUser.getmPhoneNumber());
-                        b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
-                       // navToSignUpVerificationFragment(b);
-                    } else {
-                        AppConfig.getInstance().isCommingFromSplash = true;
-                        navToMainActivity();
-                    }
+                        b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
+//                        b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
+                       //navToSignUpVerificationFragment(b);
+                        navToVerifyMemberFragment(b);
+//                    } else {
+//                        AppConfig.getInstance().isCommingFromSplash = true;
+//                        navToMainActivity();
+//                    }
                 }
             } else {
                 customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
@@ -406,6 +416,7 @@ private void requestSignUp(String _name, String _email, String _gender, String _
 
         @Override
         public void onWebException(Exception ex) {
+            Log.e("ex","ex",ex);
             progressDilogue.stopiOSLoader();
             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
 
@@ -413,11 +424,17 @@ private void requestSignUp(String _name, String _email, String _gender, String _
 
         @Override
         public void onWebLogout() {
+            Log.e("log","out");
             progressDilogue.stopiOSLoader();
 
         }
-    }, _name, _email, _gender, _phone, _pin, _fcmToken);
-
+    }, _name, _email, _gender, _age,_occupation,_referral_code, _pin, _fcmToken);
+//    final String _name, final String _emailId,
+//    final String _gender, final String _age,String _occupation,String _referral_code,
+//    final String _pin, final String _fcmToken
+//    final String _name, final String _emailId,
+//    final String _gender, final String _age,String _occupation,String _referral_code,
+//    final String _pin, final String _fcmToken
 }
     private void navToTermsAndConditionsFragment(Bundle bundle) {
         Log.e("click","terms111");
@@ -435,10 +452,11 @@ private void requestSignUp(String _name, String _email, String _gender, String _
         ft.commit();
     }
 
-    private void navToVerifyMemberFragment() {
+    private void navToVerifyMemberFragment(Bundle b) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment frg = new VerifyMemberFragment();
+        frg.setArguments(b);
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
         ft.replace(R.id.containerIntroFragments, frg);
         ft.commit();

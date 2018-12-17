@@ -26,7 +26,7 @@ public interface ApiMethod {
 
     interface POST {
         String signIn = "signIn";
-        String signUp = "addUser";
+        String signUp = "registration-step-one";
         String forgotPassword = "forgotPassword";
         String getAuthorization = "getAuthorization";
         String checkPhone = "checkPhone";

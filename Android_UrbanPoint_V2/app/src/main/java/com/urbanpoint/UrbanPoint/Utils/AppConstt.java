@@ -229,6 +229,7 @@ public interface AppConstt {
         String notificationMessage = "notificationMessage";
         String notificationDate = "notificationDate";
         String backBtnVisibility = "backBtnVisibility";
+        String userId="userId";
     }
 
     public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",

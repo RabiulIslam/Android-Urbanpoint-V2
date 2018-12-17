@@ -205,13 +205,16 @@ public class AppConfig {
         SignupEditor.putString("Refcode", ReferralCode);
         SignupEditor.commit();
     }
-
+    public void setPin(String Pin)
+    {
+        SignupEditor.putString("Pin", Pin);
+        SignupEditor.commit();
+    }
 
     public String getName()
     {
         return  SignupData.getString("name","");
     }
-
     public String getAge()
     {
         return  SignupData.getString("age","");
@@ -224,7 +227,7 @@ public class AppConfig {
     {
       return  SignupData.getString("email","");
     }
-
+    public String getPin(){return SignupData.getString("Pin","");}
     public String getReferralCode()
     {
        return SignupData.getString("Refcode","");
@@ -324,12 +327,11 @@ public class AppConfig {
 
             return locationMode != Settings.Secure.LOCATION_MODE_OFF;
 
-        } else {
+        }
+        else {
             locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             return !TextUtils.isEmpty(locationProviders);
         }
-
-
     }
 
     public boolean checkPermission(Context mContext) {

@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.facebook.android:facebook-core:[4,5)'
     implementation 'com.facebook.android:facebook-marketing:[4,5)'
+    implementation 'com.facebook.android:account-kit-sdk:4.+'
 
 
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'

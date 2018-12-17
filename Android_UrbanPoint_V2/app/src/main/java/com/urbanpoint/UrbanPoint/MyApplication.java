@@ -14,6 +14,7 @@ import android.util.LongSparseArray;
 import android.view.WindowManager;
 
 import com.facebook.FacebookSdk;
+import com.facebook.accountkit.AccountKit;
 import com.facebook.appevents.AppEventsLogger;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -45,7 +46,7 @@ public class MyApplication extends Application {
         mContext = this;
         AppConfig.initInstance(mContext);
         setLanguageSpecificFonts(true);
-
+        AccountKit.initialize(getApplicationContext());
 
    /*     CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/ubuntu_regular.ttf")

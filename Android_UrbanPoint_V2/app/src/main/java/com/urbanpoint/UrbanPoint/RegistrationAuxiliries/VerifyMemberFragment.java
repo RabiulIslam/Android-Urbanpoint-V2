@@ -3,6 +3,7 @@ package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -17,11 +18,20 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.ui.AccountKitActivity;
+import com.facebook.accountkit.ui.AccountKitConfiguration;
+import com.facebook.accountkit.ui.LoginType;
+import com.facebook.accountkit.ui.SkinManager;
+import com.facebook.accountkit.ui.UIManager;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 //import com.urbanpoint.UrbanPoint.adapters.homeAdapter.favoritesAdapter.FavoritesAdapter;
@@ -54,7 +64,7 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
 //    private List<DModelHomeGrdVw> lstFavoritesByLocation, lstFavoritesByAlphabetically;
 //    private FavoritesAdapter favoritesAdapter;
     private RelativeLayout rlAlphabetically, rlLocation;
-    private TextView txvLocation, txvAlphabetically;
+    private TextView Back, Continue;
 //    private HomeManager homeManager;
 //    private MerchantManager mMerchantManager;
     private boolean isLocationSort;
@@ -73,14 +83,12 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_verify_member, null);
-
         this.mActivity = getActivity();
         this.mContext = mActivity.getApplicationContext();
         this.mRootView = view;
 //        mActivity.overridePendingTransition(R.anim.left_in, R.anim.right_out);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-        initialize();
+        initialize(view);
 
 
 //        if (NetworkUtils.isConnected(mContext)) {
@@ -95,7 +103,7 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     }
 
 
-    private void initialize() {
+    private void initialize(View view) {
       //  MyApplication.getInstance().trackScreenView(getString(R.string.contact_us));
         utilObj = new Utility(getActivity());
        // homeManager = new HomeManager(mContext, this);
@@ -107,14 +115,84 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
 //        isSubscribed = AppPreference.getSettingResturnsBoolean(mActivity, Constants.DEFAULT_VALUES.IS_USER_SUBSCRIBE, false);
 //        lstFavoritesByLocation = new ArrayList<>();
 //        lstFavoritesByAlphabetically = new ArrayList<>();
-        bindViews();
+        bindViews(view);
     }
 
-    private void bindViews() {
-
+    private void bindViews(View view) {
+     Back=(Button)view.findViewById(R.id.back);
+     Continue=(Button)view.findViewById(R.id.btn_continue);
+     Continue.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+           phoneLogin();
+         }
+     });
 
     }
 
+    int APP_REQUEST_CODE =99;
+    @Override
+    public void onActivityResult(
+            final int requestCode,
+            final int resultCode,
+            final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            String toastMessage;
+            if (loginResult.getError() != null) {
+                toastMessage = loginResult.getError().getErrorType().getMessage();
+                //showErrorActivity(loginResult.getError());
+            } else if (loginResult.wasCancelled()) {
+                toastMessage = "Login Cancelled";
+            } else {
+                if (loginResult.getAccessToken() != null) {
+                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+                } else {
+                    toastMessage = String.format(
+                            "Success:%s...",
+                            loginResult.getAuthorizationCode().substring(0,10));
+                }
+
+                // If you have an authorization code, retrieve it from
+                // loginResult.getAuthorizationCode()
+                // and pass it to your server and exchange it for an access token.
+
+                // Success! Start your next activity...
+               // goToMyLoggedInActivity();
+            }
+
+            // Surface the result to your user in an appropriate way.
+            Toast.makeText(getContext(),
+                    toastMessage,
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+
+
+
+
+    public void phoneLogin() {
+        AccountKit.logOut();
+        final Intent intent = new Intent(getActivity(), AccountKitActivity.class);
+        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
+                new AccountKitConfiguration.AccountKitConfigurationBuilder(
+                        LoginType.PHONE,
+                        AccountKitActivity.ResponseType.TOKEN); // or .ResponseType.TOKEN
+        // ... perform additional configuration ...
+        UIManager uiManager=new SkinManager(SkinManager.Skin.CLASSIC,Color.parseColor("#a83664"));
+//        UIManager uiManager=new SkinManager(SkinManager.Skin.CONTEMPORARY,Color.parseColor(getActivity().
+//                getResources().getColor(R.color.expndble_lst_color),SkinManager.Tint.WHITE))
+//       U uiManager = new SkinManager(SkinManager.Skin.CONTEMPORARY,Color.parseColor("#6200EE"),
+//               SkinManager.Tint.WHITE,60);
+
+        configurationBuilder.setUIManager(uiManager);
+        intent.putExtra(
+                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
+                configurationBuilder.build());
+        startActivityForResult(intent, APP_REQUEST_CODE);
+    }
     public void setActionBar(String title, boolean showNavButton) {
 //        getActivity().getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         Animation animation = AnimationUtils.loadAnimation(getContext(),
