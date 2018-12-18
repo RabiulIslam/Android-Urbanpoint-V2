@@ -7,7 +7,6 @@
     tools:ignore="MissingPrefix">
 
 
-
     <RelativeLayout
         android:id="@+id/frg_change_pin_mainparentlayout"
         android:layout_width="match_parent"
@@ -134,6 +133,7 @@
                             android:text="@string/network"
                             android:textAlignment="center"
                             android:textColor="@color/gray_bg"
+                            android:visibility="gone"
                             android:textSize="@dimen/sp18" />
 
                         <Spinner
@@ -159,11 +159,12 @@
                             android:background="@color/transparent"
                             android:hint="@string/vodafone"
                             android:inputType="text"
+
                             android:textAlignment="center"
                             android:textColor="@color/gray_light"
                             android:textCursorDrawable="@drawable/cursor_edit_text"
                             android:textSize="@dimen/sp14"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                         <View
                             android:layout_width="match_parent"

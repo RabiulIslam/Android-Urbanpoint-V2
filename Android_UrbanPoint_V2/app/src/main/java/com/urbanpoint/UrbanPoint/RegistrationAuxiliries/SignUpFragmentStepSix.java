@@ -100,67 +100,10 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         this.mActivity = getActivity();
         this.mContext = mActivity.getApplicationContext();
         this.mRootView = view;
-        //  getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
        initialize();
-       // MyApplication.getInstance().trackScreenView(getResources().getString(R.string.get_started) + ":" + getResources().getString(R.string.ga_set_up_account_screen));
 
-//        mSignUpUserEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_NEXT)) {
-//                    Log.d("asdfwe", "onEditorAction: ");
-//                   }
-//                return true;
-//            }
-//        });
-
-
-//        mSignUpUserEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    rlProgressBar.setVisibility(View.VISIBLE);
-//
-//                    requestCheckEmailPhone(mSignUpUserEmail.getText().toString(),false);
-//
-////                    doValidateEmail(mSignUpUserEmail.getText().toString());
-//                }
-//            }
-//        });
         return view;
-    }
-    private void requestCheckEmailPhone(String _value, final boolean _isPhone) {
-        SignUp_WebHit_Post_checkPhoneEmail signUp_webHit_post_checkPhoneEmail = new SignUp_WebHit_Post_checkPhoneEmail();
-        signUp_webHit_post_checkPhoneEmail.requestcheckPhoneEmail(getContext(), new IWebCallbacks() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                progressDilogue.stopiOSLoader();
-                if (isSuccess)
-                {
-                       // mSignUpUserEmail.
-                } else {
-
-                        mSignUpUserEmail.setText("");
-
-                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
-                }
-            }
-
-            @Override
-            public void onWebException(Exception ex) {
-                progressDilogue.stopiOSLoader();
-//                if (_isPhone) {
-//                    mPhnNumber.clearText();
-//                } else {
-                    mSignUpUserEmail.setText("");
-              //  }
-                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
-            }
-
-            @Override
-            public void onWebLogout() {
-                progressDilogue.stopiOSLoader();
-            }
-        }, _value, _isPhone);
     }
 
 
@@ -329,7 +272,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                 if ( validatingRequired()==true)
 
                 {
-                    Log.e("chkpin",AppConfig.getInstance().getPin()+"mmmmmmmmmm");
+                    Log.e("chkpin",AppConfig.getInstance().getPin()+"mm");
                     requestSignUp(AppConfig.getInstance().getName(),
                             AppConfig.getInstance().getEmail(),
                             AppConfig.getInstance().getGender(),
@@ -385,7 +328,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     }
 private void requestSignUp(String _name, String _email, String _gender, String _pin, String _fcmToken,
                            String _occupation,String _age,String _referral_code) {
-        Log.e("pin111",_pin);
+
     progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
     SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
     signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
@@ -429,12 +372,7 @@ private void requestSignUp(String _name, String _email, String _gender, String _
 
         }
     }, _name, _email, _gender, _age,_occupation,_referral_code, _pin, _fcmToken);
-//    final String _name, final String _emailId,
-//    final String _gender, final String _age,String _occupation,String _referral_code,
-//    final String _pin, final String _fcmToken
-//    final String _name, final String _emailId,
-//    final String _gender, final String _age,String _occupation,String _referral_code,
-//    final String _pin, final String _fcmToken
+
 }
     private void navToTermsAndConditionsFragment(Bundle bundle) {
         Log.e("click","terms111");
@@ -442,11 +380,6 @@ private void requestSignUp(String _name, String _email, String _gender, String _
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         fr.setArguments(bundle);
-//        ft.add(R.id.containerIntroFragments, fr, AppConstt.FRGTAG.WebViewFragment);
-//        ft.addToBackStack(AppConstt.FRGTAG.WebViewFragment);
-//        ft.hide(this);
-//        ft.commit();
-//        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
         ft.replace(R.id.containerIntroFragments, fr);
         ft.commit();

@@ -44,9 +44,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        AccountKit.initialize(this);
         AppConfig.initInstance(mContext);
         setLanguageSpecificFonts(true);
-        AccountKit.initialize(getApplicationContext());
+
 
    /*     CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/ubuntu_regular.ttf")

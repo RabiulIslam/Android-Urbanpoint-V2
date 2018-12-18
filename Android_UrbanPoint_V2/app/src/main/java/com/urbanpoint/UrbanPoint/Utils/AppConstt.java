@@ -76,6 +76,7 @@ public interface AppConstt {
         String OutletDetailFramgnet = "OutletDetailFramgnet";
         String MerchantPinFragment = "MerchantPinFragment";
         String HowToUseFragment = "HowToUseFragment";
+        String ReferAndEarnFragment = "ReferAndEarnFragment";
         String ProfileFragment = "ProfileFragment";
         String WebViewFragment = "WebViewFragment";
         String FN_PurchaseSuccessFragment = "PurchaseSuccessFragment";

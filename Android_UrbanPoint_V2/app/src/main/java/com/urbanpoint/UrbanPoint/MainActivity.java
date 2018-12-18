@@ -28,6 +28,7 @@ import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ContactUsFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.HowToUseFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ProfileFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.PurchaseHistoryFragment;
+import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ReferAndEarnFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ReviewOrdersFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.UnSubscribeFragment;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices.Logout_Webhit_Get_logout;
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             mDrawerLayout = findViewById(R.id.drawer_layout);
             setupDrawerToggle();
             mDrawerToggle.setDrawerIndicatorEnabled(false);
-
             Intent intent = getIntent();
             String Id = "";
             String title = "";
@@ -254,11 +254,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 break;
 
             case R.id.drawer_ll_invite_friends:
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                String formattedString = String.format(getString(R.string.app_share_message_text), AppConstt.DEFAULT_VALUES.SHARE_URL, "");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, formattedString);
-                startActivity(Intent.createChooser(sharingIntent, "Select"));
+//
+                navToReferAndEarnFragment(previousFrg);
                 mDrawerLayout.closeDrawer(llDrawerMenu);
                 break;
 
@@ -463,7 +460,14 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         ft.hide(_previousFrg);
         ft.commit();
     }
-
+    public void navToReferAndEarnFragment(Fragment _previousFrg) {
+        FragmentTransaction ft = mFrgmgr.beginTransaction();
+        Fragment frg = new ReferAndEarnFragment();
+        ft.add(R.id.content_frame, frg, AppConstt.FRGTAG.ReferAndEarnFragment);
+        ft.addToBackStack(AppConstt.FRGTAG.ReferAndEarnFragment);
+        ft.hide(_previousFrg);
+        ft.commit();
+    }
     public void navToHowToUseFragment(Fragment _previousFrg) {
         FragmentTransaction ft = mFrgmgr.beginTransaction();
         Fragment frg = new HowToUseFragment();

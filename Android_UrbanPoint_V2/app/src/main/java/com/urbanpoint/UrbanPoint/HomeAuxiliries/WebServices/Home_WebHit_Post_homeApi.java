@@ -55,6 +55,7 @@ public class Home_WebHit_Post_homeApi {
                             Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
+                                     AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
                                     if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
                                         //Premier User is always subscribed and not allowed to unsub
                                         AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
@@ -988,7 +989,18 @@ public class Home_WebHit_Post_homeApi {
         }
 
         public class Data {
+            private int wallet;
             private Subscription subscription;
+
+            public int getWallet()
+            {
+                return wallet;
+            }
+
+            public void setWallet(int wallet)
+            {
+                this.wallet = wallet;
+            }
 
             public Subscription getSubscription() {
                 return this.subscription;

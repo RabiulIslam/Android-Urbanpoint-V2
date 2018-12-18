@@ -29,7 +29,7 @@ public interface ApiMethod {
         String signUp = "registration-step-one";
         String forgotPassword = "forgotPassword";
         String getAuthorization = "getAuthorization";
-        String checkPhone = "checkPhone";
+        String checkPhone = "registration-step-two";
         String checkEmail = "checkEmail";
         String homeApi = "homeApi";
         String eligibilitychecker = "eligibilitychecker";

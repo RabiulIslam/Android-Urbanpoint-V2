@@ -70,24 +70,16 @@ public class SignUp_WebHit_Post_addUser {
                             switch (statusCode) {
 
                                 case AppConstt.ServerStatus.CREATED:
-//                                    AppConfig.getInstance().mUser.setmName(_name);
+                                    AppConfig.getInstance().mUser.setmName(_name);
                                     AppConfig.getInstance().mUser.setmUserId(responseObject.getData().getId() + "");
-//                                    AppConfig.getInstance().mUser.setmEmail(_emailId);
-//                                    AppConfig.getInstance().mUser.setmPhoneNumber(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + _phone);
-//                                    AppConfig.getInstance().mUser.setmGender(_gender);
-//                                    AppConfig.getInstance().mUser.setmDob(_pin + "-01-01");
-//                                    AppConfig.getInstance().mUser.setmNetworkType(AppConstt.NetworkType);
-//                                    AppConfig.getInstance().mUser.setmNationality("");
-//                                    AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
-//                                    AppConfig.getInstance().isEligible = (SignUp_WebHit_Post_addUser.responseObject.getData().getEligibility() == 1 ? true : false);
-//                                    Log.d("isEligible", "onSuccess: " + AppConfig.getInstance().isEligible);
-//                                    int pinCode = Integer.parseInt(_pin);
-//                                    int num4 = pinCode % 10;
-//                                    int num1 = pinCode / 1000 % 10;
-//                                    AppConfig.getInstance().mUser.setmPinCode(num1 + "**" + num4);
-
-//                                    AppConfig.getInstance().mUser.setLoggedIn(true);
-//                                    AppConfig.getInstance().saveUserData();
+                                    AppConfig.getInstance().mUser.setmEmail(_emailId);
+                                    AppConfig.getInstance().mUser.setmGender(_gender);
+                                    AppConfig.getInstance().mUser.setmNationality("");
+                                    int pinCode = Integer.parseInt(_pin);
+                                    int num4 = pinCode % 10;
+                                    int num1 = pinCode / 1000 % 10;
+                                    AppConfig.getInstance().mUser.setmPinCode(num1 + "**" + num4);
+                                    AppConfig.getInstance().saveUserData();
                                    iWebCallback.onWebResult(true, responseObject.getMessage());
                                     break;
 

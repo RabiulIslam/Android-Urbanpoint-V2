@@ -333,7 +333,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onHiddenChanged(boolean isHidden) {
+    public void onHiddenChanged(boolean isHidden)
+    {
         super.onHiddenChanged(isHidden);
         if (!isHidden) {
             txvOldPin.setText(AppConfig.getInstance().mUser.getmPinCode());

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.GetStartedFragment;
+import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.VerifyMemberFragment;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.yqritc.scalablevideoview.ScalableVideoView;

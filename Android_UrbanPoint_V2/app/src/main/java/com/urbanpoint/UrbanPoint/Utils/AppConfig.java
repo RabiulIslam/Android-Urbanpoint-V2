@@ -143,7 +143,7 @@ public class AppConfig {
         mUser.mNationality = sharedPref.getString("nationality", "");
         mUser.mPinCode = sharedPref.getString("pinCode", "");
         mUser.mPhoneNumber = sharedPref.getString("msisdn_id", "");
-
+        mUser.mReferralCode= sharedPref.getString("referral_code","");
         String isSubscribed = "";
         isSubscribed = sharedPref.getString("key_user_subscribe_status", "");
         if (isSubscribed.equalsIgnoreCase("true")) {
@@ -258,6 +258,7 @@ public class AppConfig {
         mUser.setPremierUser(sharedPref.getBoolean("key_is_premier_user", false));
         mUser.setUberRequired(sharedPref.getBoolean("key_is_uber_required", false));
         mUserBadges.setFavoriteCount(sharedPref.getInt("key_favorites_count", 0));
+        mUser.setmReferralCode(sharedPref.getString("referral_code",""));
     }
 
     public void saveUserData() {
@@ -282,6 +283,7 @@ public class AppConfig {
         editor.putBoolean("key_is_premier_user", mUser.isPremierUser());
         editor.putBoolean("key_is_uber_required", mUser.isUberRequired());
         editor.putInt("key_favorites_count", mUserBadges.getFavoriteCount());
+        editor.putString("referral_code",mUser.getmReferralCode());
         editor.commit();
     }
 

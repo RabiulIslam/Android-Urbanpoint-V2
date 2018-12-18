@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,14 +27,29 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitCallback;
+import com.facebook.accountkit.AccountKitError;
 import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.facebook.accountkit.ui.SkinManager;
 import com.facebook.accountkit.ui.UIManager;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
+import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.Utils.AppConfig;
+import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
+import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
+import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 //import com.urbanpoint.UrbanPoint.adapters.homeAdapter.favoritesAdapter.FavoritesAdapter;
 //import com.urbanpoint.UrbanPoint.dataobject.main.DModelHomeGrdVw;
@@ -45,8 +62,12 @@ import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.MyApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +81,9 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     private View mRootView;
     private Utility utilObj;
     private ImageView mBackButton;
+    ProgressDilogue progressDilogue;
     private ListView lsvFavorites;
+    CustomAlert customAlert;
 //    private List<DModelHomeGrdVw> lstFavoritesByLocation, lstFavoritesByAlphabetically;
 //    private FavoritesAdapter favoritesAdapter;
     private RelativeLayout rlAlphabetically, rlLocation;
@@ -106,7 +129,8 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     private void initialize(View view) {
       //  MyApplication.getInstance().trackScreenView(getString(R.string.contact_us));
         utilObj = new Utility(getActivity());
-       // homeManager = new HomeManager(mContext, this);
+        customAlert = new CustomAlert();
+        progressDilogue = new ProgressDilogue();
         frgMngr = getFragmentManager();
         novaThin = Typeface.createFromAsset(mContext.getAssets(), "fonts/proxima_nova_alt_thin.ttf");
         novaRegular = Typeface.createFromAsset(mContext.getAssets(), "fonts/proxima_nova_alt_regular.ttf");
@@ -124,6 +148,7 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
      Continue.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
+             Log.e("on","click");
            phoneLogin();
          }
      });
@@ -139,42 +164,138 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
             AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-            String toastMessage;
+            String toastMessage = "";
             if (loginResult.getError() != null) {
                 toastMessage = loginResult.getError().getErrorType().getMessage();
-                //showErrorActivity(loginResult.getError());
+              
             } else if (loginResult.wasCancelled()) {
                 toastMessage = "Login Cancelled";
             } else {
-                if (loginResult.getAccessToken() != null) {
-                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
-                } else {
-                    toastMessage = String.format(
-                            "Success:%s...",
-                            loginResult.getAuthorizationCode().substring(0,10));
-                }
-
-                // If you have an authorization code, retrieve it from
-                // loginResult.getAuthorizationCode()
-                // and pass it to your server and exchange it for an access token.
-
-                // Success! Start your next activity...
-               // goToMyLoggedInActivity();
+                
+                 getaccount_info();
             }
-
+            Log.e("result",toastMessage);
             // Surface the result to your user in an appropriate way.
-            Toast.makeText(getContext(),
-                    toastMessage,
-                    Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(getContext(),
+//                    toastMessage,
+//                    Toast.LENGTH_LONG)
+//                    .show();
         }
     }
 
+    private void getaccount_info()
+    {
+        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+            @Override
+            public void onSuccess(Account account)
+            {
+                Log.e("mobileno",account.getPhoneNumber()+"");
 
+                String phoneno= String.valueOf(account.getPhoneNumber());
+                phoneno=phoneno.replace("+91","");
+                verifyPhoneNo(phoneno);
+            }
+
+            @Override
+            public void onError(AccountKitError accountKitError) {
+                Log.e("account_kit_error",accountKitError+"");
+
+            }
+        });
+    }
+    private void logFireBaseEvent() {
+        Bundle params = new Bundle();
+        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
+        params.putString("device_type", "Android");
+        // Send the event
+        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
+    }
+    private void logFaceBookEvent() {
+        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
+    }
+
+    private void logMixPanelEvent() {
+        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
+        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
+        mixpanel.getPeople().set("Created at", timeStamp);
+        mixpanel.getPeople().set("Last logged in at", timeStamp);
+    }
+    private void navToMainActivity() {
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
+        getActivity().finish();
+    }
+//    private void navToSignUpVerificationFragment(Bundle b) {
+//        FragmentManager fm = getFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        Fragment frg = new SignUpVerificationFragment();
+//        frg.setArguments(b);
+//        ft.add(R.id.activity_intro_frm, frg, AppConstt.FRGTAG.FN_SignUpVerificationFragment);
+//        ft.addToBackStack(AppConstt.FRGTAG.FN_SignUpVerificationFragment);
+//        ft.hide(this);
+//        ft.commit();
+//    }
+    private void verifyPhoneNo(String _phone) {
+
+        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+        SignUp_WebHit_Post_checkPhoneEmail signUp_webHit_checkPhone = new SignUp_WebHit_Post_checkPhoneEmail();
+        signUp_webHit_checkPhone.requestcheckPhoneEmail(getContext(), new IWebCallbacks() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                Log.e("register_res_boolean",isSuccess+","+strMsg);
+                progressDilogue.stopiOSLoader();
+                if (isSuccess) {
+                    logFireBaseEvent();
+                    logFaceBookEvent();
+                    logMixPanelEvent();
+                    if (SignUp_WebHit_Post_checkPhoneEmail.responseObject != null)
+                    {
+
+                        Bundle b = new Bundle();
+                        b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
+                        AppConfig.getInstance().isCommingFromSplash = true;
+                        AppConfig.getInstance().mUser.setLoggedIn(true);
+                        navToMainActivity();
+
+                    }
+                } else {
+
+                    if (strMsg.equalsIgnoreCase("Conflict")) {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getResources().getString(R.string.already_registered), null, null, false, null);
+                    }
+                    else
+                    {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                Log.e("ex","ex",ex);
+                progressDilogue.stopiOSLoader();
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+
+            }
+
+            @Override
+            public void onWebLogout() {
+                Log.e("log","out");
+                progressDilogue.stopiOSLoader();
+
+            }
+        }, _phone);
+
+    }
 
 
     public void phoneLogin() {
-        AccountKit.logOut();
+    //    AccountKit.logOut();
         final Intent intent = new Intent(getActivity(), AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
                 new AccountKitConfiguration.AccountKitConfigurationBuilder(

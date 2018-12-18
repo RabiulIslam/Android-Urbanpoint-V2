@@ -186,11 +186,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             public void onWebResult(boolean isSuccess, String strMsg) {
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
-                    logFireBaseEvent();
-                    logFaceBookEvent();
-                    logMixPanelEvent();
-                    navToMainActivity();
-                } else {
+
+
+                 if (strMsg.equalsIgnoreCase("Phone no. verification pending."))
+
+                    {
+                        navToVerifyMemberFragment();
+                    } else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
+
+                     logFireBaseEvent();
+                     logFaceBookEvent();
+                     logMixPanelEvent();
+                     AppConfig.getInstance().mUser.setLoggedIn(true);
+                     navToMainActivity();
+
+                    }
+                }
+                else {
+
+
                     customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg, null, null, false, null);
 
                 }
@@ -209,6 +223,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             }
         }, _email, _pin, _fcmToken);
     }
+
+
+    private void navToVerifyMemberFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment frg = new VerifyMemberFragment();
+        ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        ft.replace(R.id.containerIntroFragments, frg);
+        ft.commit();
+    }
+
     private boolean validatingRequired() {
         String message = "";
         String email = mUserEmail.getText().toString().trim();

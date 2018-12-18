@@ -60,7 +60,7 @@ public class SignUpFragmentStepTwo extends Fragment implements View.OnClickListe
 //
     private void initialize() {
         utilObj = new Utility(mActivity);
-
+        customAlert=new CustomAlert();
         bindViews();
     }
 //
@@ -81,7 +81,8 @@ public class SignUpFragmentStepTwo extends Fragment implements View.OnClickListe
         if (genderValue!=null & genderValue!="null" & !(genderValue.equalsIgnoreCase("null"))) {
             if (genderValue.equalsIgnoreCase(AppConstt.Gender.FEMALE)) {
                 mFemaleImageView.setBackgroundResource(R.mipmap.female_selected);
-            } else {
+            } else if(genderValue.equalsIgnoreCase(AppConstt.Gender.MALE))
+            {
                 mMaleImageView.setBackgroundResource(R.mipmap.male_selected);
             }
         }

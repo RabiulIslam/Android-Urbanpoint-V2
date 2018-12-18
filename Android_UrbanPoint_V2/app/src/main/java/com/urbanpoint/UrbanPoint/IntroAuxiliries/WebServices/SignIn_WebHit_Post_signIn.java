@@ -45,22 +45,8 @@ public class SignIn_WebHit_Post_signIn {
         Log.e("params",params+"");
         Log.e("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
 
-//        JSONObject jsonObject = new JSONObject();
-//        StringEntity entity = null;
-//
-//        try {
-//            jsonObject.put("email", _emailId);
-//            jsonObject.put("password", _pin);
-//            jsonObject.put("deviceType", AppConstt.DeviceType);
-//            entity = new StringEntity(jsonObject.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-//        mClient.addHeader(ApiMethod.HEADER.app_id, "1");
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         Log.e("header",AppConstt.HeadersValue.Authorization);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
@@ -79,6 +65,7 @@ public class SignIn_WebHit_Post_signIn {
                             switch (statusCode) {
 
                                 case AppConstt.ServerStatus.OK:
+
                                     AppConfig.getInstance().mUser.setmName(responseObject.getData().getName());
                                     if (responseObject.getData().getId()>0){
 
@@ -93,15 +80,19 @@ public class SignIn_WebHit_Post_signIn {
                                     AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());
                                     AppConfig.getInstance().mUser.setmNationality(responseObject.getData().getNationality());
                                     AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
-                                    AppConfig.getInstance().mUser.setLoggedIn(true);
-
+                                   // AppConfig.getInstance().mUser.setLoggedIn(true);
+                                    Log.e("referral",responseObject.getData().getReferralCode()+"ref_code");
+                                    AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().getReferralCode());
                                     int pinCode = Integer.parseInt(_pin);
                                     int num4 = pinCode % 10;
                                     int num1 = pinCode / 1000 % 10;
                                     AppConfig.getInstance().mUser.setmPinCode(num1 + "**" + num4);
 
                                     AppConfig.getInstance().saveUserData();
+//                                    if(responseObject.getMessage().equalsIgnoreCase("Phone no. verification pending."))
+//                                    {
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
+
                                     break;
 
                                 case AppConstt.ServerStatus.NO_CONTENT:
@@ -285,6 +276,15 @@ public class SignIn_WebHit_Post_signIn {
 
             public void setAuthorization(String Authorization) {
                 this.Authorization = Authorization;
+            }
+            private String refferelcode;
+
+            public String getReferralCode() {
+                return refferelcode;
+            }
+
+            public void setReferralCode(String referralCode) {
+                refferelcode = referralCode;
             }
         }
 
