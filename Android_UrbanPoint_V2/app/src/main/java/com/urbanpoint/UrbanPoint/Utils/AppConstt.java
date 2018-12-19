@@ -24,7 +24,7 @@ public interface AppConstt {
      */
     int LIMIT_API_RETRY = 0;
     int LIMIT_TIMOUT_MILLIS = 30000;
-    public static final String LOGIN_RULES = "privacyStatementAndTermsofUseUrbanPoint.html";
+    public static final String LOGIN_RULES = "privacyStatementAndTermsofUseBiyog.html";
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
     String ARABIC = "ar";
     String ENGLISH = "en";

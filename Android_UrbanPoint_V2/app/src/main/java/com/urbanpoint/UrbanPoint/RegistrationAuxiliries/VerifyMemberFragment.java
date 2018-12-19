@@ -152,6 +152,16 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
            phoneLogin();
          }
      });
+//     Back.setOnClickListener(new View.OnClickListener() {
+//         @Override
+//         public void onClick(View v) {
+//             FragmentManager fragmentManager = getFragmentManager();
+//             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//             fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+//             fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepTwo());
+//             fragmentTransaction.commit();
+//         }
+//     });
 
     }
 
@@ -254,13 +264,11 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
                     logMixPanelEvent();
                     if (SignUp_WebHit_Post_checkPhoneEmail.responseObject != null)
                     {
-
                         Bundle b = new Bundle();
                         b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
                         AppConfig.getInstance().isCommingFromSplash = true;
                         AppConfig.getInstance().mUser.setLoggedIn(true);
                         navToMainActivity();
-
                     }
                 } else {
 
@@ -324,13 +332,13 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         TextView title1 = (TextView) customView.findViewById(R.id.textViewTitle);
         customView.startAnimation(animation);
         mBackButton = (ImageView) customView.findViewById(R.id.backButton);
-        mBackButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                frgMngr.popBackStack();
-                return false;
-            }
-        });
+//        mBackButton.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                frgMngr.popBackStack();
+//                return false;
+//            }
+//        });
 
         title1.setText(title);
         title1.setTypeface(novaRegular);

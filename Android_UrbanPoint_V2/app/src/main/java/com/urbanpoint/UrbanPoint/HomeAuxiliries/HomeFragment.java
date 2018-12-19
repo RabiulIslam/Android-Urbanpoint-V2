@@ -863,9 +863,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void updateBadges() {
         //Updating GainAcees Button
-        if (AppConfig.getInstance().mUser.isSubscribed()) {
-            btnGainAccess.setVisibility(View.GONE);
-        } else {
+//        if (AppConfig.getInstance().mUser.isSubscribed()) {
+//            btnGainAccess.setVisibility(View.GONE);
+//        } else {
             btnGainAccess.setVisibility(View.VISIBLE);
             //Updating "Already Member" Msg For Premier Users
 //                if (AppConfig.getInstance().mUser.isPremierUser()) {
@@ -873,7 +873,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                } else {
 //                    rlMembermsg.setVisibility(View.GONE);
 //                }
-        }
+
 
         //Updating NewOffers Badge
         if (AppConfig.getInstance().mUserBadges.getNewOfferCount() > 0) {

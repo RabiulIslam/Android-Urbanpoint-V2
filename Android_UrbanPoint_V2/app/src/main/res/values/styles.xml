@@ -58,7 +58,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
         <!--<inamename="android:textSize">@dimen/sp16</item>-->
-        <item name="android:textSize">@dimen/fontsize_normal</item>
+        <item name="android:textSize">@dimen/fontsize_large</item>
         <item name="android:layout_height">@dimen/dp30</item>
     </style>
 
@@ -89,7 +89,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textSize">@dimen/fontsize_large</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>

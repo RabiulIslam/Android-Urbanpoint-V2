@@ -156,7 +156,7 @@
 
     <!--Navigatoin Drawer Strings-->
     <string name="drawer_home">Home</string>
-    <string name="drawer_invite_friends">Refer and Earn</string>
+    <string name="drawer_invite_friends">Refer &amp; Earn</string>
     <string name="drawer_profile">Profile</string>
     <string name="drawer_how_to_use">How to Use</string>
     <string name="drawer_my_reviews">My Reviews</string>
@@ -456,5 +456,7 @@
     <string name="use_balance_to_unlock_deals">You can use your wallet balance to unlock great deals!</string>
     <string name="FACEBOOK_APP_ID">392993371444452</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
+
+    <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
 
 </resources>

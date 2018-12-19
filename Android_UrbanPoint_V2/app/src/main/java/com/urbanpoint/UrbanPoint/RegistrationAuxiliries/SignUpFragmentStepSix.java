@@ -1,8 +1,11 @@
 package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +18,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,6 +28,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +77,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private PinEntryView mSignUpNewPinEntry;
     private PinEntryView mSignUpConfirmPinEntry;
     private String enteredNewPin = "";
+    String occupation="";
     private String enteredConfirmPin = "";
     private LinearLayout mMainParentLayout;
     /*private CustomTextView mLoginTermsAndConditions;
@@ -82,7 +89,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private int currentApiVersion;
     private boolean isValidEmail;
     private RelativeLayout rlProgressBar;
-    private AutoCompleteTextView mSignUpOccupation;
+    private Spinner mSignUpOccupation;
     private EditText mSignUpReferralCode;
 //    private IntroActivityManager introActivityManager;
     ArrayAdapter OccupationAdapter;
@@ -118,7 +125,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     }
 
     private void bindViews() {
-        OccupationAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,
+        OccupationAdapter=new ArrayAdapter(getActivity(),R.layout.simple_dropdown_item,
                 getContext().getResources().getStringArray(R.array.occupation));
         rlProgressBar = (RelativeLayout) mRootView.findViewById(R.id.frg_sign_up_rl_progrssbar);
 
@@ -136,9 +143,21 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mSignUpFinishView = (Button) mRootView.findViewById(R.id.signUpStepSixFinishButton);
         mSignUpFinishView.setOnClickListener(this);
         mSignUpUserEmail = (EditText) mRootView.findViewById(R.id.signUpUserEmail);
-        mSignUpOccupation=(AutoCompleteTextView)mRootView.findViewById(R.id.signUpUserOccupation);
+        mSignUpOccupation=(Spinner) mRootView.findViewById(R.id.signUpUserOccupation);
         mSignUpOccupation.setAdapter(OccupationAdapter);
-        mSignUpOccupation.setThreshold(1);
+//        mSignUpOccupation.setThreshold(1);
+        mSignUpOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) view).setTextColor(Color.WHITE);
+                occupation=getResources().getStringArray(R.array.occupation)[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
         mSignUpNewPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpNewPinEntry);
         mSignUpConfirmPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpConfirmPinEntry);
@@ -234,7 +253,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         }
         if (message.equalsIgnoreCase("") || message == null) {
             AppConfig.getInstance().setEmail(email);
-            AppConfig.getInstance().setOccupation(mSignUpOccupation.getText().toString());
+            AppConfig.getInstance().setOccupation(occupation);
             AppConfig.getInstance().setReferralCode(mSignUpReferralCode.getText().toString());
             Log.e("entered_pin",enteredNewPin);
             AppConfig.getInstance().setPin(enteredNewPin);
@@ -342,11 +361,46 @@ private void requestSignUp(String _name, String _email, String _gender, String _
                 logMixPanelEvent();
                 if (SignUp_WebHit_Post_addUser.responseObject != null) {
 //                    if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
-                        Bundle b = new Bundle();
+                        final Bundle b = new Bundle();
                         b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
 //                        b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
                        //navToSignUpVerificationFragment(b);
-                        navToVerifyMemberFragment(b);
+
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.custome_message_alert_box);
+
+                    dialog.setCancelable(false);
+                    // set the custom dialog components - text
+                    TextView messageTitle = (TextView) dialog.findViewById(R.id.messageTitle);
+                    TextView messageText = (TextView) dialog.findViewById(R.id.dialogMessageText);
+                    Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+                    Button okButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+
+
+                    TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
+                    dialogButtonSeparator.setVisibility(View.GONE);
+                    cancelButton.setVisibility(View.GONE);
+                    okButton.setVisibility(View.GONE);
+                    messageTitle.setText(getString(R.string.sign_up_enter_account_setup_heading));
+                    messageText.setText(getString(R.string.register_successfully));
+                    dialog.show();
+
+
+//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading),
+//                            getResources().getString(R.string.register_successfully), null, null, false, null);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            navToVerifyMemberFragment(b);
+
+
+
+                        }
+                    }, 3000);
+
 //                    } else {
 //                        AppConfig.getInstance().isCommingFromSplash = true;
 //                        navToMainActivity();

@@ -55,6 +55,7 @@ public class Home_WebHit_Post_homeApi {
                             Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
+                                    AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
                                      AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
                                     if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
                                         //Premier User is always subscribed and not allowed to unsub
@@ -1008,6 +1009,15 @@ public class Home_WebHit_Post_homeApi {
 
             public void setSubscription(Subscription subscription) {
                 this.subscription = subscription;
+            }
+            private String refferelcode;
+
+            public String getRefferelcode() {
+                return refferelcode;
+            }
+
+            public void setRefferelcode(String refferelcode) {
+                this.refferelcode = refferelcode;
             }
 
             private int newOffer;
