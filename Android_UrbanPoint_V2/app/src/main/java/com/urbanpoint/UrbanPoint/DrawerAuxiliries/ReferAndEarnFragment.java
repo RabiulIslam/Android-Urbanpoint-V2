@@ -85,7 +85,7 @@ public class ReferAndEarnFragment extends Fragment implements View.OnClickListen
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 String referral_msg= getResources().getString(R.string.app_share_message_text)
-                        +" "+ AppConfig.getInstance().mUser.getmReferralCode()+"\n"+
+                        +" "+ AppConfig.getInstance().mUser.getmReferralCode()+"\n\n"+
                         getResources().getString(R.string.earn_free_subscription);
 
 

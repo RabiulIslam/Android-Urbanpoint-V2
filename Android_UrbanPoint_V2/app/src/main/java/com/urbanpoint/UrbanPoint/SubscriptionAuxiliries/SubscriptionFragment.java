@@ -37,8 +37,8 @@ import java.util.List;
  */
 
 public class SubscriptionFragment extends Fragment implements View.OnClickListener {
-    private Button btnConfirm, btnAccessCode;
-    private CellNoEntryView mMobileNumberEntry;
+    private Button  btnAccessCode;
+   // private CellNoEntryView mMobileNumberEntry;
     private String enteredMobileNumber = "";
     private ExpandableHeightGridView lsv1, lsv2;
     private LinearLayout llParentLayout;
@@ -113,42 +113,42 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         lsv1 = v.findViewById(R.id.frg_subscription_lsv_1);
         lsv2 = v.findViewById(R.id.frg_subscription_lsv_2);
         txvSubsText = (HtmlTextView) v.findViewById(R.id.txv_subs_text);
-        mMobileNumberEntry = v.findViewById(R.id.frg_subscription_pinentry_phone);
-        btnConfirm = v.findViewById(R.id.frg_subscription_btn_cnfrm);
+//        mMobileNumberEntry = v.findViewById(R.id.frg_subscription_pinentry_phone);
+//        btnConfirm = v.findViewById(R.id.frg_subscription_btn_cnfrm);
         btnAccessCode = v.findViewById(R.id.frg_subscription_btn_access_code);
 
         llParentLayout.setOnClickListener(this);
-        btnConfirm.setOnClickListener(this);
+//        btnConfirm.setOnClickListener(this);
         btnAccessCode.setOnClickListener(this);
 
-        mMobileNumberEntry.setOnPinEnteredListener(new CellNoEntryView.OnPinEnteredListener() {
-            @Override
-            public void onPinEntered(String pin) {
-                if (pin.length() == 8) {
-                    enteredMobileNumber = pin;
-                    AppConfig.getInstance().closeKeyboard(getActivity());
-                } else {
-                    enteredMobileNumber = "";
-                }
-            }
-        });
+//        mMobileNumberEntry.setOnPinEnteredListener(new CellNoEntryView.OnPinEnteredListener() {
+//            @Override
+//            public void onPinEntered(String pin) {
+//                if (pin.length() == 8) {
+//                    enteredMobileNumber = pin;
+//                    AppConfig.getInstance().closeKeyboard(getActivity());
+//                } else {
+//                    enteredMobileNumber = "";
+//                }
+//            }
+//        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.frg_subscription_btn_cnfrm:
-                if (enteredMobileNumber != null && enteredMobileNumber.length() == 8) {
-                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-//                    if (AppConfig.getInstance().mUser.getmPhoneNumber().length() > 10) {
-//                        requestValidateMsisdn(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-//                    } else {
-                        requestCheckEligibility(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-                   // }
-                } else {
-                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getString(R.string.voda_do_unsubscribe_enter_mobile_number), null, null, false, null);
-                }
-                break;
+//            case R.id.frg_subscription_btn_cnfrm:
+//                if (enteredMobileNumber != null && enteredMobileNumber.length() == 8) {
+//                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+////                    if (AppConfig.getInstance().mUser.getmPhoneNumber().length() > 10) {
+////                        requestValidateMsisdn(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
+////                    } else {
+//                        requestCheckEligibility(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
+//                   // }
+//                } else {
+//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getString(R.string.voda_do_unsubscribe_enter_mobile_number), null, null, false, null);
+//                }
+//                break;
             case R.id.frg_subscription_btn_access_code:
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 Bundle b = new Bundle();

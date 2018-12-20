@@ -3,6 +3,8 @@ package com.urbanpoint.UrbanPoint.IntroAuxiliries;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.ForgotPassword_WebHit_Post_forgotPassword;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.LoginFragment;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlertConfirmationInterface;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
@@ -31,6 +34,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
     private boolean isMailSent;
     String emailID;
     CustomAlert customAlert;
+    RelativeLayout Back;
     ProgressDilogue progressDilogue;
     CustomAlertConfirmationInterface customAlertConfirmationInterface;
 
@@ -51,7 +55,12 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
             @Override
             public void callConfirmationDialogPositive() {
                 if (isMailSent) {
-                    getFragmentManager().popBackStackImmediate();
+                   // getFragmentManager().popBackStackImmediate();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+                    fragmentTransaction.replace(R.id.containerIntroFragments, new LoginFragment());
+                    fragmentTransaction.commit();
                 } else {
                     edtEmail.setText("");
                 }
@@ -84,7 +93,12 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
                 }
                 break;
             case R.id.frg_forgot_paswrd_rl_back:
-                getFragmentManager().popBackStackImmediate();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+                fragmentTransaction.replace(R.id.containerIntroFragments, new LoginFragment());
+                fragmentTransaction.commit();
+                //getFragmentManager().popBackStackImmediate();
                 break;
         }
     }

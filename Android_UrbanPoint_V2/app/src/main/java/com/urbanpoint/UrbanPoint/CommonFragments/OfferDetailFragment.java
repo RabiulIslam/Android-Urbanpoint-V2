@@ -391,7 +391,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT, OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getDescription());
-            String formattedString = String.format(getString(R.string.offer_share_message_text), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getTitle(), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getName(), roundedSavings + " QR", AppConstt.DEFAULT_VALUES.SHARE_URL);
+            String formattedString = String.format(getString(R.string.offer_share_message_text), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getTitle(), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getName(), roundedSavings + " Tk", AppConstt.DEFAULT_VALUES.SHARE_URL);
             sharingIntent.putExtra(Intent.EXTRA_TEXT, formattedString);
             Log.d("sadsadsdsad", "onClick: " + formattedString);
             startActivity(Intent.createChooser(sharingIntent, "Select"));

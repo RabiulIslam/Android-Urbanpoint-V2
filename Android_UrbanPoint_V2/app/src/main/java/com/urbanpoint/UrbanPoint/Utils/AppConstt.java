@@ -291,12 +291,12 @@ public interface AppConstt {
     }
 
     public static class DEFAULT_VALUES {
-        public static final String SHARE_URL = "http://onelink.to/urbanpoint";
+        public static final String SHARE_URL = "www.biyog.com";
         public static final String SORT_BY_ALPHABETICALLY = "alphabetically";
         public static final String SORT_BY_LOCATION = "location";
         public static final double DEFAULT_LAT = 0;
         public static final double DEFAULT_LNG = 0;
-        public static final String COUNTRY_CODE = "974";
+        public static final String COUNTRY_CODE = "880";
         public static final String Male = "0";
         public static final String Female = "1";
         public static final String Both = "2";

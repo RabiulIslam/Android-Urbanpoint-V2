@@ -176,7 +176,8 @@
                 android:id="@+id/loginToApp"
                 style="@style/button_large_style"
                 android:background="@drawable/custom_round_button"
-
+                android:fontFamily="@font/opensans_regular"
+                android:textSize="@dimen/fontsize_large"
                 android:contentDescription="@string/login"
                 android:text="@string/login"
                 android:textAllCaps="false"
@@ -190,6 +191,8 @@
             <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
                 android:id="@+id/loginBackButton"
                 style="@style/button_style"
+                android:fontFamily="@font/opensans_regular"
+                android:textSize="@dimen/fontsize_large"
                 android:layout_width="@dimen/dp100"
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/back"

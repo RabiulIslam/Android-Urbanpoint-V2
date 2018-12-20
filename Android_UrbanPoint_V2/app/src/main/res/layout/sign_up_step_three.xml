@@ -162,9 +162,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+           android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/dp10">
 
@@ -175,6 +175,7 @@
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/back"
                 android:text="@string/back"
+                android:fontFamily="@font/opensans_regular"
                 android:textAllCaps="false"
                 android:textColor="@drawable/change_text_color_on_button_pressed" />
 
@@ -186,6 +187,7 @@
                 android:id="@+id/signUpStepFiveContinueButton"
                 style="@style/button_style"
                 android:layout_width="@dimen/dp100"
+                android:fontFamily="@font/opensans_regular"
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/continue_button"
                 android:text="@string/continue_button"

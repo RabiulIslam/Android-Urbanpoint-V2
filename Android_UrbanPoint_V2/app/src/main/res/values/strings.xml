@@ -44,7 +44,7 @@
     <string name="frg_purchase_success">Purchase Success</string>
     <string name="frg_privacy_statement">Privacy Statement</string>
     <string name="frg_rules_of_purchase">Rules of Purchase</string>
-    <string name="frg_subscription_for_15">Subscribe for QR 15/month</string>
+    <string name="frg_subscription_for_15">Subscribe for 99 Tk./month</string>
     <string name="frg_subscription">Subscribe</string>
     <string name="frg_subscription_success">Congratulations</string>
     <string name="frg_subscription_eligible">Subscribe for FREE!</string>
@@ -116,11 +116,12 @@
     <string name="login_terms_and_conditions_message_two"><u>Privacy Statement and Terms of Use</u></string>
 
 
-
-    <string name="occ1">Student</string>
-    <string name="occ2">Service Holder</string>
+    <string name="occ1"></string>
+    <string name="occ2">Student</string>
     <string name="occ3">Businessman</string>
-    <string name="occ4">Unemployed</string>
+    <string name="occ4">Self Employed</string>
+    <string name="occ5">Service Holder</string>
+    <string name="occ6">Unemployed</string>
 
 
     <!--Occupation Array-->
@@ -129,6 +130,8 @@
         <item>@string/occ2</item>
         <item>@string/occ3</item>
         <item>@string/occ4</item>
+        <item>@string/occ5</item>
+        <item>@string/occ6</item>
     </string-array>
     <!--SignUp Verification Screen-->
     <string name="sign_up_free_access">You have Free access to Urban Point.\n
@@ -456,7 +459,14 @@
     <string name="use_balance_to_unlock_deals">You can use your wallet balance to unlock great deals!</string>
     <string name="FACEBOOK_APP_ID">392993371444452</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
-
+    <string name="select">Select</string>
     <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
-
+     <string name="_seventy">70.00</string>
+    <string name="_300">300</string>
+    <string name="_9taka">9.99 Tk.</string>
+    <string name="_49taka">49.99 Tk.</string>
+    <string name="_99taka">99.00 Tk.</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="daily">Daily</string>
 </resources>
