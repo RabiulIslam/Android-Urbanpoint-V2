@@ -17,10 +17,6 @@
             android:padding="@dimen/dp10">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
 
                 <LinearLayout
@@ -58,7 +54,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
+
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
 
@@ -68,6 +64,7 @@
                             android:layout_height="wrap_content"
                             android:text="rgfg dg d gdf gd d fd gfd gf ggd"
                             android:paddingStart="15dp"
+                            android:layout_marginTop="40dp"
                             android:paddingEnd="15dp"
                             android:gravity="start"
                             android:textColor="@color/main_color"
@@ -81,7 +78,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginTop="25dp"
-                        android:layout_weight="1"
                         android:choiceMode="singleChoice"
                         android:clickable="false"
                         android:divider="@color/transparent"
@@ -95,24 +91,23 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
 
-                    android:orientation="vertical">
-
-
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/layout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:gravity="center_horizontal"
                         android:orientation="horizontal"
                         android:weightSum="1">
 
                         <LinearLayout
+
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -271,7 +266,6 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_regular"
                                 android:text="@string/monthly"
-
                                 android:textSize="@dimen/fontsize_normal"
                                 android:textColor="@color/gray_bg"/>
                         <Button
@@ -289,40 +283,76 @@
                     </LinearLayout>
 
 
-                </LinearLayout>
-            </LinearLayout>
+    <TextView
+        android:layout_marginTop="@dimen/dp25"
+        android:layout_alignLeft="@+id/layout"
+        android:id="@+id/tv_condition_applies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textColor="@color/gray_bg"
+        android:textStyle="normal"
+        android:textSize="@dimen/fontsize_mini"
+        android:layout_below="@+id/layout"
+        android:text="@string/condition_applies"
+        />
+    <TextView
+        android:id="@+id/tv_additional_vat"
+        android:layout_alignLeft="@+id/tv_condition_applies"
+        android:layout_below="@+id/tv_condition_applies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textColor="@color/gray_bg"
+        android:textStyle="normal"
+        android:textSize="@dimen/fontsize_mini"
+        android:text="@string/additional_vat"
+        />
+<!--<LinearLayout-->
+    <!--android:layout_alignLeft="@+id/layout"-->
+    <!--android:layout_alignRight="@+id/layout"-->
+    <!--android:layout_below="@+id/layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="@dimen/dp25"-->
+    <!--android:orientation="vertical">-->
+
+                 <!---->
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_below="@+id/tv_additional_vat"
+                android:orientation="vertical"
+                android:layout_weight="0.2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_access_code"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_above="@+id/frg_subscription_ll_access_code"
-                    android:layout_marginBottom="-10dp"
                     android:hint="@string/subscription_screen_have_code"
-                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textColorHint="@color/gray_light"
                     android:textSize="@dimen/fontsize_small"
-                    android:gravity="center"
-                    android:visibility="visible" />
+                    android:visibility="visible"/>
 
 
                 <LinearLayout
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tv_access_code"
                     android:id="@+id/frg_subscription_ll_access_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+
                     android:orientation="horizontal">
 
                     <Button
-
                         android:id="@+id/frg_subscription_btn_access_code"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/button_height_xmedium"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="0.20"
                         android:background="@drawable/custom_round_gray_button"
                         android:paddingStart="20dp"
@@ -332,7 +362,8 @@
                         android:textSize="@dimen/fontsize_normal" />
                 </LinearLayout>
             </RelativeLayout>
-
+<!--</LinearLayout>-->
+</RelativeLayout>
         </LinearLayout>
 
     </ScrollView>

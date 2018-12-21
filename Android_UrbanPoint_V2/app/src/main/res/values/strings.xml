@@ -469,4 +469,6 @@
     <string name="monthly">Monthly</string>
     <string name="weekly">Weekly</string>
     <string name="daily">Daily</string>
+    <string name="condition_applies">*Condition Applies</string>
+    <string name="additional_vat">*Additional Vat 15% applicable</string>
 </resources>

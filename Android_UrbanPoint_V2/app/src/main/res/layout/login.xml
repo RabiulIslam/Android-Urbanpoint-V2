@@ -174,10 +174,11 @@
 
             <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
                 android:id="@+id/loginToApp"
-                style="@style/button_large_style"
+                style="@style/button_style"
+                android:textSize="@dimen/fontsize_large"
+                android:layout_width="@dimen/dp175"
                 android:background="@drawable/custom_round_button"
                 android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/fontsize_large"
                 android:contentDescription="@string/login"
                 android:text="@string/login"
                 android:textAllCaps="false"
