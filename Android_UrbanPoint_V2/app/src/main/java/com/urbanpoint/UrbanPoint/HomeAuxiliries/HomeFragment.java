@@ -862,6 +862,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateBadges() {
+
+        Log.e("email_verified_status",AppConfig.getInstance().mUser.EmailVerified+"");
         //Updating GainAcees Button
 //        if (AppConfig.getInstance().mUser.isSubscribed()) {
 //            btnGainAccess.setVisibility(View.GONE);
@@ -889,7 +891,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             imvFavorite.setVisibility(View.GONE);
         }
 
-        //Updating UnRead Notification Badge
+        //Updatisng UnRead Notification Badge
         int count = AppConfig.getInstance().mUserBadges.getNotificationCount();
         if (count > 0) {
             rlNotifctnBubble.setVisibility(View.VISIBLE);
@@ -904,9 +906,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         //Updating MenuIcon Badge
         String nationality = "";
+        String EmailVerified="";
         if (AppConfig.getInstance().mUser.getmNationality() != null &&
                 AppConfig.getInstance().mUser.getmNationality().length() > 0) {
             nationality = AppConfig.getInstance().mUser.getmNationality();
+        }
+        if (AppConfig.getInstance().mUser.getEmailVerified() != null &&
+                AppConfig.getInstance().mUser.getEmailVerified().length() > 0) {
+            EmailVerified = AppConfig.getInstance().mUser.getEmailVerified();
         }
         if ((AppConfig.getInstance().mUserBadges.getReviewCount() == 0)) {
             if ((nationality.length() > 0)) {
@@ -923,10 +930,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((MainActivity) getContext()).setReviewCount(AppConfig.getInstance().mUserBadges.getReviewCount());
 
         //Updating Profile Completion Badge
-        if (nationality.length() > 0) {
+        if (nationality.length() > 0  && EmailVerified.length()>0 &&
+                EmailVerified.equalsIgnoreCase("1")) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
-        } else {
+        }
+        else if ((EmailVerified.equalsIgnoreCase("1") && nationality.length()<=0)||
+                (nationality.length()>0 && EmailVerified.equalsIgnoreCase("0")))
+        {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+
+            ((MainActivity) getContext()).setProfileCount("90%");
+
+
+        }
+        else if ( EmailVerified.equalsIgnoreCase("0") && nationality.length()==0 )
+        {
+            ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+            ((MainActivity) getContext()).setProfileCount("80%");
+
         }
 
         //Updating if User can Unsubscribe or not

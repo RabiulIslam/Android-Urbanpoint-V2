@@ -18,8 +18,9 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="70dp"
+            android:adjustViewBounds="true"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/logo_main" />
@@ -174,7 +175,9 @@
 
             <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
                 android:id="@+id/loginToApp"
-                style="@style/button_style"
+                android:layout_height="wrap_content"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
                 android:textSize="@dimen/fontsize_large"
                 android:layout_width="@dimen/dp175"
                 android:background="@drawable/custom_round_button"
@@ -182,6 +185,7 @@
                 android:contentDescription="@string/login"
                 android:text="@string/login"
                 android:textAllCaps="false"
+                android:gravity="center"
                 android:textColor="@drawable/change_text_color_on_button_pressed" />
 
             <View
@@ -191,10 +195,13 @@
 
             <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
                 android:id="@+id/loginBackButton"
-                style="@style/button_style"
+                android:layout_height="wrap_content"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
                 android:fontFamily="@font/opensans_regular"
                 android:textSize="@dimen/fontsize_large"
                 android:layout_width="@dimen/dp100"
+                android:gravity="center"
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/back"
                 android:text="@string/back"

@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -27,10 +28,12 @@ public class Logout_Webhit_Get_logout {
     public void requestLogOut(Context _context, final IWebCallbacks iWebCallbacks) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.logout;
+        Log.e("urll",myUrl);
         this.mContext = _context;
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, new AsyncHttpResponseHandler() {
                     @Override
@@ -63,7 +66,9 @@ public class Logout_Webhit_Get_logout {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("status",statusCode+"");
                         switch (statusCode) {
+
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
                                 break;

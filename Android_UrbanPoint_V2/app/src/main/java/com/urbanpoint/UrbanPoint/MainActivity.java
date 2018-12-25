@@ -369,6 +369,12 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         }
     }
 
+
+    @Override
+    public void setProfileCount(String Count) {
+        txvProfile.setText(Count);
+    }
+
     @Override
     public void setProfileCountVisibility(int _visibility) {
         txvProfile.setVisibility(_visibility);

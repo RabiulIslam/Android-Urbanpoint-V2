@@ -50,6 +50,8 @@ import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -380,6 +382,8 @@ private void requestSignUp(String _name, String _email, String _gender, String _
 
 
                     TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
+                    TextView HorizontalSeprator=(TextView)dialog.findViewById(R.id.horizontal_seprator);
+                    HorizontalSeprator.setVisibility(View.GONE);
                     dialogButtonSeparator.setVisibility(View.GONE);
                     cancelButton.setVisibility(View.GONE);
                     okButton.setVisibility(View.GONE);

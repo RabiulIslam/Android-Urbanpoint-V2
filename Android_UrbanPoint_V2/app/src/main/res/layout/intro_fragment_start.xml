@@ -14,7 +14,7 @@
         <!--android:src="@drawable/logo_main"-->
         <!--android:visibility="gone"/>-->
     <ImageView
-        android:layout_width="150dp"
+        android:layout_width="175dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"

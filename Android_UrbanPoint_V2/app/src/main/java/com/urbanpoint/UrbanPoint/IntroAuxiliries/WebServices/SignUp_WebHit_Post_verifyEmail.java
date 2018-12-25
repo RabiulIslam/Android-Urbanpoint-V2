@@ -17,34 +17,28 @@ import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
-
-
-public class SignUp_WebHit_Post_checkPhoneEmail {
-
+public class SignUp_WebHit_Post_verifyEmail {
     private AsyncHttpClient mClient = new AsyncHttpClient();
     public static ResponseModel responseObject = null;
     Context mContext;
 
-
-    public void requestcheckPhoneEmail(Context _mContext, final IWebCallbacks iWebCallback,
-                                      final String _value) {
+    public void verifyEmail(Context _mContext, final IWebCallbacks iWebCallback,
+                            final String _value) {
 
         this.mContext = _mContext;
         RequestParams params = new RequestParams();
-        String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
+        //String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
 
 
         String myUrl;
 //        if (_isPhone) {
-            myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.checkPhone;
-            params.put("phone", _value);
-            params.put("device_info",deviceInfo);
-            params.put("deviceType","android");
-            params.put("id",AppConfig.getInstance().mUser.getmUserId());
+        myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.verifyEmail;
 
-            Log.e("step2_params",params+"");
-        Log.e("step2_url",myUrl+"");
-        Log.e("step2_header",AppConstt.HeadersValue.Authorization+"");
+        params.put("id", AppConfig.getInstance().mUser.getmUserId());
+
+        Log.e("verifyemailparams", params + "");
+        Log.e("verifyemailurl", myUrl + "");
+        Log.e("verifyemail_header", AppConstt.HeadersValue.Authorization + "");
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
@@ -57,20 +51,20 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
                             Gson gson = new Gson();
                             strResponse = new String(responseBody, "UTF-8");
 
-                            responseObject = gson.fromJson(strResponse, ResponseModel.class);
+                            responseObject = gson.fromJson(strResponse, SignUp_WebHit_Post_verifyEmail.ResponseModel.class);
 
 
                             switch (statusCode) {
 
-                                case AppConstt.ServerStatus.CREATED:
+                                case AppConstt.ServerStatus.OK:
 
-                                    AppConfig.getInstance().mUser.setmPhoneNumber( _value);
-
-
-                                    AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
-                                    AppConfig.getInstance().isEligible = (SignUp_WebHit_Post_checkPhoneEmail.responseObject.getData().getEligibility() == 1 ? true : false);
-                                    Log.e("isEligible", "onSuccess: " + AppConfig.getInstance().isEligible);
-                                    AppConfig.getInstance().mUser.setLoggedIn(true);
+//                                    AppConfig.getInstance().mUser.setmPhoneNumber( _value);
+//
+//
+//                                    AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
+//                                    AppConfig.getInstance().isEligible = (SignUp_WebHit_Post_checkPhoneEmail.responseObject.getData().getEligibility() == 1 ? true : false);
+//                                    Log.e("isEligible", "onSuccess: " + AppConfig.getInstance().isEligible);
+//                                    AppConfig.getInstance().mUser.setLoggedIn(true);
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
                                     break;
 
@@ -82,7 +76,6 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
                                     iWebCallback.onWebResult(false, responseObject.getMessage());
                                     break;
                             }
-
 
 
                         } catch (Exception ex) {
@@ -124,7 +117,7 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
                                 try {
                                     Gson gson = new Gson();
                                     String strResponse = new String(responseBody, "UTF-8");
-                                    responseObject = gson.fromJson(strResponse, ResponseModel.class);
+                                    responseObject = gson.fromJson(strResponse, SignUp_WebHit_Post_verifyEmail.ResponseModel.class);
                                     iWebCallback.onWebResult(false, responseObject.getMessage());
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
@@ -136,6 +129,7 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
                 }
         );
     }
+
 
     public class ResponseModel {
         private int status;
@@ -158,7 +152,7 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
             this.message = message;
         }
 
-        private Data data;
+        private String data;
 
 //        public String getData() {
 //            return this.data;
@@ -169,66 +163,12 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
 //        }
 
 
-        public Data getData() {
+        public String getData() {
             return data;
         }
 
-        public void setData(Data data) {
+        public void setData(String data) {
             this.data = data;
         }
-
-        public class Data {
-            private int id;
-
-            public int getId() {
-                return this.id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            private int eligibility;
-
-            public int getEligibility() {
-                return eligibility;
-            }
-
-            public void setEligibility(int eligibility) {
-                this.eligibility = eligibility;
-            }
-
-            private String premier_user;
-
-            public String getPremierUser() {
-                return this.premier_user;
-            }
-
-            public void setPremierUser(String premier_user) {
-                this.premier_user = premier_user;
-            }
-
-            private String verificationCode;
-
-            public String getVerificationCode() {
-                return verificationCode;
-            }
-
-            public void setVerificationCode(String verificationCode) {
-                this.verificationCode = verificationCode;
-            }
-
-            private String Authorization;
-
-            public String getAuthorization() {
-                return this.Authorization;
-            }
-
-            public void setAuthorization(String Authorization) {
-                this.Authorization = Authorization;
-            }
-        }
-
     }
-
 }

@@ -88,7 +88,7 @@
     <string name="contextual_messages">Enable location to sort offers \nbased on their distance from you.</string>
     <string name="contextual_uber_messages">Please enable location permission to request an Uber ride.</string>
     <string name="contextual_uber_btn">Enable.</string>
-    <string name="app_update_messages">Please update to the latest version of the Urban Point app to continue using it.</string>
+    <string name="app_update_messages">Please update to the latest version of the Biyog app to continue using it.</string>
     <string name="MSG_ERROR_NETWORK">Network error, please try again.</string>
 
 
@@ -193,7 +193,7 @@
 
     <!--how to use screen-->
     <string name="how_to_use_one">1. Visit the place where you\'d \n like to use the offer</string>
-    <string name="how_to_use_two">2. Click on the \'\'Get the deal\'\' button  on the offer screen</string>
+    <string name="how_to_use_two">2. Click on the \'\'Get It\'\' button  on the offer screen</string>
     <string name="how_to_use_three">3. One of the staff member needs to enter their PIN to confirm the offer</string>
 
     <!-- contact us screen-->
@@ -414,6 +414,7 @@
     <string name="enter_pin">Enter PIN</string>
     <string name="confirm_pin">Confirm PIN</string>
     <string name="skip"><u>Skip</u></string>
+    <string name="_skip">Skip</string>
     <string name="age_text">What\'s your age?</string>
     <string name="setup_your_account">Set Up Your Account</string>
     <string name="finish">Finish</string>
@@ -462,6 +463,8 @@
     <string name="select">Select</string>
     <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
      <string name="_seventy">70.00</string>
+    <string name="verify_email">Verify Email</string>
+    <string name ="send_link_to_verify_email"> We will send a link to verify your email to access all the offers </string>
     <string name="_300">300</string>
     <string name="_9taka">9.99 Tk.</string>
     <string name="_49taka">49.99 Tk.</string>

@@ -2,6 +2,7 @@ package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -43,6 +45,7 @@ import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -268,7 +271,8 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
                         b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
                         AppConfig.getInstance().isCommingFromSplash = true;
                         AppConfig.getInstance().mUser.setLoggedIn(true);
-                        navToMainActivity();
+                      //  navToMainActivity();
+                        showVerifyEmailDialog();
                     }
                 } else {
 
@@ -298,6 +302,98 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
 
             }
         }, _phone);
+
+    }
+
+
+
+    private void verifyEmail() {
+
+        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+        SignUp_WebHit_Post_verifyEmail signUp_webHit_checkPhone = new SignUp_WebHit_Post_verifyEmail();
+        signUp_webHit_checkPhone.verifyEmail(getContext(), new IWebCallbacks() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                Log.e("register_res_boolean",isSuccess+","+strMsg);
+                progressDilogue.stopiOSLoader();
+                if (isSuccess) {
+//                    logFireBaseEvent();
+//                    logFaceBookEvent();
+//                    logMixPanelEvent();
+                    if (SignUp_WebHit_Post_verifyEmail.responseObject != null)
+                    {
+//                        Bundle b = new Bundle();
+//                        b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
+//                        AppConfig.getInstance().isCommingFromSplash = true;
+//                        AppConfig.getInstance().mUser.setLoggedIn(true);
+                        navToMainActivity();
+//                        showVerifyEmailDialog();
+                    }
+                } else {
+
+                    if (strMsg.equalsIgnoreCase("Conflict")) {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getResources().getString(R.string.already_registered), null, null, false, null);
+                    }
+                    else
+                    {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                Log.e("ex","ex",ex);
+                progressDilogue.stopiOSLoader();
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+
+            }
+
+            @Override
+            public void onWebLogout() {
+                Log.e("log","out");
+                progressDilogue.stopiOSLoader();
+
+            }
+        }, AppConfig.getInstance().mUser.mUserId);
+
+    }
+
+    private void showVerifyEmailDialog()
+    {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.custome_message_alert_box);
+
+        dialog.setCancelable(false);
+        // set the custom dialog components - text
+        TextView messageTitle = (TextView) dialog.findViewById(R.id.messageTitle);
+        TextView messageText = (TextView) dialog.findViewById(R.id.dialogMessageText);
+        Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+        Button okButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        cancelButton.setText(getString(R.string._skip));
+
+        TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
+      dialogButtonSeparator.setVisibility(View.VISIBLE);
+//        cancelButton.setVisibility(View.GONE);
+//        okButton.setVisibility(View.GONE);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               navToMainActivity();
+            }
+        });
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyEmail();
+            }
+        });
+        messageTitle.setText(getString(R.string.verify_email));
+        messageText.setText(getString(R.string.send_link_to_verify_email));
+        dialog.show();
 
     }
 

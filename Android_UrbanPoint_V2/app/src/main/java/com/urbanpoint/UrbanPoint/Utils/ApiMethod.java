@@ -30,6 +30,7 @@ public interface ApiMethod {
         String forgotPassword = "forgotPassword";
         String getAuthorization = "getAuthorization";
         String checkPhone = "registration-step-two";
+        String verifyEmail="verifyEmail";
         String checkEmail = "checkEmail";
         String homeApi = "homeApi";
         String eligibilitychecker = "eligibilitychecker";

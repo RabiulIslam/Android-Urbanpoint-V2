@@ -163,7 +163,8 @@ public class ReviewOrdersFragment extends Fragment implements AbsListView.OnScro
                                 AppConfig.getInstance().mUser.getmNationality().length() > 0) {
                             nationality = AppConfig.getInstance().mUser.getmNationality();
                         }
-                        if (nationality.length() > 0) {
+                        if (nationality.length() > 0 &&
+                                AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
                             ((MainActivity) getContext()).setMenuBadgeVisibility(false);
                         }
                         gvReveives.setVisibility(View.GONE);

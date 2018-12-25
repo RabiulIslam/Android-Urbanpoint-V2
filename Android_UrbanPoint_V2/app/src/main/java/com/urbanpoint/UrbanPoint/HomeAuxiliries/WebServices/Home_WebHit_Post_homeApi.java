@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.JsonReader;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -49,14 +51,19 @@ public class Home_WebHit_Post_homeApi {
                         String strResponse;
                         try {
                             Gson gson = new Gson();
-                            strResponse = new String(responseBody, "UTF-8");
 
-                            responseObject = gson.fromJson(strResponse, ResponseModel.class);
+                            strResponse = new String(responseBody, "UTF-8");
+                            JsonReader reader = new JsonReader(new StringReader(strResponse.trim()));
+                            reader.setLenient(true);
+
+                            responseObject = gson.fromJson(String.valueOf(reader), ResponseModel.class);
                             Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
+                                    Log.e("emailverificationstatus",responseObject.getData().emailverified);
                                     AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
                                      AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
+                                     AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
                                     if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
                                         //Premier User is always subscribed and not allowed to unsub
                                         AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
@@ -130,6 +137,7 @@ public class Home_WebHit_Post_homeApi {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            Log.e("exception","ex",ex);
                             iWebCallback.onWebException(ex);
                         }
                     }
@@ -182,6 +190,7 @@ public class Home_WebHit_Post_homeApi {
 
     public class ResponseModel {
         private int status;
+
 
         public int getStatus() {
             return this.status;
@@ -990,6 +999,7 @@ public class Home_WebHit_Post_homeApi {
         }
 
         public class Data {
+            private  String emailverified;
             private int wallet;
             private Subscription subscription;
 
@@ -1054,6 +1064,14 @@ public class Home_WebHit_Post_homeApi {
 
             public int getUnReadNotification() {
                 return this.unReadNotification;
+            }
+
+            public String getEmailVerified() {
+                return emailverified;
+            }
+
+            public void setEmailVerified(String emailVerified) {
+                this.emailverified = emailVerified;
             }
 
             public void setUnReadNotification(int unReadNotification) {

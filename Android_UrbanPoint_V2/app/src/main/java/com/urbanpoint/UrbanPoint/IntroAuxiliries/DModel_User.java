@@ -28,6 +28,7 @@ public class DModel_User {
     public String masterMerchant;
     public boolean isLoggedIn;
     public boolean isPremierUser;
+    public String EmailVerified;
     public String mReferralCode;
     public int wallet;
     public DModel_User() {
@@ -54,6 +55,14 @@ public class DModel_User {
         this.masterMerchant = "";
         this.isLoggedIn = false;
         this.isPremierUser = false;
+    }
+
+    public String getEmailVerified() {
+        return EmailVerified;
+    }
+
+    public void setEmailVerified(String emailVerified) {
+        EmailVerified = emailVerified;
     }
 
     public int getWallet() {

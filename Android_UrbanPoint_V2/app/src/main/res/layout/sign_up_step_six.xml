@@ -27,17 +27,16 @@
 
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="155dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/logoContentDescription"
                     android:padding="@dimen/dp10"
                     android:src="@drawable/logo"
                     android:visibility="gone"/>
                 <ImageView
-                    android:layout_width="150dp"
+                    android:layout_width="175dp"
                     android:layout_height="70dp"
-
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/logo_main" />

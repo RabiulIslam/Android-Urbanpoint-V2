@@ -80,9 +80,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         txvNetwork.setText(AppConfig.getInstance().mUser.getmNetworkType());
         txvGender.setText(AppConfig.getInstance().mUser.getmGender());
         txvOldPin.setText(AppConfig.getInstance().mUser.getmPinCode());
-        txvPercentage.setText("80%");
-
-
+        if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1"))
+        {
+            txvPercentage.setText("90%");
+        }
+        else
+        {
+            txvPercentage.setText("80%");
+        }
         if (AppConfig.getInstance().mUser.getmNationality().length() > 0) {
             txvNationality.setText(AppConfig.getInstance().mUser.getmNationality() + "");
 
@@ -303,7 +308,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     AppConfig.getInstance().saveUserData();
                     ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
 
-                    if (AppConfig.getInstance().mUserBadges.getReviewCount() == 0) {
+                    if (AppConfig.getInstance().mUserBadges.getReviewCount() == 0 &
+                            AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
                         ((MainActivity) getContext()).setMenuBadgeVisibility(false);
                     }
                     btnUpdateProfile.setVisibility(View.GONE);

@@ -30,10 +30,11 @@
 
         <ImageView
             android:id="@+id/frg_payment_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="175dp"
+            android:layout_height="70dp"
             android:adjustViewBounds="true"
+            android:layout_gravity="center"
+
             android:layout_margin="10dp"
             android:background="@drawable/logo_main" />
 
