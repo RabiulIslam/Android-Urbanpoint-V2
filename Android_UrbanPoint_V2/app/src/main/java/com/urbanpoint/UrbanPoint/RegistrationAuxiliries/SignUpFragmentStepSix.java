@@ -439,7 +439,9 @@ private void requestSignUp(String _name, String _email, String _gender, String _
         FragmentTransaction ft = fm.beginTransaction();
         fr.setArguments(bundle);
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
-        ft.replace(R.id.containerIntroFragments, fr);
+        ft.add(R.id.containerIntroFragments, fr, AppConstt.FRGTAG.WebViewFragment);
+        ft.addToBackStack(AppConstt.FRGTAG.WebViewFragment);
+        ft.hide(this);
         ft.commit();
     }
 
@@ -451,6 +453,7 @@ private void requestSignUp(String _name, String _email, String _gender, String _
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
         ft.replace(R.id.containerIntroFragments, frg);
         ft.commit();
+
     }
 
     private void navToMainActivity() {

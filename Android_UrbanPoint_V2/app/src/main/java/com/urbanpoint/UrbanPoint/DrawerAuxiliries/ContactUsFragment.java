@@ -106,15 +106,15 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
                     String reason = (String) mContactUsCategorySpinner.getSelectedItem();
                     String body = mContactUsMessage.getText().toString();
 //                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-//                    requestContactUs(reason, body);
+                   requestContactUs(reason, body);
 
-                    String URI = "mailto:?subject=" + reason + "&body=" + body + "&to=" + AppConstt.ContactUS.EMAIL;
-
-
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri data = Uri.parse(URI);
-                    intent.setData(data);
-                    startActivity(intent);
+//                    String URI = "mailto:?subject=" + reason + "&body=" + body + "&to=" + AppConstt.ContactUS.EMAIL;
+//
+//
+//                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                    Uri data = Uri.parse(URI);
+//                    intent.setData(data);
+//                    startActivity(intent);
                     break;
                 }
         }
@@ -127,7 +127,7 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
             public void onWebResult(boolean isSuccess, String strMsg) {
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
-                    customAlert.showCustomAlertDialog(getActivity(), null, "Our team will contact you, in a short time", null, null, false, new CustomAlertConfirmationInterface() {
+                    customAlert.showCustomAlertDialog(getActivity(), null, "Thanks for contacting us. Our team will contact you shortly", null, null, false, new CustomAlertConfirmationInterface() {
                         @Override
                         public void callConfirmationDialogPositive() {
                             navToHomeFragment();

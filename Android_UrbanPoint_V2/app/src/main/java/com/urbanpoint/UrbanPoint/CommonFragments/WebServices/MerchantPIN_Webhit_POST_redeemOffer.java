@@ -27,7 +27,7 @@ public class MerchantPIN_Webhit_POST_redeemOffer {
     public static ResponseModel responseObject;
     private Context mContext;
 
-    public void requestRedeem(Context _context, final IWebCallbacks iWebCallbacks, int _offerId, int _pin) {
+    public void requestRedeem(Context _context, final IWebCallbacks iWebCallbacks, int _offerId, int _pin,int useWallet) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.redeemOffer;
         Log.e("redeem_offerurl",myUrl);
@@ -35,6 +35,7 @@ public class MerchantPIN_Webhit_POST_redeemOffer {
         RequestParams params = new RequestParams();
         params.put("offer_id", _offerId);
         params.put("pin", _pin);
+        params.put("should_redeemed",useWallet);
         Log.e("redeem_offerparams",params+"");
         Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());

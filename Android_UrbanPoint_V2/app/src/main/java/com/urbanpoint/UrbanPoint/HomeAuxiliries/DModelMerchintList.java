@@ -147,8 +147,10 @@ public class DModelMerchintList {
         String Gender;
         String Thumbnail;
         String special;
+       // String redeem;
 
-        public Child(String productId, String imgUrl, String name, String special1, String festival, String status, String gender, String thumbnail) {
+        public Child(String productId, String imgUrl, String name, String special1,
+                     String festival, String status, String gender, String thumbnail) {
             ProductId = productId;
             ImgUrl = imgUrl;
             Name = name;
@@ -157,7 +159,16 @@ public class DModelMerchintList {
             Gender = gender;
             Thumbnail = thumbnail;
             special = special1;
+//            redeem=redeem;
         }
+
+//        public String getRedeem() {
+//            return redeem;
+//        }
+//
+//        public void setRedeem(String redeem) {
+//            this.redeem = redeem;
+//        }
 
         public String getProductId() {
             return ProductId;

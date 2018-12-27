@@ -1,5 +1,7 @@
 package com.urbanpoint.UrbanPoint;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -45,6 +47,25 @@ public class SignupActivity extends AppCompatActivity
 
 
         mFragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        ExitMessageDialog();
+    }
+
+    private void ExitMessageDialog() {
+        new AlertDialog.Builder(SignupActivity.this)
+                .setMessage(getResources().getString(R.string.exit_app))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }})
+                .setNegativeButton(getResources().getString(R.string.No), null)
+                .show();
+
     }
 
     private void startVideo() {

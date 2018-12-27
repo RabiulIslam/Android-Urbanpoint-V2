@@ -9,9 +9,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 
-/**
- * Created by Danish on 3/16/2018.
- */
+
 
 public class FirebaseInstanceId extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
@@ -19,7 +17,7 @@ public class FirebaseInstanceId extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String refreshedToken = com.google.firebase.iid.FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken); // If you want to send messages to this application instance or // manage this apps subscriptions on the server side, send the // Instance ID token to your app server.
+        Log.e(TAG, "Refreshed token: " + refreshedToken); // If you want to send messages to this application instance or // manage this apps subscriptions on the server side, send the // Instance ID token to your app server.
         AppConfig.getInstance().saveFCMToken(refreshedToken);
 
     }

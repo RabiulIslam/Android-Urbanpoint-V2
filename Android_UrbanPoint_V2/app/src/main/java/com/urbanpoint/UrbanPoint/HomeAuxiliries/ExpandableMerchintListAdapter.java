@@ -80,7 +80,7 @@ public class ExpandableMerchintListAdapter extends BaseExpandableListAdapter {
                     .load(AppConstt.BASE_URL_IMAGES + lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl())
                     .into(viewHolderChild.imvOffer);
         }
-        if (isSubscribed) {
+        if (lstOutletOffers.get(groupPosition).getChild().get(childPosition).getStatus().equalsIgnoreCase("1")) {
             viewHolderChild.imvLockOffer.setVisibility(View.GONE);
         } else {
             viewHolderChild.imvLockOffer.setVisibility(View.VISIBLE);

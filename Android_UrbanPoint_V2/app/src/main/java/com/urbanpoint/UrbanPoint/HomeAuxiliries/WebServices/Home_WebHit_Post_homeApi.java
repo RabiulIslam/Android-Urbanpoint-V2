@@ -30,8 +30,6 @@ public class Home_WebHit_Post_homeApi {
     private AsyncHttpClient mClient = new AsyncHttpClient();
     public static ResponseModel responseObject = null;
     Context mContext;
-
-
     public void requestHomeApi(Context _mContext, final IWebCallbacks iWebCallback) {
 
         this.mContext = _mContext;
@@ -53,10 +51,10 @@ public class Home_WebHit_Post_homeApi {
                             Gson gson = new Gson();
 
                             strResponse = new String(responseBody, "UTF-8");
-                            JsonReader reader = new JsonReader(new StringReader(strResponse.trim()));
-                            reader.setLenient(true);
+//                            JsonReader reader = new JsonReader(new StringReader(strResponse.trim()));
+//                            reader.setLenient(true);
 
-                            responseObject = gson.fromJson(String.valueOf(reader), ResponseModel.class);
+                            responseObject = gson.fromJson(strResponse.trim(), ResponseModel.class);
                             Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
@@ -64,44 +62,46 @@ public class Home_WebHit_Post_homeApi {
                                     AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
                                      AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
                                      AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
-                                    if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
-                                        //Premier User is always subscribed and not allowed to unsub
-                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                        AppConfig.getInstance().mUser.setSubscribed(true);
-                                        AppConfig.getInstance().mUser.setPremierUser(true);
-                                    } else {
+//                                    if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
+//                                        //Premier User is always subscribed and not allowed to unsub
+//                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                        AppConfig.getInstance().mUser.setSubscribed(true);
+//                                        AppConfig.getInstance().mUser.setPremierUser(true);
+//                                    } else {
+                                        Log.e("home_subscription",responseObject.getData().getSubscription().getSubscription());
                                         if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
                                             // subscription==1 means user has access to all offers (for some no. of remaining days)
                                             AppConfig.getInstance().mUser.setSubscribed(true);
-                                            AppConfig.getInstance().mUser.setPremierUser(false);
-                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
-                                                // status==0 means user has been unsubscribed
-                                                AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                            } else {
-                                                switch (responseObject.getData().getSubscription().getNetwork()) {
-                                                    case AppConstt.SubscriptionTypes.Ooredoo:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.VodaFone:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.Card:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.Code:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                                        break;
-                                                }
-                                            }
+                                            //AppConfig.getInstance().mUser.setPremierUser(false);
+//                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
+//                                                // status==0 means user has been unsubscribed
+//                                                AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                            }
+//                                            else {
+//                                                switch (responseObject.getData().getSubscription().getNetwork()) {
+//                                                    case AppConstt.SubscriptionTypes.Ooredoo:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.VodaFone:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.Card:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.Code:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                                        break;
+//                                                }
+                                           // }
                                         } else {
-                                            AppConfig.getInstance().mUser.setPremierUser(false);
-                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                            AppConfig.getInstance().mUser.setPremierUser(false);
+//                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
                                             AppConfig.getInstance().mUser.setSubscribed(false);
                                         }
-                                    }
+
                                     if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber()!=null&&
                                             Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber().equalsIgnoreCase("1")) {
                                         AppConfig.getInstance().mUser.setUberRequired(true);

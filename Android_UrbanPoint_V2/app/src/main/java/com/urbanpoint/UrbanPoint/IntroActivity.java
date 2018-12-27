@@ -1,6 +1,8 @@
 package com.urbanpoint.UrbanPoint;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -28,6 +30,7 @@ import com.urbanpoint.UrbanPoint.MyApplication;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
 import java.util.Locale;
 
@@ -35,7 +38,7 @@ import java.util.Locale;
  * Created by Danish on 1/23/2018.
  */
 
-public class IntroActivity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpdateListener{
     private ImageView imvLoader;
     private LinearLayout llContainer;
     private VideoView videoView;
@@ -164,6 +167,25 @@ public class IntroActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        ExitMessageDialog();
+    }
+
+    private void ExitMessageDialog() {
+        new AlertDialog.Builder(IntroActivity.this)
+                .setMessage(getResources().getString(R.string.exit_app))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }})
+                .setNegativeButton(getResources().getString(R.string.No), null)
+                .show();
+
+    }
     public void setDefLang(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -172,5 +194,55 @@ public class IntroActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
         ((MyApplication) getApplication()).setLanguageSpecificFonts(true);
+    }
+
+    @Override
+    public void setNavBarTitle(String strTitle) {
+
+    }
+
+    @Override
+    public void setMenuBadgeVisibility(boolean _shouldBageVisible) {
+
+    }
+
+    @Override
+    public void setBackBtnVisibility(int _visibility) {
+
+    }
+
+    @Override
+    public void setCancelBtnVisibility(int _visibility) {
+
+    }
+
+    @Override
+    public void setToolBarbackgroudVisibility(int _visibility) {
+
+    }
+
+    @Override
+    public void setReviewCount(int _count) {
+
+    }
+
+    @Override
+    public void setProfileCountVisibility(int _visibility) {
+
+    }
+
+    @Override
+    public void setUnSubscribeVisibility(int _visibility) {
+
+    }
+
+    @Override
+    public void navToLogin() {
+
+    }
+
+    @Override
+    public void setProfileCount(String Count) {
+
     }
 }

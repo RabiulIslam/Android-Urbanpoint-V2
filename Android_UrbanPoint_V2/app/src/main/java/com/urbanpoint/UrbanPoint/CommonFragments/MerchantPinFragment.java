@@ -123,7 +123,13 @@ public class MerchantPinFragment extends Fragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.btnConfirmPurchase:
                 if (validatingRequired()) {
-                    requestRedeemOffer(Integer.parseInt(offerId), Integer.parseInt(enteredLoginPin));
+                    if (AppConfig.getInstance().mUser.isSubscribed()) {
+                        requestRedeemOffer(Integer.parseInt(offerId), Integer.parseInt(enteredLoginPin), 0);
+                    }
+                    else
+                    {
+                        requestRedeemOffer(Integer.parseInt(offerId), Integer.parseInt(enteredLoginPin), 1);
+                    }
                 }
                 break;
 
@@ -145,7 +151,7 @@ public class MerchantPinFragment extends Fragment implements View.OnClickListene
         ft.commit();
     }
 
-    private void requestRedeemOffer(int _offerId, int _pin) {
+    private void requestRedeemOffer(int _offerId, int _pin,int useWallet) {
         progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
         MerchantPIN_Webhit_POST_redeemOffer merchantPIN_webhit_post_redeemOffer = new MerchantPIN_Webhit_POST_redeemOffer();
         merchantPIN_webhit_post_redeemOffer.requestRedeem(getContext(), new IWebCallbacks() {
@@ -182,7 +188,7 @@ public class MerchantPinFragment extends Fragment implements View.OnClickListene
             public void onWebLogout() {
                 progressDilogue.stopiOSLoader();
             }
-        }, _offerId, _pin);
+        }, _offerId, _pin,useWallet);
     }
 
     private boolean validatingRequired() {

@@ -272,7 +272,7 @@
     <string name="added_to_ur_wish_list">Added to faves</string>
     <string name="txt_expiry">Use this offer before: </string>
     <string name="offer_detail_expires_on_1">Use this offer before: </string>
-    <string name="offer_detail_expires_on_2">Use this offer again on: </string>
+    <string name="offer_detail_expires_on_2">Use this offer again tomorrow </string>
     <string name="offer_detail_expires_on_3">Offer has been used</string>
 
     <!--navigation saving history screen-->
@@ -303,9 +303,12 @@
 
     <string name="logout">Logout</string>
 
-
+    <string name="verify"><u> Verify </u></string>
+    <string name="link_sent">A link is sent to your registered email</string>
     <string name="change_underline"><u>Change</u></string>
-
+    <string name="yes">Yes</string>
+    <string name="No">No</string>
+    <string name="exit_app">Exit App?</string>
 
     <string name="how_to_use_four">The staff member will then apply the discount to your bill. Enjoy the savings!</string>
 
@@ -406,7 +409,7 @@
 
     <string name="enter_access_code_empty_2">Please enter a valid Access Code</string>
     <string name="country_code">+888</string>
-    <string name="txv_qatar_riyal">QR </string>
+    <string name="txv_qatar_riyal">Tk </string>
     <string name="facebook_app_id">167219837169256</string>
     <string name="fb_login_protocol_scheme">fb167219837169256</string>
     <string name="logoContentDescription">Splash Logo</string>
@@ -462,10 +465,10 @@
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
     <string name="select">Select</string>
     <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
-     <string name="_seventy">70.00</string>
+     <string name="_seventy">70.00 Tk.</string>
     <string name="verify_email">Verify Email</string>
     <string name ="send_link_to_verify_email"> We will send a link to verify your email to access all the offers </string>
-    <string name="_300">300</string>
+    <string name="_300">300 Tk.</string>
     <string name="_9taka">9.99 Tk.</string>
     <string name="_49taka">49.99 Tk.</string>
     <string name="_99taka">99.00 Tk.</string>

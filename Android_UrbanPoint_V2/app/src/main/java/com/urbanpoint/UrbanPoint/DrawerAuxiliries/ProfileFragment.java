@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices.Profile_Webhit_Post_updateProfile;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -43,12 +44,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private RoundedImageView rmvImg;
     private List<String> lstNationality;
-    private EditText edtEmail;
+    private TextView edtEmail;
     private TextView txvNationality, txvName, txvPercentage, txvOldPin, txvGender, txvNetwork;
     private ListView lsvNationality;
     private NationalityListAdapter nationalityListAdapter;
     private ImageView imvNationltiyFlag, imvFlagInRounded, imvCross;
-    private RelativeLayout rlChangePin;
+    private RelativeLayout rlChangePin,rlVerifyemail;
     private LinearLayout llListContainer, llProfileContainer;
     private Button btnNationalitySave, btnUpdateProfile;
     private int mSelectedPosition;
@@ -177,6 +178,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void bindViews(View frg) {
+        rlVerifyemail=frg.findViewById(R.id.frg_profile_verify_email);
         llListContainer = frg.findViewById(R.id.frg_profile_ll_list_container);
         llProfileContainer = frg.findViewById(R.id.frg_profile_ll);
         imvCross = frg.findViewById(R.id.frg_profile_imv_close);
@@ -203,16 +205,75 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         imvNationltiyFlag = frg.findViewById(R.id.frg_profile_imv_nationality);
         rlChangePin = frg.findViewById(R.id.frg_profile_rl_change_pin);
         rlChangePin.setOnClickListener(this);
-
+        rlVerifyemail.setOnClickListener(this);
         lstNationality = Arrays.asList(AppConstt.arrFlags);
         Log.d("IMGESLST", "Unsorted: " + lstNationality);
 
         nationalityListAdapter = new NationalityListAdapter(getContext(), mSelectedPosition, lstNationality);
         lsvNationality.setAdapter(nationalityListAdapter);
-
+     if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1"))
+     {
+         rlVerifyemail.setVisibility(View.GONE);
+     }
+     else
+     {
+         rlVerifyemail.setVisibility(View.VISIBLE);
+     }
 
     }
+    private void verifyEmail() {
 
+        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+        SignUp_WebHit_Post_verifyEmail signUp_webHit_checkPhone = new SignUp_WebHit_Post_verifyEmail();
+        signUp_webHit_checkPhone.verifyEmail(getContext(), new IWebCallbacks() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                Log.e("register_res_boolean",isSuccess+","+strMsg);
+                progressDilogue.stopiOSLoader();
+                if (isSuccess) {
+//                    logFireBaseEvent();
+//                    logFaceBookEvent();
+//                    logMixPanelEvent();
+                    if (SignUp_WebHit_Post_verifyEmail.responseObject != null)
+                    {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.verify_email), getResources().getString(R.string.link_sent), null, null, false, null);
+//                        Bundle b = new Bundle();
+//                        b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
+//                        AppConfig.getInstance().isCommingFromSplash = true;
+//                        AppConfig.getInstance().mUser.setLoggedIn(true);
+                        //navToMainActivity();
+//                        showVerifyEmailDialog();
+                    }
+                } else {
+
+                    if (strMsg.equalsIgnoreCase("Conflict")) {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getResources().getString(R.string.already_registered), null, null, false, null);
+                    }
+                    else
+                    {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                Log.e("ex","ex",ex);
+                progressDilogue.stopiOSLoader();
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+
+            }
+
+            @Override
+            public void onWebLogout() {
+                Log.e("log","out");
+                progressDilogue.stopiOSLoader();
+
+            }
+        }, AppConfig.getInstance().mUser.mUserId);
+
+    }
     @Override
     public void onClick(View v) {
 
@@ -221,7 +282,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             case R.id.frg_profile_rl_change_pin:
                 navToChangePinFragment();
                 break;
-
+            case R.id.frg_profile_verify_email:
+                verifyEmail();
+                break;
             case R.id.frg_profile_imv_close:
                 llProfileContainer.setVisibility(View.VISIBLE);
                 llListContainer.setVisibility(View.GONE);

@@ -59,7 +59,7 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
 
-
+                         Log.e("step2_response",responseObject+"");
                             switch (statusCode) {
 
                                 case AppConstt.ServerStatus.CREATED:

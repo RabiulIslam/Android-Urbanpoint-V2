@@ -30,7 +30,7 @@ public class DModel_User {
     public boolean isPremierUser;
     public String EmailVerified;
     public String mReferralCode;
-    public int wallet;
+    public float wallet;
     public DModel_User() {
         this.mUserId = "";
         this.mName = "";
@@ -65,11 +65,11 @@ public class DModel_User {
         EmailVerified = emailVerified;
     }
 
-    public int getWallet() {
+    public float getWallet() {
         return wallet;
     }
 
-    public void setWallet(int wallet) {
+    public void setWallet(float wallet) {
         this.wallet = wallet;
     }
 

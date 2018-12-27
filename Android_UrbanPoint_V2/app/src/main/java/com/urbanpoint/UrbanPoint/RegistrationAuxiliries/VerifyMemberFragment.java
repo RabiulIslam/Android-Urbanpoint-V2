@@ -117,13 +117,6 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         initialize(view);
 
 
-//        if (NetworkUtils.isConnected(mContext)) {
-//            utilObj.startiOSLoader(mActivity, R.drawable.image_for_rotation, getString(R.string.please_wait), true);
-////            homeManager.doFetchFavOffers();
-//        } else {
-//            utilObj.showToast(mContext, getString(R.string.no_internet), Toast.LENGTH_LONG);
-//        }
-
 
         return view;
     }
@@ -155,16 +148,6 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
            phoneLogin();
          }
      });
-//     Back.setOnClickListener(new View.OnClickListener() {
-//         @Override
-//         public void onClick(View v) {
-//             FragmentManager fragmentManager = getFragmentManager();
-//             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//             fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
-//             fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepTwo());
-//             fragmentTransaction.commit();
-//         }
-//     });
 
     }
 

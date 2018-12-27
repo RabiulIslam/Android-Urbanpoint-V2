@@ -1,5 +1,7 @@
 package com.urbanpoint.UrbanPoint;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -13,8 +15,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -533,6 +537,60 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
     }
     //endregion
 
+
+//
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(event.getAction() == KeyEvent.ACTION_DOWN){
+//            switch(keyCode)
+//            {
+//                case KeyEvent.KEYCODE_BACK:
+//
+//                    ExitMessageDialog();
+//
+////                    String tag = returnStackFragment();
+////
+//////                    TimelineFragment home_frag = (TimelineFragment) getSupportFragmentManager().findFragmentByTag("home");
+////                    if (tag == null || TextUtils.isEmpty(tag)) {
+////                        // add your code here
+////                        ExitMessageDialog();
+////                    }
+////
+////
+////
+////                    if(getSupportFragmentManager().getBackStackEntryCount()<=0)
+////                    {
+////                        ExitMessageDialog();
+////                        //finish();
+////                    }
+////                    else
+////                    {
+////                        getSupportFragmentManager().popBackStack();
+////                    }
+//            }
+//
+//
+//            return true;
+//        }
+
+
+//        return super.onKeyDown(keyCode, event);
+//    }
+
+
+
+    private void ExitMessageDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage(getResources().getString(R.string.exit_app))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }})
+                .setNegativeButton(getResources().getString(R.string.No), null)
+                .show();
+
+    }
     private void requestLogout() {
         Logout_Webhit_Get_logout logout_webhit_get_logout = new Logout_Webhit_Get_logout();
         logout_webhit_get_logout.requestLogOut(this, new IWebCallbacks() {
@@ -643,21 +701,26 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         String tag = returnStackFragment();
         if (mDrawerLayout.isDrawerOpen(llDrawerMenu)) {
             mDrawerLayout.closeDrawer(llDrawerMenu);
+
         } else if (tag.equalsIgnoreCase(AppConstt.FRGTAG.HomeFragment)) {
-            this.finish();
-        } else if ((tag.equalsIgnoreCase(AppConstt.FRGTAG.FN_PurchaseSuccessFragment)) ||
+            ExitMessageDialog();
+        }
+         else if ((tag.equalsIgnoreCase(AppConstt.FRGTAG.FN_PurchaseSuccessFragment)) ||
                 (tag.equalsIgnoreCase(AppConstt.FRGTAG.SubscriptionEligibleSuccessFragment))) {
             navToHomeFragment();
         } else if (tag.equalsIgnoreCase(AppConstt.FRGTAG.SubscriptionSuccessFragment)) {
             if (AppConfig.getInstance().isCommingFromOfferDetail) {
-                mFrgmgr.popBackStackImmediate();
-                mFrgmgr.popBackStackImmediate();
-                mFrgmgr.popBackStackImmediate();
+//                mFrgmgr.popBackStackImmediate();
+//                mFrgmgr.popBackStackImmediate();
+//                mFrgmgr.popBackStackImmediate();
+                ExitMessageDialog();
             } else {
                 navToHomeFragment();
             }
-        } else {
-            super.onBackPressed();
+        }
+        else {
+            ExitMessageDialog();
+           // super.onBackPressed();
         }
 
     }

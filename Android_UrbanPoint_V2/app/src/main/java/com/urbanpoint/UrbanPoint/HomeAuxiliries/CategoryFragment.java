@@ -29,6 +29,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.BuildConfig;
 import com.urbanpoint.UrbanPoint.CommonFragments.MerchantDetailFragment;
 import com.urbanpoint.UrbanPoint.CommonFragments.OfferDetailFragment;
+import com.urbanpoint.UrbanPoint.CommonFragments.WebServices.OfferDetail_Webhit_Get_getOfferDetail;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.CategoryOffers_Webhit_Get_getOutlet;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.LocationPermission_WebHit_Post_updatePermission;
 import com.urbanpoint.UrbanPoint.R;
@@ -442,16 +443,28 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                         }
 
                         String strImageUrl = "";
+                        String isRedeem="";
                         if (CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getImage() != null) {
                             strImageUrl = CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getImage();
                         }
+                        if (AppConfig.getInstance().mUser.isSubscribed()
+                                || (Float.parseFloat(CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getPrice())
+                                <= AppConfig.getInstance().mUser.getWallet()))
+                        {
+                           isRedeem="1";
+                        }
+                        else
+                        {
+                            isRedeem="0";
+                        }
+                      //  CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getPrice()
                         lstChild.add(new DModelMerchintList.Child(
                                 CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getId(),
                                 strImageUrl,
                                 CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getTitle(),
                                 special,
                                 Cfestival,
-                                CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getRedeemed(),
+                                isRedeem,
                                 "", ""));
                     }
                     int distance;
@@ -465,7 +478,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                     if (CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getImage() != null) {
                         strImageUrl = CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getImage();
                     }
-
+                    //CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).get
                     lstOutlets.add(new DModelMerchintList(
                             CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getId(),
                             CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getName(),
@@ -480,6 +493,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                             CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getLogo(),
                             CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getPhone(),
                             lstChild
+
                     ));
 
                 }
