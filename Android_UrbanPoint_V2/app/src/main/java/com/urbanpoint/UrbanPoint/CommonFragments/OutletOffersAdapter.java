@@ -62,7 +62,8 @@ public class OutletOffersAdapter extends BaseAdapter {
                 .load(AppConstt.BASE_URL_IMAGES + categorieslist.get(position).getImage())
                 .into(imvCategory);
 
-        if (AppConfig.getInstance().mUser.isSubscribed()) {
+        if (AppConfig.getInstance().mUser.isSubscribed()||
+                AppConfig.getInstance().mUser.getWallet()>=categorieslist.get(position).getPrice()) {
 
             imvLocked.setVisibility(View.GONE);
             if (categorieslist.get(position).getSpecial() == "1") {

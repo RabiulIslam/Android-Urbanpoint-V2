@@ -3,6 +3,7 @@ package com.urbanpoint.UrbanPoint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,7 +57,8 @@ public class SignupActivity extends AppCompatActivity
     }
 
     private void ExitMessageDialog() {
-        new AlertDialog.Builder(SignupActivity.this)
+        AlertDialog alertDialog;
+        alertDialog =   new AlertDialog.Builder(SignupActivity.this)
                 .setMessage(getResources().getString(R.string.exit_app))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
@@ -65,6 +67,8 @@ public class SignupActivity extends AppCompatActivity
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
 
     }
 

@@ -548,8 +548,9 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
                             MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().get(i).getTitle(),
                             merchantName,
                             0,
-                            MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().get(i).getSpecialType()
-                    ));
+                            MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().get(i).getSpecialType(),
+                            Float.parseFloat(MerchantDetail_Webhit_Get_getMerchantDetail.
+                                    responseObject.getData().get(i).getApproxSaving())));
                 }
                 lsvMerchantOffers.setFocusable(false);
                 lsvMerchantOffers.setExpanded(true);

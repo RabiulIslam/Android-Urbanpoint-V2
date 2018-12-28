@@ -269,7 +269,13 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
 //                        AppConfig.getInstance().mUser.setEligible(false);
 //                        navToSubscriptionFragment();
 //                    }
-//                } else {
+                if (! AppConfig.getInstance().mUser.isSubscribed()
+                    & (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0)
+                        .getApproxSaving()) > AppConfig.getInstance().mUser.getWallet()))
+                 {
+                     navToSubscriptionFragment();
+                 }
+                  else {
                     bundle = new Bundle();
                     bundle.putString(AppConstt.BundleStrings.offerId, offerId + "");
                     bundle.putString(AppConstt.BundleStrings.offerName, offerName);
@@ -279,7 +285,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
                     bundle.putString(AppConstt.BundleStrings.merchantId, merchantId);
                     bundle.putString(AppConstt.BundleStrings.orderId, orderId);
                     navToMerchantPinFragment(bundle);
-                //}
+                }
                 break;
 
             case R.id.frg_offer_detail_txv_RulesOfPurchase:
@@ -545,9 +551,9 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
 
 
             Log.e("price",Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData()
-                    .get(0).getPrice())+","+ AppConfig.getInstance().mUser.getWallet());
+                    .get(0).getApproxSaving())+","+ AppConfig.getInstance().mUser.getWallet());
             if (AppConfig.getInstance().mUser.isSubscribed()
-                    || (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getPrice())
+                    || (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
                     <= AppConfig.getInstance().mUser.getWallet()))
             {
                 Log.e("check","lock");
@@ -566,6 +572,13 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
                     txvExpiryTime.setVisibility(View.VISIBLE);
                 }
 
+            }
+            else if(Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
+                    > AppConfig.getInstance().mUser.getWallet())
+            {
+                imvGetItLock.setVisibility(View.VISIBLE);
+                btnGetIt.setEnabled(true);
+                btnGetIt.setClickable(true);
             }
             else
             {

@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -580,7 +581,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 
 
     private void ExitMessageDialog() {
-        new AlertDialog.Builder(MainActivity.this)
+        AlertDialog alertDialog;
+        alertDialog =   new AlertDialog.Builder(MainActivity.this)
                 .setMessage(getResources().getString(R.string.exit_app))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
@@ -589,6 +591,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
 
     }
     private void requestLogout() {

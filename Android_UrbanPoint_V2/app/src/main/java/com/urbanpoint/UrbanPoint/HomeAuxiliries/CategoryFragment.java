@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.uber.sdk.rides.client.model.Vehicle;
 import com.urbanpoint.UrbanPoint.BuildConfig;
 import com.urbanpoint.UrbanPoint.CommonFragments.MerchantDetailFragment;
 import com.urbanpoint.UrbanPoint.CommonFragments.OfferDetailFragment;
@@ -43,6 +44,8 @@ import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -390,18 +393,26 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
 
     private void updateList(double _lat) {
+        boolean isDistanceRequired;
         if (strSortBy.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION)) {
             updateBtnLocation();
+            if (_lat > 0) {
+                isDistanceRequired = true;
+            } else {
+                isDistanceRequired = false;
+            }
+
         } else {
+            isDistanceRequired=false;
             updatebtnAlpabetical();
         }
 
-        boolean isDistanceRequired;
-        if (_lat > 0) {
-            isDistanceRequired = true;
-        } else {
-            isDistanceRequired = false;
-        }
+
+//        if (_lat > 0) {
+//            isDistanceRequired = true;
+//        } else {
+//            isDistanceRequired = false;
+//        }
 
         if ((strOfferType.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.Male)) ||
                 (strOfferType.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.Female))) {
@@ -415,7 +426,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                 CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().size() > 0) {
 
             if (CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().size() < 20) {
-                Log.d("dsafasdfasdfdsa", "onUpdateList: " + CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().size());
+                Log.d("dsafasdfasdfdsa", "onUpdateList: " + CategoryOffers_Webhit_Get_getOutlet.
+                        responseObject.getData().size());
                 shouldGetMoreOffers = false;
             }
 
@@ -448,11 +460,12 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                             strImageUrl = CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getImage();
                         }
                         if (AppConfig.getInstance().mUser.isSubscribed()
-                                || (Float.parseFloat(CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getPrice())
+                                || (Float.parseFloat(CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getApproxSaving())
                                 <= AppConfig.getInstance().mUser.getWallet()))
                         {
                            isRedeem="1";
                         }
+
                         else
                         {
                             isRedeem="0";
@@ -495,6 +508,22 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                             lstChild
 
                     ));
+
+                    if (strSortBy.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.SORT_BY_ALPHABETICALLY)) {
+                        Collections.sort(lstOutlets, new Comparator<DModelMerchintList>() {
+                            public int compare(DModelMerchintList v1, DModelMerchintList v2) {
+                                return v1.getMerchantName().compareTo(v2.getMerchantName());
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Collections.sort(lstOutlets, new Comparator<DModelMerchintList>() {
+                            public int compare(DModelMerchintList v1, DModelMerchintList v2) {
+                                return v1.getMerchantDistance()- v2.getMerchantDistance();
+                            }
+                        });
+                    }
 
                 }
             }

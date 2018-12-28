@@ -189,9 +189,12 @@ public class ExpandableMerchintListAdapter extends BaseExpandableListAdapter {
             viewHolder.merchantDistance.setText("");
         }
 
-        if (isSubscribed) {
+        if (isSubscribed ||  AppConfig.getInstance().mUser.getWallet()>0)
+        {
             viewHolder.imvLock.setVisibility(View.GONE);
-        } else {
+        }
+        else {
+
             viewHolder.imvLock.setVisibility(View.VISIBLE);
         }
 

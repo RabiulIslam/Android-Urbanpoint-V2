@@ -145,9 +145,9 @@ public class SplashFragment extends Fragment {
         shouldNavigate = true;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        shouldNavigate = false;
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        shouldNavigate = false;
+//    }
 }

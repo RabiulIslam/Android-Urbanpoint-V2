@@ -159,6 +159,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     void navToSignUpFragment() {
         Intent intent=new Intent(IntroActivity.this,SignupActivity.class);
         startActivity(intent);
+        finish();
         Fragment fragment = new SignUpFragment();
 //        FragmentManager fm = getSupportFragmentManager();
 //        FragmentTransaction ft = fm.beginTransaction();
@@ -175,7 +176,8 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     }
 
     private void ExitMessageDialog() {
-        new AlertDialog.Builder(IntroActivity.this)
+        AlertDialog alertDialog;
+        alertDialog =   new AlertDialog.Builder(IntroActivity.this)
                 .setMessage(getResources().getString(R.string.exit_app))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
@@ -184,6 +186,8 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
 
     }
     public void setDefLang(String lang) {

@@ -454,12 +454,13 @@
     <string name="confirm_pin_error">Pin and Confirm Pin should be same</string>
     <string name="sign_up_select_gender">Please tell us if you are a girl or guy</string>
     <string name="occupation">Occupation</string>
+    <string name="referral_code_optional">Referral Code (Optional)</string>
     <string name="referral_code">Referral Code</string>
     <string name="share">Share</string>
     <string name="wallet_balance">Wallet Balance :</string>
     <string name="already_registered">This number is already registered, please use a different number.</string>
     <string name="share_referral_code">Share your referral code</string>
-    <string name="refer_friends">Refer your friends and\nearn <b>250</b> Tk. for each successful installation.</string>
+    <string name="refer_friends">Refer your friends and\nearn <b>250</b> Tk. for each successful installation. Your friend also gets 40 days free premium user access.</string>
     <string name="use_balance_to_unlock_deals">You can use your wallet balance to unlock great deals!</string>
     <string name="FACEBOOK_APP_ID">392993371444452</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>

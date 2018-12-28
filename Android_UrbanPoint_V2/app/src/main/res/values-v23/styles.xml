@@ -25,7 +25,7 @@
         <!--<inamename="android:windowLightStatusBar">true</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
          <item name="colorAccent">@color/transparent</item>
-        <item name="android:textColorPrimary">@color/black</item>
+        <!--<item name="android:textColorPrimary">@color/black</item>-->
 
         <item name="android:windowActionBar">false</item>
         <item name="android:windowTitleSize">0dp</item>

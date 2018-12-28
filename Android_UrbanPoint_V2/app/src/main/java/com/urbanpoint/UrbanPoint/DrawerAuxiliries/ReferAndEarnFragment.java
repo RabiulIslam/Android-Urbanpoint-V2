@@ -18,6 +18,8 @@ import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
+import java.text.DecimalFormat;
+
 import static com.mixpanel.android.mpmetrics.ExceptionHandler.init;
 
 public class ReferAndEarnFragment extends Fragment implements View.OnClickListener {
@@ -61,7 +63,15 @@ public class ReferAndEarnFragment extends Fragment implements View.OnClickListen
 
     private void setData()
     {
-        WalletBalance.setText(getActivity().getResources().getString(R.string.wallet_balance)+" "+AppConfig.getInstance().mUser.getWallet()+" Tk");
+
+        if (AppConfig.getInstance().mUser.getWallet()==0.0)
+        {
+            WalletBalance.setText(getActivity().getResources().getString(R.string.wallet_balance) + " 00.00 Tk");
+        }
+        else {
+            DecimalFormat df = new DecimalFormat("#######.00");
+            WalletBalance.setText(getActivity().getResources().getString(R.string.wallet_balance) + " " + df.format(AppConfig.getInstance().mUser.getWallet()) + " Tk");
+        }
         Log.e("ref_code",AppConfig.getInstance().mUser.getmReferralCode()+"ref_code");
         ReferralCode.setText(AppConfig.getInstance().mUser.getmReferralCode());
     }

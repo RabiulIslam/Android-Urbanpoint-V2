@@ -47,6 +47,7 @@
                 android:contentDescription="@string/enter_email_message"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/dp10"
+                android:paddingRight="@dimen/dp10"
                 android:singleLine="true"
                 android:textSize="@dimen/fontsize_large"
                 android:text=""

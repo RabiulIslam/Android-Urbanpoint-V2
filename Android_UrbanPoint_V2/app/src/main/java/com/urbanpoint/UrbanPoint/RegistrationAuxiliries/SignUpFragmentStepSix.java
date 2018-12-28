@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -95,7 +97,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private EditText mSignUpReferralCode;
 //    private IntroActivityManager introActivityManager;
     ArrayAdapter OccupationAdapter;
-
+    TextView RefCode;
     public SignUpFragmentStepSix() {
         // Required empty public constructor
     }
@@ -146,6 +148,31 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mSignUpFinishView.setOnClickListener(this);
         mSignUpUserEmail = (EditText) mRootView.findViewById(R.id.signUpUserEmail);
         mSignUpOccupation=(Spinner) mRootView.findViewById(R.id.signUpUserOccupation);
+        RefCode=(TextView)mRootView.findViewById(R.id.tv_ref_code);
+        mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
+//        mSignUpReferralCode.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            if (s.length()>0)
+//            {
+//                RefCode.setText(getActivity().getString(R.string.referral_code));
+//            }
+//            else
+//            {
+//                RefCode.setText(getActivity().getString(R.string.referral_code_optional));
+//            }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
         mSignUpOccupation.setAdapter(OccupationAdapter);
 //        mSignUpOccupation.setThreshold(1);
         mSignUpOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -160,7 +187,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
             }
         });
-        mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
+
         mSignUpNewPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpNewPinEntry);
         mSignUpConfirmPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpConfirmPinEntry);
         mSignUpNewPinEntry.setOnPinEnteredListener(new PinEntryView.OnPinEnteredListener() {
