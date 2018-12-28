@@ -150,6 +150,15 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mSignUpOccupation=(Spinner) mRootView.findViewById(R.id.signUpUserOccupation);
         RefCode=(TextView)mRootView.findViewById(R.id.tv_ref_code);
         mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
+        mSignUpReferralCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                {
+                    mSignUpReferralCode.setHint("");
+                }
+            }
+        });
 //        mSignUpReferralCode.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
