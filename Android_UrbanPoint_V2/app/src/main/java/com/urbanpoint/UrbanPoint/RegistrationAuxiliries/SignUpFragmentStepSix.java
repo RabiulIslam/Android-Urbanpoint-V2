@@ -180,6 +180,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) view).setTextColor(Color.WHITE);
                 occupation=getResources().getStringArray(R.array.occupation)[position];
+
             }
 
             @Override
@@ -271,8 +272,15 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             //utilObj.showError(this, message, textViewObj, emailObj);
             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_up_enter_account_setup_heading), message, null, null, false, null);
         }
+        else if(occupation.length()<=0)
+        {
+            message="Please select occupation";
+            customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_up_enter_account_setup_heading),
+                    message, null, null, false,
+                    null);
+        }
 
-         else if (!checkEmail(email)) {
+        else if (!checkEmail(email)) {
             message = getResources().getString(R.string.invalid_email);
             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_up_enter_account_setup_heading), message, null, null, false, null);
         }

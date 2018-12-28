@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 
 
@@ -79,9 +80,11 @@ public class OffersAdapter extends BaseAdapter {
                     .into(viewHolder.imvOffer);
         }
 
-        if (isSubscribed) {
+        if (isSubscribed || AppConfig.getInstance().mUser.getWallet()>= lstOffers.get(position).getPrice())
+        {
             viewHolder.imvLockOffer.setVisibility(View.GONE);
-        } else {
+        }
+        else {
             viewHolder.imvLockOffer.setVisibility(View.VISIBLE);
         }
 

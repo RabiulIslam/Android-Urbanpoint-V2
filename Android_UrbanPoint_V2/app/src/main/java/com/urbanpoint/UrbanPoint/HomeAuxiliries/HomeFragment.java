@@ -826,8 +826,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getName(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getSpecial(),
                         festival,
-                        dist,
-                        false
+                        dist, false,
+                        Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData()
+                                .getSpecailOffers().get(i).getApproxSaving())
+
                 ));
             }
             rlProgress1.setVisibility(View.GONE);
@@ -851,7 +853,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getSpecial(),
                         "",
                         dist,
-                        false
+                        false,Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().
+                        getMostLovedOffers().get(i).getApproxSaving())
                 ));
             }
             rlProgress2.setVisibility(View.GONE);

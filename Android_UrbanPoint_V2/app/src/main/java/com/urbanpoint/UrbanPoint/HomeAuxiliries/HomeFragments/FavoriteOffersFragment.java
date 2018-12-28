@@ -393,9 +393,8 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getId(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getName(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getSpecial(),
-                        festival,
-                        (int) distance,
-                        isDistanceRequired
+                        festival, (int) distance, isDistanceRequired,
+                        Float.parseFloat( NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getApproxSaving())
                 ));
             }
 

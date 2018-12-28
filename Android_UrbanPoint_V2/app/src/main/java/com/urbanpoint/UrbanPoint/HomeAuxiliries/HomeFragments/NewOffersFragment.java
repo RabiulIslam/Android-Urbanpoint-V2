@@ -297,18 +297,21 @@ public class NewOffersFragment extends Fragment implements View.OnClickListener 
     }
 
     private void updateList(double _lat) {
-        if (strSortBy.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION)) {
-            updateBtnLocation();
-        } else {
-            updatebtnAlpabetical();
-        }
 
         boolean isDistanceRequired;
-        if (_lat>0) {
-            isDistanceRequired = true;
+
+        if (strSortBy.equalsIgnoreCase(AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION)) {
+            updateBtnLocation();
+            if (_lat>0) {
+                isDistanceRequired = true;
+            } else {
+                isDistanceRequired = false;
+            }
         } else {
-            isDistanceRequired = false;
+            updatebtnAlpabetical();
+            isDistanceRequired=false;
         }
+
 
         if (NewOffers_Webhit_Get_getOffers.responseObject != null &&
                 NewOffers_Webhit_Get_getOffers.responseObject.getData() != null &&
@@ -343,9 +346,8 @@ public class NewOffersFragment extends Fragment implements View.OnClickListener 
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getId(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getName(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getSpecial(),
-                        festival,
-                        (int) distance,
-                        isDistanceRequired
+                        festival, (int) distance, isDistanceRequired,
+                        Float.parseFloat(NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getApproxSaving())
                 ));
             }
 
