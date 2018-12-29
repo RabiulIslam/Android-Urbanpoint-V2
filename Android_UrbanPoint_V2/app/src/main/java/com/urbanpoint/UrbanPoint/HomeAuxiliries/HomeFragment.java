@@ -614,6 +614,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onWebException(Exception ex) {
+                Log.e("home_exceptn","ex",ex);
+
                 progressDilogue.stopiOSLoader();
                 if (customAlert != null)
                     customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(), null, null, false, null);
@@ -837,6 +839,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         // Updating Home MostLoved Offers list
+
+        Log.e("most_loved_offers_size", Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size()+"");
         if (Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size() > 0) {
             for (int i = 0; i < Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size(); i++) {
@@ -850,7 +854,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getTitle(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getId(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getName(),
-                        Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getSpecial(),
+                        //"0",
+                       Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getSpecial(),
                         "",
                         dist,
                         false,Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().
