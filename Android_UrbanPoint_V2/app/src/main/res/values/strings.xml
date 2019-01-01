@@ -82,8 +82,6 @@
     <string name="enter_new_confirm_pin_message">Please enter confirm New PIN</string>
     <string name="enter_pin_not_match">The PINs  you entered do not match, please re-enter the PINs</string>
     <string name="congratulations_access">Congratulations! You now have access to all Biyog offers!</string>
-
-
     <string name="contextual_messages_heading">Always know what\'s around</string>
     <string name="contextual_messages">Enable location to sort offers \nbased on their distance from you.</string>
     <string name="contextual_uber_messages">Please enable location permission to request an Uber ride.</string>

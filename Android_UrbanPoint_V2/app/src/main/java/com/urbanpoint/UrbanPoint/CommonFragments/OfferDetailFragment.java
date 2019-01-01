@@ -559,14 +559,16 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
                 Log.e("check","lock");
                 imvGetItLock.setVisibility(View.GONE);
 
-                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
+                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0)
+                {
                     btnGetIt.setText(getResources().getString(R.string.btn_used));
                     btnGetIt.setEnabled(false);
                     btnGetIt.setClickable(false);
                     btnGetIt.setBackground(getResources().getDrawable(R.drawable.btn_redeem_slc));
                     txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_2));
                     txvExpiryTime.setVisibility(View.VISIBLE);
-                } else {
+                }
+                else {
                     String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                     txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
                     txvExpiryTime.setVisibility(View.VISIBLE);
