@@ -8,21 +8,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-
 import com.urbanpoint.UrbanPoint.R;
 
 import java.util.List;
 
 
-
-public class NationalityListAdapter extends BaseAdapter {
+public class ZoneListAdapter extends BaseAdapter {
     Context mContext;
     List<String> lstNames;
     LayoutInflater inflater;
     ProfileFragment profileFragment;
     int mSelectedPosition;
 
-    public NationalityListAdapter(Context _mContext, int _selectedPosition, List<String> _lstNames) {
+    public ZoneListAdapter(Context _mContext, int _selectedPosition, List<String> _lstNames) {
         this.mContext = _mContext;
         this.lstNames = _lstNames;
         inflater = LayoutInflater.from(_mContext);

@@ -31,6 +31,7 @@ public class DModel_User {
     public String EmailVerified;
     public String mReferralCode;
     public float wallet;
+    public String zone;
     public DModel_User() {
         this.mUserId = "";
         this.mName = "";
@@ -55,6 +56,16 @@ public class DModel_User {
         this.masterMerchant = "";
         this.isLoggedIn = false;
         this.isPremierUser = false;
+        this.zone="";
+    }
+
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
     }
 
     public String getEmailVerified() {

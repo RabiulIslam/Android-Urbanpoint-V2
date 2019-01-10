@@ -43,7 +43,8 @@
     <string name="frg_merchant_pin">Merchant PIN</string>
     <string name="frg_purchase_success">Purchase Success</string>
     <string name="frg_privacy_statement">Privacy Statement</string>
-    <string name="frg_rules_of_purchase">Rules of Purchase</string>
+    <string name="rules_of_purchase">Rules of Purchase</string>
+    <string name="frg_terms_of_sales">Terms of Sales</string>
     <string name="frg_subscription_for_15">Subscribe for 99 Tk./month</string>
     <string name="frg_subscription">Subscribe</string>
     <string name="frg_subscription_success">Congratulations</string>
@@ -101,6 +102,7 @@
 
 
     <!--   signup screen-->
+    <string name="frg_rules_of_purchase">Rules of Purchase</string>
     <string name="sign_up_create_account">Create your account</string>
     <string name="sign_up_are_you_girl_guy">Are you a girl or a guy?</string>
     <string name="sign_up_girl">Girl</string>
@@ -180,7 +182,7 @@
     <string name="promo_code_hint">Access Code</string>
 
     <!--profile screen-->
-    <string name="natinality_message">Please select your country</string>
+    <string name="natinality_message">Please select your location</string>
 
     <!--Change Pin    -->
     <string name="change_pin_welcome">Welcome %1$s!</string>
@@ -264,7 +266,7 @@
     <string name="add_to_favs">Added To Favs</string>
     <string name="approx_saving">Approximate Savings</string>
     <string name="offers_text">All offers are subject to</string>
-    <string name="rules_of_purchase"><u>Rules of Purchase</u></string>
+
     <string name="timing_text">Timings</string>
     <string name="cancel">Cancel</string>
     <string name="added_to_ur_wish_list">Added to faves</string>
@@ -326,8 +328,10 @@
 
     <string name="enjoy_your">Enjoy Your</string>
     <string name="ist_offer">Offer Free</string>
-    <string name="nationality">Nationality</string>
-    <string name="nationality_hint">Please select your country</string>
+    <string name="zone">Zone</string>
+    <string name="select_zone">Please select your zone</string>
+    <string name="nationality">Current Location</string>
+    <string name="nationality_hint">Please select your location</string>
     <!--<strnamename="here_how_it_works_header">Here\'s how it works </string>-->
 
 
@@ -476,4 +480,19 @@
     <string name="daily">Daily</string>
     <string name="condition_applies">*Condition Applies</string>
     <string name="additional_vat">*Additional Vat 15% applicable</string>
+    <string name="bill_to">Bill To :</string>
+    <string name="name">Name</string>
+    <string name="cell">Cell</string>
+    <string name="package_text">Package</string>
+    <string name="placed_on">Placed on</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="vat">Vat (15%)</string>
+   <string name="total">Total : </string>
+    <string name="address">Address</string>
+    <string name="proceed_to_payment">Proceed to payment</string>
+    <string name="agree_to_biyog">I agree to Biyog\'s</string>
+    <string name="terms_of_sale"><u>Terms of Sale</u></string>
+    <!--<string name="email">Email</string>-->
+    <!--<string name="cell">Cell</string>-->
+
 </resources>

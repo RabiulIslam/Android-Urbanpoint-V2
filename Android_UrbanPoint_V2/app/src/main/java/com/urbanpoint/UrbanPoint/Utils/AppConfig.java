@@ -19,9 +19,7 @@ import com.urbanpoint.UrbanPoint.IntroAuxiliries.DModel_User;
 
 import java.sql.Ref;
 
-/**
- * Created by Danish on 1/25/2018.
- */
+
 
 public class AppConfig {
     public DModel_User mUser;
@@ -126,11 +124,8 @@ public class AppConfig {
     }
 
     public static AppConfig getInstance() {
-
         return ourInstance;
     }
-
-
 
 
 
@@ -144,6 +139,7 @@ public class AppConfig {
         mUser.mPinCode = sharedPref.getString("pinCode", "");
         mUser.mPhoneNumber = sharedPref.getString("msisdn_id", "");
         mUser.mReferralCode= sharedPref.getString("referral_code","");
+        mUser.zone=sharedPref.getString("zone","");
         String isSubscribed = "";
         isSubscribed = sharedPref.getString("key_user_subscribe_status", "");
         if (isSubscribed.equalsIgnoreCase("true")) {
@@ -211,6 +207,12 @@ public class AppConfig {
         SignupEditor.commit();
     }
 
+    public void setZone(String zone)
+    {
+        SignupEditor.putString("zone",zone);
+        SignupEditor.commit();
+    }
+
     public String getName()
     {
         return  SignupData.getString("name","");
@@ -259,6 +261,7 @@ public class AppConfig {
         mUser.setUberRequired(sharedPref.getBoolean("key_is_uber_required", false));
         mUserBadges.setFavoriteCount(sharedPref.getInt("key_favorites_count", 0));
         mUser.setmReferralCode(sharedPref.getString("referral_code",""));
+        mUser.setZone(sharedPref.getString("zone",""));
     }
 
     public void saveUserData() {
@@ -284,6 +287,7 @@ public class AppConfig {
         editor.putBoolean("key_is_uber_required", mUser.isUberRequired());
         editor.putInt("key_favorites_count", mUserBadges.getFavoriteCount());
         editor.putString("referral_code",mUser.getmReferralCode());
+        editor.putString("zone",mUser.getZone());
         editor.commit();
     }
 

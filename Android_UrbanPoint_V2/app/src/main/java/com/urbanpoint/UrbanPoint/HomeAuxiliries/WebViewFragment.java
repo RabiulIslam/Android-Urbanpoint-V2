@@ -42,6 +42,7 @@ public class WebViewFragment extends Fragment implements View.OnClickListener {
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
 
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
+    public static final String TERMS_OF_SALES="Terms_of_Sale.html";
 
     @Nullable
     @Override
@@ -106,6 +107,23 @@ public class WebViewFragment extends Fragment implements View.OnClickListener {
             iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
             iNavBarUpdateUpdateListener.setNavBarTitle(strTitle);
           //  iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
+            iNavBarUpdateUpdateListener.setCancelBtnVisibility(View.GONE);
+            iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
+        }
+
+        else if (strExtra.equalsIgnoreCase(AppConstt.TERMS_OF_SALES)) {
+            webView.loadUrl("file:///android_asset/" + TERMS_OF_SALES);
+            strTitle = (getActivity().getResources().getString(R.string.terms_of_sale));
+            imvBack1.setVisibility(View.GONE);
+            try {
+                iNavBarUpdateUpdateListener = (INavBarUpdateUpdateListener) getActivity();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
+            iNavBarUpdateUpdateListener.setNavBarTitle(strTitle);
+            //  iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
             iNavBarUpdateUpdateListener.setCancelBtnVisibility(View.GONE);
             iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
         }

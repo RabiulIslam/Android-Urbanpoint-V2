@@ -81,7 +81,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private TextView txvOfferDays, txvRedIconBtn, txvHomeScreenMsg, txvMemberMsg, txvBubbleCount;
     private HorizontalScrollView mHorizontalScrollView1, mHorizontalScrollView2;
     private RelativeLayout rlHomeMenu, rlHomeSearch;
-
     //Bottom Tab Items
     private final byte NUM_BOTTOM_TABS = 3;
     private final byte BOTTOM_TAB_FAVORITES = 0;
