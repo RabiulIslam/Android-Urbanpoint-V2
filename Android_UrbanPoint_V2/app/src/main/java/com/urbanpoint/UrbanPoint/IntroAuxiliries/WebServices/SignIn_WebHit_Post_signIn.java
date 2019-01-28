@@ -18,9 +18,6 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 
-/**
- * Created by lenovo on 09/08/2018.
- */
 
 public class SignIn_WebHit_Post_signIn {
 
@@ -66,6 +63,8 @@ public class SignIn_WebHit_Post_signIn {
 
                                 case AppConstt.ServerStatus.OK:
 
+                                    Log.e("zone_valuee",responseObject.getData().getZone()+" vvvv");
+
                                     AppConfig.getInstance().mUser.setmName(responseObject.getData().getName());
                                     if (responseObject.getData().getId()>0){
 
@@ -79,6 +78,7 @@ public class SignIn_WebHit_Post_signIn {
                                     AppConfig.getInstance().mUser.setmDob(responseObject.getData().getDOB());
                                     AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());
                                     AppConfig.getInstance().mUser.setmNationality(responseObject.getData().getNationality());
+                                    AppConfig.getInstance().mUser.setZone(responseObject.getData().getZone());
                                     AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
                                    // AppConfig.getInstance().mUser.setLoggedIn(true);
                                     Log.e("referral",responseObject.getData().getReferralCode()+"ref_code");
@@ -256,6 +256,15 @@ public class SignIn_WebHit_Post_signIn {
 
             public void setNetwork(String network) {
                 this.network = network;
+            }
+            private String Zone;
+
+            public String getZone() {
+                return Zone;
+            }
+
+            public void setZone(String zone) {
+                Zone = zone;
             }
 
             private String nationality;

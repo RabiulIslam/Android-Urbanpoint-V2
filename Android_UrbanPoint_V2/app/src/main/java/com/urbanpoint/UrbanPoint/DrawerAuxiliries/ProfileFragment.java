@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     CustomAlert customAlert;
     ProgressDilogue progressDilogue;
     boolean zone;
-    RelativeLayout ZoneLayout;
+    RelativeLayout ZoneLayout,ChangeZoneLayout,ChangenationalityLayout;
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
 
     @Override
@@ -92,30 +92,47 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         {
             txvPercentage.setText("80%");
         }
-        if (AppConfig.getInstance().mUser.getmNationality().length() > 0) {
-            txvNationality.setText(AppConfig.getInstance().mUser.getmNationality() + "");
 
-            btnUpdateProfile.setVisibility(View.GONE);
+        try {
+//                Log.d("IMGESLST", "list value: " + AppInstance.profileData.getNationality() + ".png");
+            InputStream inputstream = getContext().getAssets().open("flags/Bangladesh.png");
+            drawable = Drawable.createFromStream(inputstream, null);
+            imvFlagInRounded.setImageDrawable(drawable);
+            imvNationltiyFlag.setImageDrawable(drawable);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (AppConfig.getInstance().mUser.getmNationality().length() > 0) {
+
+            ChangenationalityLayout.setVisibility(View.VISIBLE);
+            ChangeZoneLayout.setVisibility(View.VISIBLE);
+            txvNationality.setText(AppConfig.getInstance().mUser.getmNationality() + "");
+           // btnUpdateProfile.setVisibility(View.GONE);
             txvPercentage.setVisibility(View.GONE);
             imvNationltiyFlag.setVisibility(View.GONE);
             imvCross.setVisibility(View.GONE);
-//
-//            try {
-////                Log.d("IMGESLST", "list value: " + AppInstance.profileData.getNationality() + ".png");
-//                InputStream inputstream = getContext().getAssets().open("flags/" + AppConfig.getInstance().mUser.getmNationality() + ".png");
-//                drawable = Drawable.createFromStream(inputstream, null);
-//                imvFlagInRounded.setImageDrawable(drawable);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-        } else {
+
+            if (AppConfig.getInstance().mUser.getmNationality().equalsIgnoreCase("Others")) {
+                ZoneLayout.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                ZoneLayout.setVisibility(View.VISIBLE);
+                txvZone.setText(AppConfig.getInstance().mUser.getZone());
+            }
+
+
+        }
+        else {
+            ChangenationalityLayout.setVisibility(View.GONE);
+            ChangeZoneLayout.setVisibility(View.GONE);
             if (AppConfig.getInstance().mUser.isNationalityLstDisplyd()) {
                 txvPercentage.setVisibility(View.VISIBLE);
                 imvCross.setVisibility(View.GONE);
             } else {
                 imvCross.setVisibility(View.VISIBLE);
-                llListContainer.setVisibility(View.VISIBLE);
-                llProfileContainer.setVisibility(View.GONE);
+                llProfileContainer.setVisibility(View.VISIBLE);
                 btnNationalitySave.setVisibility(View.GONE);
                 AppConfig.getInstance().mUser.setNationalityLstDisplyd(true);
                 AppConfig.getInstance().saveUserData();
@@ -176,23 +193,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 Log.e("item click","true");
                 mSelectedPosition = position;
 
-
-//                nationalityListAdapter = new NationalityListAdapter(mContext, mSelectedPosition, lstNationality);
-//                lsvNationality.setAdapter(nationalityListAdapter);
                 nationalityListAdapter.setPosition(position);
                 nationalityListAdapter.notifyDataSetInvalidated();
-
-
-
-//                try {
-//                    Log.d("IMGESLST", "list value: " + lstNationality.get(position) + ".png");
-//                    InputStream inputstream = getContext().getAssets().open("flags/" + lstNationality.get(position) + ".png");
-//                    drawable = Drawable.createFromStream(inputstream, null);
-//                    imvFlagInRounded.setImageDrawable(drawable);
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-
                 btnNationalitySave.setVisibility(View.VISIBLE);
             }
         });
@@ -204,9 +206,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         lsvZone.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            zoneselectedposition= position;
-//                nationalityListAdapter = new NationalityListAdapter(mContext, mSelectedPosition, lstNationality);
-//                lsvNationality.setAdapter(nationalityListAdapter);
+                zoneselectedposition= position;
                 zoneListAdapter.setPosition(position);
                 zoneListAdapter.notifyDataSetInvalidated();
                 btnNationalitySave.setVisibility(View.VISIBLE);
@@ -239,10 +239,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         txvNetwork = frg.findViewById(R.id.frg_profile_txv_network);
         btnUpdateProfile = frg.findViewById(R.id.frg_profile_update);
         btnUpdateProfile.setOnClickListener(this);
-
         btnNationalitySave = frg.findViewById(R.id.frg_profile_nationality_save);
         btnNationalitySave.setOnClickListener(this);
-
         imvFlagInRounded = frg.findViewById(R.id.frg_profile_imv_flag);
         imvFlagInRounded.setImageResource(R.mipmap.nationality_0);
         rmvImg = frg.findViewById(R.id.frg_profile_round__imv_pic);
@@ -250,7 +248,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         txvName = frg.findViewById(R.id.frg_profile_edt_name);
         edtEmail = frg.findViewById(R.id.frg_profile_edt_email);
         txvZone=frg.findViewById(R.id.frg_profile_edt_zone);
+        ChangenationalityLayout=frg.findViewById(R.id.frg_profile_rl_change_nationality);
+        ChangeZoneLayout=frg.findViewById(R.id.frg_profile_rl_change_zone);
         txvNationality = frg.findViewById(R.id.frg_profile_edt_nationality);
+        ChangeZoneLayout.setOnClickListener(this);
+        ChangenationalityLayout.setOnClickListener(this);
         txvNationality.setOnClickListener(this);
         txvZone.setOnClickListener(this);
         lsvNationality = frg.findViewById(R.id.frg_profile_list_view_nationality_2);
@@ -261,21 +263,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rlVerifyemail.setOnClickListener(this);
         lstNationality = Arrays.asList(AppConstt.arrFlags);
         Log.d("IMGESLST", "Unsorted: " + lstNationality);
-
-
         nationalityListAdapter = new NationalityListAdapter(getContext(), mSelectedPosition, lstNationality);
         lsvNationality.setAdapter(nationalityListAdapter);
-//        lstZone=Arrays.asList(AppConstt.arrNorthZone);
-
-
-        if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1"))
-     {
-         rlVerifyemail.setVisibility(View.GONE);
-     }
-     else
-     {
-         rlVerifyemail.setVisibility(View.VISIBLE);
-     }
+        if (AppConfig.getInstance().mUser.getEmailVerified()!=null) {
+            if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
+                rlVerifyemail.setVisibility(View.GONE);
+            } else {
+                rlVerifyemail.setVisibility(View.VISIBLE);
+            }
+        }
+        else
+        {
+            rlVerifyemail.setVisibility(View.VISIBLE);
+        }
 
     }
     private void verifyEmail() {
@@ -336,6 +336,50 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         switch (v.getId()) {
 
+            case R.id.frg_profile_rl_change_zone:
+                Log.e("change","zone");
+                if (txvNationality.getText().toString().length()>0)
+                {
+                zone=true;
+                btnNationalitySave.setVisibility(View.GONE);
+                imvCross.setVisibility(View.VISIBLE);
+                llListContainer.setVisibility(View.VISIBLE);
+                llProfileContainer.setVisibility(View.GONE);
+                lsvZone.setVisibility(View.VISIBLE);
+                lsvNationality.setVisibility(View.GONE);
+                ListTitle.setText(getString(R.string.select_zone));
+
+
+                   if (txvNationality.getText().toString().equalsIgnoreCase("Dhaka North"))
+                   {
+                       lstZone=Arrays.asList(AppConstt.arrNorthZone);
+                       zoneListAdapter=new ZoneListAdapter(getContext(),zoneselectedposition,lstZone);
+                       lsvZone.setAdapter(zoneListAdapter);
+                   }
+                   else
+                   {
+                       lstZone=Arrays.asList(AppConstt.arrSouthZone);
+                       zoneListAdapter=new ZoneListAdapter(getContext(),zoneselectedposition,lstZone);
+                       lsvZone.setAdapter(zoneListAdapter);
+                   }
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Please select location",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.frg_profile_rl_change_nationality:
+                Log.e("change","nationality");
+                zone=false;
+                ListTitle.setText(getString(R.string.natinality_message));
+                    btnNationalitySave.setVisibility(View.GONE);
+                    imvCross.setVisibility(View.VISIBLE);
+                    llListContainer.setVisibility(View.VISIBLE);
+                    llProfileContainer.setVisibility(View.GONE);
+                    lsvZone.setVisibility(View.GONE);
+                    lsvNationality.setVisibility(View.VISIBLE);
+
+                break;
             case R.id.frg_profile_rl_change_pin:
                 navToChangePinFragment();
                 break;
@@ -349,8 +393,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 mSelectedPosition = -1;
                 nationalityListAdapter.setPosition(mSelectedPosition);
                 nationalityListAdapter.notifyDataSetInvalidated();
-
-
                 break;
 
             case R.id.frg_profile_nationality_save:
@@ -361,6 +403,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     if (mSelectedPosition > -1) {
 //                    AppConfig.getInstance().mUser.setmNationality(lstNationality.get(mSelectedPosition));
                         txvNationality.setText(lstNationality.get(mSelectedPosition));
+                        txvZone.setText("");
                         if (mSelectedPosition==0)
                         {
                             ZoneLayout.setVisibility(View.VISIBLE);
@@ -441,7 +484,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 }
                 else {
                     progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-                    requestUpdateProfile(txvNationality.getText().toString(), "", "", true);
+                    requestUpdateProfile(txvNationality.getText().toString(), "", "", true,
+                            txvZone.getText().toString());
                     //customAlert.showCustomAlertDialog(getActivity(), null, getString(R.string.nationality_hint), null, null, false, null);
                 }
                 break;
@@ -457,7 +501,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ft.commit();
     }
 
-    private void requestUpdateProfile(final String _nationality, String _password, String _oldPassword, boolean _isNaltionalityUpdate) {
+    private void requestUpdateProfile(final String _nationality, String _password, String _oldPassword,
+                                      boolean _isNaltionalityUpdate, final String _zone) {
         Profile_Webhit_Post_updateProfile profile_webhit_post_updateProfile = new Profile_Webhit_Post_updateProfile();
         profile_webhit_post_updateProfile.requestUpdateProfile(getContext(), new IWebCallbacks() {
             @Override
@@ -465,6 +510,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     AppConfig.getInstance().mUser.setmNationality(_nationality);
+                    AppConfig.getInstance().mUser.setZone(_zone);
                     AppConfig.getInstance().saveUserData();
                     ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
 
@@ -472,13 +518,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                             AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
                         ((MainActivity) getContext()).setMenuBadgeVisibility(false);
                     }
-                    btnUpdateProfile.setVisibility(View.GONE);
+
                     imvNationltiyFlag.setVisibility(View.GONE);
                     txvPercentage.setVisibility(View.GONE);
                     customAlert.showToast(getContext(), strMsg, Toast.LENGTH_LONG);
                 } else {
-                    customAlert.showCustomAlertDialog(getActivity(), null, strMsg, null, null, false, null);
-
+                    customAlert.showCustomAlertDialog(getActivity(), null, strMsg,
+                            null, null, false,
+                            null);
                 }
 
             }
@@ -486,7 +533,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onWebException(Exception ex) {
                 progressDilogue.stopiOSLoader();
-                customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(), null, null, false, null);
+                customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(),
+                        null, null, false, null);
 
             }
 
@@ -495,7 +543,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 progressDilogue.stopiOSLoader();
 
             }
-        }, _nationality, _password, _oldPassword, _isNaltionalityUpdate);
+        }, _nationality, _password, _oldPassword, _isNaltionalityUpdate,_zone);
     }
 
     @Override

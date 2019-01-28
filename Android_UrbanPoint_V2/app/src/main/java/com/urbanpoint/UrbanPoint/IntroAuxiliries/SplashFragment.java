@@ -19,14 +19,13 @@ import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.SignupActivity;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.GPSTracker;
 
-/**
- * Created by Danish on 1/24/2018.
- */
 
 public class SplashFragment extends Fragment {
-    private static int SPLASH_TIME_OUT = 4000;
+//    private static int SPLASH_TIME_OUT = 2000;
     private boolean shouldNavigate;
+    boolean location=false;
 
     @Nullable
     @Override
@@ -43,9 +42,8 @@ public class SplashFragment extends Fragment {
                 AppConfig.getInstance().saveUserData();
             }
         }
-//                loadOldPrefrencLog();
 
-        launchSelection();
+//        launchSelection();
         return frg;
 
     }
@@ -84,22 +82,32 @@ public class SplashFragment extends Fragment {
         }
     }
 
-    void launchSelection() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.e("should","navigate"+shouldNavigate);
-                if (shouldNavigate) {
-                    if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+//    void launchSelection() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.e("should", "navigate" + shouldNavigate);
+//
+//                if (AppConfig.getInstance().isLocationEnabled(getActivity())) {
+//                    location=true;
+//                }
+//
+//
+//                if (shouldNavigate) {
+//                    if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+//
+//                        navToHomeActivity();
+//                    } else {
+//                        navToGetStartedFragment();
+//                    }
+//                }
+//
+//            }
+//        }, SPLASH_TIME_OUT);
+//    }
 
-                        navToHomeActivity();
-                    } else {
-                        navToGetStartedFragment();
-                    }
-                }
-            }
-        }, SPLASH_TIME_OUT);
-    }
+
+
 
     private void navToHomeActivity() {
         Log.e("home","home");
@@ -129,20 +137,22 @@ public class SplashFragment extends Fragment {
     void navToGetStartedFragment()
     {
         Log.e("home","home23");
-        Intent intent= new Intent(getActivity(), SignupActivity.class);
+        Intent intent= new Intent(getContext(), SignupActivity.class);
         startActivity(intent);
-        getActivity().finish();
-//        Fragment fragment = new SignUpFragment();
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.IntroMainFragment);
-//        ft.commitAllowingStateLoss();
+       getActivity().finish();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         shouldNavigate = true;
+//        if (location)
+//        {
+//            if (AppConfig.getInstance().isLocationEnabled(getActivity()))
+//            {
+//                launchSelection();
+//            }
+//        }
     }
 
 //    @Override

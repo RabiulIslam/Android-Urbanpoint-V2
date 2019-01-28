@@ -82,6 +82,7 @@
 
 
                     <EditText
+                        android:textCursorDrawable="@null"
                         android:id="@+id/signUpUserEmail"
                         android:layout_width="match_parent"
                         android:fontFamily="@font/opensans_regular"
@@ -155,6 +156,7 @@
                 android:paddingTop="0dp"
                 android:text="@string/referral_code" />
             <EditText
+                android:textCursorDrawable="@null"
                 android:id="@+id/signUpUserReferralCode"
                 android:layout_width="match_parent"
                 android:fontFamily="@font/opensans_regular"

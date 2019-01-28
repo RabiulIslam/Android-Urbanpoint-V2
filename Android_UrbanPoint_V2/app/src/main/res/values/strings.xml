@@ -232,7 +232,7 @@
     <!--Subscription Eligible Success Screen-->
     <string name="subscription_eligible_success_congratulatn">Congratulations!</string>
     <string name="subscription_eligible_success_subscribed">You are now subscribed for FREE to\nUrban Point!</string>
-    <string name="subscription_eligible_success_enjoy">Enjoy your favourite offers every months!</string>
+    <string name="subscription_eligible_success_enjoy">Enjoy your favourite offers every day!</string>
 
     <!--Subscription Success Screen-->
     <string name="subscription_success_member">You are now an\nUrban Point member!</string>
@@ -462,6 +462,7 @@
     <string name="wallet_balance">Wallet Balance :</string>
     <string name="already_registered">This number is already registered, please use a different number.</string>
     <string name="share_referral_code">Share your referral code</string>
+    <string name="learn_more"><u>Learn More</u></string>
     <string name="refer_friends">Refer your friends and\nearn <b>250</b> Tk. for each successful installation. Your friend also gets 40 days free premium user access.</string>
     <string name="use_balance_to_unlock_deals">You can use your wallet balance to unlock great deals!</string>
     <string name="FACEBOOK_APP_ID">392993371444452</string>
@@ -494,5 +495,17 @@
     <string name="terms_of_sale"><u>Terms of Sale</u></string>
     <!--<string name="email">Email</string>-->
     <!--<string name="cell">Cell</string>-->
+
+  <!--Live Keys-->
+    <string name="merchant_id">WMX5c39bb1d2ae5d</string>
+    <string name="merchant_username">biyog_1696732007</string>
+    <string name="merchant_password">biyog_453604340</string>
+    <string name="walletmixapp_key">2803dfb16649f0d5152a900ee5cde1d59bf66e69</string>
+    <!--Sandbox Keys-->
+    <!--<string name="merchant_id">WMX5c39bf8037f22</string>-->
+    <!--<string name="merchant_username">biyog_1316536615</string>-->
+    <!--<string name="merchant_password">biyog_2055363772</string>-->
+    <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
+    <string name="walletmix_appname">biyog.com</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -17,9 +18,6 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 
-/**
- * Created by lenovo on 09/08/2018.
- */
 
 public class Subscribe_WebHit_Post_subscribe {
 
@@ -29,26 +27,30 @@ public class Subscribe_WebHit_Post_subscribe {
 
 
     public void requestsubscribeUser(Context _mContext, final IWebCallbacks iWebCallback,
-                                     final String _phone) {
+                                     final String type,final String date,String order_id) {
 
         this.mContext = _mContext;
-        String myUrl = AppConstt.BASE_URL_SUBSCRIPTION + ApiMethod.POST.subscribe;
-
+        String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.subscribe;
+        Log.e("subscription_url",myUrl);
         RequestParams params = new RequestParams();
-        params.put("user_id", AppConfig.getInstance().mUser.getmUserId());
-        params.put("phone", _phone);
-
+        params.put("order_id",order_id);
+        params.put("date", date);
+        params.put("type", type);
+        params.put("phone",AppConfig.getInstance().mUser.getmPhoneNumber());
+        Log.e("suscription_params",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-//        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("subs_header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String strResponse;
+
                         try {
                             Gson gson = new Gson();
                             strResponse = new String(responseBody, "UTF-8");
-
+                           // Log.e("subsribe res",strResponse+" resssss");
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
 
                             switch (statusCode) {
@@ -67,6 +69,7 @@ public class Subscribe_WebHit_Post_subscribe {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            Log.e("subsribe res","ex",ex);
                             iWebCallback.onWebException(ex);
                         }
                     }
@@ -74,6 +77,7 @@ public class Subscribe_WebHit_Post_subscribe {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("subsribe res","ex",error);
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
@@ -146,15 +150,15 @@ public class Subscribe_WebHit_Post_subscribe {
             this.message = message;
         }
 
-        private String data;
-
-        public String getData() {
-            return this.data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
-        }
+//        private String data;
+//
+//        public String getData() {
+//            return this.data;
+//        }
+//
+//        public void setData(String data) {
+//            this.data = data;
+//        }
     }
 
 }

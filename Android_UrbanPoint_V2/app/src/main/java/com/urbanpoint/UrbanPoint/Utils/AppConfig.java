@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
@@ -322,25 +324,24 @@ public class AppConfig {
         int locationMode = 0;
         String locationProviders;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            try {
-                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+           if (checkPermission(context)) {
+               LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+               if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                   return true;
+               } else {
 
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-                return false;
-            }
+                   return false;
+               }
 
-            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+           }
 
-        }
-        else {
-            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-            return !TextUtils.isEmpty(locationProviders);
-        }
+           return false;
     }
 
-    public boolean checkPermission(Context mContext) {
+
+
+    public static boolean checkPermission(Context mContext) {
         int result = -1;
         try {
             if (Build.VERSION.SDK_INT >= 23) {

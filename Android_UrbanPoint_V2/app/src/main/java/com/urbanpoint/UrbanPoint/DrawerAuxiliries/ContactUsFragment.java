@@ -127,7 +127,12 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
             public void onWebResult(boolean isSuccess, String strMsg) {
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
-                    customAlert.showCustomAlertDialog(getActivity(), null, "Thanks for contacting us. Our team will contact you shortly", null, null, false, new CustomAlertConfirmationInterface() {
+                    customAlert.showCustomAlertDialog(getActivity(),
+                            null, "Thanks for contacting us." +
+                            " Our team will contact you shortly",
+                            null, null,
+                            false,
+                            new CustomAlertConfirmationInterface() {
                         @Override
                         public void callConfirmationDialogPositive() {
                             navToHomeFragment();

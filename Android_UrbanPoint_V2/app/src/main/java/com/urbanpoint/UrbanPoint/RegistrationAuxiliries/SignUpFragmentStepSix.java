@@ -500,6 +500,9 @@ private void requestSignUp(String _name, String _email, String _gender, String _
 
     }
 
+
+
+
     private void navToMainActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);

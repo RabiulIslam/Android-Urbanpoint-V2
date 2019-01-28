@@ -25,9 +25,6 @@ import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 
 import org.json.JSONObject;
 
-/**
- * Created by indus on 5/3/2017.
- */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FCMService";
@@ -116,7 +113,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             tempCategory = AppConstt.Notifications.PUSH_CATG_ANNOUNCEMENTS;
         }
 
-
+           // Log.e("pushhhh_title",_title+"");
         //Set Intent (Pre-Req for NotificationCompat)
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

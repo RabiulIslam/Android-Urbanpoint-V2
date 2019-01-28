@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
@@ -25,7 +28,7 @@ import static com.mixpanel.android.mpmetrics.ExceptionHandler.init;
 public class ReferAndEarnFragment extends Fragment implements View.OnClickListener {
     TextView ReferralCode,WalletBalance;
     Button Share;
-
+    TextView LearnMore;
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
     @Nullable
     @Override
@@ -57,6 +60,8 @@ public class ReferAndEarnFragment extends Fragment implements View.OnClickListen
         WalletBalance=(TextView)view.findViewById(R.id.tv_wallet_balance);
         ReferralCode=(TextView)view.findViewById(R.id.tv_referral_code);
         Share=(Button)view.findViewById(R.id.btn_share);
+        LearnMore=(TextView)view.findViewById(R.id.tv_learnmore);
+        LearnMore.setOnClickListener(this);
         Share.setOnClickListener(this);
         setData();
     }
@@ -80,11 +85,26 @@ public class ReferAndEarnFragment extends Fragment implements View.OnClickListen
     public void onHiddenChanged(boolean isHidden) {
         super.onHiddenChanged(isHidden);
         if (!isHidden) {
-            iNavBarUpdateUpdateListener.setNavBarTitle(getActivity().getResources().getString(R.string.frg_access_code));
+            iNavBarUpdateUpdateListener.setNavBarTitle(getActivity().getResources().getString(R.string.drawer_invite_friends));
             iNavBarUpdateUpdateListener.setBackBtnVisibility(View.GONE);
             iNavBarUpdateUpdateListener.setCancelBtnVisibility(View.GONE);
             iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
         }
+    }
+
+
+
+    private void navToLearMoreFragment(Bundle bundle) {
+        Log.e("click","terms111");
+        Fragment fr = new WebViewFragment();
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        fr.setArguments(bundle);
+        ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        ft.add(R.id.content_frame, fr, AppConstt.FRGTAG.WebViewFragment);
+        ft.addToBackStack(AppConstt.FRGTAG.WebViewFragment);
+        ft.hide(this);
+        ft.commit();
     }
 
     @Override
@@ -103,6 +123,13 @@ public class ReferAndEarnFragment extends Fragment implements View.OnClickListen
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, formattedString);
                 startActivity(Intent.createChooser(sharingIntent, "Select"));
                 break;
+            case R.id.tv_learnmore:
+                Bundle b=new Bundle();
+                b.putString("page",AppConstt.REFER_AND_EARN);
+                navToLearMoreFragment(b);
+                break;
         }
+
+
     }
 }

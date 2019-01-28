@@ -63,6 +63,7 @@ public class SignupActivity extends AppCompatActivity
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         finish();
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)

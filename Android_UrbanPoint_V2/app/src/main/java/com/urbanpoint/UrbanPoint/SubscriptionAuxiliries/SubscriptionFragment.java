@@ -13,15 +13,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.AccessCodeFragment;
-import com.urbanpoint.UrbanPoint.DrawerAuxiliries.OrderDetail;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.Home_WebHit_Post_eligibilitychecker;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.Home_WebHit_Post_homeApi;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
+import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.WebServices.Subscribe_WebHit_Post_validatemsisdn;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
-import com.urbanpoint.UrbanPoint.Utils.CellNoEntryView;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.ExpandableHeightGridView;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
@@ -72,7 +71,8 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         return v;
     }
 
-    private void updateSubscriptionLists() {
+    private void updateSubscriptionLists()
+    {
         if (Home_WebHit_Post_homeApi.responseObject != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size() > 0) {
@@ -82,7 +82,6 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
              //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
                 txvSubsText.setHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText(), new HtmlResImageGetter(txvSubsText));
             }
-
 
             subscribeTextAdapter = new SubscribeTextAdapter(getContext(), lstStrings, true);
             lsv1.setExpanded(true);
@@ -141,33 +140,42 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        Intent in=new Intent(getActivity(),ActivityOrderDetail.class);
         switch (v.getId()) {
-//            case R.id.frg_subscription_btn_cnfrm:
-//                if (enteredMobileNumber != null && enteredMobileNumber.length() == 8) {
-//                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-////                    if (AppConfig.getInstance().mUser.getmPhoneNumber().length() > 10) {
-////                        requestValidateMsisdn(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-////                    } else {
-//                        requestCheckEligibility(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-//                   // }
-//                } else {
-//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getString(R.string.voda_do_unsubscribe_enter_mobile_number), null, null, false, null);
-//                }
-//                break;
+
             case R.id.frg_subscription_btn1:
-                navToOrderDetailFragment();
+                in.putExtra("type","1");
+                in.putExtra("subtotal","Tk 9.99");
+                in.putExtra("package","Daily");
+                in.putExtra("vat","Tk 1.49");
+                in.putExtra("total","Tk 11.48");
+               startActivity(in);
+                ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn2:
-                navToOrderDetailFragment();
+                in.putExtra("type","2");
+                in.putExtra("subtotal","Tk 49.99");
+                in.putExtra("package","Weekly");
+                in.putExtra("vat","Tk 07.49");
+                in.putExtra("total","Tk 57.48");
+                startActivity(in);
+                ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn3:
-                navToOrderDetailFragment();
+                in.putExtra("type","3");
+                in.putExtra("subtotal","Tk 99.00");
+                in.putExtra("package","Monthly");
+                in.putExtra("vat","Tk 14.85");
+                in.putExtra("total","Tk 113.85");
+                startActivity(in);
+                ((MainActivity)getActivity()).finish();
+
             break;
             case R.id.frg_subscription_btn_access_code:
                 AppConfig.getInstance().closeKeyboard(getActivity());
-                Bundle b = new Bundle();
-                b.putBoolean(AppConstt.BundleStrings.backBtnVisibility, true);
-                navToAccessCodeFragment(b);
+                Bundle b1 = new Bundle();
+                b1.putBoolean(AppConstt.BundleStrings.backBtnVisibility, true);
+                navToAccessCodeFragment(b1);
                 break;
             case R.id.frg_subscription_ll_parentlayout:
                 AppConfig.getInstance().closeKeyboard(getActivity());
@@ -175,15 +183,7 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    private void navToOrderDetailFragment() {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment frg = new OrderDetail();
 
-        ft.add(R.id.content_frame, frg, AppConstt.FRGTAG.OrderDetailFragment);
-        ft.addToBackStack(AppConstt.FRGTAG.OrderDetailFragment);
-        ft.hide(this);
-        ft.commit();
-    }
 
     private void navToSubscriptionConfirmFragment(Bundle _b) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();

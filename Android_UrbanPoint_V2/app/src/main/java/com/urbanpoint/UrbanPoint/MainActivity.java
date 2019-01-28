@@ -72,8 +72,20 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("PUSHNOTIFICATN", "onCreateMainActivity: " + AppConfig.getInstance().isCommingFromSplash);
-        if (!AppConfig.getInstance().isCommingFromSplash) {
+        Log.e("PUSHNOTIFICATN", "onCreateMainActivity: " + AppConfig.getInstance().isCommingFromSplash);
+
+//         if (getIntent().hasExtra("subscribe"))
+//         {
+//             Log.e("home","home");
+////             navToHomeFragment();
+//             FragmentTransaction ft = mFrgmgr.beginTransaction();
+//             Fragment frg = new HomeFragment();
+//             ft.add(R.id.content_frame, frg, AppConstt.FRGTAG.HomeFragment);
+//             ft.addToBackStack(AppConstt.FRGTAG.HomeFragment);
+//             ft.commit();
+//         }
+        if (!AppConfig.getInstance().isCommingFromSplash)
+        {
             Log.e("check","1");
             AppConfig.getInstance().isCommingFromSplash = true;
             //If not coming from splash, redirect to splash
@@ -507,10 +519,14 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         ft.commit();
     }
 
+
+
+
+
     private void navToIntroActivity() {
 //        AppConfig.getInstance().deleteUserData(AppConfig.getInstance().loadDefLanguage(),
 //                AppConfig.getInstance().loadFCMToken());
-        Intent i = new Intent(this, IntroActivity.class);
+        Intent i = new Intent(this, SignupActivity.class);
         startActivity(i);
         this.finish();
     }
@@ -587,6 +603,13 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+//                        finish();
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeIntent);
                         finish();
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)

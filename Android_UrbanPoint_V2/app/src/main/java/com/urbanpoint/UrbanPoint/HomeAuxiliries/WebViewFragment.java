@@ -128,6 +128,25 @@ public class WebViewFragment extends Fragment implements View.OnClickListener {
             iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
         }
 
+        else if (strExtra.equalsIgnoreCase(AppConstt.REFER_AND_EARN))
+        {
+            webView.loadUrl("file:///android_asset/refer_earn.html");
+            strTitle = "Refer & Earn";
+            imvBack1.setVisibility(View.GONE);
+            try
+            {
+                iNavBarUpdateUpdateListener = (INavBarUpdateUpdateListener) getActivity();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
+            iNavBarUpdateUpdateListener.setNavBarTitle(strTitle);
+            //  iNavBarUpdateUpdateListener.setBackBtnVisibility(View.VISIBLE);
+            iNavBarUpdateUpdateListener.setCancelBtnVisibility(View.GONE);
+            iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
+        }
+
         webView.setBackgroundColor(Color.TRANSPARENT);
         rlBackbtn.setOnClickListener(this);
         imvBack1.setOnClickListener(this);

@@ -1,8 +1,10 @@
 package com.urbanpoint.UrbanPoint.CommonFragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,12 +53,24 @@ import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
 
-/**
- * Created by Danish on 2/26/2018.
- */
-
-public class MerchantDetailFragment extends Fragment implements View.OnClickListener {
+public class MerchantDetailFragment extends Fragment implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
+    double pickUp_latitude, pickUp_longitude, dropoff_lat, dropoff_lng;
     private ImageView imvProduct;
     private Button btnCall, btnDirection;
     private TextView txvOfferTitle, txvMerchantName, txvMerchantTimmings, txvDescription, txvTimeDuration, txvPriceEstimate;
@@ -73,7 +87,14 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
     private boolean shouldGetMoreOffers, isAlreadyfetchingOffers;
     private String navBarTitle, offerName, merchantName, merchantImage, merchantLogo, merchantAddress, merchantDescription, merchantTimmings, merchantPIN;
     private Bundle bundle;
-
+    private LocationRequest mLocationRequest;
+    public GoogleApiClient mGoogleApiClient;
+    final static int REQUEST_LOCATION = 199;
+    final static int MY_PERMISSIONS_REQUEST_LOCATION = 1999;
+    android.location.Location mLastLocation;
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
     private boolean isPriceLoaded, isTimeLoaded;
     private SessionConfiguration uberConfig;
     //    private RelativeLayout layout;
@@ -252,6 +273,8 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         btnCall.setOnClickListener(this);
         btnDirection.setOnClickListener(this);
         imvMerchant.setOnClickListener(this);
+        buildGoogleApiClient();
+        createLocationRequest();
     }
 
     @Override
@@ -503,18 +526,26 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
 
 
             if (AppConfig.getInstance().mUser.isUberRequired()) {
-                if (!AppConfig.getInstance().isLocationEnabled(getContext()) || !AppConfig.getInstance().checkPermission(getContext())) {
+
+
+                if (!AppConfig.getInstance().checkPermission(getActivity()) ||
+                        !(AppConfig.getInstance().isLocationEnabled(getActivity()))) {
                     Log.d("PERMISSS", "Not allowed ");
                     customAlert.showUberAlertDialog(getActivity(), new CustomAlertConfirmationInterface() {
                         @RequiresApi(api = Build.VERSION_CODES.M)
                         @Override
                         public void callConfirmationDialogPositive() {
 
-                            if (AppConfig.getInstance().isLocationEnabled(getContext())) {
-                                requestPermission();
-                            } else {
-                                startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE);
+                            if(AppConfig.getInstance().checkPermission(getActivity()))
+                            {
+                                turnGPSOn();
                             }
+                            else
+                            {
+                               requestPermission();
+                            }
+
+
                         }
 
                         @Override
@@ -531,10 +562,13 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
                     }
                 }
             }
+            Log.e("merchant_offerssize",MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().size()+"");
 
 
             if (MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData() != null &&
                     MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().size() > 0) {
+
+                Log.e("merchant_offers",MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().size()+"");
                 for (int i = 0; i < MerchantDetail_Webhit_Get_getMerchantDetail.responseObject.getData().size(); i++) {
 
                     String strImageUrl = "";
@@ -567,6 +601,46 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         }
     }
 
+
+
+    public void turnGPSOn()
+    {
+        Log.e("checkgps","1");
+        mGoogleApiClient.connect();
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(500);
+        locationRequest.setFastestInterval(1000);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+
+        builder.setAlwaysShow(true);
+
+        PendingResult<LocationSettingsResult> result =
+                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>()
+        {
+            @Override
+            public void onResult(LocationSettingsResult result)
+            {
+                final Status status = result.getStatus();
+                switch (status.getStatusCode())
+                {
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try
+                        {
+                            startIntentSenderForResult(status.getResolution().getIntentSender(), REQUEST_LOCATION, new Intent(), 0, 0, 0, null);
+
+//                            status.startResolutionForResult(getActivity(), REQUEST_LOCATION);
+                        }
+                        catch (@SuppressLint("NewApi") Exception e)
+                        {
+                            Log.e("exc","e",e);
+                        }
+                        break;
+                }
+            }
+        });
+    }
     private void updateUberSDK() {
         uberConfig = new SessionConfiguration.Builder()
                 // mandatory
@@ -582,9 +656,9 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         UberSdk.initialize(uberConfig);
         Log.d("PERMISSS", "latitude:" + directionlattitude);
 
-        double pickUp_latitude, pickUp_longitude, dropoff_lat, dropoff_lng;
-        pickUp_latitude = GPSTracker.getInstance(getContext()).getLatitude();
-        pickUp_longitude = GPSTracker.getInstance(getContext()).getLongitude();
+//        double pickUp_latitude, pickUp_longitude, dropoff_lat, dropoff_lng;
+        pickUp_latitude = GPSTracker.lat;
+        pickUp_longitude = GPSTracker.lng;
 //        pickUp_latitude = 33.651962;
 //        pickUp_longitude = 73.046379;
         dropoff_lat = Double.parseDouble(directionlattitude);
@@ -650,6 +724,150 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         requestUberTime(pickUp_latitude, pickUp_longitude, dropoff_lat, dropoff_lng);
 
     }
+    private void displayLocation() {
+
+        if (checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        if (mLastLocation != null) {
+//            double latitude = mLastLocation.getLatitude();
+//            double longitude = mLastLocation.getLongitude();
+
+            pickUp_latitude = mLastLocation.getLatitude();
+            pickUp_longitude = mLastLocation.getLongitude();
+            updateUberSDK();
+            //Loge("Location_gps",latitude + ", " + longitude);
+//            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+//            requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
+//            findGirlfriendbydefaultlocation(lat,lng);
+        } else {
+            //Loge("check","location");
+        }
+    }
+    protected void createLocationRequest()
+    {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+    }
+    protected synchronized void buildGoogleApiClient()
+    {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                //was crashing here
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // Permission Granted
+                    Log.e("aserwqer", "onRequestPermissionsResult: " + requestCode);
+                    pickUp_latitude = GPSTracker.lat;
+                    pickUp_longitude = GPSTracker.lng;
+                    if (pickUp_latitude != 0) {
+                        updateUberSDK();
+//                        strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+//                        requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
+                    }
+                    else if (!(AppConfig.getInstance().isLocationEnabled(getActivity())))
+                    {
+                        turnGPSOn();
+                    }
+                    else {
+                        customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
+                    }
+
+                } else {
+                    String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+                    boolean showRationale = shouldShowRequestPermissionRationale(permission);
+                    if (!showRationale) {
+                        Log.e("aserwqer11", "onRequestPermissionsResult----: " + requestCode);
+//                        if (!AppConfig.getInstance().mUser.isNeverAskActive) {
+                        startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.parse("package:" + BuildConfig.APPLICATION_ID)),
+                                AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
+//                        } else {
+//                            AppConfig.getInstance().mUser.setNeverAskActive(true);
+//                        }
+                    }
+                }
+
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onactivityresult",requestCode+","+resultCode);
+//        if (requestCode==REQUEST_LOCATION && resultCode==getActivity().RESULT_OK)
+//        {
+//            updateUberSDK();
+////            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+////            requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
+//        }
+        if (requestCode == REQUEST_LOCATION)
+        {
+            switch (resultCode)
+
+            {
+                case -1:
+                    displayLocation();
+
+                    break;
+
+            }
+
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        Log.e("loc","changed");
+        pickUp_latitude=location.getLatitude();
+        pickUp_longitude=location.getLongitude();
+    updateUberSDK();
+        //        strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+//        requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
+
+
+    }
+
+
+
+
 
     private void updateUberValues(boolean _isSuccess) {
         if (_isSuccess) {
@@ -673,7 +891,7 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         return false;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     public void requestPermission() {
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
     }
@@ -693,56 +911,56 @@ public class MerchantDetailFragment extends Fragment implements View.OnClickList
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                //was crashing here
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission Granted
-                    Log.d("aserwqer", "onRequestPermissionsResult: " + requestCode);
-                    updateUberSDK();
-
-                } else {
-                    String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-                    boolean showRationale = shouldShowRequestPermissionRationale(permission);
-                    if (!showRationale) {
-                        Log.d("aserwqer", "onRequestPermissionsResult----: " + requestCode);
-                        if (!AppConfig.getInstance().mUser.isNeverAskActive) {
-                            startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)), AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
-                        } else {
-                            AppConfig.getInstance().mUser.setNeverAskActive(true);
-                        }
-                    }
-                }
-
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE == requestCode) {
-            if (AppConfig.getInstance().checkPermission(getContext())) {
-                updateUberSDK();
-            }
-        } else if (AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE == requestCode) {
-
-            if (AppConfig.getInstance().isLocationEnabled(getContext())) {
-                if (!AppConfig.getInstance().checkPermission(getContext())) {
-                    requestPermission();
-                } else {
-                    updateUberSDK();
-                }
-            } else {
-                Log.d("sadSDSAASD", "onCreateView:5520 ");
-            }
-
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode) {
+//            case PERMISSION_REQUEST_CODE:
+//                //was crashing here
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    // Permission Granted
+//                    Log.d("aserwqer", "onRequestPermissionsResult: " + requestCode);
+//                    updateUberSDK();
+//
+//                } else {
+//                    String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+//                    boolean showRationale = shouldShowRequestPermissionRationale(permission);
+//                    if (!showRationale) {
+//                        Log.d("aserwqer", "onRequestPermissionsResult----: " + requestCode);
+//                        if (!AppConfig.getInstance().mUser.isNeverAskActive) {
+//                            startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+//                                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)), AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
+//                        } else {
+//                            AppConfig.getInstance().mUser.setNeverAskActive(true);
+//                        }
+//                    }
+//                }
+//
+//                break;
+//            default:
+//                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.M)
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE == requestCode) {
+//            if (AppConfig.getInstance().checkPermission(getContext())) {
+//                updateUberSDK();
+//            }
+//        } else if (AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE == requestCode) {
+//
+//            if (AppConfig.getInstance().isLocationEnabled(getContext())) {
+//                if (!AppConfig.getInstance().checkPermission(getContext())) {
+//                    requestPermission();
+//                } else {
+//                    updateUberSDK();
+//                }
+//            } else {
+//                Log.d("sadSDSAASD", "onCreateView:5520 ");
+//            }
+//
+//        }
+//    }
 }

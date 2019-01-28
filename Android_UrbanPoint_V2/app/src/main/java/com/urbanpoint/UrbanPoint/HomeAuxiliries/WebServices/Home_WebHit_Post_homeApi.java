@@ -72,6 +72,15 @@ public class Home_WebHit_Post_homeApi {
                                         if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
                                             // subscription==1 means user has access to all offers (for some no. of remaining days)
                                             AppConfig.getInstance().mUser.setSubscribed(true);
+                                            Log.e("premium_userrrr",responseObject.getData().getSubscription().getStatus());
+                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0"))
+                                            {
+                                                AppConfig.getInstance().mUser.setPremierUser(false);
+                                            }
+                                            else
+                                            {
+                                                AppConfig.getInstance().mUser.setPremierUser(true);
+                                            }
                                             //AppConfig.getInstance().mUser.setPremierUser(false);
 //                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
 //                                                // status==0 means user has been unsubscribed

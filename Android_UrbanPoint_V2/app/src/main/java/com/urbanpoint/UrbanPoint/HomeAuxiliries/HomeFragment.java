@@ -380,16 +380,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.frg_home_btn_gain_access:
                 String phone = AppConfig.getInstance().mUser.getmPhoneNumber();
                 Log.d("PHONECHECKER", "onClick: " + phone);
-                logFireBaseEvent();
-                logFaceBookEvent();
-
-                if (phone.length() > 10) {
-                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-                    requestCheckEligibility(phone);
-                } else {
+//                logFireBaseEvent();
+//                logFaceBookEvent();
+//
+//                if (phone.length() > 10) {
+//                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+//                    requestCheckEligibility(phone);
+//                } else {
                     AppConfig.getInstance().mUser.setEligible(false);
                     navToSubscriptionFragment();
-                }
+              //  }
                 // navToSubscriptionEligibleFragment();
                 break;
 
@@ -601,6 +601,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 if (isSuccess) {
                     upDateBothList();
                     updateBadges();
+
+
 //                    if ((AppConfig.getInstance().isEligible) &&
 //                            !(AppConfig.getInstance().mUser.isSubscribed())) {
 //                        navToSubscriptionEligibleFragment();
@@ -786,8 +788,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
             float playStoreAppVersion = Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getVersion());
             if (playStoreAppVersion > AppConfig.getInstance().mUser.getmAppVersion()) {
-                Log.d("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
-                Log.d("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
+                Log.e("AppUpdateVersion111", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
+                Log.e("AppUpdateVersion11", "Server Version: " + playStoreAppVersion);
                 showAppUpdateDialogue(AppConfig.getInstance().mUser.isForcefullyUpdateActive());
             }
         }
@@ -871,18 +873,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void updateBadges() {
 
         Log.e("email_verified_status",AppConfig.getInstance().mUser.EmailVerified+"");
-        //Updating GainAcees Button
-//        if (AppConfig.getInstance().mUser.isSubscribed()) {
-//            btnGainAccess.setVisibility(View.GONE);
-//        } else {
-            btnGainAccess.setVisibility(View.VISIBLE);
-            //Updating "Already Member" Msg For Premier Users
-//                if (AppConfig.getInstance().mUser.isPremierUser()) {
-//                    rlMembermsg.setVisibility(View.VISIBLE);
-//                } else {
-//                    rlMembermsg.setVisibility(View.GONE);
-//                }
 
+        Log.e("subscription1",AppConfig.getInstance().mUser.isSubscribed+
+                "&"+AppConfig.getInstance().mUser.isPremierUser);
+        if (AppConfig.getInstance().mUser.isSubscribed )
+        {
+            Log.e("test","1");
+            btnGainAccess.setVisibility(View.GONE);
+        }
+        else
+        {
+            Log.e("test","2");
+            btnGainAccess.setVisibility(View.VISIBLE);
+        }
 
         //Updating NewOffers Badge
         if (AppConfig.getInstance().mUserBadges.getNewOfferCount() > 0) {
@@ -1005,6 +1008,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 //        loadOldPrefrencLog();
 //        Checking if Update Dialog is required
+
+        Log.e("resume","resume");
+
         String tag = ((MainActivity) getActivity()).returnStackFragment();
         if (tag.equalsIgnoreCase(AppConstt.FRGTAG.HomeFragment)) {
             if (Home_WebHit_Post_homeApi.responseObject != null &&
@@ -1018,12 +1024,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                     float playStoreAppVersion = Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getVersion());
                     if (playStoreAppVersion > AppConfig.getInstance().mUser.getmAppVersion()) {
-                        Log.d("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
-                        Log.d("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
+                        Log.e("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
+                        Log.e("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
                         showAppUpdateDialogue(AppConfig.getInstance().mUser.isForcefullyUpdateActive());
                     }
                 }
             }
+
+
         }
     }
 

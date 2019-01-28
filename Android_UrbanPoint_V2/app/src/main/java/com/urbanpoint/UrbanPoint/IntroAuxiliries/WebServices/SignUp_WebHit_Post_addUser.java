@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -37,10 +38,11 @@ public class SignUp_WebHit_Post_addUser {
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.signUp;
         String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
-
+        String android_id = Settings.Secure.getString(_mContext.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         RequestParams params = new RequestParams();
         params.put("reffered_by",_referral_code);
-        params.put("nationality",  "Bangladesh");
+        params.put("nationality",  "");
         params.put("occupation",_occupation);
         params.put("age", _age);
         params.put("name", _name);
@@ -50,6 +52,7 @@ public class SignUp_WebHit_Post_addUser {
         params.put("deviceType", AppConstt.DeviceType);
         params.put("device_info", deviceInfo);
         params.put("token", _fcmToken);
+        params.put("device_token",android_id);
        Log.e("params",params+"");
         Log.e("header",AppConstt.HeadersValue.Authorization);
         Log.e("register_url",myUrl);

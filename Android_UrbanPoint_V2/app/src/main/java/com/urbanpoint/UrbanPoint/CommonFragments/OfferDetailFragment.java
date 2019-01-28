@@ -550,8 +550,8 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             }
 
 
-            Log.e("price",Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData()
-                    .get(0).getApproxSaving())+","+ AppConfig.getInstance().mUser.getWallet());
+//            Log.e("price",Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData()
+//                    .get(0).getApproxSaving())+","+ AppConfig.getInstance().mUser.getWallet());
             if (AppConfig.getInstance().mUser.isSubscribed()
                     || (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
                     <= AppConfig.getInstance().mUser.getWallet()))

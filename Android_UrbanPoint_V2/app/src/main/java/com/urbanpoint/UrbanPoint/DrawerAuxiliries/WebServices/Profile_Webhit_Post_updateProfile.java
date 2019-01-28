@@ -16,9 +16,7 @@ import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
-/**
- * Created by Danish on 2/27/2018.
- */
+
 
 public class Profile_Webhit_Post_updateProfile {
     private AsyncHttpClient mClient = new AsyncHttpClient();
@@ -26,13 +24,14 @@ public class Profile_Webhit_Post_updateProfile {
     public Context mContext;
 
     public void requestUpdateProfile(Context _context, final IWebCallbacks iWebCallbacks, String _nationality,
-                                     final String _password, String _oldPassword, final boolean _isNaltionalityUpdate) {
+                                     final String _password, String _oldPassword, final boolean _isNaltionalityUpdate,String  _zone) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.updateProfile;
         this.mContext = _context;
         RequestParams params = new RequestParams();
         if (_isNaltionalityUpdate) {
             params.put("nationality", _nationality);
+            params.put("zone",_zone);
         } else {
             params.put("password", _password);
             params.put("old_password", _oldPassword);

@@ -171,7 +171,7 @@ public class ChangePinFragment extends Fragment implements View.OnClickListener 
                 progressDilogue.stopiOSLoader();
 
             }
-        }, _nationality, _password, _oldPassword, _isNaltionalityUpdate);
+        }, _nationality, _password, _oldPassword, _isNaltionalityUpdate,AppConfig.getInstance().mUser.zone);
     }
 
 

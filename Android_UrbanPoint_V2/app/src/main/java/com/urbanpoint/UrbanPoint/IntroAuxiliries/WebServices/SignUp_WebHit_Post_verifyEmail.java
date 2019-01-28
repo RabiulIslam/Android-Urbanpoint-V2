@@ -29,7 +29,6 @@ public class SignUp_WebHit_Post_verifyEmail {
         RequestParams params = new RequestParams();
         //String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
 
-
         String myUrl;
 //        if (_isPhone) {
         myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.verifyEmail;

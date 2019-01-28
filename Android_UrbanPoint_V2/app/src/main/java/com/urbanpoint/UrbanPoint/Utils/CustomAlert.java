@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import com.urbanpoint.UrbanPoint.R;
 
-/**
- * Created by Danish on 1/25/2018.
- */
+
 
 public class CustomAlert {
     private boolean isCustomAlertDialogCancelable = true;

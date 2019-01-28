@@ -31,8 +31,8 @@
         </activity>
 
 
-        <activity android:name=".DrawerAuxiliries.OrderDetail"
-            android:screenOrientation="portrait"></activity>
+        <!--<activity android:name=".DrawerAuxiliries.OrderDetail"-->
+            <!--android:screenOrientation="portrait"></activity>-->
         <activity
             android:name="com.urbanpoint.UrbanPoint.MainActivity"
             android:launchMode="singleTask"
@@ -87,8 +87,20 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+   <activity android:name=".GatewayCallbackActivity"></activity>
+        <activity android:name=".SubscriptionAuxiliries.ActivityOrderDetail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
-
+        <activity android:name=".PaymentSuccess"></activity>
+      <service android:name=".Utils.GPSTracker"
+          android:permission="android.permission.BIND_JOB_SERVICE"
+          android:exported="true"></service>
+        <activity android:name=".SubscriptionAuxiliries.TermsofSale"
+            android:screenOrientation="portrait"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ef3bffaaf480adea4f322123d1aa50aaa0c5042b" />
     </application>
 
 </manifest>

@@ -75,6 +75,8 @@ public class ExpandableMerchintListAdapter extends BaseExpandableListAdapter {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
 
+
+        Log.e("img_urlll",lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl()+" offer image");
         if (lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl() != null) {
             Picasso.get()
                     .load(AppConstt.BASE_URL_IMAGES + lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl())

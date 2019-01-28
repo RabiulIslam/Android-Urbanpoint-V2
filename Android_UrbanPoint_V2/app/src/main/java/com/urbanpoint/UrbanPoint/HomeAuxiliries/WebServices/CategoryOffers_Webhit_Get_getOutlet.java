@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -31,11 +32,12 @@ public class CategoryOffers_Webhit_Get_getOutlet {
 
         this.mContext = _context;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getOutlets;
+        Log.e("urll",myUrl);
         RequestParams params = new RequestParams();
         params.put("index", _page);
         params.put("category_id", _categoryId);
         params.put("sortby", _sortBy);
-
+       Log.e("cat_frag_params",params+"");
         if (_isgenderRequired) {
             params.put("type", _genderType);
         }

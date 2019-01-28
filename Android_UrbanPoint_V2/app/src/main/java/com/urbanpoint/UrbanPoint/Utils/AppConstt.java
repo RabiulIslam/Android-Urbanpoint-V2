@@ -5,10 +5,11 @@ public interface AppConstt {
 
 //    Live Server
   //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
-    String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+//    String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+    String BASE_URL="http://cms.biyog.com/up_qatar/api/v1/";
     String BASE_URL_MOBILE = BASE_URL + "mobile/";
-    String BASE_URL_SUBSCRIPTION = BASE_URL + "subscription/";
-    String BASE_URL_IMAGES = "http://34.219.2.69/up_qatar/uploads/";
+    String BASE_URL_SUBSCRIPTION = BASE_URL_MOBILE + "subsribeuser";
+    String BASE_URL_IMAGES = "http://cms.biyog.com/up_qatar/uploads/";
     String mSignupUsername="";
     String mSignupAge="";
      String mSignupGender="";
@@ -27,6 +28,7 @@ public interface AppConstt {
     public static final String LOGIN_RULES = "privacyStatementAndTermsofUseBiyog.html";
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
     public static final String TERMS_OF_SALES ="Terms_of_Sales.html";
+    public static final String REFER_AND_EARN="Refer &amp; Earn";
     String ARABIC = "ar";
     String ENGLISH = "en";
     static String DeviceType = "android";
