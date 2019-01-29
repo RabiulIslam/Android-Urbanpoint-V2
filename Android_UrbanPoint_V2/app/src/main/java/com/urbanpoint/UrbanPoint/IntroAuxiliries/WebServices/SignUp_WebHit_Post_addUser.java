@@ -53,7 +53,7 @@ public class SignUp_WebHit_Post_addUser {
         params.put("device_info", deviceInfo);
         params.put("token", _fcmToken);
         params.put("device_token",android_id);
-       Log.e("params",params+"");
+        Log.e("params",params+"");
         Log.e("header",AppConstt.HeadersValue.Authorization);
         Log.e("register_url",myUrl);
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);

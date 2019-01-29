@@ -3,7 +3,6 @@ package com.urbanpoint.UrbanPoint.Utils;
 
 public interface ApiMethod {
 
-
     interface GET {
         String getOutlets = "getOutlets";
         String getOffers = "getOffers";
