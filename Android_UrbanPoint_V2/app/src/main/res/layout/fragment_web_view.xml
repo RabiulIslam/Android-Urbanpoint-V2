@@ -40,6 +40,7 @@
 
     </RelativeLayout>
 
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
@@ -48,4 +49,12 @@
 
 
     </WebView>
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="@dimen/dp15"
+        android:layout_height="@dimen/dp15"
+        android:id="@+id/imvBack1"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginLeft="@dimen/dp15"
+        />
 </RelativeLayout>

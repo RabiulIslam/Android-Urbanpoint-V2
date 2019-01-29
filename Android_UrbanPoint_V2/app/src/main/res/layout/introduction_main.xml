@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:indicator="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/start_transparent_background_5"
+    android:orientation="vertical"
+    app:ignore="NamespaceTypo">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/blank_layout_height" />
+
+    <LinearLayout
+        android:id="@+id/startButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/dp10">
+
+        <!--<com.viewpagerindicator.CirclePageIndicator-->
+        <!--android:id="@+id/indicator"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/startButton"-->
+        <!--android:layout_marginBottom="@dimen/dp10"-->
+        <!--android:paddingLeft="@dimen/dp20"-->
+        <!--android:paddingRight="@dimen/dp20"-->
+        <!--indicator:pageColor="@color/gray"-->
+        <!--indicator:radius="@dimen/dp5"-->
+        <!--indicator:strokeColor="@color/gray"-->
+        <!--indicator:strokeWidth="0dp" />-->
+
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/startButton"
+            android:layout_below="@+id/frg_dlta_home_view_pagr_spcl_offr"
+
+            android:layout_margin="5dp"
+            android:layout_marginBottom="@dimen/dp10"
+            app:ci_drawable="@drawable/circle_white"
+            app:ci_drawable_unselected="@drawable/circle_light_grey"
+            app:ci_height="30dp"
+            app:ci_width="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/getStartedButton"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:fontFamily="@font/opensans_regular"
+                android:textSize="@dimen/fontsize_large"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp175"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/get_started"
+                android:text="@string/get_started"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed"
+                android:textStyle="normal" />
+
+            <View
+                style="@style/view_20"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp15" />
+
+            <com.urbanpoint.UrbanPoint.customViews.customFontViews.ButtonView
+                android:id="@+id/loginButton"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:fontFamily="@font/opensans_regular"
+                android:textSize="@dimen/fontsize_large"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp100"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/login"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@drawable/change_text_color_on_button_pressed"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startButton"
+        android:layout_below="@+id/actionBarHeightLayout">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
+

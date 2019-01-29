@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Urban Point</string>
+    <string name="app_name">Biyog</string>
 
     <!--Button Strings-->
+    <string name="login">Login</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_getit">Get It</string>
@@ -21,6 +22,7 @@
     <string name="sign_up_get_startd">Get Started</string>
     <string name="save">Save</string>
     <string name="button_text_allow">Allow</string>
+    <string name="get_started">Get Started</string>
 
     <!--Fragments Title-->
     <string name="frg_Home">Home</string>
@@ -41,8 +43,9 @@
     <string name="frg_merchant_pin">Merchant PIN</string>
     <string name="frg_purchase_success">Purchase Success</string>
     <string name="frg_privacy_statement">Privacy Statement</string>
-    <string name="frg_rules_of_purchase">Rules of Purchase</string>
-    <string name="frg_subscription_for_15">Subscribe for QR 15/month</string>
+    <string name="rules_of_purchase">Rules of Purchase</string>
+    <string name="frg_terms_of_sales">Terms of Sales</string>
+    <string name="frg_subscription_for_15">Subscribe for 99 Tk./month</string>
     <string name="frg_subscription">Subscribe</string>
     <string name="frg_subscription_success">Congratulations</string>
     <string name="frg_subscription_eligible">Subscribe for FREE!</string>
@@ -79,14 +82,12 @@
     <string name="enter_new_pin_message">Please enter new pin</string>
     <string name="enter_new_confirm_pin_message">Please enter confirm New PIN</string>
     <string name="enter_pin_not_match">The PINs  you entered do not match, please re-enter the PINs</string>
-    <string name="congratulations_access">Congratulations! You now have access to all Urban Point offers!</string>
-
-
+    <string name="congratulations_access">Congratulations! You now have access to all Biyog offers!</string>
     <string name="contextual_messages_heading">Always know what\'s around</string>
     <string name="contextual_messages">Enable location to sort offers \nbased on their distance from you.</string>
     <string name="contextual_uber_messages">Please enable location permission to request an Uber ride.</string>
     <string name="contextual_uber_btn">Enable.</string>
-    <string name="app_update_messages">Please update to the latest version of the Urban Point app to continue using it.</string>
+    <string name="app_update_messages">Please update to the latest version of the Biyog app to continue using it.</string>
     <string name="MSG_ERROR_NETWORK">Network error, please try again.</string>
 
 
@@ -101,6 +102,7 @@
 
 
     <!--   signup screen-->
+    <string name="frg_rules_of_purchase">Rules of Purchase</string>
     <string name="sign_up_create_account">Create your account</string>
     <string name="sign_up_are_you_girl_guy">Are you a girl or a guy?</string>
     <string name="sign_up_girl">Girl</string>
@@ -110,10 +112,27 @@
     <string name="sign_up_year_of_birth">Year of birth</string>
     <string name="sign_up_pin">This year will be used as your PIN</string>
     <string name="sign_up_login">Already a user? <u>Log In</u></string>
-    <string name="login_terms_and_conditions_message_one">By clicking Get Started, you agree to accept our&#160;</string>
+    <string name="login_terms_and_conditions_message_one">By clicking Finish, you agree to accept our&#160;</string>
     <string name="login_terms_and_conditions_message_two"><u>Privacy Statement and Terms of Use</u></string>
 
 
+    <string name="occ1"></string>
+    <string name="occ2">Student</string>
+    <string name="occ3">Businessman</string>
+    <string name="occ4">Self Employed</string>
+    <string name="occ5">Service Holder</string>
+    <string name="occ6">Unemployed</string>
+
+
+    <!--Occupation Array-->
+    <string-array name="occupation">
+        <item>@string/occ1</item>
+        <item>@string/occ2</item>
+        <item>@string/occ3</item>
+        <item>@string/occ4</item>
+        <item>@string/occ5</item>
+        <item>@string/occ6</item>
+    </string-array>
     <!--SignUp Verification Screen-->
     <string name="sign_up_free_access">You have Free access to Urban Point.\n
     Please enter the code received by SMS to \n
@@ -140,7 +159,7 @@
 
     <!--Navigatoin Drawer Strings-->
     <string name="drawer_home">Home</string>
-    <string name="drawer_invite_friends">Invite Friends</string>
+    <string name="drawer_invite_friends">Refer &amp; Earn</string>
     <string name="drawer_profile">Profile</string>
     <string name="drawer_how_to_use">How to Use</string>
     <string name="drawer_my_reviews">My Reviews</string>
@@ -163,7 +182,7 @@
     <string name="promo_code_hint">Access Code</string>
 
     <!--profile screen-->
-    <string name="natinality_message">Please select your country</string>
+    <string name="natinality_message">Please select your location</string>
 
     <!--Change Pin    -->
     <string name="change_pin_welcome">Welcome %1$s!</string>
@@ -174,7 +193,7 @@
 
     <!--how to use screen-->
     <string name="how_to_use_one">1. Visit the place where you\'d \n like to use the offer</string>
-    <string name="how_to_use_two">2. Click on the \'\'Get the deal\'\' button  on the offer screen</string>
+    <string name="how_to_use_two">2. Click on the \'\'Get It\'\' button  on the offer screen</string>
     <string name="how_to_use_three">3. One of the staff member needs to enter their PIN to confirm the offer</string>
 
     <!-- contact us screen-->
@@ -213,7 +232,7 @@
     <!--Subscription Eligible Success Screen-->
     <string name="subscription_eligible_success_congratulatn">Congratulations!</string>
     <string name="subscription_eligible_success_subscribed">You are now subscribed for FREE to\nUrban Point!</string>
-    <string name="subscription_eligible_success_enjoy">Enjoy your favourite offers every months!</string>
+    <string name="subscription_eligible_success_enjoy">Enjoy your favourite offers every day!</string>
 
     <!--Subscription Success Screen-->
     <string name="subscription_success_member">You are now an\nUrban Point member!</string>
@@ -247,13 +266,13 @@
     <string name="add_to_favs">Added To Favs</string>
     <string name="approx_saving">Approximate Savings</string>
     <string name="offers_text">All offers are subject to</string>
-    <string name="rules_of_purchase"><u>Rules of Purchase</u></string>
+
     <string name="timing_text">Timings</string>
     <string name="cancel">Cancel</string>
     <string name="added_to_ur_wish_list">Added to faves</string>
     <string name="txt_expiry">Use this offer before: </string>
     <string name="offer_detail_expires_on_1">Use this offer before: </string>
-    <string name="offer_detail_expires_on_2">Use this offer again on: </string>
+    <string name="offer_detail_expires_on_2">Use this offer again tomorrow </string>
     <string name="offer_detail_expires_on_3">Offer has been used</string>
 
     <!--navigation saving history screen-->
@@ -284,9 +303,12 @@
 
     <string name="logout">Logout</string>
 
-
+    <string name="verify"><u> Verify </u></string>
+    <string name="link_sent">A link is sent to your registered email</string>
     <string name="change_underline"><u>Change</u></string>
-
+    <string name="yes">Yes</string>
+    <string name="No">No</string>
+    <string name="exit_app">Exit App?</string>
 
     <string name="how_to_use_four">The staff member will then apply the discount to your bill. Enjoy the savings!</string>
 
@@ -306,8 +328,10 @@
 
     <string name="enjoy_your">Enjoy Your</string>
     <string name="ist_offer">Offer Free</string>
-    <string name="nationality">Nationality</string>
-    <string name="nationality_hint">Please select your country</string>
+    <string name="zone">Zone</string>
+    <string name="select_zone">Please select your zone</string>
+    <string name="nationality">Current Location</string>
+    <string name="nationality_hint">Please select your location</string>
     <!--<strnamename="here_how_it_works_header">Here\'s how it works </string>-->
 
 
@@ -368,11 +392,12 @@
     <!--<strnamename="login_terms_and_conditions_message_two"><u>Privacy Statement and</u></string>-->
 
     <!--<strnamename="offer_share_message_text">Hi!\nCheck out this offer on Urban Point! \n%1$s by %2$s\nSave %3$s when you avail this offer!\n\nDownload the app to access this offer:\n\niPhone:&#160;%4$s\n\nAndroid:&#160;%5$s</string>-->
-    <string name="offer_share_message_text">Hi!\nCheck out this offer on Urban Point! \n%1$s by %2$s\nSave %3$s when you avail this offer!\n\nDownload the app to access this offer:\n\n%4$s</string>
+    <string name="offer_share_message_text">Hi!\nCheck out this offer on Biyog! \n%1$s by %2$s\nSave %3$s when you avail this offer!\n\nDownload the app to access this offer:\n\n%4$s</string>
 
 
     <!--<strnamename="app_share_message_text">Hey!\n\nCHECK out this app called Urban Point! Download to access hundreds of offers every month to enjoy your city for less!\n\niPhone:&#160;%1$s\n\nAndroid:&#160;%2$s </string>-->
-    <string name="app_share_message_text">Hi! Check out Urban Point for amazing deals on food &amp; drinks, beauty &amp; health, fun &amp; leisure activities, retail and other services. Download now to start saving!\n\n%1$s%2$s </string>
+    <string name="app_share_message_text">Hey!\n\nCHECK OUT this app called Biyog! Download to access Thousands of <b> buy 1 get 1 free </b> offers every month and enjoy Dhaka for less!\n\nhttps://www.biyog.com\n\nReferral Code:</string>
+    <string name="earn_free_subscription">Use the referral code during sign up and get 40 days free premium access.\n\nCheers! </string>
     <string name="offer_redeem_success_time">Your offer was redeemed on:\n%1$s\nat %2$s</string>
 
 
@@ -385,11 +410,102 @@
 
 
     <string name="enter_access_code_empty_2">Please enter a valid Access Code</string>
-    <string name="country_code">+974</string>
-    <string name="txv_qatar_riyal">QR </string>
+    <string name="country_code">+888</string>
+    <string name="txv_qatar_riyal">Tk </string>
     <string name="facebook_app_id">167219837169256</string>
     <string name="fb_login_protocol_scheme">fb167219837169256</string>
+    <string name="logoContentDescription">Splash Logo</string>
+    <string name="forgot_password"><u>Forgot PIN?</u></string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="_skip">Skip</string>
+    <string name="age_text">What\'s your age?</string>
+    <string name="setup_your_account">Set Up Your Account</string>
+    <string name="finish">Finish</string>
+    <string name="continue_button">Continue</string>
+    <string name="sign_up_step_one_message">Hi! Nice to meet you, tell us your name</string>
+    <string name="sign_up_step_two_message">Are you a girl or guy?</string>
+    <string name="sign_up_step_three_message">Tell us your interests so that we can get you what you like</string>
 
+    <string name="sign_up_step_four_message">Are you a Vodafone Qatar customer?</string>
 
+    <!--<string name="sign_up_step_five_message">Please setup your PIN.\n You can always change it later.</string>-->
+    <string name="sign_up_step_five_message">Please setup your PIN</string>
+
+    <string name="signup_food_and_drink">Food &amp;\nDrink\n&#160; </string>
+    <string name="signup_beauty_and_spa">Beauty &amp;\nHealth\n&#160; </string>
+    <string name="signup_fun_activities">Fun&amp;\nLeisure\n&#160; </string>
+    <string name="signup_health_fitness">Retail &amp;\n Services\n&#160; </string>
+      <!--Intro Fragment Strings-->
+    <string name="intro_screen_message">Enjoy your city for less!</string>
+    <string name="intro_fra_1">Awesome Things\n to do</string>
+    <string name="intro_fra_1_footer">From your favorite restaurants, salons and brands!</string>
+    <string name="intro_fra_2">Monthly Local\n Offers</string>
+    <string name="intro_fra_2_footer">Access great local offers every month!\n&#160;</string>
+    <!--<string name="intro_fra_3">Enjoy Your City</string>-->
+    <string name="intro_fra_3">Simplest Way to\n Enjoy Your City</string>
+    <string name="intro_fra_3_footer">Enjoy a lavish lifestyle without hurting your wallet!</string>
+    <string name="member_screen_msg">Verify your phone number and access Thousands of offers in Dhaka!</string>
+    <string name="member_screen_verify">Verify</string>
+    <string name="get_code">Get Code</string>
+    <string name="member_screen_verify_pay_text">Pay on your phone bill \n Cancel your membership any time</string>
+    <string name="plus_880">+880</string>
+    <string name="get1stmonthfree">Get 1st Month Free</string>
+    <string name="pin_error">Please enter 4 digit pin</string>
+    <string name="confirm_pin_error">Pin and Confirm Pin should be same</string>
+    <string name="sign_up_select_gender">Please tell us if you are a girl or guy</string>
+    <string name="occupation">Occupation</string>
+    <string name="referral_code_optional">Referral Code (Optional)</string>
+    <string name="referral_code">Referral Code</string>
+    <string name="share">Share</string>
+    <string name="wallet_balance">Wallet Balance :</string>
+    <string name="already_registered">This number is already registered, please use a different number.</string>
+    <string name="share_referral_code">Share your referral code</string>
+    <string name="learn_more"><u>Learn More</u></string>
+    <string name="refer_friends">Refer your friends and\nearn <b>250</b> Tk. for each successful installation. Your friend also gets 40 days free premium user access.</string>
+    <string name="use_balance_to_unlock_deals">You can use your wallet balance to unlock great deals!</string>
+    <string name="FACEBOOK_APP_ID">392993371444452</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
+    <string name="select">Select</string>
+    <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
+     <string name="_seventy">70.00 Tk.</string>
+    <string name="verify_email">Verify Email</string>
+    <string name ="send_link_to_verify_email"> We will send a link to verify your email to access all the offers </string>
+    <string name="_300">300 Tk.</string>
+    <string name="_9taka">9.99 Tk.</string>
+    <string name="_49taka">49.99 Tk.</string>
+    <string name="_99taka">99.00 Tk.</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="daily">Daily</string>
+    <string name="condition_applies">*Condition Applies</string>
+    <string name="additional_vat">*Additional Vat 15% applicable</string>
+    <string name="bill_to">Bill To :</string>
+    <string name="name">Name</string>
+    <string name="cell">Cell</string>
+    <string name="package_text">Package</string>
+    <string name="placed_on">Placed on</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="vat">Vat (15%)</string>
+   <string name="total">Total : </string>
+    <string name="address">Address</string>
+    <string name="proceed_to_payment">Proceed to payment</string>
+    <string name="agree_to_biyog">I agree to Biyog\'s</string>
+    <string name="terms_of_sale"><u>Terms of Sale</u></string>
+    <!--<string name="email">Email</string>-->
+    <!--<string name="cell">Cell</string>-->
+
+  <!--Live Keys-->
+    <string name="merchant_id">WMX5c39bb1d2ae5d</string>
+    <string name="merchant_username">biyog_1696732007</string>
+    <string name="merchant_password">biyog_453604340</string>
+    <string name="walletmixapp_key">2803dfb16649f0d5152a900ee5cde1d59bf66e69</string>
+    <!--Sandbox Keys-->
+    <!--<string name="merchant_id">WMX5c39bf8037f22</string>-->
+    <!--<string name="merchant_username">biyog_1316536615</string>-->
+    <!--<string name="merchant_password">biyog_2055363772</string>-->
+    <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
+    <string name="walletmix_appname">biyog.com</string>
 
 </resources>

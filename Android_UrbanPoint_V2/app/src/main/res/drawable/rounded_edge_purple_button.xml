@@ -4,7 +4,4 @@
 
         <solid android:color="@color/drawer_contact_us_background" />
         <corners
-            android:bottomLeftRadius="8dp"
-            android:bottomRightRadius="8dp"
-            android:topLeftRadius="8dp"
-            android:topRightRadius="8dp" /></shape>
+           android:radius="5dp" /></shape>

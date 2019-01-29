@@ -25,9 +25,6 @@ import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 
 import org.json.JSONObject;
 
-/**
- * Created by indus on 5/3/2017.
- */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FCMService";
@@ -38,17 +35,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated.
-        Log.d(TAG, "onMessageReceived");
-        String mPushTitle = "Urban Point";
+        Log.e(TAG, remoteMessage.getData()+"");
+        String mPushTitle = "Biyog";
         String mTitle = "";
         String mMessage = "";
         String mId = "";
         String mDate = "";
         try {
             //Event
+
             JSONObject jsonObjectA = new JSONObject(remoteMessage.getData());
             Log.d(TAG, "onMessageReceived" + jsonObjectA);
-             mPushTitle = "Urban Point";
+             mPushTitle = "Biyog";
              mTitle = (String) jsonObjectA.get("title");
              mMessage = (String) jsonObjectA.get("message");
              mId = (String) jsonObjectA.get("id");
@@ -56,13 +54,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             if (AppConfig.getInstance().mUser.isLoggedIn()) {
                 sendNotification(mPushTitle, mTitle, mMessage, mId, mDate);
-                Log.d(TAG, "onMessageNotificationSend" );
+                Log.e(TAG, "onMessageNotificationSend" );
             }else {
-                Log.d(TAG, "onMessageNotificationNotSend" );
+                Log.e(TAG, "onMessageNotificationNotSend" );
             }
 
         } catch (Exception e) {
-            Log.d(TAG, "onException" + e.getMessage());
+            Log.e(TAG, "onException" + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -98,7 +96,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .build();
 
             //Configure Channel's initial settings
-            channel.setDescription(_title);
+            channel.setDescription(_message);
             channel.setShowBadge(true);
             channel.canShowBadge();
             channel.enableLights(true);
@@ -115,7 +113,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             tempCategory = AppConstt.Notifications.PUSH_CATG_ANNOUNCEMENTS;
         }
 
-
+           // Log.e("pushhhh_title",_title+"");
         //Set Intent (Pre-Req for NotificationCompat)
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -163,6 +161,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.drawable.icn_push_silhouette : R.mipmap.ic_launcher;
+        return useWhiteIcon ? R.drawable.ic_launcher : R.mipmap.ic_launcher;
     }
 }

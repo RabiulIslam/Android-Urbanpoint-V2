@@ -2,17 +2,31 @@ package com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +58,22 @@ import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteOffersFragment extends Fragment implements View.OnClickListener {
+public class FavoriteOffersFragment extends Fragment implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+    private LocationRequest mLocationRequest;
+    public GoogleApiClient mGoogleApiClient;
+    final static int REQUEST_LOCATION = 199;
+    final static int MY_PERMISSIONS_REQUEST_LOCATION = 1999;
+    android.location.Location mLastLocation;
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
 
     private ListView lsvNewOffers;
     private List<DModelHomeGrdVw> lstNewOffers;
@@ -163,16 +189,33 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
 
         rlAlphabetically.setOnClickListener(this);
         rlLocation.setOnClickListener(this);
+        buildGoogleApiClient();
+        createLocationRequest();
 
-        if (!AppConfig.getInstance().checkPermission(getActivity()) || !(AppConfig.getInstance().isLocationEnabled(getActivity()))) {
+//        if (!AppConfig.getInstance().checkPermission(getActivity()) || !(AppConfig.getInstance().isLocationEnabled(getActivity()))) {
+//            updatebtnAlpabetical();
+//            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_ALPHABETICALLY;
+//            requestNewOffers(page, strSortBy, lat, lng, true);
+//        } else {
+//            updateBtnLocation();
+//            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+//            lat = GPSTracker.lat;
+//            lng = GPSTracker.lng;
+//            if (lat != 0) {
+//                requestNewOffers(page, strSortBy, lat, lng, true);
+//            } else {
+//                updatebtnAlpabetical();
+//                rlAlphabetically.performClick();
+//            }
+
+        if (!AppConfig.getInstance().checkPermission(getActivity()) ||
+                !(AppConfig.getInstance().isLocationEnabled(getActivity()))) {
             updatebtnAlpabetical();
-            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_ALPHABETICALLY;
             requestNewOffers(page, strSortBy, lat, lng, true);
         } else {
             updateBtnLocation();
-            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
-            lat = GPSTracker.getInstance(getContext()).getLatitude();
-            lng = GPSTracker.getInstance(getContext()).getLongitude();
+            lat = GPSTracker.lat;
+            lng = GPSTracker.lng;
             if (lat != 0) {
                 requestNewOffers(page, strSortBy, lat, lng, true);
             } else {
@@ -180,6 +223,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                 rlAlphabetically.performClick();
             }
         }
+
     }
 
     @Override
@@ -198,34 +242,67 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                 if (!isAlreadyfetchingOffers) {
                     shouldGetMoreOffers = true;
                     page = 1;
-                    strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
-                    if (!AppConfig.getInstance().isLocationEnabled(getActivity()) || !AppConfig.getInstance().checkPermission(getActivity())) {
-                        customAlert.showContextualAlertDialog(getActivity(), new CustomAlertConfirmationInterface() {
-                            @RequiresApi(api = Build.VERSION_CODES.M)
-                            @Override
-                            public void callConfirmationDialogPositive() {
-                                requestSetLocationPermission(1);
-                                if (AppConfig.getInstance().isLocationEnabled(getContext())) {
-                                    requestPermission();
-                                } else {
-                                    startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE);
-                                }
-                            }
+//                    strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+//                    if (!AppConfig.getInstance().isLocationEnabled(getActivity()) || !AppConfig.getInstance().checkPermission(getActivity())) {
+//                        customAlert.showContextualAlertDialog(getActivity(), new CustomAlertConfirmationInterface() {
+//                            @RequiresApi(api = Build.VERSION_CODES.M)
+//                            @Override
+//                            public void callConfirmationDialogPositive() {
+//                                requestSetLocationPermission(1);
+//                                if (AppConfig.getInstance().isLocationEnabled(getContext())) {
+//                                    requestPermission();
+//                                } else {
+//                                    startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE);
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void callConfirmationDialogNegative() {
+//                                requestSetLocationPermission(0);
+//                            }
+//                        });
+//                    } else {
+//                        lat = GPSTracker.lat;
+//                        lng = GPSTracker.lng;
+//                        if (lat != 0) {
+//                            requestNewOffers(page, strSortBy, lat, lng, true);
+//                        } else {
+//                            customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
+//                        }
+//                    }
+//                }
 
-                            @Override
-                            public void callConfirmationDialogNegative() {
-                                requestSetLocationPermission(0);
+                    if( AppConfig.getInstance().checkPermission(getActivity()))
+                    {
+                        Log.e("checkloc","1");
+                        if (AppConfig.getInstance().isLocationEnabled(getActivity())) {
+                            Log.e("checkloc","2");
+                            lat = GPSTracker.lat;
+                            lng = GPSTracker.lng;
+                            if (lat != 0) {
+                                Log.e("checkloc","3");
+                                strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+                                requestNewOffers(page, strSortBy, lat, lng, true);
+
+                            } else {
+                                Log.e("checkloc","4");
+
+                                displayLocation();
                             }
-                        });
-                    } else {
-                        lat = GPSTracker.getInstance(getContext()).getLatitude();
-                        lng = GPSTracker.getInstance(getContext()).getLongitude();
-                        if (lat != 0) {
-                            requestNewOffers(page, strSortBy, lat, lng, true);
-                        } else {
+                        }
+                        else
+                        {
+                            turnGPSOn();
                             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
+//
+//                            GPSTracker.enqueueWork(getActivity(),new Intent());
                         }
                     }
+                    else
+                    {
+                        requestPermission();
+                    }
+
                 }
                 break;
         }
@@ -393,9 +470,8 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getId(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getName(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getSpecial(),
-                        festival,
-                        (int) distance,
-                        isDistanceRequired
+                        festival, (int) distance, isDistanceRequired,
+                        Float.parseFloat( NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getApproxSaving())
                 ));
             }
 
@@ -428,7 +504,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     public void requestPermission() {
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
     }
@@ -444,32 +520,82 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
         }
     }
 
+
+
+
+
+
+
+
+
+    protected void createLocationRequest()
+    {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+    }
+    protected synchronized void buildGoogleApiClient()
+    {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 //was crashing here
+
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission Granted
-                    Log.d("aserwqer", "onRequestPermissionsResult: " + requestCode);
-                    lat = GPSTracker.getInstance(getContext()).getLatitude();
-                    lng = GPSTracker.getInstance(getContext()).getLongitude();
-                    if (lat != 0) {
-                        requestNewOffers(page, strSortBy, lat, lng, true);
-                    } else {
-                        customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
+
+                    if (AppConfig.getInstance().isLocationEnabled(getActivity())) {
+
+
+                        if (mGoogleApiClient.isConnected()) {
+
+
+                            Location mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+                            if (mLocation == null) {
+                                mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                                        mLocationRequest, (LocationListener) this);
+                            }
+                            else {
+                                lat = mLocation.getLatitude();
+                                lng = mLocation.getLongitude();
+                                Log.e("location_onconnected", lat + "," + lng);
+                                strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+                                updateBtnLocation();
+                                requestNewOffers(page, strSortBy, lat, lng, false);   }
+
+                        }
+                        else
+                        {
+                            mGoogleApiClient.connect();
+
+                        }
                     }
+                    else
+
+                    {
+                        turnGPSOn();
+                    }
+
                 } else {
                     String permission = Manifest.permission.ACCESS_FINE_LOCATION;
                     boolean showRationale = shouldShowRequestPermissionRationale(permission);
                     if (!showRationale) {
-                        Log.d("aserwqer", "onRequestPermissionsResult----: " + requestCode);
-                        if (!AppConfig.getInstance().mUser.isNeverAskActive) {
-                            startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)), AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
-                        } else {
-                            AppConfig.getInstance().mUser.setNeverAskActive(true);
-                        }
+                        Log.e("aserwqer11", "onRequestPermissionsResult----: " + requestCode);
+
+                        startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.parse("package:" + BuildConfig.APPLICATION_ID)),
+                                AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
+
                     }
                 }
 
@@ -479,32 +605,145 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE == requestCode) {
-            if (AppConfig.getInstance().checkPermission(getContext())) {
-                requestNewOffers(page, strSortBy, lat, lng, true);
-            }
-        } else if (AppConstt.IntentPreference.SOURCE_LOCATION_INTENT_CODE == requestCode) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onactivityresult",requestCode+","+resultCode);
+        if (requestCode == REQUEST_LOCATION)
+        {
+            switch (resultCode)
 
-            if (AppConfig.getInstance().isLocationEnabled(getContext())) {
-                if (!AppConfig.getInstance().checkPermission(getContext())) {
-                    requestPermission();
-                } else {
-                    lat = GPSTracker.getInstance(getContext()).getLatitude();
-                    lng = GPSTracker.getInstance(getContext()).getLongitude();
-                    if (lat != 0) {
-                        requestNewOffers(page, strSortBy, lat, lng, true);
-                    } else {
-                        customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
-                    }
-                }
-            } else {
-                Log.d("sadSDSAASD", "onCreateView:5520 ");
+            {
+                case -1:
+                    displayLocation();
+
+                    break;
+
             }
 
         }
+
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Location   mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+
+        if(mLocation == null)
+        {
+            mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                    mLocationRequest, (LocationListener) this);
+        }
+        else
+        {
+
+            lat=mLocation.getLatitude();
+            lng=mLocation.getLongitude();
+            Log.e("location_onconnected",lat+","+lng);
+            strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+            updateBtnLocation();
+            requestNewOffers(page, strSortBy, lat, lng, true);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        Log.e("loc","changed");
+        lat=location.getLatitude();
+        lng=location.getLongitude();
+        strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+        requestNewOffers(page, strSortBy, lat, lng, true);
+
+    }
+
+    public void turnGPSOn()
+    {
+        Log.e("checkgps","1");
+        mGoogleApiClient.connect();
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(500);
+        locationRequest.setFastestInterval(1000);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+
+        builder.setAlwaysShow(true);
+
+        PendingResult<LocationSettingsResult> result =
+                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>()
+        {
+            @Override
+            public void onResult(LocationSettingsResult result)
+            {
+                final Status status = result.getStatus();
+                switch (status.getStatusCode())
+                {
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try
+                        {
+                            startIntentSenderForResult(status.getResolution().getIntentSender(), REQUEST_LOCATION, new Intent(), 0, 0, 0, null);
+//                            status.startResolutionForResult(getActivity(), REQUEST_LOCATION);
+                        }
+                        catch (@SuppressLint("NewApi") Exception e)
+                        {
+                            Log.e("exc","e",e);
+                        }
+                        break;
+                }
+            }
+        });
+//      displayLocation();
+    }
+    private void displayLocation() {
+
+        if (checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+
+        if (mGoogleApiClient.isConnected()) {
+            if (mLastLocation == null) {
+                mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                        mLocationRequest, (LocationListener) this);
+
+            } else {
+
+                Log.e("location_resulttttt", mLastLocation.getLatitude() + "," + mLastLocation.getLongitude());
+                lat = mLastLocation.getLatitude();
+                lng = mLastLocation.getLongitude();
+
+                strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
+                requestNewOffers(page, strSortBy, lat, lng, true);
+            }
+        }
+        else
+        {
+            mGoogleApiClient.connect();
+
+        }
+
+    }
+
+
+
+
 }

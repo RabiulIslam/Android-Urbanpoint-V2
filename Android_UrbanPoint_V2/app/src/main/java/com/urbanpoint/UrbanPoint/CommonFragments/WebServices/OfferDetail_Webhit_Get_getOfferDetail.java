@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.CommonFragments.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,10 +30,12 @@ public class OfferDetail_Webhit_Get_getOfferDetail {
     public void requestOfferDetail(Context _context, final IWebCallbacks iWebCallbacks, int id) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getOfferDetail;
+        Log.e("offer_detail_url",myUrl);
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("offer_id", id);
-
+       Log.e("offer_detail_params",params+"");
+       Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);

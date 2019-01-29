@@ -13,9 +13,7 @@ import com.urbanpoint.UrbanPoint.R;
 
 import java.util.List;
 
-/**
- * Created by Lenovo on 6/20/2017.
- */
+
 
 public class NationalityListAdapter extends BaseAdapter {
     Context mContext;

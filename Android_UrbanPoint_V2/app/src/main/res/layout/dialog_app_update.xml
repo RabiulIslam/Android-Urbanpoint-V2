@@ -8,11 +8,11 @@
 
 
     <ImageView
-        android:layout_width="230dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/dp175"
+        android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/up_logo_white" />
+        android:background="@drawable/logo_main" />
 
     <TextView
         android:layout_width="match_parent"

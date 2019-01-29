@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -8,6 +9,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.ApiMethod;
+import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 
@@ -16,9 +18,6 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 
-/**
- * Created by lenovo on 09/08/2018.
- */
 
 public class SignUp_WebHit_Post_checkPhoneEmail {
 
@@ -28,20 +27,24 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
 
 
     public void requestcheckPhoneEmail(Context _mContext, final IWebCallbacks iWebCallback,
-                                      final String _value, final boolean _isPhone) {
+                                      final String _value) {
 
         this.mContext = _mContext;
         RequestParams params = new RequestParams();
+        String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
 
 
         String myUrl;
-        if (_isPhone) {
+//        if (_isPhone) {
             myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.checkPhone;
-            params.put("phone",AppConstt.DEFAULT_VALUES.COUNTRY_CODE+ _value);
-        } else {
-            myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.checkEmail;
-            params.put("email", _value);
-        }
+            params.put("phone", _value);
+            params.put("device_info",deviceInfo);
+            params.put("deviceType","android");
+            params.put("id",AppConfig.getInstance().mUser.getmUserId());
+
+            Log.e("step2_params",params+"");
+        Log.e("step2_url",myUrl+"");
+        Log.e("step2_header",AppConstt.HeadersValue.Authorization+"");
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
@@ -56,8 +59,18 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
 
+                         Log.e("step2_response",responseObject+"");
                             switch (statusCode) {
-                                case AppConstt.ServerStatus.OK:
+
+                                case AppConstt.ServerStatus.CREATED:
+
+                                    AppConfig.getInstance().mUser.setmPhoneNumber( _value);
+
+
+                                    AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
+                                    AppConfig.getInstance().isEligible = (SignUp_WebHit_Post_checkPhoneEmail.responseObject.getData().getEligibility() == 1 ? true : false);
+                                    Log.e("isEligible", "onSuccess: " + AppConfig.getInstance().isEligible);
+                                    AppConfig.getInstance().mUser.setLoggedIn(true);
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
                                     break;
 
@@ -69,6 +82,8 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
                                     iWebCallback.onWebResult(false, responseObject.getMessage());
                                     break;
                             }
+
+
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -143,14 +158,75 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
             this.message = message;
         }
 
-        private String data;
+        private Data data;
 
-        public String getData() {
-            return this.data;
+//        public String getData() {
+//            return this.data;
+//        }
+//
+//        public void setData(String data) {
+//            this.data = data;
+//        }
+
+
+        public Data getData() {
+            return data;
         }
 
-        public void setData(String data) {
+        public void setData(Data data) {
             this.data = data;
+        }
+
+        public class Data {
+            private int id;
+
+            public int getId() {
+                return this.id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            private int eligibility;
+
+            public int getEligibility() {
+                return eligibility;
+            }
+
+            public void setEligibility(int eligibility) {
+                this.eligibility = eligibility;
+            }
+
+            private String premier_user;
+
+            public String getPremierUser() {
+                return this.premier_user;
+            }
+
+            public void setPremierUser(String premier_user) {
+                this.premier_user = premier_user;
+            }
+
+            private String verificationCode;
+
+            public String getVerificationCode() {
+                return verificationCode;
+            }
+
+            public void setVerificationCode(String verificationCode) {
+                this.verificationCode = verificationCode;
+            }
+
+            private String Authorization;
+
+            public String getAuthorization() {
+                return this.Authorization;
+            }
+
+            public void setAuthorization(String Authorization) {
+                this.Authorization = Authorization;
+            }
         }
 
     }

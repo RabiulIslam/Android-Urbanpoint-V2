@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:ignore="MissingPrefix">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/action_bar_layout_height" />
+
+
+    <LinearLayout
+        android:id="@+id/mainParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:text="@string/get1stmonthfree"
+                android:textColor="@color/drawer_contact_us_background"
+                android:textSize="@dimen/sp20"
+                android:layout_marginRight="@dimen/dp25"
+                android:layout_marginLeft="@dimen/dp25"/>
+
+            <ImageView
+                android:id="@+id/frg_payment_logo"
+                android:layout_width="175dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp10"
+                android:background="@drawable/logo_main" />
+
+            <TextView
+                android:layout_marginRight="@dimen/dp25"
+                android:layout_marginLeft="@dimen/dp25"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/member_screen_msg"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/main_color"
+                android:textSize="@dimen/sp14" />
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp35"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginRight="@dimen/dp30"
+                android:weightSum="1">
+                <Button
+                    android:id="@+id/back"
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/dp20"
+                    android:paddingRight="@dimen/dp20"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    android:visibility="gone"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/rounded_edge_purple_button"
+                    android:text="@string/back"/>
+                <Button
+
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/btn_continue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/dp20"
+                    android:paddingRight="@dimen/dp20"
+                    android:textSize="@dimen/sp14"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/rounded_edge_purple_button"
+                    android:text="@string/continue_button" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+</RelativeLayout>

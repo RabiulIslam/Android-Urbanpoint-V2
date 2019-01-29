@@ -30,11 +30,20 @@
                 android:orientation="vertical">
 
 
+                <!--<ImageView-->
+                    <!--android:layout_width="@dimen/dp150"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/powered_ooredoo" />-->
                 <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/frg_payment_logo"
+                    android:layout_width="175dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
                     android:layout_gravity="center"
-                    android:background="@drawable/powered_ooredoo" />
+
+                    android:layout_margin="10dp"
+                    android:background="@drawable/logo_main" />
 
 
                 <TextView

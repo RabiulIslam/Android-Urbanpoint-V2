@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/action_bar_layout_height" />
+
+
+    <LinearLayout
+        android:id="@+id/mainParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:text="@string/refer_friends"
+            android:textColor="@color/drawer_background"
+            android:textSize="@dimen/sp16"
+            android:layout_marginBottom="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp15"
+            android:layout_marginLeft="@dimen/dp15"/>
+
+        <ImageView
+            android:id="@+id/frg_payment_logo"
+            android:layout_width="175dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+
+            android:layout_margin="10dp"
+            android:background="@drawable/logo_main" />
+
+        <TextView
+            android:layout_marginRight="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp25"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/share_referral_code"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:layout_marginTop="@dimen/dp10"
+            android:textSize="@dimen/sp14" />
+
+
+        <TextView
+            android:id="@+id/tv_referral_code"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp25"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/purchase_history_footer"
+            android:textSize="@dimen/sp25" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp25"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp30"
+            android:layout_marginRight="@dimen/dp30"
+            android:weightSum="1">
+
+            <Button
+
+                android:textColor="@color/white"
+                android:id="@+id/btn_share"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="@dimen/dp20"
+                android:paddingRight="@dimen/dp20"
+                android:textSize="@dimen/sp14"
+                android:fontFamily="@font/opensans_regular"
+                android:background="@drawable/rounded_edge_purple_button"
+                android:text="@string/share" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_wallet_balance"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:text="@string/wallet_balance"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp17"
+            android:layout_marginRight="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp25"/>
+
+        <TextView
+            android:layout_marginRight="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp25"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/use_balance_to_unlock_deals"
+            android:textAlignment="center"
+            android:textColor="@color/start_transparent_background_1"
+            android:layout_marginTop="@dimen/dp10"
+            android:textSize="@dimen/sp12" />
+
+        <TextView
+            android:id="@+id/tv_learnmore"
+            android:layout_marginRight="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp25"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/learn_more"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@color/drawer_contact_us_background"
+            android:layout_marginTop="@dimen/dp10"
+            android:textSize="@dimen/sp15" />
+
+
+    </LinearLayout>
+</LinearLayout>

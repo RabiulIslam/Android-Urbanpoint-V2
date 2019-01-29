@@ -1,12 +1,7 @@
 package com.urbanpoint.UrbanPoint.Utils;
 
-/**
- * Created by bilalahmed on 24/10/16.
- * bilalahmed.cs@live.com
- */
 
 public interface ApiMethod {
-
 
     interface GET {
         String getOutlets = "getOutlets";
@@ -26,10 +21,11 @@ public interface ApiMethod {
 
     interface POST {
         String signIn = "signIn";
-        String signUp = "addUser";
+        String signUp = "registration-step-one";
         String forgotPassword = "forgotPassword";
         String getAuthorization = "getAuthorization";
-        String checkPhone = "checkPhone";
+        String checkPhone = "registration-step-two";
+        String verifyEmail="verifyEmail";
         String checkEmail = "checkEmail";
         String homeApi = "homeApi";
         String eligibilitychecker = "eligibilitychecker";
@@ -37,7 +33,7 @@ public interface ApiMethod {
         String deleteMyFavouriteOffer = "deleteMyFavouriteOffer";
         String redeemOffer = "redeemOffer";
         String usePromoCode = "usePromoCode";
-         String subscribe = "subscribe";
+         String subscribe = "subsribeuser";
         String validatemsisdn = "validatemsisdn";
         String unsubscribe = "unsubscribe";
         String contactUs = "contactUs";

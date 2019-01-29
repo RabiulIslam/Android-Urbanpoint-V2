@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -16,9 +17,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-/**
- * Created by Danish on 2/27/2018.
- */
+
 
 public class PurchaseHistory_Webhit_Get_getMyPurchaseHistory {
     private AsyncHttpClient mClient = new AsyncHttpClient();
@@ -28,15 +27,17 @@ public class PurchaseHistory_Webhit_Get_getMyPurchaseHistory {
     public void getPurchaseHistory(Context _context, final IWebCallbacks iWebCallbacks) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getMyPurchaseHistory;
+        Log.e("get_purchase_hostory",myUrl);
         this.mContext = _context;
-
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
+        Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.get(myUrl, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String strResponse;
+                        Log.e("purchsehistory_reponse",responseBody+"");
                         try {
                             Gson gson = new Gson();
                             strResponse = new String(responseBody, "UTF-8");
@@ -64,6 +65,7 @@ public class PurchaseHistory_Webhit_Get_getMyPurchaseHistory {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("error",error.getMessage());
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

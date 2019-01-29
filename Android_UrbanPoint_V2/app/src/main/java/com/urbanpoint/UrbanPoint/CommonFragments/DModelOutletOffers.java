@@ -12,14 +12,16 @@ public class DModelOutletOffers {
     String merchantName;
     double merchantDistance;
     String special;
+    float price;
 
-    public DModelOutletOffers(String id, String image, String offerName, String merchantName, double merchantDistance, String special) {
+    public DModelOutletOffers(String id, String image, String offerName, String merchantName, double merchantDistance, String special, float price) {
         this.id = id;
         this.image = image;
         this.offerName = offerName;
         this.merchantName = merchantName;
         this.merchantDistance = merchantDistance;
         this.special = special;
+        this.price = price;
     }
 
     public DModelOutletOffers() {
@@ -29,6 +31,14 @@ public class DModelOutletOffers {
         this.merchantName = "";
         this.merchantDistance = 0;
         this.special = "";
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public void setId(String id) {

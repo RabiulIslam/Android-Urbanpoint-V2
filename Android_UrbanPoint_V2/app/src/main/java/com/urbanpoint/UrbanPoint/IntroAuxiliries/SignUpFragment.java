@@ -202,9 +202,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                                     String fcmToken = AppConfig.getInstance().loadFCMToken();
                                     if (validatingRequired()) {
                                         progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.progress_dialog_sign_up_loading_message), false);
-                                        requestSignUp(edtName.getText().toString(),
-                                                edtEmail.getText().toString().trim(),
-                                                genderValue + "", strPhnNumber, strPIN, fcmToken);
+//                                        requestSignUp(edtName.getText().toString(),
+//                                                edtEmail.getText().toString().trim(),
+//                                                genderValue + "", strPhnNumber, strPIN, fcmToken);
                                     }
                                 } else {
                                     customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getString(R.string.enter_valid_pin_message), null, null, false, null);
@@ -286,84 +286,84 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         getActivity().finish();
     }
 
-    private void requestSignUp(String _name, String _email, String _gender, String _phone, String _pin, String _fcmToken) {
-        SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
-        signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                progressDilogue.stopiOSLoader();
-                if (isSuccess) {
-                    logFireBaseEvent();
-                    logFaceBookEvent();
-                    logMixPanelEvent();
-                    if (SignUp_WebHit_Post_addUser.responseObject != null) {
-                        if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
-                            Bundle b = new Bundle();
-                            b.putString(AppConstt.BundleStrings.premierUserPhone, AppConfig.getInstance().mUser.getmPhoneNumber());
-                            b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
-                            navToSignUpVerificationFragment(b);
-                        } else {
-                            AppConfig.getInstance().isCommingFromSplash = true;
-                            navToMainActivity();
-                        }
-                    }
-                } else {
-                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
-                }
-            }
+//    private void requestSignUp(String _name, String _email, String _gender, String _phone, String _pin, String _fcmToken) {
+//        SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
+//        signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
+//            @Override
+//            public void onWebResult(boolean isSuccess, String strMsg) {
+//                progressDilogue.stopiOSLoader();
+//                if (isSuccess) {
+//                    logFireBaseEvent();
+//                    logFaceBookEvent();
+//                    logMixPanelEvent();
+//                    if (SignUp_WebHit_Post_addUser.responseObject != null) {
+//                        if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
+//                            Bundle b = new Bundle();
+//                            b.putString(AppConstt.BundleStrings.premierUserPhone, AppConfig.getInstance().mUser.getmPhoneNumber());
+//                            b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
+//                            navToSignUpVerificationFragment(b);
+//                        } else {
+//                            AppConfig.getInstance().isCommingFromSplash = true;
+//                            navToMainActivity();
+//                        }
+//                    }
+//                } else {
+//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+//                }
+//            }
+//
+//            @Override
+//            public void onWebException(Exception ex) {
+//                progressDilogue.stopiOSLoader();
+//                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+//
+//            }
+//
+//            @Override
+//            public void onWebLogout() {
+//                progressDilogue.stopiOSLoader();
+//
+//            }
+//        }, _name, _email, _gender, _phone, _pin, _fcmToken);
+//    }
 
-            @Override
-            public void onWebException(Exception ex) {
-                progressDilogue.stopiOSLoader();
-                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
-
-            }
-
-            @Override
-            public void onWebLogout() {
-                progressDilogue.stopiOSLoader();
-
-            }
-        }, _name, _email, _gender, _phone, _pin, _fcmToken);
-    }
-
-    private void requestCheckEmailPhone(String _value, final boolean _isPhone) {
-        SignUp_WebHit_Post_checkPhoneEmail signUp_webHit_post_checkPhoneEmail = new SignUp_WebHit_Post_checkPhoneEmail();
-        signUp_webHit_post_checkPhoneEmail.requestcheckPhoneEmail(getContext(), new IWebCallbacks() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                progressDilogue.stopiOSLoader();
-                if (isSuccess) {
-                    if (_isPhone) {
-                        mPIN.requestFocus();
-                    }
-                } else {
-                    if (_isPhone) {
-                        mPhnNumber.clearText();
-                    } else {
-                        edtEmail.setText("");
-                    }
-                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
-                }
-            }
-
-            @Override
-            public void onWebException(Exception ex) {
-                progressDilogue.stopiOSLoader();
-                if (_isPhone) {
-                    mPhnNumber.clearText();
-                } else {
-                    edtEmail.setText("");
-                }
-                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
-            }
-
-            @Override
-            public void onWebLogout() {
-                progressDilogue.stopiOSLoader();
-            }
-        }, _value, _isPhone);
-    }
+//    private void requestCheckEmailPhone(String _value, final boolean _isPhone) {
+//        SignUp_WebHit_Post_checkPhoneEmail signUp_webHit_post_checkPhoneEmail = new SignUp_WebHit_Post_checkPhoneEmail();
+//        signUp_webHit_post_checkPhoneEmail.requestcheckPhoneEmail(getContext(), new IWebCallbacks() {
+//            @Override
+//            public void onWebResult(boolean isSuccess, String strMsg) {
+//                progressDilogue.stopiOSLoader();
+//                if (isSuccess) {
+//                    if (_isPhone) {
+//                        mPIN.requestFocus();
+//                    }
+//                } else {
+//                    if (_isPhone) {
+//                        mPhnNumber.clearText();
+//                    } else {
+//                        edtEmail.setText("");
+//                    }
+//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+//                }
+//            }
+//
+//            @Override
+//            public void onWebException(Exception ex) {
+//                progressDilogue.stopiOSLoader();
+//                if (_isPhone) {
+//                    mPhnNumber.clearText();
+//                } else {
+//                    edtEmail.setText("");
+//                }
+//                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+//            }
+//
+//            @Override
+//            public void onWebLogout() {
+//                progressDilogue.stopiOSLoader();
+//            }
+//        }, _value, _isPhone);
+//    }
 
     private void getAppVersion() {
         try {

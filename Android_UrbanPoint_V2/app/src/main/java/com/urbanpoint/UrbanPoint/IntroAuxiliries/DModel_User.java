@@ -28,7 +28,10 @@ public class DModel_User {
     public String masterMerchant;
     public boolean isLoggedIn;
     public boolean isPremierUser;
-
+    public String EmailVerified;
+    public String mReferralCode;
+    public float wallet;
+    public String zone;
     public DModel_User() {
         this.mUserId = "";
         this.mName = "";
@@ -53,6 +56,32 @@ public class DModel_User {
         this.masterMerchant = "";
         this.isLoggedIn = false;
         this.isPremierUser = false;
+        this.zone="";
+    }
+
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getEmailVerified() {
+        return EmailVerified;
+    }
+
+    public void setEmailVerified(String emailVerified) {
+        EmailVerified = emailVerified;
+    }
+
+    public float getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(float wallet) {
+        this.wallet = wallet;
     }
 
     public String getmUserId() {
@@ -237,5 +266,14 @@ public class DModel_User {
 
     public void setNationalityLstDisplyd(boolean nationalityLstDisplyd) {
         isNationalityLstDisplyd = nationalityLstDisplyd;
+
+    }
+
+    public String getmReferralCode() {
+        return mReferralCode;
+    }
+
+    public void setmReferralCode(String mReferralCode) {
+        this.mReferralCode = mReferralCode;
     }
 }

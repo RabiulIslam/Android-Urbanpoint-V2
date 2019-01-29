@@ -16,11 +16,13 @@ public class DModelHomeGrdVw {
     String strSpecial;
     int distance;
     boolean isDistanceRequired;
+    float Price;
 
 
     public DModelHomeGrdVw(String strImgUrl, String strOfferName,
                            String strProductId, String strMerchantName,String special,
-                           String strFestival, int distance, boolean isDistanceRequired) {
+                           String strFestival, int distance,
+                           boolean isDistanceRequired,float price) {
         this.strImgUrl = strImgUrl;
         this.strOfferName = strOfferName;
         this.strProductId = strProductId;
@@ -30,10 +32,23 @@ public class DModelHomeGrdVw {
         this.distance = distance;
         this.strSpecial=special;
         this.isDistanceRequired=isDistanceRequired;
+        this.Price=price;
 
     }
 
-    public DModelHomeGrdVw(String strImgUrl, String strOfferName, String strProductId, String strMerchantName, String strMerchantAddress, String strCategoryImage,String strFestival) {
+    public float getPrice() {
+        return Price;
+    }
+
+    public void setPrice(float price) {
+        Price = price;
+    }
+
+    public DModelHomeGrdVw(String strImgUrl, String strOfferName,
+                           String strProductId, String strMerchantName,
+                           String strMerchantAddress,
+                           String strCategoryImage,
+                           String strFestival) {
         this.strImgUrl = strImgUrl;
         this.strOfferName = strOfferName;
         this.strProductId = strProductId;
@@ -43,7 +58,10 @@ public class DModelHomeGrdVw {
         this.strFestival = strFestival;
         this.distance = 0;
         this.isDistanceRequired = false;
+
     }
+
+
 
     public String getStrImgUrl() {
         return strImgUrl;

@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,11 +30,13 @@ public class Notification_Webhit_Get_getMyNotifications {
     public void getNotifications(Context _context, final IWebCallbacks iWebCallbacks, int _page) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getMyNotifications;
+        Log.e("url",myUrl);
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("index", _page);
-
+        Log.e("params",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
+        Log.e("header", AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, params, new AsyncHttpResponseHandler() {

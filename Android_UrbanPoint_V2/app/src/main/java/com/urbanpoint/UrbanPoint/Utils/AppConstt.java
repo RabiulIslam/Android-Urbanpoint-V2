@@ -1,20 +1,21 @@
 package com.urbanpoint.UrbanPoint.Utils;
 
-/**
- * Created by Danish on 1/24/2018.
- */
 
 public interface AppConstt {
 
 //    Live Server
-    String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
+  //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
+//    String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+    String BASE_URL="http://cms.biyog.com/up_qatar/api/v1/";
     String BASE_URL_MOBILE = BASE_URL + "mobile/";
-    String BASE_URL_SUBSCRIPTION = BASE_URL + "subscription/";
-    String BASE_URL_IMAGES = "http://18.185.217.28/up_qatar/uploads/";
-
+    String BASE_URL_SUBSCRIPTION = BASE_URL_MOBILE + "subsribeuser";
+    String BASE_URL_IMAGES = "http://cms.biyog.com/up_qatar/uploads/";
+    String mSignupUsername="";
+    String mSignupAge="";
+     String mSignupGender="";
+   String mSignupEmail="";
 
 //    Staging Server
-
 
     public static final String FLURRY_TOKEN = "MH74JX4SNGK89G427BGP";
     public static final String MIXPANEL_TOKEN = "a37d3739dc37b7bfec03e2d4a7c3ff8b";
@@ -24,8 +25,10 @@ public interface AppConstt {
      */
     int LIMIT_API_RETRY = 0;
     int LIMIT_TIMOUT_MILLIS = 30000;
-    public static final String LOGIN_RULES = "privacyStatementAndTermsofUseUrbanPoint.html";
+    public static final String LOGIN_RULES = "privacyStatementAndTermsofUseBiyog.html";
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
+    public static final String TERMS_OF_SALES ="Terms_of_Sales.html";
+    public static final String REFER_AND_EARN="Refer &amp; Earn";
     String ARABIC = "ar";
     String ENGLISH = "en";
     static String DeviceType = "android";
@@ -70,12 +73,14 @@ public interface AppConstt {
         String SubscriptionFragment = "SubscriptionFragment";
         String SubscriptionEligibleFragment = "SubscriptionEligibleFragment";
         String SubscriptionConfirmFragment = "SubscriptionConfirmFragment";
+        String OrderDetailFragment="OrderDetailFragment";
         String SubscriptionSuccessFragment = "SubscriptionSuccessFragment";
         String SubscriptionEligibleSuccessFragment = "SubscriptionEligibleSuccessFragment";
         String OfferDetailFragment = "OfferDetailFragment";
         String OutletDetailFramgnet = "OutletDetailFramgnet";
         String MerchantPinFragment = "MerchantPinFragment";
         String HowToUseFragment = "HowToUseFragment";
+        String ReferAndEarnFragment = "ReferAndEarnFragment";
         String ProfileFragment = "ProfileFragment";
         String WebViewFragment = "WebViewFragment";
         String FN_PurchaseSuccessFragment = "PurchaseSuccessFragment";
@@ -229,37 +234,50 @@ public interface AppConstt {
         String notificationMessage = "notificationMessage";
         String notificationDate = "notificationDate";
         String backBtnVisibility = "backBtnVisibility";
+        String userId="userId";
     }
 
-    public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
-            "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia",
-            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
-            "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Bouvet Island", "Brazil",
-            "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
-            "Cambodia", "Cameroon", "Canada", "Canary Islands", "Cape Verde", "Caribbean Netherlands", "Cayman Islands",
-            "Central African Republic", "Ceuta", "Chad", "Chile", "China", "Christmas Island", "Clipperton Island",
-            "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo - Brazzaville", "Congo - Kinshasa", "Cook Islands",
-            "Costa Rica", "Cote d'Ivoire", "Croatia", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Diego Garcia Djibouti",
-            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
-            "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia",
-            "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland",
-            "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard & McDonald Islands",
-            "Honduras", "Hong Kong (China)", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man",
-            "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan",
-            "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
-            "Martinique", "Mauritania", "Mauritius", "Mayotte", "Melilla", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia",
-            "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue",
-            "Norfolk Island", "North Korea", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestinian Territories",
-            "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico",
-            "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "St. Helena", "St. Pierre & Miquelon", "St. Kitts & Nevis", "St. Lucia",
-            "St. Vincent & Grenadines", "Samoa", "San Marino", "Sao Tome & Prfncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
-            "Sierra Leone", "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "So. Georgia & So. Sandwich Isl.",
-            "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St. Barthelemy", "Sudan", "Suriname", "Svalbard & Jan Mayen",
-            "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo",
-            "Tokelau", "Tonga", "Trinidad & Tobago", "Tristan da Cunha", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos Islands",
-            "Tuvalu", "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uraguay", "United States",
-            "U.S. Outlying Islands", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara",
-            "Yemen", "Zambia", "Zimbabwe"};
+//    public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
+//            "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia",
+//            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
+//            "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Bouvet Island", "Brazil",
+//            "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
+//            "Cambodia", "Cameroon", "Canada", "Canary Islands", "Cape Verde", "Caribbean Netherlands", "Cayman Islands",
+//            "Central African Republic", "Ceuta", "Chad", "Chile", "China", "Christmas Island", "Clipperton Island",
+//            "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo - Brazzaville", "Congo - Kinshasa", "Cook Islands",
+//            "Costa Rica", "Cote d'Ivoire", "Croatia", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Diego Garcia Djibouti",
+//            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
+//            "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia",
+//            "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland",
+//            "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard & McDonald Islands",
+//            "Honduras", "Hong Kong (China)", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man",
+//            "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan",
+//            "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+//            "Martinique", "Mauritania", "Mauritius", "Mayotte", "Melilla", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia",
+//            "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue",
+//            "Norfolk Island", "North Korea", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestinian Territories",
+//            "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico",
+//            "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "St. Helena", "St. Pierre & Miquelon", "St. Kitts & Nevis", "St. Lucia",
+//            "St. Vincent & Grenadines", "Samoa", "San Marino", "Sao Tome & Prfncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
+//            "Sierra Leone", "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "So. Georgia & So. Sandwich Isl.",
+//            "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St. Barthelemy", "Sudan", "Suriname", "Svalbard & Jan Mayen",
+//            "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo",
+//            "Tokelau", "Tonga", "Trinidad & Tobago", "Tristan da Cunha", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos Islands",
+//            "Tuvalu", "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uraguay", "United States",
+//            "U.S. Outlying Islands", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara",
+//            "Yemen", "Zambia", "Zimbabwe"};
+public static String[] arrFlags ={"Dhaka North","Dhaka South","Others"};
+
+public  static String[] arrNorthZone={"Adabor","Agargaon","Asad Gate","Badda","Banani","Baridhara",
+"Bashundhara","Dakshinkhan","Darus Salam","Dhaka- Cantonment","Dhamrai","Farmgate","Gulshan 1","Gulshan 2",
+"Kallyanpur","Karwan Bazar","Khilgaon","Khilkhet","Kuril","Mirpur 1","Mirpur 10","Mirpur 11-13","Mirpur 60 Feet",
+ "Mirpur Cantonment","Mirpur DOHS","Mirpur Kazipara","Mirpur Shewrapara","Mohakhali","Mohammadpur","Monipur para","Niketon",
+"Sher-e-Bangla Nagar","Shyamoli","Tejgaon","Tejgaon Industrial Area","Uttara"};
+    public  static String[] arrSouthZone={"Azimpur","Bangabhaban","Bangshal","Basabo","Bijoy Nagar","Chawk Bazar",
+            "Demra","Dhanmondi","Dhanmondi","Elephant Road","Gendaria","Gulistan","Hazaribagh","Jatrabari","Kakrail",
+            "Kalabagan","Kamlapur","Keraniganj Sadar","Lalbagh","Matuail","Moghbazar","Motijheel","Nawabganj",
+            "New Market","Palamganj","Pallabi","Palton","Ramna","Rampura","Sabujbagh","Sarulia","Shahbagh","Shantinagar",
+            "Sutrapur","Wari"};
 
 
     /**
@@ -289,12 +307,12 @@ public interface AppConstt {
     }
 
     public static class DEFAULT_VALUES {
-        public static final String SHARE_URL = "http://onelink.to/urbanpoint";
+        public static final String SHARE_URL = "www.biyog.com";
         public static final String SORT_BY_ALPHABETICALLY = "alphabetically";
         public static final String SORT_BY_LOCATION = "location";
         public static final double DEFAULT_LAT = 0;
         public static final double DEFAULT_LNG = 0;
-        public static final String COUNTRY_CODE = "974";
+        public static final String COUNTRY_CODE = "880";
         public static final String Male = "0";
         public static final String Female = "1";
         public static final String Both = "2";

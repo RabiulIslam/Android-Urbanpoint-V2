@@ -75,12 +75,14 @@ public class ExpandableMerchintListAdapter extends BaseExpandableListAdapter {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
 
+
+        Log.e("img_urlll",lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl()+" offer image");
         if (lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl() != null) {
             Picasso.get()
                     .load(AppConstt.BASE_URL_IMAGES + lstOutletOffers.get(groupPosition).getChild().get(childPosition).getImgUrl())
                     .into(viewHolderChild.imvOffer);
         }
-        if (isSubscribed) {
+        if (lstOutletOffers.get(groupPosition).getChild().get(childPosition).getStatus().equalsIgnoreCase("1")) {
             viewHolderChild.imvLockOffer.setVisibility(View.GONE);
         } else {
             viewHolderChild.imvLockOffer.setVisibility(View.VISIBLE);
@@ -189,9 +191,12 @@ public class ExpandableMerchintListAdapter extends BaseExpandableListAdapter {
             viewHolder.merchantDistance.setText("");
         }
 
-        if (isSubscribed) {
+        if (isSubscribed ||  AppConfig.getInstance().mUser.getWallet()>0)
+        {
             viewHolder.imvLock.setVisibility(View.GONE);
-        } else {
+        }
+        else {
+
             viewHolder.imvLock.setVisibility(View.VISIBLE);
         }
 

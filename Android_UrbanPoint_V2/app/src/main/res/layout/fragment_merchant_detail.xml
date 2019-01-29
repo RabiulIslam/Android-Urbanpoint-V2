@@ -237,7 +237,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="10dp"
-                        android:background="@drawable/gray_background_border"
+                        android:background="@drawable/orange_gadient_rectngle_rounded"
                         android:orientation="horizontal"
                         android:padding="10dp"
                         android:visibility="gone"
@@ -249,6 +249,7 @@
                             android:orientation="horizontal">
 
                             <ImageView
+                                app:tint="@android:color/white"
                                 android:layout_width="40dp"
                                 android:layout_height="14dp"
                                 android:layout_gravity="center_vertical"
@@ -262,7 +263,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:text="@string/get_a_ride"
                                 android:textSize="@dimen/fontsize_normal"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout

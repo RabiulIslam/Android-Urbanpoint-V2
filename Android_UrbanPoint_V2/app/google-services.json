@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "144540717075",
-    "firebase_url": "https://urban-point-b1b54.firebaseio.com",
-    "project_id": "urban-point-b1b54",
-    "storage_bucket": "urban-point-b1b54.appspot.com"
+    "project_number": "830312491287",
+    "firebase_url": "https://biyog-15586.firebaseio.com",
+    "project_id": "biyog-15586",
+    "storage_bucket": "biyog-15586.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:144540717075:android:3de848fe35056b60",
+        "mobilesdk_app_id": "1:830312491287:android:681bbae2e5f3f006",
         "android_client_info": {
-          "package_name": "com.urbanpoint.UrbanPoint"
+          "package_name": "com.biyog.Biyog"
         }
       },
       "oauth_client": [
         {
-          "client_id": "144540717075-aae9sc3dbchmcp6vr3lkttf569tg1qol.apps.googleusercontent.com",
+          "client_id": "830312491287-c551iiq4sp0cflajss5f2201q8guoudo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANs3gr2PF763Bho_EaF-HkUo6mJnvj3Qs"
+          "current_key": "AIzaSyDcfgFWXnO-pGsiepkICotsDbkAolvCIcI"
         }
       ],
       "services": {

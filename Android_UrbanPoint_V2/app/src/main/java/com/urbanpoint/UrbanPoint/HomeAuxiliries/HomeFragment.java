@@ -9,6 +9,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -20,6 +23,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +64,8 @@ import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +81,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private TextView txvOfferDays, txvRedIconBtn, txvHomeScreenMsg, txvMemberMsg, txvBubbleCount;
     private HorizontalScrollView mHorizontalScrollView1, mHorizontalScrollView2;
     private RelativeLayout rlHomeMenu, rlHomeSearch;
-
     //Bottom Tab Items
     private final byte NUM_BOTTOM_TABS = 3;
     private final byte BOTTOM_TAB_FAVORITES = 0;
@@ -145,6 +150,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initialize() {
+        printKeyHash();
         customAlert = new CustomAlert();
         progressDilogue = new ProgressDilogue();
         lstCategories = new ArrayList<>();
@@ -374,16 +380,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.frg_home_btn_gain_access:
                 String phone = AppConfig.getInstance().mUser.getmPhoneNumber();
                 Log.d("PHONECHECKER", "onClick: " + phone);
-                logFireBaseEvent();
-                logFaceBookEvent();
-
-                if (phone.length() > 10) {
-                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-                    requestCheckEligibility(phone);
-                } else {
+//                logFireBaseEvent();
+//                logFaceBookEvent();
+//
+//                if (phone.length() > 10) {
+//                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+//                    requestCheckEligibility(phone);
+//                } else {
                     AppConfig.getInstance().mUser.setEligible(false);
                     navToSubscriptionFragment();
-                }
+              //  }
                 // navToSubscriptionEligibleFragment();
                 break;
 
@@ -595,6 +601,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 if (isSuccess) {
                     upDateBothList();
                     updateBadges();
+
+
 //                    if ((AppConfig.getInstance().isEligible) &&
 //                            !(AppConfig.getInstance().mUser.isSubscribed())) {
 //                        navToSubscriptionEligibleFragment();
@@ -607,6 +615,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onWebException(Exception ex) {
+                Log.e("home_exceptn","ex",ex);
+
                 progressDilogue.stopiOSLoader();
                 if (customAlert != null)
                     customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(), null, null, false, null);
@@ -724,7 +734,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lstGrids2 = new ArrayList<>();
         lstCategories = new ArrayList<>();
 
-
         if (Home_WebHit_Post_homeApi.responseObject != null) {
 
             updateGridVwData();
@@ -742,6 +751,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
+
+    public void printKeyHash()
+    {
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "com.s.bikeandtaxi",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+    }
     private void updateGridVwData() {
 
         //Updating Home Screen Msg
@@ -760,8 +788,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
             float playStoreAppVersion = Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getVersion());
             if (playStoreAppVersion > AppConfig.getInstance().mUser.getmAppVersion()) {
-                Log.d("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
-                Log.d("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
+                Log.e("AppUpdateVersion111", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
+                Log.e("AppUpdateVersion11", "Server Version: " + playStoreAppVersion);
                 showAppUpdateDialogue(AppConfig.getInstance().mUser.isForcefullyUpdateActive());
             }
         }
@@ -801,8 +829,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getName(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getSpecial(),
                         festival,
-                        dist,
-                        false
+                        dist, false,
+                        Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData()
+                                .getSpecailOffers().get(i).getApproxSaving())
+
                 ));
             }
             rlProgress1.setVisibility(View.GONE);
@@ -810,6 +840,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         // Updating Home MostLoved Offers list
+
+        Log.e("most_loved_offers_size", Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size()+"");
         if (Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size() > 0) {
             for (int i = 0; i < Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size(); i++) {
@@ -823,10 +855,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getTitle(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getId(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getName(),
-                        Home_WebHit_Post_homeApi.responseObject.getData().getSpecailOffers().get(i).getSpecial(),
+                        //"0",
+                       Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getSpecial(),
                         "",
                         dist,
-                        false
+                        false,Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().
+                        getMostLovedOffers().get(i).getApproxSaving())
                 ));
             }
             rlProgress2.setVisibility(View.GONE);
@@ -837,17 +871,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateBadges() {
-        //Updating GainAcees Button
-        if (AppConfig.getInstance().mUser.isSubscribed()) {
+
+        Log.e("email_verified_status",AppConfig.getInstance().mUser.EmailVerified+"");
+
+        Log.e("subscription1",AppConfig.getInstance().mUser.isSubscribed+
+                "&"+AppConfig.getInstance().mUser.isPremierUser);
+        if (AppConfig.getInstance().mUser.isSubscribed )
+        {
+            Log.e("test","1");
             btnGainAccess.setVisibility(View.GONE);
-        } else {
+        }
+        else
+        {
+            Log.e("test","2");
             btnGainAccess.setVisibility(View.VISIBLE);
-            //Updating "Already Member" Msg For Premier Users
-//                if (AppConfig.getInstance().mUser.isPremierUser()) {
-//                    rlMembermsg.setVisibility(View.VISIBLE);
-//                } else {
-//                    rlMembermsg.setVisibility(View.GONE);
-//                }
         }
 
         //Updating NewOffers Badge
@@ -864,7 +901,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             imvFavorite.setVisibility(View.GONE);
         }
 
-        //Updating UnRead Notification Badge
+        //Updatisng UnRead Notification Badge
         int count = AppConfig.getInstance().mUserBadges.getNotificationCount();
         if (count > 0) {
             rlNotifctnBubble.setVisibility(View.VISIBLE);
@@ -879,9 +916,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         //Updating MenuIcon Badge
         String nationality = "";
+        String EmailVerified="";
         if (AppConfig.getInstance().mUser.getmNationality() != null &&
                 AppConfig.getInstance().mUser.getmNationality().length() > 0) {
             nationality = AppConfig.getInstance().mUser.getmNationality();
+        }
+        if (AppConfig.getInstance().mUser.getEmailVerified() != null &&
+                AppConfig.getInstance().mUser.getEmailVerified().length() > 0) {
+            EmailVerified = AppConfig.getInstance().mUser.getEmailVerified();
         }
         if ((AppConfig.getInstance().mUserBadges.getReviewCount() == 0)) {
             if ((nationality.length() > 0)) {
@@ -898,10 +940,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((MainActivity) getContext()).setReviewCount(AppConfig.getInstance().mUserBadges.getReviewCount());
 
         //Updating Profile Completion Badge
-        if (nationality.length() > 0) {
+        if (nationality.length() > 0  && EmailVerified.length()>0 &&
+                EmailVerified.equalsIgnoreCase("1")) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
-        } else {
+        }
+        else if ((EmailVerified.equalsIgnoreCase("1") && nationality.length()<=0)||
+                (nationality.length()>0 && EmailVerified.equalsIgnoreCase("0")))
+        {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+
+            ((MainActivity) getContext()).setProfileCount("90%");
+
+
+        }
+        else if ( EmailVerified.equalsIgnoreCase("0") && nationality.length()==0 )
+        {
+            ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+            ((MainActivity) getContext()).setProfileCount("80%");
+
         }
 
         //Updating if User can Unsubscribe or not
@@ -952,6 +1008,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 //        loadOldPrefrencLog();
 //        Checking if Update Dialog is required
+
+        Log.e("resume","resume");
+
         String tag = ((MainActivity) getActivity()).returnStackFragment();
         if (tag.equalsIgnoreCase(AppConstt.FRGTAG.HomeFragment)) {
             if (Home_WebHit_Post_homeApi.responseObject != null &&
@@ -965,12 +1024,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                     float playStoreAppVersion = Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getVersion());
                     if (playStoreAppVersion > AppConfig.getInstance().mUser.getmAppVersion()) {
-                        Log.d("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
-                        Log.d("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
+                        Log.e("AppUpdateVersion", "App Version: " + AppConfig.getInstance().mUser.getmAppVersion());
+                        Log.e("AppUpdateVersion", "Server Version: " + playStoreAppVersion);
                         showAppUpdateDialogue(AppConfig.getInstance().mUser.isForcefullyUpdateActive());
                     }
                 }
             }
+
+
         }
     }
 

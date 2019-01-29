@@ -18,9 +18,6 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 
-/**
- * Created by lenovo on 09/08/2018.
- */
 
 public class SignIn_WebHit_Post_signIn {
 
@@ -34,33 +31,21 @@ public class SignIn_WebHit_Post_signIn {
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.signIn;
+        Log.e("login_url",myUrl);
         String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
-
         RequestParams params = new RequestParams();
         params.put("email", _emailId);
         params.put("password", _pin);
         params.put("deviceType", AppConstt.DeviceType);
         params.put("device_info", deviceInfo);
         params.put("token", _fcmToken);
-        Log.d("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
+        Log.e("params",params+"");
+        Log.e("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
 
-//        JSONObject jsonObject = new JSONObject();
-//        StringEntity entity = null;
-//
-//        try {
-//            jsonObject.put("email", _emailId);
-//            jsonObject.put("password", _pin);
-//            jsonObject.put("deviceType", AppConstt.DeviceType);
-//            entity = new StringEntity(jsonObject.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-//        mClient.addHeader(ApiMethod.HEADER.app_id, "1");
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("header",AppConstt.HeadersValue.Authorization);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override
@@ -72,11 +57,14 @@ public class SignIn_WebHit_Post_signIn {
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
 
-                            Log.d("RESPONSE_MESSAGE", strResponse+"");
+                            Log.e("RESPONSE_MESSAGE", strResponse+"");
 
                             switch (statusCode) {
 
                                 case AppConstt.ServerStatus.OK:
+
+                                    Log.e("zone_valuee",responseObject.getData().getZone()+" vvvv");
+
                                     AppConfig.getInstance().mUser.setmName(responseObject.getData().getName());
                                     if (responseObject.getData().getId()>0){
 
@@ -90,16 +78,21 @@ public class SignIn_WebHit_Post_signIn {
                                     AppConfig.getInstance().mUser.setmDob(responseObject.getData().getDOB());
                                     AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());
                                     AppConfig.getInstance().mUser.setmNationality(responseObject.getData().getNationality());
+                                    AppConfig.getInstance().mUser.setZone(responseObject.getData().getZone());
                                     AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
-                                    AppConfig.getInstance().mUser.setLoggedIn(true);
-
+                                   // AppConfig.getInstance().mUser.setLoggedIn(true);
+                                    Log.e("referral",responseObject.getData().getReferralCode()+"ref_code");
+                                    AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().getReferralCode());
                                     int pinCode = Integer.parseInt(_pin);
                                     int num4 = pinCode % 10;
                                     int num1 = pinCode / 1000 % 10;
                                     AppConfig.getInstance().mUser.setmPinCode(num1 + "**" + num4);
 
                                     AppConfig.getInstance().saveUserData();
+//                                    if(responseObject.getMessage().equalsIgnoreCase("Phone no. verification pending."))
+//                                    {
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
+
                                     break;
 
                                 case AppConstt.ServerStatus.NO_CONTENT:
@@ -120,6 +113,7 @@ public class SignIn_WebHit_Post_signIn {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("err",statusCode+","+error.getMessage());
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
@@ -263,6 +257,15 @@ public class SignIn_WebHit_Post_signIn {
             public void setNetwork(String network) {
                 this.network = network;
             }
+            private String Zone;
+
+            public String getZone() {
+                return Zone;
+            }
+
+            public void setZone(String zone) {
+                Zone = zone;
+            }
 
             private String nationality;
 
@@ -282,6 +285,15 @@ public class SignIn_WebHit_Post_signIn {
 
             public void setAuthorization(String Authorization) {
                 this.Authorization = Authorization;
+            }
+            private String refferelcode;
+
+            public String getReferralCode() {
+                return refferelcode;
+            }
+
+            public void setReferralCode(String referralCode) {
+                refferelcode = referralCode;
             }
         }
 

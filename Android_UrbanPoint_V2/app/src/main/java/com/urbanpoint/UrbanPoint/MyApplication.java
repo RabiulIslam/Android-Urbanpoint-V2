@@ -4,49 +4,57 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LongSparseArray;
 import android.view.WindowManager;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
+import com.facebook.accountkit.AccountKit;
 import com.facebook.appevents.AppEventsLogger;
 import com.flurry.android.FlurryAgent;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
+//import com.google.android.gms.analytics.GoogleAnalytics;
+//import com.google.android.gms.analytics.Tracker;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.GPSTracker;
 
+import io.fabric.sdk.android.Fabric;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Created by Danish on 1/25/2018.
- */
 
-public class MyApplication extends Application {
+
+public class MyApplication extends MultiDexApplication
+{
 
     private static MyApplication applicationContext;
     private DisplayMetrics displaymetrics;
     Context mContext;
-    private static GoogleAnalytics sAnalytics;
-    private static Tracker sTracker;
+//    private static GoogleAnalytics sAnalytics;
+//    private static Tracker sTracker;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         mContext = this;
+
+        AccountKit.initialize(this);
         AppConfig.initInstance(mContext);
         setLanguageSpecificFonts(true);
-
-
+//         startService(new Intent(mContext,GPSTracker.class));
+            GPSTracker.enqueueWork(this,new Intent());
    /*     CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/ubuntu_regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
@@ -70,9 +78,9 @@ public class MyApplication extends Application {
 
 //        AnalyticsTrackers.initialize(this);
 //        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
-
-        sAnalytics = GoogleAnalytics.getInstance(this);
-        getDefaultTracker();
+//
+//        sAnalytics = GoogleAnalytics.getInstance(this);
+//        getDefaultTracker();
 
         Locale locale = new Locale("en_US");
         Locale.setDefault(locale);
@@ -85,14 +93,14 @@ public class MyApplication extends Application {
 
     }
 
-    synchronized public Tracker getDefaultTracker() {
-        // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-        if (sTracker == null) {
-            sTracker = sAnalytics.newTracker(R.xml.app_tracker);
-        }
-
-        return sTracker;
-    }
+//    synchronized public Tracker getDefaultTracker() {
+//        // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+//        if (sTracker == null) {
+//            sTracker = sAnalytics.newTracker(R.xml.app_tracker);
+//        }
+//
+//        return sTracker;
+//    }
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -288,8 +296,8 @@ public class MyApplication extends Application {
         Log.e(key, "" + value);
     }
 
-    public Typeface getFont() {
-        Typeface typeface = Typeface.createFromAsset(applicationContext.getAssets(), "fonts/openSans_regular.ttf");
+    public Typeface getFont(Context context) {
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/openSans_regular.ttf");
         return typeface;
     }
 

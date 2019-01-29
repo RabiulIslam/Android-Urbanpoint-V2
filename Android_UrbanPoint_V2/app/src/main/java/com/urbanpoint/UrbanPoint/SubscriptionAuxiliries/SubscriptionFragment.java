@@ -1,5 +1,6 @@
 package com.urbanpoint.UrbanPoint.SubscriptionAuxiliries;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,11 +16,11 @@ import com.urbanpoint.UrbanPoint.DrawerAuxiliries.AccessCodeFragment;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.Home_WebHit_Post_eligibilitychecker;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.Home_WebHit_Post_homeApi;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
+import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.WebServices.Subscribe_WebHit_Post_validatemsisdn;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
-import com.urbanpoint.UrbanPoint.Utils.CellNoEntryView;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.ExpandableHeightGridView;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
@@ -32,13 +33,10 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Danish on 2/19/2018.
- */
 
 public class SubscriptionFragment extends Fragment implements View.OnClickListener {
-    private Button btnConfirm, btnAccessCode;
-    private CellNoEntryView mMobileNumberEntry;
+    private Button  btnAccessCode;
+   // private CellNoEntryView mMobileNumberEntry;
     private String enteredMobileNumber = "";
     private ExpandableHeightGridView lsv1, lsv2;
     private LinearLayout llParentLayout;
@@ -48,6 +46,7 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
     private ProgressDilogue progressDilogue;
     private CustomAlert customAlert;
     private HtmlTextView  txvSubsText;
+    private  Button btnSubs1,btnSubs2,btnSubs3;
 
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
 
@@ -72,7 +71,8 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         return v;
     }
 
-    private void updateSubscriptionLists() {
+    private void updateSubscriptionLists()
+    {
         if (Home_WebHit_Post_homeApi.responseObject != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size() > 0) {
@@ -82,7 +82,6 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
              //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
                 txvSubsText.setHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText(), new HtmlResImageGetter(txvSubsText));
             }
-
 
             subscribeTextAdapter = new SubscribeTextAdapter(getContext(), lstStrings, true);
             lsv1.setExpanded(true);
@@ -113,53 +112,78 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         lsv1 = v.findViewById(R.id.frg_subscription_lsv_1);
         lsv2 = v.findViewById(R.id.frg_subscription_lsv_2);
         txvSubsText = (HtmlTextView) v.findViewById(R.id.txv_subs_text);
-        mMobileNumberEntry = v.findViewById(R.id.frg_subscription_pinentry_phone);
-        btnConfirm = v.findViewById(R.id.frg_subscription_btn_cnfrm);
+//        mMobileNumberEntry = v.findViewById(R.id.frg_subscription_pinentry_phone);
+//        btnConfirm = v.findViewById(R.id.frg_subscription_btn_cnfrm);
         btnAccessCode = v.findViewById(R.id.frg_subscription_btn_access_code);
-
+        btnSubs1=v.findViewById(R.id.frg_subscription_btn1);
+        btnSubs2=v.findViewById(R.id.frg_subscription_btn2);
+        btnSubs3=v.findViewById(R.id.frg_subscription_btn3);
         llParentLayout.setOnClickListener(this);
-        btnConfirm.setOnClickListener(this);
+//        btnConfirm.setOnClickListener(this);
         btnAccessCode.setOnClickListener(this);
+        btnSubs1.setOnClickListener(this);
+        btnSubs2.setOnClickListener(this);
+        btnSubs3.setOnClickListener(this);
 
-        mMobileNumberEntry.setOnPinEnteredListener(new CellNoEntryView.OnPinEnteredListener() {
-            @Override
-            public void onPinEntered(String pin) {
-                if (pin.length() == 8) {
-                    enteredMobileNumber = pin;
-                    AppConfig.getInstance().closeKeyboard(getActivity());
-                } else {
-                    enteredMobileNumber = "";
-                }
-            }
-        });
+//        mMobileNumberEntry.setOnPinEnteredListener(new CellNoEntryView.OnPinEnteredListener() {
+//            @Override
+//            public void onPinEntered(String pin) {
+//                if (pin.length() == 8) {
+//                    enteredMobileNumber = pin;
+//                    AppConfig.getInstance().closeKeyboard(getActivity());
+//                } else {
+//                    enteredMobileNumber = "";
+//                }
+//            }
+//        });
     }
 
     @Override
     public void onClick(View v) {
+        Intent in=new Intent(getActivity(),ActivityOrderDetail.class);
         switch (v.getId()) {
-            case R.id.frg_subscription_btn_cnfrm:
-                if (enteredMobileNumber != null && enteredMobileNumber.length() == 8) {
-                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-//                    if (AppConfig.getInstance().mUser.getmPhoneNumber().length() > 10) {
-//                        requestValidateMsisdn(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-//                    } else {
-                        requestCheckEligibility(AppConstt.DEFAULT_VALUES.COUNTRY_CODE + enteredMobileNumber);
-                   // }
-                } else {
-                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getString(R.string.voda_do_unsubscribe_enter_mobile_number), null, null, false, null);
-                }
+
+            case R.id.frg_subscription_btn1:
+                in.putExtra("type","1");
+                in.putExtra("subtotal","Tk 9.99");
+                in.putExtra("package","Daily");
+                in.putExtra("vat","Tk 1.49");
+                in.putExtra("total","Tk 11.48");
+               startActivity(in);
+                ((MainActivity)getActivity()).finish();
                 break;
+            case R.id.frg_subscription_btn2:
+                in.putExtra("type","2");
+                in.putExtra("subtotal","Tk 49.99");
+                in.putExtra("package","Weekly");
+                in.putExtra("vat","Tk 07.49");
+                in.putExtra("total","Tk 57.48");
+                startActivity(in);
+                ((MainActivity)getActivity()).finish();
+                break;
+            case R.id.frg_subscription_btn3:
+                in.putExtra("type","3");
+                in.putExtra("subtotal","Tk 99.00");
+                in.putExtra("package","Monthly");
+                in.putExtra("vat","Tk 14.85");
+                in.putExtra("total","Tk 113.85");
+                startActivity(in);
+                ((MainActivity)getActivity()).finish();
+
+            break;
             case R.id.frg_subscription_btn_access_code:
                 AppConfig.getInstance().closeKeyboard(getActivity());
-                Bundle b = new Bundle();
-                b.putBoolean(AppConstt.BundleStrings.backBtnVisibility, true);
-                navToAccessCodeFragment(b);
+                Bundle b1 = new Bundle();
+                b1.putBoolean(AppConstt.BundleStrings.backBtnVisibility, true);
+                navToAccessCodeFragment(b1);
                 break;
             case R.id.frg_subscription_ll_parentlayout:
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 break;
         }
     }
+
+
 
     private void navToSubscriptionConfirmFragment(Bundle _b) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();

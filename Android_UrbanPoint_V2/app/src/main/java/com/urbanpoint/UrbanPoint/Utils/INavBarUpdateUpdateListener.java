@@ -23,5 +23,7 @@ public interface INavBarUpdateUpdateListener {
     public void setUnSubscribeVisibility(int _visibility);
 
     public void navToLogin();
+
+    public void setProfileCount(String Count);
 }
 

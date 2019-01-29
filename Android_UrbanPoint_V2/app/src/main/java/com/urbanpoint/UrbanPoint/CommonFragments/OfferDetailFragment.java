@@ -258,18 +258,24 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.frg_offer_detail_btnGetIt:
 
-                if (!AppConfig.getInstance().mUser.isSubscribed()) {
-                    AppConfig.getInstance().isCommingFromOfferDetail = true;
-                    String phone = AppConfig.getInstance().mUser.getmPhoneNumber();
-                    Log.d("PHONECHECKER", "onClick: " + phone);
-                    if (phone.length() > 10) {
-                        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-                        requestCheckEligibility(phone);
-                    } else {
-                        AppConfig.getInstance().mUser.setEligible(false);
-                        navToSubscriptionFragment();
-                    }
-                } else {
+//                if (!AppConfig.getInstance().mUser.isSubscribed()) {
+//                    AppConfig.getInstance().isCommingFromOfferDetail = true;
+//                    String phone = AppConfig.getInstance().mUser.getmPhoneNumber();
+//                    Log.d("PHONECHECKER", "onClick: " + phone);
+//                    if (phone.length() > 10) {
+//                        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+//                        requestCheckEligibility(phone);
+//                    } else {
+//                        AppConfig.getInstance().mUser.setEligible(false);
+//                        navToSubscriptionFragment();
+//                    }
+                if (! AppConfig.getInstance().mUser.isSubscribed()
+                    & (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0)
+                        .getApproxSaving()) > AppConfig.getInstance().mUser.getWallet()))
+                 {
+                     navToSubscriptionFragment();
+                 }
+                  else {
                     bundle = new Bundle();
                     bundle.putString(AppConstt.BundleStrings.offerId, offerId + "");
                     bundle.putString(AppConstt.BundleStrings.offerName, offerName);
@@ -391,7 +397,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT, OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getDescription());
-            String formattedString = String.format(getString(R.string.offer_share_message_text), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getTitle(), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getName(), roundedSavings + " QR", AppConstt.DEFAULT_VALUES.SHARE_URL);
+            String formattedString = String.format(getString(R.string.offer_share_message_text), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getTitle(), OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getName(), roundedSavings + " Tk", AppConstt.DEFAULT_VALUES.SHARE_URL);
             sharingIntent.putExtra(Intent.EXTRA_TEXT, formattedString);
             Log.d("sadsadsdsad", "onClick: " + formattedString);
             startActivity(Intent.createChooser(sharingIntent, "Select"));
@@ -513,27 +519,9 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
     private void updateOfferDetailValues() {
         if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData() != null &&
                 OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().size() > 0) {
-            if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage() != null && !OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage().equalsIgnoreCase("")) {
+            if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage() != null
+                    && !OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage().equalsIgnoreCase("")) {
                 imvProduct.setVisibility(View.VISIBLE);
-
-//                imageLoader.displayImage(AppConstt.BASE_URL_IMAGES + OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage(), imvMerchant);
-
-//                mImageLoader.displayImage(AppConstt.BASE_URL_IMAGES + OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage(), imvProduct
-//                        , options, new SimpleImageLoadingListener() {
-//                            @Override
-//                            public void onLoadingStarted(String imageUri, View view) {
-//                            }
-//
-//                            @Override
-//                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//                                Log.d("Picass2", "onLoadingFailed ImageLoader: "+failReason.toString());
-//                            }
-//
-//                            @Override
-//                            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                                Log.d("Picass2", "onLoadingComplete ImageLoader: "+imageUri);
-//                            }
-//                        });
 
                 Picasso.get()
                         .load(AppConstt.BASE_URL_IMAGES + OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getImage())
@@ -541,20 +529,6 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             }
 
             if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getLogo() != null) {
-//                mImageLoader.displayImage(AppConstt.BASE_URL_IMAGES + OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getLogo(), imvMerchant
-//                        , options, new SimpleImageLoadingListener() {
-//                            @Override
-//                            public void onLoadingStarted(String imageUri, View view) {
-//                            }
-//
-//                            @Override
-//                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//                            }
-//
-//                            @Override
-//                            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                            }
-//                        });
 
                 Picasso.get()
                         .load(AppConstt.BASE_URL_IMAGES + OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getLogo())
@@ -574,6 +548,50 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             } else {
                 imvMerchant.setImageResource(R.drawable.rmv_place_holder);
             }
+
+
+//            Log.e("price",Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData()
+//                    .get(0).getApproxSaving())+","+ AppConfig.getInstance().mUser.getWallet());
+            if (AppConfig.getInstance().mUser.isSubscribed()
+                    || (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
+                    <= AppConfig.getInstance().mUser.getWallet()))
+            {
+                Log.e("check","lock");
+                imvGetItLock.setVisibility(View.GONE);
+
+                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0)
+                {
+                    btnGetIt.setText(getResources().getString(R.string.btn_used));
+                    btnGetIt.setEnabled(false);
+                    btnGetIt.setClickable(false);
+                    btnGetIt.setBackground(getResources().getDrawable(R.drawable.btn_redeem_slc));
+                    txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_2));
+                    txvExpiryTime.setVisibility(View.VISIBLE);
+                }
+                else {
+                    String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
+                    txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
+                    txvExpiryTime.setVisibility(View.VISIBLE);
+                }
+
+            }
+            else if(Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
+                    > AppConfig.getInstance().mUser.getWallet())
+            {
+                imvGetItLock.setVisibility(View.VISIBLE);
+                btnGetIt.setEnabled(true);
+                btnGetIt.setClickable(true);
+            }
+            else
+            {
+                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
+                    btnGetIt.setText(getResources().getString(R.string.btn_used));
+                }
+                imvGetItLock.setVisibility(View.VISIBLE);
+                btnGetIt.setEnabled(false);
+                btnGetIt.setClickable(false);
+            }
+
             merchantPIN = OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getPin();
             merchantId = OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getMerchantId();
             orderId = OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getId();
@@ -598,7 +616,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             txvApproxSaving.setVisibility(View.VISIBLE);
             float savings = Float.parseFloat(String.valueOf(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving()));
             roundedSavings = (int) savings;
-            txvApproxSavingPrice.setText(getResources().getString(R.string.txv_qatar_riyal) + " " + roundedSavings);
+            txvApproxSavingPrice.setText(roundedSavings+ " " +getResources().getString(R.string.txv_qatar_riyal) );
             txvApproxSavingPrice.setVisibility(View.VISIBLE);
             txvValidFor.setText(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getValidFor());
             txvValidFor.setVisibility(View.VISIBLE);
@@ -608,24 +626,12 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             txvTiming.setVisibility(View.VISIBLE);
             btnAddToFav.setVisibility(View.VISIBLE);
             btnGetIt.setVisibility(View.VISIBLE);
+        Log.e("offer_subscription",AppConfig.getInstance().mUser.isSubscribed()+"");
 
-            if (AppConfig.getInstance().mUser.isSubscribed()) {
-                imvGetItLock.setVisibility(View.GONE);
-            } else {
-                imvGetItLock.setVisibility(View.VISIBLE);
-            }
-            if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
-                btnGetIt.setText(getResources().getString(R.string.btn_used));
-                btnGetIt.setEnabled(false);
-                btnGetIt.setClickable(false);
-                btnGetIt.setBackground(getResources().getDrawable(R.drawable.btn_redeem_slc));
-                txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_2) + " " + getNextMonth());
-                txvExpiryTime.setVisibility(View.VISIBLE);
-            } else {
-                String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
-                txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
-                txvExpiryTime.setVisibility(View.VISIBLE);
-            }
+
+
+
+
             if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getRenew().equalsIgnoreCase("0")) {
                 txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_3));
                 txvExpiryTime.setVisibility(View.VISIBLE);

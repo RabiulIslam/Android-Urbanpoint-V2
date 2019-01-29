@@ -1,0 +1,431 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent_background">
+
+    <ScrollView
+        android:id="@+id/scrollViewMainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/mainParentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/actionBarHeightLayout"
+                layout="@layout/blank_layout_height" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="155dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/logoContentDescription"
+                    android:padding="@dimen/dp10"
+                    android:src="@drawable/logo"
+                    android:visibility="gone"/>
+                <ImageView
+                    android:layout_width="175dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/logo_main" />
+
+
+                <TextView
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/dp5"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/setup_your_account" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:orientation="vertical">
+
+                <TextView
+                    android:fontFamily="@font/opensans_regular"
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/dp5"
+                    android:paddingTop="0dp"
+                    android:text="@string/sign_in_enter_email" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp50"
+                    android:layout_marginRight="@dimen/dp50"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp10"
+                    android:paddingRight="@dimen/dp10">
+
+
+
+
+                    <EditText
+                        android:textCursorDrawable="@null"
+                        android:id="@+id/signUpUserEmail"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dp5"
+                        android:paddingBottom="@dimen/dp5"
+                        android:background="@drawable/custom_round_button"
+                        android:contentDescription="@string/enter_email_message"
+                        android:gravity="left|center"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/dp10"
+                        android:paddingRight="@dimen/dp10"
+                        android:textSize="@dimen/fontsize_large"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textStyle="normal" />
+                    <RelativeLayout
+                        android:id="@+id/frg_sign_up_rl_progrssbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:visibility="gone">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <TextView
+                android:fontFamily="@font/opensans_regular"
+                style="@style/view_20"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dp5"
+                android:layout_marginTop="@dimen/dp15"
+                android:paddingTop="0dp"
+                android:text="@string/occupation" />
+            <Spinner
+                android:id="@+id/signUpUserOccupation"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_round_button"
+                android:contentDescription="@string/enter_email_message"
+                android:gravity="left|center"
+                android:paddingTop="8dp"
+                android:popupBackground="@drawable/custom_round_button"
+                android:paddingBottom="8dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fontsize_large"
+                android:layout_marginLeft="@dimen/dp60"
+                android:layout_marginRight="@dimen/dp60"
+                android:textStyle="normal" />
+            <TextView
+
+                android:id="@+id/tv_ref_code"
+                android:fontFamily="@font/opensans_regular"
+                style="@style/view_20"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dp5"
+                android:layout_marginTop="@dimen/dp15"
+                android:paddingTop="0dp"
+                android:text="@string/referral_code" />
+            <EditText
+                android:textCursorDrawable="@null"
+                android:id="@+id/signUpUserReferralCode"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp5"
+                android:hint="Optional"
+                android:textColorHint="@color/white"
+                android:paddingBottom="@dimen/dp5"
+                android:background="@drawable/custom_round_button"
+
+                android:gravity="left|center"
+                android:inputType=""
+                android:paddingLeft="@dimen/dp10"
+                android:paddingRight="@dimen/dp10"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dp60"
+                android:textSize="@dimen/fontsize_large"
+                android:layout_marginRight="@dimen/dp60"
+                android:textStyle="normal" />
+
+            <TextView
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp15" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/view_20"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp5"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="@string/sign_up_step_five_message" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dp40"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView
+                        android:id="@+id/signUpNewPinEntry"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        app:accentType="character"
+                        app:applyDigitTextSize="true"
+                        app:digitBackground="@drawable/pin_custom_square_button"
+                        app:digitHeight="@dimen/dp35"
+                        app:digitSpacing="@dimen/dp15"
+                        app:digitTextColor="@color/white"
+                        app:digitTextSize="@dimen/dp8"
+                        app:digitWidth="@dimen/dp35"
+                        app:mask="&#8226;"
+                        app:pinAccentColor="@color/selected_pin_input"
+                        app:pinInputType="number" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp2">
+
+                    <TextView
+                        style="@style/view_20"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp5"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/confirm_pin" />
+
+
+                    <LinearLayout
+                        android:id="@+id/signUpConfirmPinEntryMainLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/dp40"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView
+                            android:id="@+id/signUpConfirmPinEntry"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            app:accentType="character"
+                            app:applyDigitTextSize="true"
+                            app:digitBackground="@drawable/pin_custom_square_button"
+                            app:digitHeight="@dimen/dp35"
+                            app:digitSpacing="@dimen/dp15"
+                            app:digitTextColor="@color/white"
+                            app:digitTextSize="@dimen/dp8"
+                            app:digitWidth="@dimen/dp35"
+                            app:mask="&#8226;"
+                            app:pinAccentColor="@color/selected_pin_input"
+                            app:pinInputType="number" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/view_20"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/login_terms_and_conditions_message_one"
+                        android:textSize="@dimen/sp10" />
+
+                    <TextView
+                        android:id="@+id/loginTermsAndConditions"
+                        style="@style/view_20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/login_terms_and_conditions_message_two"
+                        android:textColor="@color/purchase_history_header"
+                        android:textSize="@dimen/sp10"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/loginTermsAndConditions_Two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="@string/login_terms_and_conditions_message_two"
+                    android:textColor="@color/purchase_history_header"
+                    android:textSize="@dimen/sp10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/dp15"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp10">
+
+                    <Button
+                        android:id="@+id/signUpStepSixBackButton"
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp100"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/custom_round_button"
+                        android:contentDescription="@string/back"
+                        android:text="@string/back"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/change_text_color_on_button_pressed"
+                        android:textStyle="normal" />
+
+                    <View
+                        android:layout_width="@dimen/dp80"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/signUpStepSixFinishButton"
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp100"
+                        android:background="@drawable/custom_round_button"
+                        android:contentDescription="@string/finish"
+                        android:text="@string/finish"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textColor="@drawable/change_text_color_on_button_pressed"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp10">
+
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view" />
+
+                    <View
+                        android:layout_width="@dimen/dp5"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view" />
+
+                    <View
+                        android:layout_width="@dimen/dp5"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view" />
+
+                    <View
+                        android:layout_width="@dimen/dp5"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view" />
+
+                    <View
+                        android:layout_width="@dimen/dp5"
+                        android:layout_height="match_parent" />
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view" />
+
+                    <View
+                        android:layout_width="@dimen/dp5"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        style="@style/button_style"
+                        android:layout_width="@dimen/dp10"
+                        android:layout_height="@dimen/dp10"
+                        android:background="@drawable/custom_circle_fill_view"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp150"></LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

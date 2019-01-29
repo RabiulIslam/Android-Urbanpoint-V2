@@ -1,6 +1,8 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.JsonReader;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -12,6 +14,7 @@ import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -27,69 +30,87 @@ public class Home_WebHit_Post_homeApi {
     private AsyncHttpClient mClient = new AsyncHttpClient();
     public static ResponseModel responseObject = null;
     Context mContext;
-
-
     public void requestHomeApi(Context _mContext, final IWebCallbacks iWebCallback) {
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.homeApi;
-
+        Log.e("homeApi",myUrl);
         RequestParams requestParams = new RequestParams();
         requestParams.put("app_version",AppConfig.getInstance().mUser.mAppVersion);
-
+         Log.e("home_params",requestParams+"");
+         Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, requestParams,new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
                         String strResponse;
                         try {
                             Gson gson = new Gson();
+
                             strResponse = new String(responseBody, "UTF-8");
+//                            JsonReader reader = new JsonReader(new StringReader(strResponse.trim()));
+//                            reader.setLenient(true);
 
-                            responseObject = gson.fromJson(strResponse, ResponseModel.class);
-
+                            responseObject = gson.fromJson(strResponse.trim(), ResponseModel.class);
+                            Log.e("res_object",responseObject+"");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
-                                    if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
-                                        //Premier User is always subscribed and not allowed to unsub
-                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                        AppConfig.getInstance().mUser.setSubscribed(true);
-                                        AppConfig.getInstance().mUser.setPremierUser(true);
-                                    } else {
+                                    Log.e("emailverificationstatus",responseObject.getData().emailverified);
+                                    AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
+                                     AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
+                                     AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
+//                                    if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
+//                                        //Premier User is always subscribed and not allowed to unsub
+//                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                        AppConfig.getInstance().mUser.setSubscribed(true);
+//                                        AppConfig.getInstance().mUser.setPremierUser(true);
+//                                    } else {
+                                        Log.e("home_subscription",responseObject.getData().getSubscription().getSubscription());
                                         if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
                                             // subscription==1 means user has access to all offers (for some no. of remaining days)
                                             AppConfig.getInstance().mUser.setSubscribed(true);
-                                            AppConfig.getInstance().mUser.setPremierUser(false);
-                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
-                                                // status==0 means user has been unsubscribed
-                                                AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                            } else {
-                                                switch (responseObject.getData().getSubscription().getNetwork()) {
-                                                    case AppConstt.SubscriptionTypes.Ooredoo:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.VodaFone:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.Card:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
-                                                        break;
-
-                                                    case AppConstt.SubscriptionTypes.Code:
-                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                                        break;
-                                                }
+                                            Log.e("premium_userrrr",responseObject.getData().getSubscription().getStatus());
+                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0"))
+                                            {
+                                                AppConfig.getInstance().mUser.setPremierUser(false);
                                             }
+                                            else
+                                            {
+                                                AppConfig.getInstance().mUser.setPremierUser(true);
+                                            }
+                                            //AppConfig.getInstance().mUser.setPremierUser(false);
+//                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
+//                                                // status==0 means user has been unsubscribed
+//                                                AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                            }
+//                                            else {
+//                                                switch (responseObject.getData().getSubscription().getNetwork()) {
+//                                                    case AppConstt.SubscriptionTypes.Ooredoo:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.VodaFone:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.Card:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(true);
+//                                                        break;
+//
+//                                                    case AppConstt.SubscriptionTypes.Code:
+//                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                                        break;
+//                                                }
+                                           // }
                                         } else {
-                                            AppConfig.getInstance().mUser.setPremierUser(false);
-                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
+//                                            AppConfig.getInstance().mUser.setPremierUser(false);
+//                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
                                             AppConfig.getInstance().mUser.setSubscribed(false);
                                         }
-                                    }
+
                                     if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber()!=null&&
                                             Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber().equalsIgnoreCase("1")) {
                                         AppConfig.getInstance().mUser.setUberRequired(true);
@@ -125,6 +146,7 @@ public class Home_WebHit_Post_homeApi {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            Log.e("exception","ex",ex);
                             iWebCallback.onWebException(ex);
                         }
                     }
@@ -132,6 +154,7 @@ public class Home_WebHit_Post_homeApi {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("errr",error.getMessage()+","+statusCode);
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
@@ -176,6 +199,7 @@ public class Home_WebHit_Post_homeApi {
 
     public class ResponseModel {
         private int status;
+
 
         public int getStatus() {
             return this.status;
@@ -984,7 +1008,19 @@ public class Home_WebHit_Post_homeApi {
         }
 
         public class Data {
+            private  String emailverified;
+            private int wallet;
             private Subscription subscription;
+
+            public int getWallet()
+            {
+                return wallet;
+            }
+
+            public void setWallet(int wallet)
+            {
+                this.wallet = wallet;
+            }
 
             public Subscription getSubscription() {
                 return this.subscription;
@@ -992,6 +1028,15 @@ public class Home_WebHit_Post_homeApi {
 
             public void setSubscription(Subscription subscription) {
                 this.subscription = subscription;
+            }
+            private String refferelcode;
+
+            public String getRefferelcode() {
+                return refferelcode;
+            }
+
+            public void setRefferelcode(String refferelcode) {
+                this.refferelcode = refferelcode;
             }
 
             private int newOffer;
@@ -1028,6 +1073,14 @@ public class Home_WebHit_Post_homeApi {
 
             public int getUnReadNotification() {
                 return this.unReadNotification;
+            }
+
+            public String getEmailVerified() {
+                return emailverified;
+            }
+
+            public void setEmailVerified(String emailVerified) {
+                this.emailverified = emailVerified;
             }
 
             public void setUnReadNotification(int unReadNotification) {

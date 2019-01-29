@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -40,14 +41,16 @@ public class NewOffers_Webhit_Get_getOffers {
         }else {
              myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.GET.getMyFavouriteOffers ;
         }
-
+        Log.e("get_fvt_offers_url",myUrl);
         if (_lat>0){
             params.put("latitude", _lat);
             params.put("longitude", _lng);
         }
-
+        Log.e("get_fvt_offr_params",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
+
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+         Log.e("offers_headers",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override
@@ -80,6 +83,7 @@ public class NewOffers_Webhit_Get_getOffers {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
+                        Log.e("fvt_offers_error",error.getMessage()+"");
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

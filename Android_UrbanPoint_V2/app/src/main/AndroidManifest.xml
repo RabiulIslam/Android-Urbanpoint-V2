@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.urbanpoint.UrbanPoint">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -12,7 +13,7 @@
 
     <application
         android:name="com.urbanpoint.UrbanPoint.MyApplication"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
@@ -25,11 +26,13 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
+        <!--<activity android:name=".DrawerAuxiliries.OrderDetail"-->
+            <!--android:screenOrientation="portrait"></activity>-->
         <activity
             android:name="com.urbanpoint.UrbanPoint.MainActivity"
             android:launchMode="singleTask"
@@ -37,12 +40,35 @@
             android:windowSoftInputMode="adjustPan">
 
         </activity>
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
+        <meta-data android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name" />
+        <!--<meta-data android:name="com.facebook.sdk.ApplicationId"-->
+            <!--android:value="@string/FACEBOOK_APP_ID" />-->
+        <!--<meta-data android:name="com.facebook.accountkit.ClientToken"-->
+            <!--android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />-->
+
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+            android:theme="@style/fbotptheme"
+            tools:replace="android:theme"/>
+
+        <activity
+            android:name="com.urbanpoint.UrbanPoint.SignupActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
 
 
         <!-- For Facebook-->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:value="@string/FACEBOOK_APP_ID" />
         <meta-data android:name="com.facebook.sdk.CodelessDebugLogEnabled" android:value="true" />
 
 
@@ -61,8 +87,20 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+   <activity android:name=".GatewayCallbackActivity"></activity>
+        <activity android:name=".SubscriptionAuxiliries.ActivityOrderDetail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
-
+        <activity android:name=".PaymentSuccess"></activity>
+      <service android:name=".Utils.GPSTracker"
+          android:permission="android.permission.BIND_JOB_SERVICE"
+          android:exported="true"></service>
+        <activity android:name=".SubscriptionAuxiliries.TermsofSale"
+            android:screenOrientation="portrait"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ef3bffaaf480adea4f322123d1aa50aaa0c5042b" />
     </application>
 
 </manifest>

@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <include
+        android:id="@+id/actionBarHeightLayout"
+        layout="@layout/blank_layout_height" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp10">
+
+        <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+            style="@style/view_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="3"
+            android:fontFamily="@font/opensans_regular"
+            android:text="@string/intro_fra_1"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp35" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp175"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/icon" />
+
+        <com.urbanpoint.UrbanPoint.customViews.customFontViews.CustomTextView
+            style="@style/view_20"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="bottom|center"
+            android:text="@string/intro_fra_1_footer" />
+
+    </LinearLayout>
+
+</RelativeLayout>

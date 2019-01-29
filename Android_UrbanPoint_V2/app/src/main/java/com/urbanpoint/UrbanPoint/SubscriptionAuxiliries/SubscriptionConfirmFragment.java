@@ -111,7 +111,7 @@ public class SubscriptionConfirmFragment extends Fragment implements View.OnClic
                     if (Signup_WEbhit_Post_validateCode.responseObject.getMessage().equals("matched")) {
 
                         progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-                        requestSubscribe(subscriberPhone);
+                       // requestSubscribe(subscriberPhone);
                     } else {
 
                     }
@@ -174,38 +174,38 @@ public class SubscriptionConfirmFragment extends Fragment implements View.OnClic
         ft.commit();
     }
 
-    private void requestSubscribe(String _phone) {
-        Subscribe_WebHit_Post_subscribe subscribe_webHit_post_subscribe = new Subscribe_WebHit_Post_subscribe();
-        subscribe_webHit_post_subscribe.requestsubscribeUser(getContext(), new IWebCallbacks() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                progressDilogue.stopiOSLoader();
-                if (isSuccess) {
-                    if (AppConfig.getInstance().mUser.isEligible()) {
-                        navToSubscriptionEligibleSuccessFragment();
-                    } else {
-                        navToSubscriptionSuccessFragment();
-                    }
-                } else {
-                    customAlert.showCustomAlertDialog(getActivity(), null, strMsg, null, null, false, null);
-                }
-
-            }
-
-            @Override
-            public void onWebException(Exception ex) {
-                progressDilogue.stopiOSLoader();
-                customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(), null, null, false, null);
-
-            }
-
-            @Override
-            public void onWebLogout() {
-                progressDilogue.stopiOSLoader();
-
-            }
-        }, _phone);
-    }
+//    private void requestSubscribe(String _phone) {
+//        Subscribe_WebHit_Post_subscribe subscribe_webHit_post_subscribe = new Subscribe_WebHit_Post_subscribe();
+//        subscribe_webHit_post_subscribe.requestsubscribeUser(getContext(), new IWebCallbacks() {
+//            @Override
+//            public void onWebResult(boolean isSuccess, String strMsg) {
+//                progressDilogue.stopiOSLoader();
+//                if (isSuccess) {
+//                    if (AppConfig.getInstance().mUser.isEligible()) {
+//                        navToSubscriptionEligibleSuccessFragment();
+//                    } else {
+//                        navToSubscriptionSuccessFragment();
+//                    }
+//                } else {
+//                    customAlert.showCustomAlertDialog(getActivity(), null, strMsg, null, null, false, null);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onWebException(Exception ex) {
+//                progressDilogue.stopiOSLoader();
+//                customAlert.showCustomAlertDialog(getActivity(), null, ex.getMessage(), null, null, false, null);
+//
+//            }
+//
+//            @Override
+//            public void onWebLogout() {
+//                progressDilogue.stopiOSLoader();
+//
+//            }
+//        }, _phone);
+//    }
     private void logFireBaseEvent() {
         Bundle params = new Bundle();
         params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());

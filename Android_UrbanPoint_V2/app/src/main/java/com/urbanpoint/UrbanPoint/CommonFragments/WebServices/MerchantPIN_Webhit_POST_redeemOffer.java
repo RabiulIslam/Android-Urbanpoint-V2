@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.CommonFragments.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -26,14 +27,17 @@ public class MerchantPIN_Webhit_POST_redeemOffer {
     public static ResponseModel responseObject;
     private Context mContext;
 
-    public void requestRedeem(Context _context, final IWebCallbacks iWebCallbacks, int _offerId, int _pin) {
+    public void requestRedeem(Context _context, final IWebCallbacks iWebCallbacks, int _offerId, int _pin,int useWallet) {
 
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.redeemOffer;
+        Log.e("redeem_offerurl",myUrl);
         this.mContext = _context;
         RequestParams params = new RequestParams();
         params.put("offer_id", _offerId);
         params.put("pin", _pin);
-
+        params.put("should_redeemed",useWallet);
+        Log.e("redeem_offerparams",params+"");
+        Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
