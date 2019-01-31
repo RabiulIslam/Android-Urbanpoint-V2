@@ -45,7 +45,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SplashFragment;
 import com.urbanpoint.UrbanPoint.MyApplication;
@@ -122,7 +122,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             navToSplash();
         }
         String projectToken = AppConstt.mixPanel.MIXPANEL_TOKEN; // e.g.: "1ef7e30d2a58d27f4b90c42e31d6d7ad"
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
 
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&

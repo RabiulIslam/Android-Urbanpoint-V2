@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
@@ -423,19 +423,19 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         // Send the event
         FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
     }
-    private void logFaceBookEvent() {
-         AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
-    }
-
-    private void logMixPanelEvent() {
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
-        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
-        mixpanel.getPeople().set("Created at", timeStamp);
-        mixpanel.getPeople().set("Last logged in at", timeStamp);
-    }
+//    private void logFaceBookEvent() {
+//         AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
+//    }
+//
+//    private void logMixPanelEvent() {
+//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
+//        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
+//        mixpanel.getPeople().set("Created at", timeStamp);
+//        mixpanel.getPeople().set("Last logged in at", timeStamp);
+//    }
 
 }

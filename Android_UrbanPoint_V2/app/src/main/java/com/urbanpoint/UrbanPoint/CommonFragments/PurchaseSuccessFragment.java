@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.facebook.appevents.AppEventsLogger;
+//
+//import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -63,7 +63,7 @@ public class PurchaseSuccessFragment extends Fragment implements View.OnClickLis
 
         bindViews(v);
 
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
 
         JSONObject props = null;
         try {
@@ -79,10 +79,10 @@ public class PurchaseSuccessFragment extends Fragment implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mixpanel.track("Offer Used Confirmation screen", props);
+//        mixpanel.track("Offer Used Confirmation screen", props);
 
         logFireBaseEvent();
-        logFaceBookEvent();
+//        logFaceBookEvent();
 
         return v;
     }
@@ -191,9 +191,9 @@ public class PurchaseSuccessFragment extends Fragment implements View.OnClickLis
                 .logEvent(AppConstt.FireBaseEvents.Successful_Redemptions, params);
     }
 
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Redemptions);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Redemptions);
+//    }
 
     @Override
     public void onHiddenChanged(boolean isHidden) {

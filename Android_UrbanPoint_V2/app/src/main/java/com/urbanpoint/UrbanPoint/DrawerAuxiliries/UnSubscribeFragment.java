@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.facebook.appevents.AppEventsLogger;
+//import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices.UnSubscribe_Webhit_Post_unsubscribe;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -121,9 +121,9 @@ public class UnSubscribeFragment extends Fragment implements View.OnClickListene
                 .logEvent(AppConstt.FireBaseEvents.Manual_Unsubscription, params);
     }
 
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Manual_Unsubscription);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Manual_Unsubscription);
+//    }
 
     private void requestUnSubscribe(String _phone) {
         UnSubscribe_Webhit_Post_unsubscribe unSubscribe_webhit_post_unsubscribe = new UnSubscribe_Webhit_Post_unsubscribe();
@@ -133,7 +133,7 @@ public class UnSubscribeFragment extends Fragment implements View.OnClickListene
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                    MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
+//                    MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
 
                     JSONObject props = null;
                     try {
@@ -142,10 +142,10 @@ public class UnSubscribeFragment extends Fragment implements View.OnClickListene
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    mixpanel.track("Unsubscribe confirmation", props);
+//                    mixpanel.track("Unsubscribe confirmation", props);
 
                     logFireBaseEvent();
-                    logFaceBookEvent();
+//                    logFaceBookEvent();
                     customAlert.showCustomAlertDialog(getActivity(), null, getString(R.string.unsub_successfully), null, null, false, new CustomAlertConfirmationInterface() {
                         @Override
                         public void callConfirmationDialogPositive() {

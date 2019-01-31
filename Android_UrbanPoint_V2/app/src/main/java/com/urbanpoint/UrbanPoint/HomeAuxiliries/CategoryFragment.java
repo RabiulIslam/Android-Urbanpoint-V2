@@ -43,7 +43,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.firebase.analytics.FirebaseAnalytics;
+//import com.google.firebase.analytics.FirebaseAnalytics;
 import com.uber.sdk.rides.client.model.Vehicle;
 import com.urbanpoint.UrbanPoint.BuildConfig;
 import com.urbanpoint.UrbanPoint.CommonFragments.MerchantDetailFragment;
@@ -693,29 +693,29 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
 
         switch (_caegoryId) {
             case "17":
-                FirebaseAnalytics.getInstance(getActivity())    // FireBaseEvent Logger
-                        .logEvent(AppConstt.FireBaseEvents.Food_And_Drink_Views, params);
-                AppEventsLogger.newLogger(getActivity())        // FacebookEvent Logger
-                        .logEvent(AppConstt.FireBaseEvents.Food_And_Drink_Views);
-                break;
-            case "64":
-                FirebaseAnalytics.getInstance(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Beauty_And_Health_Views, params);
-                AppEventsLogger.newLogger(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Beauty_And_Health_Views);
-                break;
-            case "15":
-                FirebaseAnalytics.getInstance(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Fun_And_Leisure_Views, params);
-                AppEventsLogger.newLogger(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Fun_And_Leisure_Views);
-                break;
-            case "65":
-                FirebaseAnalytics.getInstance(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Retail_And_Services_Views, params);
-                AppEventsLogger.newLogger(getActivity())
-                        .logEvent(AppConstt.FireBaseEvents.Retail_And_Services_Views);
-                break;
+//                FirebaseAnalytics.getInstance(getActivity())    // FireBaseEvent Logger
+//                        .logEvent(AppConstt.FireBaseEvents.Food_And_Drink_Views, params);
+//                AppEventsLogger.newLogger(getActivity())        // FacebookEvent Logger
+//                        .logEvent(AppConstt.FireBaseEvents.Food_And_Drink_Views);
+//                break;
+//            case "64":
+//                FirebaseAnalytics.getInstance(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Beauty_And_Health_Views, params);
+//                AppEventsLogger.newLogger(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Beauty_And_Health_Views);
+//                break;
+//            case "15":
+//                FirebaseAnalytics.getInstance(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Fun_And_Leisure_Views, params);
+//                AppEventsLogger.newLogger(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Fun_And_Leisure_Views);
+//                break;
+//            case "65":
+//                FirebaseAnalytics.getInstance(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Retail_And_Services_Views, params);
+//                AppEventsLogger.newLogger(getActivity())
+//                        .logEvent(AppConstt.FireBaseEvents.Retail_And_Services_Views);
+//                break;
         }
     }
 
@@ -762,7 +762,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                         if (mGoogleApiClient.isConnected()) {
 
 
-                            Location mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                            @SuppressLint("MissingPermission") Location mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
                             if (mLocation == null) {
                                 mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);

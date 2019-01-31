@@ -18,11 +18,11 @@ import android.view.WindowManager;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.facebook.accountkit.AccountKit;
-import com.facebook.appevents.AppEventsLogger;
-import com.flurry.android.FlurryAgent;
+//import com.facebook.appevents.AppEventsLogger;
+//import com.flurry.android.FlurryAgent;
 //import com.google.android.gms.analytics.GoogleAnalytics;
-//import com.google.android.gms.analytics.Tracker;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+////import com.google.android.gms.analytics.Tracker;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.GPSTracker;
@@ -49,7 +49,7 @@ public class MyApplication extends MultiDexApplication
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         mContext = this;
-
+        FacebookSdk.sdkInitialize(getApplicationContext());
         AccountKit.initialize(this);
         AppConfig.initInstance(mContext);
         setLanguageSpecificFonts(true);
@@ -62,16 +62,16 @@ public class MyApplication extends MultiDexApplication
         );*/
 
 
-        new FlurryAgent.Builder()
-                .withLogEnabled(true)
-                .build(this, AppConstt.FLURRY_TOKEN);
+//        new FlurryAgent.Builder()
+//                .withLogEnabled(true)
+//                .build(this, AppConstt.FLURRY_TOKEN);
         mContext = this;
 
-        String projectToken = AppConstt.MIXPANEL_TOKEN; // e.g.: "1ef7e30d2a58d27f4b90c42e31d6d7ad"
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
+//        String projectToken = AppConstt.MIXPANEL_TOKEN; // e.g.: "1ef7e30d2a58d27f4b90c42e31d6d7ad"
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
+//
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+//        AppEventsLogger.activateApp(this);
 
 //        Mint.enableDebug();
 //        Mint.initAndStartSession(getApplicationContext(), AppConstt.BugSenseConstants.SPLUNK_API_KEY);

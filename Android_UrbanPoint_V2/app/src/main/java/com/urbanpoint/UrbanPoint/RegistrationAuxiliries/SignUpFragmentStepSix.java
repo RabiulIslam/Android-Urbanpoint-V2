@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
@@ -51,9 +51,7 @@ import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView;
-
 import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -370,27 +368,27 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 
     }}
 
-    private void logFireBaseEvent() {
-        Bundle params = new Bundle();
-        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
-        params.putString("device_type", "Android");
-        // Send the event
-        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
-    }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
-    }
-
-    private void logMixPanelEvent() {
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
-        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
-        mixpanel.getPeople().set("Created at", timeStamp);
-        mixpanel.getPeople().set("Last logged in at", timeStamp);
-    }
+//    private void logFireBaseEvent() {
+//        Bundle params = new Bundle();
+//        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
+//        params.putString("device_type", "Android");
+//        // Send the event
+//        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
+//    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
+//    }
+//
+//    private void logMixPanelEvent() {
+//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
+//        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
+//        mixpanel.getPeople().set("Created at", timeStamp);
+//        mixpanel.getPeople().set("Last logged in at", timeStamp);
+//    }
 private void requestSignUp(String _name, String _email, String _gender, String _pin, String _fcmToken,
                            String _occupation,String _age,String _referral_code) {
 
@@ -402,9 +400,9 @@ private void requestSignUp(String _name, String _email, String _gender, String _
             Log.e("register_res_boolean",isSuccess+","+strMsg);
             progressDilogue.stopiOSLoader();
             if (isSuccess) {
-                logFireBaseEvent();
-                logFaceBookEvent();
-                logMixPanelEvent();
+//                logFireBaseEvent();
+////                logFaceBookEvent();
+//                logMixPanelEvent();
                 if (SignUp_WebHit_Post_addUser.responseObject != null) {
 //                    if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
                         final Bundle b = new Bundle();

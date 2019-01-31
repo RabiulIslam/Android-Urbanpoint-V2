@@ -25,9 +25,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFiles 'proguard-rules.pro'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFiles 'proguard-rules.pro'
         }
     }
 }
@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.google.android.gms:play-services-analytics:16.0.5'
+//    implementation 'com.google.android.gms:play-services-analytics:16.0.5'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -66,14 +66,14 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     // Required for Analytics integration
-    implementation 'com.flurry.android:analytics:9.0.0@aar'          // Flurry Analytics
-    implementation 'com.mixpanel.android:mixpanel-android:5.+'       // Mixpanel Analytics      
+//    implementation 'com.flurry.android:analytics:9.0.0@aar'          // Flurry Analytics
+//    implementation 'com.mixpanel.android:mixpanel-android:5.+'       // Mixpanel Analytics
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-    implementation 'com.facebook.android:facebook-core:[4,5)'
-    implementation 'com.facebook.android:facebook-marketing:[4,5)'
+//    implementation 'com.facebook.android:facebook-core:[4,5)'
+//    implementation 'com.facebook.android:facebook-marketing:[4,5)'
   //  implementation 'com.google.android.gms:play-services-auth-api-phone:11.0.4'
-    implementation 'com.facebook.android:account-kit-sdk:4.27.0'
+    implementation 'com.facebook.android:account-kit-sdk:4.37.0'
     //) {
 //        exclude group: 'com.google.android.gms', module: 'play-services-auth-api-phone'
 //        exclude group: 'com.google.android.gms', module: 'play-services-auth'

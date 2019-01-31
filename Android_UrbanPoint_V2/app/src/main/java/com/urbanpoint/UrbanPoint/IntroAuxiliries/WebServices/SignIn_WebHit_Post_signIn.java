@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -50,9 +51,16 @@ public class SignIn_WebHit_Post_signIn {
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                        Log.e("login_response",statusCode+"");
                         String strResponse;
                         try {
-                            Gson gson = new Gson();
+//                            GsonBuilder
+//                            Gson gson = new Gson();
+
+                            GsonBuilder gsonBuilder = new GsonBuilder();
+                            gsonBuilder.serializeNulls();
+                            Gson gson = gsonBuilder.create();
                             strResponse = new String(responseBody, "UTF-8");
 
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
@@ -76,7 +84,7 @@ public class SignIn_WebHit_Post_signIn {
                                     }
                                     AppConfig.getInstance().mUser.setmGender(responseObject.getData().getGender());
                                     AppConfig.getInstance().mUser.setmDob(responseObject.getData().getDOB());
-                                    AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());
+//                                    AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());
                                     AppConfig.getInstance().mUser.setmNationality(responseObject.getData().getNationality());
                                     AppConfig.getInstance().mUser.setZone(responseObject.getData().getZone());
                                     AppConfig.getInstance().mUser.setmAuthorizationToken(responseObject.getData().getAuthorization());
@@ -96,16 +104,19 @@ public class SignIn_WebHit_Post_signIn {
                                     break;
 
                                 case AppConstt.ServerStatus.NO_CONTENT:
+                                    Log.e("check","1");
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
                                     break;
 
                                 default:
+                                    Log.e("check","2");
                                     iWebCallback.onWebResult(false, responseObject.getMessage());
                                     break;
                             }
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            Log.e("check","3");
                             iWebCallback.onWebException(ex);
                         }
                     }
@@ -114,6 +125,7 @@ public class SignIn_WebHit_Post_signIn {
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
                         Log.e("err",statusCode+","+error.getMessage());
+
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
@@ -248,15 +260,15 @@ public class SignIn_WebHit_Post_signIn {
                 this.DOB = DOB;
             }
 
-            private String network;
-
-            public String getNetwork() {
-                return this.network;
-            }
-
-            public void setNetwork(String network) {
-                this.network = network;
-            }
+//            private String network;
+//
+//            public String getNetwork() {
+//                return this.network;
+//            }
+//
+//            public void setNetwork(String network) {
+//                this.network = network;
+//            }
             private String Zone;
 
             public String getZone() {

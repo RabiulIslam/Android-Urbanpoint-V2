@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
@@ -107,7 +107,9 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
                 String fcmToken = AppConfig.getInstance().loadFCMToken();
                 if (validatingRequired()) {
                     progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.progress_dialog_logging_your_account), false);
-                    requestSignIn(edtEmail.getText().toString().trim(), strPIN, fcmToken);
+//                    requestSignIn(edtEmail.getText().toString().trim(), strPIN, fcmToken);
+
+                    Log.e("check","login");
                 }
                 break;
 
@@ -142,38 +144,38 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
         getActivity().finish();
     }
 
-    private void requestSignIn(String _email, String _pin, String _fcmToken) {
-        SignIn_WebHit_Post_signIn signIn_webHit_post_signIn = new SignIn_WebHit_Post_signIn();
-        signIn_webHit_post_signIn.requestSignIn(getContext(), new IWebCallbacks() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                progressDilogue.stopiOSLoader();
-                Log.e("msg",strMsg);
-                if (isSuccess) {
-
-                    logFireBaseEvent();
-                    logFaceBookEvent();
-                    logMixPanelEvent();
-                    navToMainActivity();
-                } else {
-                    customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg, null, null, false, null);
-
-                }
-            }
-
-            @Override
-            public void onWebException(Exception ex) {
-                progressDilogue.stopiOSLoader();
-                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
-
-            }
-
-            @Override
-            public void onWebLogout() {
-                progressDilogue.stopiOSLoader();
-            }
-        }, _email, _pin, _fcmToken);
-    }
+//    private void requestSignIn(String _email, String _pin, String _fcmToken) {
+//        SignIn_WebHit_Post_signIn signIn_webHit_post_signIn = new SignIn_WebHit_Post_signIn();
+//        signIn_webHit_post_signIn.requestSignIn(getContext(), new IWebCallbacks() {
+//            @Override
+//            public void onWebResult(boolean isSuccess, String strMsg) {
+//                progressDilogue.stopiOSLoader();
+//                Log.e("msg",strMsg);
+//                if (isSuccess) {
+//
+////                    logFireBaseEvent();
+////                    logFaceBookEvent();
+////                    logMixPanelEvent();
+//                    navToMainActivity();
+//                } else {
+//                    customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg, null, null, false, null);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onWebException(Exception ex) {
+//                progressDilogue.stopiOSLoader();
+//                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+//
+//            }
+//
+//            @Override
+//            public void onWebLogout() {
+//                progressDilogue.stopiOSLoader();
+//            }
+//        }, _email, _pin, _fcmToken);
+//    }
 
     private boolean validatingRequired() {
         String message = "";
@@ -214,17 +216,17 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
         // Send the event
         FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login, params);
     }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login);
-    }
-
-    private void logMixPanelEvent() {
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().set("Last logged in at", timeStamp);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login);
+//    }
+//
+//    private void logMixPanelEvent() {
+//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().set("Last logged in at", timeStamp);
+//    }
 
 
     public boolean checkEmail(String email) {

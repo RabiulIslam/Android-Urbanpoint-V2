@@ -39,9 +39,9 @@ import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.facebook.accountkit.ui.SkinManager;
 import com.facebook.accountkit.ui.UIManager;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.facebook.appevents.AppEventsLogger;
+//import com.google.firebase.analytics.FirebaseAnalytics;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
@@ -199,27 +199,27 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
             }
         });
     }
-    private void logFireBaseEvent() {
-        Bundle params = new Bundle();
-        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
-        params.putString("device_type", "Android");
-        // Send the event
-        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
-    }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
-    }
-
-    private void logMixPanelEvent() {
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
-        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
-        mixpanel.getPeople().set("Created at", timeStamp);
-        mixpanel.getPeople().set("Last logged in at", timeStamp);
-    }
+//    private void logFireBaseEvent() {
+//        Bundle params = new Bundle();
+//        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
+//        params.putString("device_type", "Android");
+//        // Send the event
+//        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
+//    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
+//    }
+//
+//    private void logMixPanelEvent() {
+//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
+//        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
+//        mixpanel.getPeople().set("Created at", timeStamp);
+//        mixpanel.getPeople().set("Last logged in at", timeStamp);
+//    }
     private void navToMainActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);
@@ -245,9 +245,9 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
                 Log.e("register_res_boolean",isSuccess+","+strMsg);
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
-                    logFireBaseEvent();
-                    logFaceBookEvent();
-                    logMixPanelEvent();
+//                    logFireBaseEvent();
+//                    logFaceBookEvent();
+//                    logMixPanelEvent();
                     if (SignUp_WebHit_Post_checkPhoneEmail.responseObject != null)
                     {
                         Bundle b = new Bundle();

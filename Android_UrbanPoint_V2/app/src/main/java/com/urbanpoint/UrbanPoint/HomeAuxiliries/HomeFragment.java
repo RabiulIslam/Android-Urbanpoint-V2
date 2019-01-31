@@ -40,8 +40,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.analytics.FirebaseAnalytics;
+//import com.facebook.appevents.AppEventsLogger;
+//import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.CommonFragments.OfferDetailFragment;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.FavoriteOffersFragment;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.NewOffersFragment;
@@ -436,18 +436,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
-    private void logFireBaseEvent() {
-        Bundle params = new Bundle();
-        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
-        params.putString("device_type", "Android");
-        // Send the event
-        FirebaseAnalytics.getInstance(getActivity())
-                .logEvent(AppConstt.FireBaseEvents.Gain_Access, params);
-    }
+//    private void logFireBaseEvent() {
+//        Bundle params = new Bundle();
+//        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
+//        params.putString("device_type", "Android");
+//        // Send the event
+//        FirebaseAnalytics.getInstance(getActivity())
+//                .logEvent(AppConstt.FireBaseEvents.Gain_Access, params);
+//    }
 
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Gain_Access);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Gain_Access);
+//    }
 
     //region Navigation Function
     private void navToNotificationFragment() {

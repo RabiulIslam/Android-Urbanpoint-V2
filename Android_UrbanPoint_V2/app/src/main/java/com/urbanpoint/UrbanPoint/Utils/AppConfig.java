@@ -274,10 +274,10 @@ public class AppConfig {
         editor.putString("key_dob", mUser.getmDob());
         editor.putString("key_gender", mUser.getmGender());
         editor.putString("key_nationality", mUser.getmNationality());
-        editor.putString("key_pin_code", mUser.getmPinCode());
-        editor.putString("key_network_type", mUser.getmNetworkType());
+//        editor.putString("key_pin_code", mUser.getmPinCode());
+//        editor.putString("key_network_type", mUser.getmNetworkType());
         editor.putString("key_phone_number", mUser.getmPhoneNumber());
-        editor.putString("key_merchint_pin", mUser.getMasterMerchant());
+//        editor.putString("key_merchint_pin", mUser.getMasterMerchant());
         editor.putBoolean("key_is_subscribe", mUser.isSubscribed());
 //        editor.putFloat("key_app_version", mUser.getmAppVersion());
         editor.putString("key_authorization", mUser.getmAuthorizationToken());

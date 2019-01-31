@@ -17,9 +17,7 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 
-/**
- * Created by lenovo on 09/08/2018.
- */
+
 
 public class SignUp_WebHit_Get_sendMT {
 

@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.facebook.appevents.AppEventsLogger;
+//import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -54,10 +54,10 @@ public class SubscriptionSuccessFragment extends Fragment implements View.OnClic
 
         bindViews(v);
 
-        logFireBaseEvent();
-        logFaceBookEvent();
-
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
+//        logFireBaseEvent();
+//        logFaceBookEvent();
+//
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getContext(), MIXPANEL_TOKEN);
         JSONObject props = null;
         try {
             props = new JSONObject();
@@ -65,7 +65,7 @@ public class SubscriptionSuccessFragment extends Fragment implements View.OnClic
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mixpanel.track("Subscribe Confirmation screen", props);
+//        mixpanel.track("Subscribe Confirmation screen", props);
 
         return v;
     }
@@ -91,18 +91,18 @@ public class SubscriptionSuccessFragment extends Fragment implements View.OnClic
         }
     }
 
-    private void logFireBaseEvent() {
-        Bundle params = new Bundle();
-        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
-        params.putString("device_type", "Android");
-        // Send the event
-        FirebaseAnalytics.getInstance(getActivity())
-                .logEvent(AppConstt.FireBaseEvents.Successful_Regular_Subscription, params);
-    }
+//    private void logFireBaseEvent() {
+//        Bundle params = new Bundle();
+//        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
+//        params.putString("device_type", "Android");
+//        // Send the event
+//        FirebaseAnalytics.getInstance(getActivity())
+//                .logEvent(AppConstt.FireBaseEvents.Successful_Regular_Subscription, params);
+//    }
 
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Regular_Subscription);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Regular_Subscription);
+//    }
     @Override
     public void onHiddenChanged(boolean isHidden) {
         super.onHiddenChanged(isHidden);

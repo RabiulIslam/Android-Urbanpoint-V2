@@ -23,7 +23,7 @@ import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
 import java.text.DecimalFormat;
 
-import static com.mixpanel.android.mpmetrics.ExceptionHandler.init;
+//import static com.mixpanel.android.mpmetrics.ExceptionHandler.init;
 
 public class ReferAndEarnFragment extends Fragment implements View.OnClickListener {
     TextView ReferralCode,WalletBalance;

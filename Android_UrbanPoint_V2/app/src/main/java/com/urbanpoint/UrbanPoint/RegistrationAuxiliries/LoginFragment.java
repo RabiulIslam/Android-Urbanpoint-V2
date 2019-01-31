@@ -19,10 +19,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.appevents.AppEventsLogger;
+//
+//import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.ForgotPasswordFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
@@ -180,11 +180,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         getActivity().finish();
     }
     private void requestSignIn(String _email, String _pin, String _fcmToken) {
+        Log.e("check","login11");
         SignIn_WebHit_Post_signIn signIn_webHit_post_signIn = new SignIn_WebHit_Post_signIn();
         signIn_webHit_post_signIn.requestSignIn(getContext(), new IWebCallbacks() {
             @Override
             public void onWebResult(boolean isSuccess, String strMsg) {
+                  Log.e("login_success",isSuccess+"");
                 progressDilogue.stopiOSLoader();
+                Log.e("strmsg",strMsg);
                 if (isSuccess) {
 
 
@@ -194,9 +197,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener
                         navToVerifyMemberFragment();
                     } else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
 
-                     logFireBaseEvent();
-                     logFaceBookEvent();
-                     logMixPanelEvent();
+//                     logFireBaseEvent();
+//                     logFaceBookEvent();
+//                     logMixPanelEvent();
                      AppConfig.getInstance().mUser.setLoggedIn(true);
                      navToMainActivity();
 
@@ -204,7 +207,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
                 }
                 else {
 
-
+                       Log.e("check_login_res","ressss");
                     customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg, null, null, false, null);
 
                 }
@@ -213,6 +216,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             @Override
             public void onWebException(Exception ex) {
                 progressDilogue.stopiOSLoader();
+                Log.e("exxc","ex",ex);
                 customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
 
             }
@@ -272,17 +276,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         // Send the event
         FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login, params);
     }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login);
-    }
-
-    private void logMixPanelEvent() {
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-        mixpanel.getPeople().set("Last logged in at", timeStamp);
-    }
+//    private void logFaceBookEvent() {
+//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Login);
+//    }
+//
+//    private void logMixPanelEvent() {
+//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
+//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
+//        mixpanel.getPeople().set("Last logged in at", timeStamp);
+//    }
 
 
     public boolean checkEmail(String email) {
