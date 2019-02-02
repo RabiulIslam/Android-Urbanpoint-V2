@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -32,12 +33,13 @@ public class ForgotPassword_WebHit_Post_forgotPassword {
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.forgotPassword;
-
+        Log.e("forgot_url",myUrl);
         RequestParams params = new RequestParams();
         params.put("email", _emailId);
-
+      Log.e("f_params",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
         mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        Log.e("header",AppConstt.HeadersValue.Authorization);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

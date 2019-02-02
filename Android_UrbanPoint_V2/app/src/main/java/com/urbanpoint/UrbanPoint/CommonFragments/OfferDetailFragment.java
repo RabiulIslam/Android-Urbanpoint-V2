@@ -578,18 +578,23 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             else if(Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
                     > AppConfig.getInstance().mUser.getWallet())
             {
+                String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                 imvGetItLock.setVisibility(View.VISIBLE);
                 btnGetIt.setEnabled(true);
                 btnGetIt.setClickable(true);
+                txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
+                txvExpiryTime.setVisibility(View.VISIBLE);
             }
             else
-            {
+            { String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                 if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
                     btnGetIt.setText(getResources().getString(R.string.btn_used));
                 }
                 imvGetItLock.setVisibility(View.VISIBLE);
                 btnGetIt.setEnabled(false);
                 btnGetIt.setClickable(false);
+                txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
+                txvExpiryTime.setVisibility(View.VISIBLE);
             }
 
             merchantPIN = OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getPin();
