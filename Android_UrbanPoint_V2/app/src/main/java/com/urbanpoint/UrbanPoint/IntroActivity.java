@@ -11,6 +11,8 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,8 +43,12 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SplashFragment;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlertConfirmationInterface;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
@@ -61,7 +67,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     private static int FATEST_INTERVAL = 5000; // 5 sec
     private static int DISPLACEMENT = 10; // 10 meters
     boolean shouldNavigate;
-    double lat, lng;
+    Double lat, lng;
     String Id = "";
     String title = "";
     String msg = "";
@@ -129,7 +135,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                             if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
                     }
@@ -174,18 +180,6 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.SplashFragment);
         ft.commit();
-
-    }
-
-    void navToSignUpFragment() {
-        Intent intent = new Intent(IntroActivity.this, SignupActivity.class);
-        startActivity(intent);
-        finish();
-        //  Fragment fragment = new SignUpFragment();
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.FN_SignUpFragment);
-//        ft.commit();
 
     }
 
@@ -318,39 +312,96 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
     private void navToHomeActivity() {
         Log.e("home", "home");
-//        Bundle b = getArguments();
-//        String id = "";
-//        String title = "";
-//        String msg = "";
-//        String date = "";
+
+        boolean firstInstall = AppConfig.getInstance().isFirstInstall();
+        if (firstInstall) {
+            proceedToHomeActivity();
+        } else {
+            AppConfig.getInstance().saveInstalled(true);
+            if (lat != null && lng != null) {
+                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
+                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                @Override
+                                public void callConfirmationDialogPositive() {
+                                    proceedToHomeActivity();
+                                }
+
+                                @Override
+                                public void callConfirmationDialogNegative() {
+                                    finish();
+                                }
+                            });
+                } else {
+                    proceedToHomeActivity();
+                }
+            } else {
+                proceedToHomeActivity();
+            }
+        }
+    }
+
+    private void proceedToHomeActivity() {
         Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         if (getIntent() != null) {
-            Log.e("home", "home11");
-//            id = b.getString(AppConstt.Notifications.PUSH_NTIFCN_ID);
-//            title = b.getString(AppConstt.Notifications.PUSH_NTIFCN_TITLE);
-//            msg = b.getString(AppConstt.Notifications.PUSH_NTIFCN_MSG);
-//            date = b.getString(AppConstt.Notifications.PUSH_NTIFCN_DATE);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_ID, Id);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_TITLE, title);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_MSG, msg);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_DATE, date);
         }
-
         startActivity(intent);
         finish();
     }
 
-    void navToGetStartedFragment() {
-        Log.e("home", "home23");
+    private void proceedToSignUpActivity() {
         Intent intent = new Intent(IntroActivity.this, SignupActivity.class);
         startActivity(intent);
         finish();
-//        Fragment fragment = new SignUpFragment();
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.IntroMainFragment);
-//        ft.commitAllowingStateLoss();
+    }
+
+    private String getCountryName(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+
+                Log.e("IntroActivity", "getLocality " + addresses.get(0).getLocality());
+                return addresses.get(0).getLocality().toLowerCase();
+            }
+        } catch (IOException ioe) {
+        }
+        return null;
+    }
+
+    void navToSignUpFragment() {
+        boolean firstInstall = AppConfig.getInstance().isFirstInstall();
+        if (firstInstall) {
+            proceedToSignUpActivity();
+        } else {
+            AppConfig.getInstance().saveInstalled(true);
+            if (lat != null && lng != null) {
+                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
+                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                @Override
+                                public void callConfirmationDialogPositive() {
+                                    proceedToSignUpActivity();
+                                }
+
+                                @Override
+                                public void callConfirmationDialogNegative() {
+                                    finish();
+                                }
+                            });
+                } else {
+                    proceedToSignUpActivity();
+                }
+            } else {
+                proceedToSignUpActivity();
+            }
+        }
     }
 
     @Override
@@ -368,7 +419,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                             if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
                         break;
@@ -381,7 +432,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
 
@@ -410,7 +461,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
                     }
@@ -427,7 +478,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
 
@@ -442,7 +493,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
                 } else {
@@ -453,7 +504,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
                 }

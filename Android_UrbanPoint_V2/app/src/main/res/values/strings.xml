@@ -308,7 +308,7 @@
     <string name="change_underline"><u>Change</u></string>
     <string name="yes">Yes</string>
     <string name="No">No</string>
-    <string name="exit_app">Exit App?</string>
+    <string name="exit_app">Do you want to exit Biyog ?</string>
 
     <string name="how_to_use_four">The staff member will then apply the discount to your bill. Enjoy the savings!</string>
 
@@ -514,5 +514,10 @@
     <!--<string name="merchant_password">biyog_2055363772</string>-->
     <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
     <string name="walletmix_appname">biyog.com</string>
+    <string name="msg_not_dhake_city">This app is only for Dhaka City residentials.
+        there are no offers outside of Dhaka city at this moment.
+        However, we are working on to bring merchants on your city too !</string>
+    <string name="proceed">Proceed</string>
+    <string name="exit">Exit</string>
 
 </resources>
