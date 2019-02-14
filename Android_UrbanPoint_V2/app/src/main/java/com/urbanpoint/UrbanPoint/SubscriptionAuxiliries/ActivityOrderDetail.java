@@ -114,8 +114,9 @@ public class ActivityOrderDetail extends AppCompatActivity implements View.OnCli
               startActivity(new Intent(ActivityOrderDetail.this,TermsofSale.class));
                 break;
             case R.id.app_bar_rl_back:
-                Intent i=new Intent(ActivityOrderDetail.this, MainActivity.class);
-                startActivity(i);
+//                Intent i=new Intent(ActivityOrderDetail.this, MainActivity.class);
+//                startActivity(i);
+                finish();
                 break;
             case R.id.btn_payment:
                 if (Agree.isChecked())
@@ -201,11 +202,11 @@ public class ActivityOrderDetail extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-        Intent i=new Intent(ActivityOrderDetail.this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        super.onBackPressed();
+//        Intent i=new Intent(ActivityOrderDetail.this, MainActivity.class);
+//        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(i);
     }
 }

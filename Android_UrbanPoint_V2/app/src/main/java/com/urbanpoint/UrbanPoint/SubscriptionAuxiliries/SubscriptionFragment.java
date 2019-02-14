@@ -35,8 +35,8 @@ import java.util.List;
 
 
 public class SubscriptionFragment extends Fragment implements View.OnClickListener {
-    private Button  btnAccessCode;
-   // private CellNoEntryView mMobileNumberEntry;
+    private Button btnAccessCode;
+    // private CellNoEntryView mMobileNumberEntry;
     private String enteredMobileNumber = "";
     private ExpandableHeightGridView lsv1, lsv2;
     private LinearLayout llParentLayout;
@@ -45,8 +45,8 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
     private SubscribeTextAdapter3 subscribeTextAdapter3;
     private ProgressDilogue progressDilogue;
     private CustomAlert customAlert;
-    private HtmlTextView  txvSubsText;
-    private  Button btnSubs1,btnSubs2,btnSubs3;
+    private HtmlTextView txvSubsText;
+    private Button btnSubs1, btnSubs2, btnSubs3;
 
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
 
@@ -71,15 +71,14 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         return v;
     }
 
-    private void updateSubscriptionLists()
-    {
+    private void updateSubscriptionLists() {
         if (Home_WebHit_Post_homeApi.responseObject != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size() > 0) {
             lstStrings = new ArrayList();
             for (int i = 0; i < Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size(); i++) {
                 lstStrings.add(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(i).getText());
-             //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
+                //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
                 txvSubsText.setHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText(), new HtmlResImageGetter(txvSubsText));
             }
 
@@ -115,9 +114,9 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
 //        mMobileNumberEntry = v.findViewById(R.id.frg_subscription_pinentry_phone);
 //        btnConfirm = v.findViewById(R.id.frg_subscription_btn_cnfrm);
         btnAccessCode = v.findViewById(R.id.frg_subscription_btn_access_code);
-        btnSubs1=v.findViewById(R.id.frg_subscription_btn1);
-        btnSubs2=v.findViewById(R.id.frg_subscription_btn2);
-        btnSubs3=v.findViewById(R.id.frg_subscription_btn3);
+        btnSubs1 = v.findViewById(R.id.frg_subscription_btn1);
+        btnSubs2 = v.findViewById(R.id.frg_subscription_btn2);
+        btnSubs3 = v.findViewById(R.id.frg_subscription_btn3);
         llParentLayout.setOnClickListener(this);
 //        btnConfirm.setOnClickListener(this);
         btnAccessCode.setOnClickListener(this);
@@ -140,37 +139,37 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Intent in=new Intent(getActivity(),ActivityOrderDetail.class);
+        Intent in = new Intent(getActivity(), ActivityOrderDetail.class);
         switch (v.getId()) {
 
             case R.id.frg_subscription_btn1:
-                in.putExtra("type","1");
-                in.putExtra("subtotal","Tk 9.99");
-                in.putExtra("package","Daily");
-                in.putExtra("vat","Tk 1.49");
-                in.putExtra("total","Tk 11.48");
-               startActivity(in);
-                ((MainActivity)getActivity()).finish();
+                in.putExtra("type", "1");
+                in.putExtra("subtotal", "Tk 9.99");
+                in.putExtra("package", "Daily");
+                in.putExtra("vat", "Tk 1.49");
+                in.putExtra("total", "Tk 11.48");
+                startActivity(in);
+                // ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn2:
-                in.putExtra("type","2");
-                in.putExtra("subtotal","Tk 49.99");
-                in.putExtra("package","Weekly");
-                in.putExtra("vat","Tk 07.49");
-                in.putExtra("total","Tk 57.48");
+                in.putExtra("type", "2");
+                in.putExtra("subtotal", "Tk 49.99");
+                in.putExtra("package", "Weekly");
+                in.putExtra("vat", "Tk 07.49");
+                in.putExtra("total", "Tk 57.48");
                 startActivity(in);
-                ((MainActivity)getActivity()).finish();
+                // ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn3:
-                in.putExtra("type","3");
-                in.putExtra("subtotal","Tk 99.00");
-                in.putExtra("package","Monthly");
-                in.putExtra("vat","Tk 14.85");
-                in.putExtra("total","Tk 113.85");
+                in.putExtra("type", "3");
+                in.putExtra("subtotal", "Tk 99.00");
+                in.putExtra("package", "Monthly");
+                in.putExtra("vat", "Tk 14.85");
+                in.putExtra("total", "Tk 113.85");
                 startActivity(in);
-                ((MainActivity)getActivity()).finish();
+                // ((MainActivity)getActivity()).finish();
 
-            break;
+                break;
             case R.id.frg_subscription_btn_access_code:
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 Bundle b1 = new Bundle();
@@ -182,7 +181,6 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
-
 
 
     private void navToSubscriptionConfirmFragment(Bundle _b) {
