@@ -515,8 +515,8 @@
     <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
     <string name="walletmix_appname">biyog.com</string>
     <string name="msg_not_dhake_city">This app is only for Dhaka City residentials.
-        there are no offers outside of Dhaka city at this moment.
-        However, we are working on to bring merchants on your city too !</string>
+        There are no offers outside of Dhaka city at this moment.
+        However, we are working hard to bring Biyog in your city too.! \n\n</string>
     <string name="proceed">Proceed</string>
     <string name="exit">Exit</string>
 

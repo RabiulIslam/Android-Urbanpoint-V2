@@ -147,8 +147,8 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
                 in.putExtra("type","1");
                 in.putExtra("subtotal","Tk 99.99");
                 in.putExtra("package","Monthly");
-                in.putExtra("vat","Tk 10.49");
-                in.putExtra("total","Tk 110.48");
+                in.putExtra("vat","Tk 14.99");
+                in.putExtra("total","Tk 114.98");
                 startActivity(in);
                // ((MainActivity)getActivity()).finish();
                 break;

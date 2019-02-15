@@ -50,7 +50,7 @@ public class GatewayCallbackActivity extends AppCompatActivity {
                             case "1000":
 //                                    TransactionDetails.setText("Transaction Success");
                                 //        finish();
-                                if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("110.48")) {
+                                if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("114.98")) {
                                     type = "1";
                                 } else if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("688.85")) {
                                     type = "2";

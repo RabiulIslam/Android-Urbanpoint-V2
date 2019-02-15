@@ -317,7 +317,6 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         if (firstInstall) {
             proceedToHomeActivity();
         } else {
-            AppConfig.getInstance().saveInstalled(true);
             if (lat != null && lng != null) {
                 if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
                     new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
@@ -325,6 +324,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                                 @Override
                                 public void callConfirmationDialogPositive() {
                                     proceedToHomeActivity();
+                                    AppConfig.getInstance().saveInstalled(true);
                                 }
 
                                 @Override
@@ -380,7 +380,6 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         if (firstInstall) {
             proceedToSignUpActivity();
         } else {
-            AppConfig.getInstance().saveInstalled(true);
             if (lat != null && lng != null) {
                 if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
                     new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
@@ -388,6 +387,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                                 @Override
                                 public void callConfirmationDialogPositive() {
                                     proceedToSignUpActivity();
+                                    AppConfig.getInstance().saveInstalled(true);
                                 }
 
                                 @Override
