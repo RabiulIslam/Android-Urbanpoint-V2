@@ -159,7 +159,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             case R.id.forgotPassword:
 //                Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
 //                startActivity(intent);
-                  navToForgotPasswordFragment();
+                navToForgotPasswordFragment();
                 break;
 
             case R.id.loginToApp:
@@ -185,31 +185,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         signIn_webHit_post_signIn.requestSignIn(getContext(), new IWebCallbacks() {
             @Override
             public void onWebResult(boolean isSuccess, String strMsg) {
-                  Log.e("login_success",isSuccess+"");
+                Log.e("login_success",isSuccess+"");
                 progressDilogue.stopiOSLoader();
                 Log.e("strmsg",strMsg);
                 if (isSuccess) {
 
 
-                 if (strMsg.equalsIgnoreCase("Phone no. verification pending."))
-
-                    {
-                        navToVerifyMemberFragment();
-                    } else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
-
+//                 if (strMsg.equalsIgnoreCase("Phone no. verification pending.")){
+//                        navToVerifyMemberFragment();
+//                    } else
+                   // if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
 //                     logFireBaseEvent();
 //                     logFaceBookEvent();
 //                     logMixPanelEvent();
-                     AppConfig.getInstance().mUser.setLoggedIn(true);
-                     navToMainActivity();
-
-                    }
+                        AppConfig.getInstance().mUser.setLoggedIn(true);
+                        navToMainActivity();
+                  //  }
                 }
                 else {
-
-                       Log.e("check_login_res","ressss");
-                    customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg, null, null, false, null);
-
+                    Log.e("check_login_res","ressss");
+                    customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), strMsg,
+                            null, null, false, null);
                 }
             }
 

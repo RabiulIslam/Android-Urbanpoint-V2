@@ -119,69 +119,11 @@
                 </RelativeLayout>
 
             </LinearLayout>
-            <TextView
-                android:fontFamily="@font/opensans_regular"
-                style="@style/view_20"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/dp5"
-                android:layout_marginTop="@dimen/dp15"
-                android:paddingTop="0dp"
-                android:text="@string/occupation" />
-            <Spinner
-                android:id="@+id/signUpUserOccupation"
-                android:layout_width="match_parent"
-                android:fontFamily="@font/opensans_regular"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_round_button"
-                android:contentDescription="@string/enter_email_message"
-                android:gravity="left|center"
-                android:paddingTop="8dp"
-                android:popupBackground="@drawable/custom_round_button"
-                android:paddingBottom="8dp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/fontsize_large"
-                android:layout_marginLeft="@dimen/dp60"
-                android:layout_marginRight="@dimen/dp60"
-                android:textStyle="normal" />
-            <TextView
-
-                android:id="@+id/tv_ref_code"
-                android:fontFamily="@font/opensans_regular"
-                style="@style/view_20"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/dp5"
-                android:layout_marginTop="@dimen/dp15"
-                android:paddingTop="0dp"
-                android:text="@string/referral_code" />
-            <EditText
-                android:textCursorDrawable="@null"
-                android:id="@+id/signUpUserReferralCode"
-                android:layout_width="match_parent"
-                android:fontFamily="@font/opensans_regular"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dp5"
-                android:hint="Optional"
-                android:textColorHint="@color/white"
-                android:paddingBottom="@dimen/dp5"
-                android:background="@drawable/custom_round_button"
-
-                android:gravity="left|center"
-                android:inputType=""
-                android:paddingLeft="@dimen/dp10"
-                android:paddingRight="@dimen/dp10"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/dp60"
-                android:textSize="@dimen/fontsize_large"
-                android:layout_marginRight="@dimen/dp60"
-                android:textStyle="normal" />
 
             <TextView
                 android:fontFamily="@font/opensans_regular"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp15" />
+                android:layout_height="@dimen/dp5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -226,7 +168,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp5"
                     android:orientation="vertical"
                     android:padding="@dimen/dp2">
 
@@ -419,10 +361,11 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp150"></LinearLayout>
+                android:layout_height="@dimen/dp20">
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

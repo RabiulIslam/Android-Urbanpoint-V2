@@ -22,7 +22,7 @@
     <string name="sign_up_get_startd">Get Started</string>
     <string name="save">Save</string>
     <string name="button_text_allow">Allow</string>
-    <string name="get_started">Get Started</string>
+    <string name="get_started">Registered? Sign Up</string>
 
     <!--Fragments Title-->
     <string name="frg_Home">Home</string>
@@ -425,7 +425,7 @@
     <string name="finish">Finish</string>
     <string name="continue_button">Continue</string>
     <string name="sign_up_step_one_message">Hi! Nice to meet you, tell us your name</string>
-    <string name="sign_up_step_two_message">Are you a girl or guy?</string>
+    <string name="sign_up_step_two_message">Select your gender</string>
     <string name="sign_up_step_three_message">Tell us your interests so that we can get you what you like</string>
 
     <string name="sign_up_step_four_message">Are you a Vodafone Qatar customer?</string>
@@ -508,4 +508,16 @@
     <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
     <string name="walletmix_appname">biyog.com</string>
 
+    <string name="grupup_msg">Verify your phone number. </string>
+    <string name="confirm">Confirm</string>
+    <string name="phone_dialog_title">
+        Hi, we see that there is no phone number
+        on file, please update your contact details
+        below
+    </string>
+    <string name="thank_you">Thank you</string>
+    <string name="resend_sms">Resend SMS</string>
+    <string name="change_phone_number">Want to update Number?</string>
+    <string name="phone_number_activity_thank_you">Thank you</string>
+    <string name="the_biyog_company">The Biyog Company</string>
 </resources>

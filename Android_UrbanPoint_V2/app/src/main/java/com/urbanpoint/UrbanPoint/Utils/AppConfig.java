@@ -33,7 +33,7 @@ public class AppConfig {
     private SharedPreferences.Editor editor;
     private SharedPreferences SignupData;
     private SharedPreferences.Editor SignupEditor;
-    public boolean isComingFromLogout;
+    public boolean isComingFromLogout = true;
     public boolean isComingFromHome;
     public int marginToast;
     public int mNotificationStatus;

@@ -72,7 +72,7 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class CategoryFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private ExpandableListView lsvOutlets;
     private ArrayList<DModelMerchintList> lstOutlets;
@@ -267,33 +267,28 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                     listSizeOffset = 0;
                     page = 1;
 
-                   if( AppConfig.getInstance().checkPermission(getActivity()))
-                    {
-                        Log.e("checkloc","1");
+                    if (AppConfig.getInstance().checkPermission(getActivity())) {
+                        Log.e("checkloc", "1");
                         if (AppConfig.getInstance().isLocationEnabled(getActivity())) {
-                            Log.e("checkloc","2");
+                            Log.e("checkloc", "2");
                             lat = GPSTracker.lat;
                             lng = GPSTracker.lng;
                             if (lat != 0) {
-                                Log.e("checkloc","3");
+                                Log.e("checkloc", "3");
                                 strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
                                 requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
                             } else {
-                                Log.e("checkloc","4");
+                                Log.e("checkloc", "4");
 
                                 displayLocation();
                             }
-                        }
-                        else
-                        {
+                        } else {
                             turnGPSOn();
                             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
 //
 //                            GPSTracker.enqueueWork(getActivity(),new Intent());
                         }
-                    }
-                    else
-                    {
+                    } else {
                         requestPermission();
                     }
 
@@ -350,14 +345,13 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                 requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
 
             }
-        }
-        else
-        {
+        } else {
             mGoogleApiClient.connect();
 
         }
 
     }
+
     private void navToOfferDetailFragment(Bundle _bundle) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment frg = new OfferDetailFragment();
@@ -402,8 +396,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
 
     private void requestCategoryOffers(int _page, final String _categoryId, String _sortBy,
                                        String _genderType, final double lat, double lng, final boolean _shouldClearLst) {
-        Log.e("request","offers");
-        if (_shouldClearLst) {
+        Log.e("request", "offers");
+        if (_shouldClearLst && getActivity() != null) {
             progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
         }
         isAlreadyfetchingOffers = true;
@@ -473,7 +467,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
             }
 
         } else {
-            isDistanceRequired=false;
+            isDistanceRequired = false;
             updatebtnAlpabetical();
         }
 
@@ -525,22 +519,18 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                         }
 
                         String strImageUrl = "";
-                        String isRedeem="";
+                        String isRedeem = "";
                         if (CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getImage() != null) {
                             strImageUrl = CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getImage();
                         }
                         if (AppConfig.getInstance().mUser.isSubscribed()
                                 || (Float.parseFloat(CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getApproxSaving())
-                                <= AppConfig.getInstance().mUser.getWallet()))
-                        {
-                           isRedeem="1";
+                                <= AppConfig.getInstance().mUser.getWallet())) {
+                            isRedeem = "1";
+                        } else {
+                            isRedeem = "0";
                         }
-
-                        else
-                        {
-                            isRedeem="0";
-                        }
-                      //  CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getPrice()
+                        //  CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getPrice()
                         lstChild.add(new DModelMerchintList.Child(
                                 CategoryOffers_Webhit_Get_getOutlet.responseObject.getData().get(i).getOffers().get(j).getId(),
                                 strImageUrl,
@@ -585,12 +575,10 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                                 return v1.getMerchantName().compareTo(v2.getMerchantName());
                             }
                         });
-                    }
-                    else
-                    {
+                    } else {
                         Collections.sort(lstOutlets, new Comparator<DModelMerchintList>() {
                             public int compare(DModelMerchintList v1, DModelMerchintList v2) {
-                                return v1.getMerchantDistance()- v2.getMerchantDistance();
+                                return v1.getMerchantDistance() - v2.getMerchantDistance();
                             }
                         });
                     }
@@ -623,11 +611,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
     }
 
 
-
-
-    public void turnGPSOn()
-    {
-        Log.e("checkgps","1");
+    public void turnGPSOn() {
+        Log.e("checkgps", "1");
         mGoogleApiClient.connect();
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -639,23 +624,17 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
 
         PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>()
-        {
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
             @Override
-            public void onResult(LocationSettingsResult result)
-            {
+            public void onResult(LocationSettingsResult result) {
                 final Status status = result.getStatus();
-                switch (status.getStatusCode())
-                {
+                switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try
-                        {
+                        try {
                             startIntentSenderForResult(status.getResolution().getIntentSender(), REQUEST_LOCATION, new Intent(), 0, 0, 0, null);
 //                            status.startResolutionForResult(getActivity(), REQUEST_LOCATION);
-                        }
-                        catch (@SuppressLint("NewApi") Exception e)
-                        {
-                             Log.e("exc","e",e);
+                        } catch (@SuppressLint("NewApi") Exception e) {
+                            Log.e("exc", "e", e);
                         }
                         break;
                 }
@@ -733,16 +712,16 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
             iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
         }
     }
-    protected void createLocationRequest()
-    {
+
+    protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FATEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
-    protected synchronized void buildGoogleApiClient()
-    {
+
+    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -766,10 +745,21 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
 
                             if (mLocation == null) {
                                 mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+                                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
                                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
                                         mLocationRequest, (LocationListener) this);
-                            }
-                            else {
+                            } else {
                                 lat = mLocation.getLatitude();
                                 lng = mLocation.getLongitude();
                                 Log.e("location_onconnected", lat + "," + lng);
@@ -778,16 +768,11 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                                 requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
                             }
 
-                        }
-                        else
-                        {
+                        } else {
                             mGoogleApiClient.connect();
 
                         }
-                    }
-                    else
-
-                    {
+                    } else {
                         turnGPSOn();
                     }
 
@@ -797,9 +782,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
                     if (!showRationale) {
                         Log.e("aserwqer11", "onRequestPermissionsResult----: " + requestCode);
 
-                            startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)),
-                                    AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
+                        startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.parse("package:" + BuildConfig.APPLICATION_ID)),
+                                AppConstt.IntentPreference.PACKAGE_LOCATION_INTENT_CODE);
 
                     }
                 }
@@ -813,12 +798,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
-         Log.e("onactivityresult",requestCode+","+resultCode);
-        if (requestCode == REQUEST_LOCATION)
-        {
-            switch (resultCode)
-
-            {
+        Log.e("onactivityresult", requestCode + "," + resultCode);
+        if (requestCode == REQUEST_LOCATION) {
+            switch (resultCode) {
                 case -1:
                     displayLocation();
 
@@ -833,7 +815,19 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-     Location   mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
          if(mLocation == null)
          {
@@ -874,13 +868,5 @@ public class CategoryFragment extends Fragment implements View.OnClickListener,G
         strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
         requestCategoryOffers(page, strCategoryId, strSortBy, strOfferType, lat, lng, true);
 
-
     }
-
-
-
-
-
-
-
 }

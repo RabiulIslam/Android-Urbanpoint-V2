@@ -2,7 +2,6 @@ package com.urbanpoint.UrbanPoint;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,12 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.GetStartedFragment;
-import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.VerifyMemberFragment;
-import com.urbanpoint.UrbanPoint.Utils.AppConfig;
-import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import java.io.IOException;

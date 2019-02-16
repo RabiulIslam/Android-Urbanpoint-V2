@@ -117,7 +117,6 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         initialize(view);
 
 
-
         return view;
     }
 
@@ -145,10 +144,19 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
          @Override
          public void onClick(View v) {
              Log.e("on","click");
-           phoneLogin();
+           //phoneLogin();
+             phoneLoginFragment();
          }
      });
+    }
 
+    private void phoneLoginFragment(){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment frg = new PhoneVerificationFragment();
+        ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
+        ft.replace(R.id.containerIntroFragments, frg);
+        ft.commit();
     }
 
     int APP_REQUEST_CODE =99;
@@ -159,23 +167,27 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
             final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
-            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-            String toastMessage = "";
-            if (loginResult.getError() != null) {
-                toastMessage = loginResult.getError().getErrorType().getMessage();
-              
-            } else if (loginResult.wasCancelled()) {
-                toastMessage = "Login Cancelled";
-            } else {
-                
-                 getaccount_info();
-            }
-            Log.e("result",toastMessage);
-            // Surface the result to your user in an appropriate way.
+            if (data != null) {
+                if (data.hasExtra(AccountKitLoginResult.RESULT_KEY)) {
+                    AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+                    String toastMessage = "";
+                    if (loginResult.getError() != null) {
+                        toastMessage = loginResult.getError().getErrorType().getMessage();
+
+                    } else if (loginResult.wasCancelled()) {
+                        toastMessage = "Login Cancelled";
+                    } else {
+
+                        getaccount_info();
+                    }
+                    Log.e("result", toastMessage);
+                    // Surface the result to your user in an appropriate way.
 //            Toast.makeText(getContext(),
 //                    toastMessage,
 //                    Toast.LENGTH_LONG)
 //                    .show();
+                }
+            }
         }
     }
 
@@ -329,8 +341,8 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
             public void onWebException(Exception ex) {
                 Log.e("ex","ex",ex);
                 progressDilogue.stopiOSLoader();
-                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
-
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(),
+                        null, null, false, null);
             }
 
             @Override

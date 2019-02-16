@@ -84,13 +84,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         txvNetwork.setText(AppConfig.getInstance().mUser.getmNetworkType());
         txvGender.setText(AppConfig.getInstance().mUser.getmGender());
         txvOldPin.setText(AppConfig.getInstance().mUser.getmPinCode());
-        if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1"))
-        {
-            txvPercentage.setText("90%");
-        }
-        else
-        {
-            txvPercentage.setText("80%");
+        if (AppConfig.getInstance().mUser.getEmailVerified() != null) {
+            if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
+                txvPercentage.setText("90%");
+            } else {
+                txvPercentage.setText("80%");
+            }
         }
 
         try {

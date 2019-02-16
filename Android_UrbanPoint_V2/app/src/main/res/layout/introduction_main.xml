@@ -62,7 +62,7 @@
                 android:fontFamily="@font/opensans_regular"
                 android:textSize="@dimen/fontsize_large"
                 android:layout_height="wrap_content"
-                android:layout_width="@dimen/dp175"
+                android:layout_width="@dimen/dp200"
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/get_started"
                 android:text="@string/get_started"

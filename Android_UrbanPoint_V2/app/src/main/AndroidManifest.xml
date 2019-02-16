@@ -43,10 +43,13 @@
         <meta-data
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
-        <meta-data android:name="com.facebook.accountkit.ApplicationName"
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
-        <!--<meta-data android:name="com.facebook.sdk.ApplicationId"-->
-            <!--android:value="@string/FACEBOOK_APP_ID" />-->
+        <!-- For Facebook-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/FACEBOOK_APP_ID" />
         <!--<meta-data android:name="com.facebook.accountkit.ClientToken"-->
             <!--android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />-->
 
@@ -55,6 +58,10 @@
             android:theme="@style/fbotptheme"
             tools:replace="android:theme"/>
 
+        <meta-data
+            android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
+            android:value="false"/>
+
         <activity
             android:name="com.urbanpoint.UrbanPoint.SignupActivity"
             android:launchMode="singleTask"
@@ -62,14 +69,6 @@
             android:windowSoftInputMode="adjustPan">
 
         </activity>
-
-
-
-        <!-- For Facebook-->
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/FACEBOOK_APP_ID" />
-        <!--<meta-data android:name="com.facebook.sdk.CodelessDebugLogEnabled" android:value="true" />-->
 
 
 
@@ -100,7 +99,7 @@
             android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="ef3bffaaf480adea4f322123d1aa50aaa0c5042b" />
+            android:value="85e4eabba4441cf9be8d9602d4f6b0a23bde095c" />
     </application>
 
 </manifest>

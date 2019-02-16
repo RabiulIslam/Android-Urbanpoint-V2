@@ -4,7 +4,6 @@ package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,51 +12,35 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.analytics.FirebaseAnalytics;
-//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
-import com.urbanpoint.UrbanPoint.Utils.AppInstance;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView;
-import org.w3c.dom.Text;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 
 /**
@@ -79,7 +62,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private PinEntryView mSignUpNewPinEntry;
     private PinEntryView mSignUpConfirmPinEntry;
     private String enteredNewPin = "";
-    String occupation="";
     private String enteredConfirmPin = "";
     private LinearLayout mMainParentLayout;
     /*private CustomTextView mLoginTermsAndConditions;
@@ -91,11 +73,8 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private int currentApiVersion;
     private boolean isValidEmail;
     private RelativeLayout rlProgressBar;
-    private Spinner mSignUpOccupation;
-    private EditText mSignUpReferralCode;
 //    private IntroActivityManager introActivityManager;
-    ArrayAdapter OccupationAdapter;
-    TextView RefCode;
+
     public SignUpFragmentStepSix() {
         // Required empty public constructor
     }
@@ -127,8 +106,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     }
 
     private void bindViews() {
-        OccupationAdapter=new ArrayAdapter(getActivity(),R.layout.simple_dropdown_item,
-                getContext().getResources().getStringArray(R.array.occupation));
         rlProgressBar = (RelativeLayout) mRootView.findViewById(R.id.frg_sign_up_rl_progrssbar);
 
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -145,18 +122,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         mSignUpFinishView = (Button) mRootView.findViewById(R.id.signUpStepSixFinishButton);
         mSignUpFinishView.setOnClickListener(this);
         mSignUpUserEmail = (EditText) mRootView.findViewById(R.id.signUpUserEmail);
-        mSignUpOccupation=(Spinner) mRootView.findViewById(R.id.signUpUserOccupation);
-        RefCode=(TextView)mRootView.findViewById(R.id.tv_ref_code);
-        mSignUpReferralCode=(EditText)mRootView.findViewById(R.id.signUpUserReferralCode);
-        mSignUpReferralCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                {
-                    mSignUpReferralCode.setHint("");
-                }
-            }
-        });
 //        mSignUpReferralCode.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -180,21 +145,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 //
 //            }
 //        });
-        mSignUpOccupation.setAdapter(OccupationAdapter);
-//        mSignUpOccupation.setThreshold(1);
-        mSignUpOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) view).setTextColor(Color.WHITE);
-                occupation=getResources().getStringArray(R.array.occupation)[position];
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         mSignUpNewPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpNewPinEntry);
         mSignUpConfirmPinEntry = (PinEntryView) mRootView.findViewById(R.id.signUpConfirmPinEntry);
@@ -279,13 +229,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             //utilObj.showError(this, message, textViewObj, emailObj);
             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_up_enter_account_setup_heading), message, null, null, false, null);
         }
-        else if(occupation.length()<=0)
-        {
-            message="Please select occupation";
-            customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_up_enter_account_setup_heading),
-                    message, null, null, false,
-                    null);
-        }
 
         else if (!checkEmail(email)) {
             message = getResources().getString(R.string.invalid_email);
@@ -297,8 +240,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         }
         if (message.equalsIgnoreCase("") || message == null) {
             AppConfig.getInstance().setEmail(email);
-            AppConfig.getInstance().setOccupation(occupation);
-            AppConfig.getInstance().setReferralCode(mSignUpReferralCode.getText().toString());
             Log.e("entered_pin",enteredNewPin);
             AppConfig.getInstance().setPin(enteredNewPin);
            // AppConfig.getInstance().
