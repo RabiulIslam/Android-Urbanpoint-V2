@@ -16,10 +16,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -41,14 +39,13 @@ import com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragment;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlertConfirmationInterface;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -84,9 +81,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 //             ft.addToBackStack(AppConstt.FRGTAG.HomeFragment);
 //             ft.commit();
 //         }
-        if (!AppConfig.getInstance().isCommingFromSplash)
-        {
-            Log.e("check","1");
+        if (!AppConfig.getInstance().isCommingFromSplash) {
+            Log.e("check", "1");
             AppConfig.getInstance().isCommingFromSplash = true;
             //If not coming from splash, redirect to splash
             Intent intent = new Intent(this, IntroActivity.class);
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             this.overridePendingTransition(0, 0);
             this.finish();//Not required in the backstack
         } else {
-            Log.e("check","2");
+            Log.e("check", "2");
             initiate();
             bindViews();
             setDefLang("en");
@@ -111,14 +107,14 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             String msg = "";
             String date = "";
             if (intent != null) {
-                Log.e("check","3");
+                Log.e("check", "3");
                 Id = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_ID);
                 title = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_TITLE);
                 msg = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_MSG);
                 date = intent.getStringExtra(AppConstt.Notifications.PUSH_NTIFCN_DATE);
             }
             if (Id != null && Id.length() > 0) {
-                Log.e("check","4");
+                Log.e("check", "4");
                 Bundle b = new Bundle();
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_ID, Id);
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_TITLE, title);
@@ -126,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 b.putString(AppConstt.Notifications.PUSH_NTIFCN_DATE, date);
                 navToHomeFragmentWithArguments(b);
             } else {
-                Log.e("check","5");
+                Log.e("check", "5");
                 AppConfig.getInstance().isComingFromHome = true;
                 navToHomeFragment();
             }
@@ -422,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 
     public void clearMyBackStack() {
         int count = 0;
-        if (mFrgmgr.getBackStackEntryCount()>0) {
+        if (mFrgmgr.getBackStackEntryCount() > 0) {
             count = mFrgmgr.getBackStackEntryCount();
         }
         for (int i = 0; i < count; ++i) {
@@ -483,6 +479,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         ft.hide(_previousFrg);
         ft.commit();
     }
+
     public void navToReferAndEarnFragment(Fragment _previousFrg) {
         FragmentTransaction ft = mFrgmgr.beginTransaction();
         Fragment frg = new ReferAndEarnFragment();
@@ -491,6 +488,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         ft.hide(_previousFrg);
         ft.commit();
     }
+
     public void navToHowToUseFragment(Fragment _previousFrg) {
         FragmentTransaction ft = mFrgmgr.beginTransaction();
         Fragment frg = new HowToUseFragment();
@@ -518,9 +516,6 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         ft.addToBackStack(AppConstt.FRGTAG.HomeFragment);
         ft.commit();
     }
-
-
-
 
 
     private void navToIntroActivity() {
@@ -594,30 +589,6 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 //        return super.onKeyDown(keyCode, event);
 //    }
 
-
-
-    private void ExitMessageDialog() {
-        AlertDialog alertDialog;
-        alertDialog =   new AlertDialog.Builder(MainActivity.this)
-                .setMessage(getResources().getString(R.string.exit_app))
-                .setCancelable(false)
-                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-//                        finish();
-                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                        homeIntent.addCategory( Intent.CATEGORY_HOME );
-                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(homeIntent);
-                        finish();
-                    }})
-                .setNegativeButton(getResources().getString(R.string.No), null)
-                .show();
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-
-    }
     private void requestLogout() {
         Logout_Webhit_Get_logout logout_webhit_get_logout = new Logout_Webhit_Get_logout();
         logout_webhit_get_logout.requestLogOut(this, new IWebCallbacks() {
@@ -730,26 +701,39 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             mDrawerLayout.closeDrawer(llDrawerMenu);
 
         } else if (tag.equalsIgnoreCase(AppConstt.FRGTAG.HomeFragment)) {
-            ExitMessageDialog();
-        }
-         else if ((tag.equalsIgnoreCase(AppConstt.FRGTAG.FN_PurchaseSuccessFragment)) ||
+            new CustomAlert().showCustomDialog(this, getResources().getString(R.string.No), getResources().getString(R.string.yes)
+                    , getResources().getString(R.string.exit_app), new CustomAlertConfirmationInterface() {
+                        @Override
+                        public void callConfirmationDialogPositive() {
+                            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                            homeIntent.addCategory(Intent.CATEGORY_HOME);
+                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(homeIntent);
+                            finish();
+                        }
+
+                        @Override
+                        public void callConfirmationDialogNegative() {
+
+                        }
+                    });
+        } else if ((tag.equalsIgnoreCase(AppConstt.FRGTAG.FN_PurchaseSuccessFragment)) ||
                 (tag.equalsIgnoreCase(AppConstt.FRGTAG.SubscriptionEligibleSuccessFragment))) {
             navToHomeFragment();
         } else if (tag.equalsIgnoreCase(AppConstt.FRGTAG.SubscriptionSuccessFragment)) {
             if (AppConfig.getInstance().isCommingFromOfferDetail) {
-//                mFrgmgr.popBackStackImmediate();
-//                mFrgmgr.popBackStackImmediate();
-//                mFrgmgr.popBackStackImmediate();
-                ExitMessageDialog();
+                mFrgmgr.popBackStackImmediate();
+                mFrgmgr.popBackStackImmediate();
+                mFrgmgr.popBackStackImmediate();
             } else {
                 navToHomeFragment();
             }
+        } else {
+            mFrgmgr.popBackStackImmediate();
+            AppConfig.getInstance().closeKeyboard(MainActivity.this);
         }
-        else {
-            ExitMessageDialog();
-           // super.onBackPressed();
-        }
-
     }
 
     @Override

@@ -45,7 +45,7 @@
     <string name="frg_privacy_statement">Privacy Statement</string>
     <string name="rules_of_purchase">Rules of Purchase</string>
     <string name="frg_terms_of_sales">Terms of Sales</string>
-    <string name="frg_subscription_for_15">Subscribe for 99 Tk./month</string>
+    <string name="frg_subscription_for_15">Subscribe for 99.99 Tk./month</string>
     <string name="frg_subscription">Subscribe</string>
     <string name="frg_subscription_success">Congratulations</string>
     <string name="frg_subscription_eligible">Subscribe for FREE!</string>
@@ -308,7 +308,7 @@
     <string name="change_underline"><u>Change</u></string>
     <string name="yes">Yes</string>
     <string name="No">No</string>
-    <string name="exit_app">Exit App?</string>
+    <string name="exit_app">Do you want to exit Biyog ?</string>
 
     <string name="how_to_use_four">The staff member will then apply the discount to your bill. Enjoy the savings!</string>
 
@@ -476,9 +476,16 @@
     <string name="_9taka">9.99 Tk.</string>
     <string name="_49taka">49.99 Tk.</string>
     <string name="_99taka">99.00 Tk.</string>
-    <string name="monthly">Monthly</string>
     <string name="weekly">Weekly</string>
     <string name="daily">Daily</string>
+
+    <string name="monthly">Monthly</string>
+    <string name="half_yearly">Half Yearly</string>
+    <string name="yearly">Yearly</string>
+    <string name="monthly_price">99.99 Tk.</string>
+    <string name="half_yearly_price">599.00 Tk.</string>
+    <string name="yearly_price">1099.00 Tk.</string>
+
     <string name="condition_applies">*Condition Applies</string>
     <string name="additional_vat">*Additional Vat 15% applicable</string>
     <string name="bill_to">Bill To :</string>
@@ -507,6 +514,11 @@
     <!--<string name="merchant_password">biyog_2055363772</string>-->
     <!--<string name="walletmixapp_key">c1b6b79fbc5657f68c147b51a45f3e7e80c2d5e7</string>-->
     <string name="walletmix_appname">biyog.com</string>
+    <string name="msg_not_dhake_city">This app is only for Dhaka City residentials.
+        There are no offers outside of Dhaka city at this moment.
+        However, we are working hard to bring Biyog in your city too.! \n\n</string>
+    <string name="proceed">Proceed</string>
+    <string name="exit">Exit</string>
 
     <string name="grupup_msg">Verify your phone number. </string>
     <string name="confirm">Confirm</string>

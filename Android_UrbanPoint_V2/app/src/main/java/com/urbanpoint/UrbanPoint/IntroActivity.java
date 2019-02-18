@@ -11,27 +11,22 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -45,20 +40,21 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-//import com.mixpanel.android.mpmetrics.MixpanelAPI;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SplashFragment;
-import com.urbanpoint.UrbanPoint.MyApplication;
-import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlertConfirmationInterface;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
+//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 
-public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpdateListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpdateListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private ImageView imvLoader;
     private LinearLayout llContainer;
     private VideoView videoView;
@@ -70,16 +66,17 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     private static int UPDATE_INTERVAL = 10000; // 10 sec
     private static int FATEST_INTERVAL = 5000; // 5 sec
     private static int DISPLACEMENT = 10; // 10 meters
-  boolean shouldNavigate;
-    double lat ,lng;
+    boolean shouldNavigate;
+    Double lat, lng;
     String Id = "";
     String title = "";
     String msg = "";
     String date = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         buildGoogleApiClient();
         // context=getApplicationContext();
         createLocationRequest();
@@ -115,7 +112,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         AppConfig.getInstance().clearSignupData();
         AppConfig.getInstance().isCommingFromSplash = true;
 
-        AppConfig.getInstance().isComingFromHome =false;
+        AppConfig.getInstance().isComingFromHome = false;
         if (AppConfig.getInstance().isComingFromLogout) {
             navToSignUpFragment();
         } else {
@@ -125,32 +122,31 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 //        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
 
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)  {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Log.e("checkloc", "1");
 
-            if (AppConfig.getInstance().isLocationEnabled(IntroActivity.this))
-            {
-                  new Handler().postDelayed(new Runnable() {
-                      @Override
-                      public void run() {
-                          shouldNavigate=true;
-                          if (shouldNavigate) {
-                              if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
-                                  navToHomeActivity();
-                              } else {
-                                  navToGetStartedFragment();
-                              }
-                          }
-                      }
-                  },2000);
+            if (AppConfig.getInstance().isLocationEnabled(IntroActivity.this)) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        shouldNavigate = true;
+                        if (shouldNavigate) {
+                            if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+                                navToHomeActivity();
+                            } else {
+                                navToSignUpFragment();
+                            }
+                        }
+                    }
+                }, 2000);
 
             }
         }
 
     }
-    protected synchronized void buildGoogleApiClient()
-    {
+
+    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -187,18 +183,6 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
     }
 
-    void navToSignUpFragment() {
-        Intent intent=new Intent(IntroActivity.this,SignupActivity.class);
-        startActivity(intent);
-        finish();
-      //  Fragment fragment = new SignUpFragment();
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.FN_SignUpFragment);
-//        ft.commit();
-
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -208,19 +192,21 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
     private void ExitMessageDialog() {
         AlertDialog alertDialog;
-        alertDialog =   new AlertDialog.Builder(IntroActivity.this)
+        alertDialog = new AlertDialog.Builder(IntroActivity.this)
                 .setMessage(getResources().getString(R.string.exit_app))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
-                    }})
+                    }
+                })
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
 
     }
+
     public void setDefLang(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -232,8 +218,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     }
 
     @Override
-    public void setNavBarTitle(String strTitle)
-    {
+    public void setNavBarTitle(String strTitle) {
 
     }
 
@@ -283,34 +268,28 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     }
 
 
-
-
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
-        if (mGoogleApiClient != null)
-        {
+        if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         }
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
     }
-    protected void createLocationRequest()
-    {
+
+    protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FATEST_INTERVAL);
@@ -320,86 +299,141 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
 
     protected void startLocationUpdates() {
-
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED)
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},1);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             }
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest,this);
     }
 
     private void navToHomeActivity() {
-        Log.e("home","home");
-//        Bundle b = getArguments();
-//        String id = "";
-//        String title = "";
-//        String msg = "";
-//        String date = "";
+        Log.e("home", "home");
+
+        boolean firstInstall = AppConfig.getInstance().isFirstInstall();
+        if (firstInstall) {
+            proceedToHomeActivity();
+        } else {
+            if (lat != null && lng != null) {
+                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
+                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                @Override
+                                public void callConfirmationDialogPositive() {
+                                    proceedToHomeActivity();
+                                    AppConfig.getInstance().saveInstalled(true);
+                                }
+
+                                @Override
+                                public void callConfirmationDialogNegative() {
+                                    finish();
+                                }
+                            });
+                } else {
+                    proceedToHomeActivity();
+                }
+            } else {
+                proceedToHomeActivity();
+            }
+        }
+    }
+
+    private void proceedToHomeActivity() {
         Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         if (getIntent() != null) {
-            Log.e("home","home11");
-//            id = b.getString(AppConstt.Notifications.PUSH_NTIFCN_ID);
-//            title = b.getString(AppConstt.Notifications.PUSH_NTIFCN_TITLE);
-//            msg = b.getString(AppConstt.Notifications.PUSH_NTIFCN_MSG);
-//            date = b.getString(AppConstt.Notifications.PUSH_NTIFCN_DATE);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_ID, Id);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_TITLE, title);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_MSG, msg);
             intent.putExtra(AppConstt.Notifications.PUSH_NTIFCN_DATE, date);
         }
-
         startActivity(intent);
         finish();
     }
 
-    void navToGetStartedFragment()
-    {
-        Log.e("home","home23");
-        Intent intent= new Intent(IntroActivity.this, SignupActivity.class);
+    private void proceedToSignUpActivity() {
+        Intent intent = new Intent(IntroActivity.this, SignupActivity.class);
         startActivity(intent);
         finish();
-//        Fragment fragment = new SignUpFragment();
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.activity_intro_frm, fragment, AppConstt.FRGTAG.IntroMainFragment);
-//        ft.commitAllowingStateLoss();
     }
+
+    private String getCountryName(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+
+                Log.e("IntroActivity", "getLocality " + addresses.get(0).getLocality());
+                return addresses.get(0).getLocality().toLowerCase();
+            }
+        } catch (IOException ioe) {
+        }
+        return null;
+    }
+
+    void navToSignUpFragment() {
+        boolean firstInstall = AppConfig.getInstance().isFirstInstall();
+        if (firstInstall) {
+            proceedToSignUpActivity();
+        } else {
+            if (lat != null && lng != null) {
+                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
+                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                @Override
+                                public void callConfirmationDialogPositive() {
+                                    proceedToSignUpActivity();
+                                    AppConfig.getInstance().saveInstalled(true);
+                                }
+
+                                @Override
+                                public void callConfirmationDialogNegative() {
+                                    finish();
+                                }
+                            });
+                } else {
+                    proceedToSignUpActivity();
+                }
+            } else {
+                proceedToSignUpActivity();
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-         Log.e("requestcode",requestCode+","+resultCode);
-        switch (requestCode)
-        {
+        Log.e("requestcode", requestCode + "," + resultCode);
+        switch (requestCode) {
 
             case REQUEST_LOCATION:
 
                 switch (resultCode) {
                     case Activity.RESULT_OK:
                         displayLocation();
-                       shouldNavigate=true;
+                        shouldNavigate = true;
                         if (shouldNavigate) {
                             if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
                         break;
                     case Activity.RESULT_CANCELED:
 //                        turnGPSOn();
-                        shouldNavigate=true;
+                        shouldNavigate = true;
 
                         if (shouldNavigate) {
                             if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
 
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
 
@@ -428,7 +462,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                                 navToHomeActivity();
                             } else {
-                                navToGetStartedFragment();
+                                navToSignUpFragment();
                             }
                         }
                     }
@@ -445,7 +479,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
 
@@ -460,12 +494,10 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
-                }
-                else
-                {
+                } else {
                     shouldNavigate = true;
 
                     if (shouldNavigate) {
@@ -473,7 +505,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
                             navToHomeActivity();
                         } else {
-                            navToGetStartedFragment();
+                            navToSignUpFragment();
                         }
                     }
                 }
@@ -485,32 +517,27 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 //
 
 
-        }
+    }
 
 
+    private void displayLocation() {
 
-
-    private void displayLocation()
-    {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},1);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             }
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if (mLastLocation != null)
-        {
+        if (mLastLocation != null) {
 //            double latitude = mLastLocation.getLatitude();
 //            double longitude = mLastLocation.getLongitude();
 
-            lat= mLastLocation.getLatitude();
-            lng= mLastLocation.getLongitude();
-            Log.e("Location_gps",lat + ", " + lng);
+            lat = mLastLocation.getLatitude();
+            lng = mLastLocation.getLongitude();
+            Log.e("Location_gps", lat + ", " + lng);
 
-           // findGirlfriendbydefaultlocation(lat,lng);
+            // findGirlfriendbydefaultlocation(lat,lng);
         } else {
             //Loge("check","location");
         }
@@ -537,18 +564,18 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         displayLocation();
 
     }
-    public static boolean checkGPSPermission(Context mContext){
+
+    public static boolean checkGPSPermission(Context mContext) {
         boolean gps_enabled = true;
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED )
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             gps_enabled = true;
         else
             gps_enabled = false;
         return gps_enabled;
     }
-    public void OnUpdateListener()
-    {
-        if(checkGPSPermission(getApplicationContext()))
-        {
+
+    public void OnUpdateListener() {
+        if (checkGPSPermission(getApplicationContext())) {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
 //            {
 //                ActivityCompat.requestPermissions(IntroActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -560,18 +587,15 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 //                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
 //                        MY_PERMISSIONS_REQUEST_LOCATION);
 //            }
-        }
-        else if(checkGPSStatus(IntroActivity.this))
+        } else if (checkGPSStatus(IntroActivity.this))
             turnGPSOn();
-        else if (mGoogleApiClient.isConnected())
-        {
+        else if (mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
 
     }
 
-    public void turnGPSOn()
-    {
+    public void turnGPSOn() {
         mGoogleApiClient.connect();
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -583,21 +607,15 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
 
         PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>()
-        {
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
             @Override
-            public void onResult(LocationSettingsResult result)
-            {
+            public void onResult(LocationSettingsResult result) {
                 final Status status = result.getStatus();
-                switch (status.getStatusCode())
-                {
+                switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try
-                        {
+                        try {
                             status.startResolutionForResult(IntroActivity.this, REQUEST_LOCATION);
-                        }
-                        catch (@SuppressLint("NewApi") IntentSender.SendIntentException e)
-                        {
+                        } catch (@SuppressLint("NewApi") IntentSender.SendIntentException e) {
 
                         }
                         break;
@@ -612,11 +630,11 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         if (locationManager == null) {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         }
-        if (!locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ))
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             gps_enabled = true;
         else
             gps_enabled = false;
-        Log.e("gps_enabled",":2:"+gps_enabled);
+        Log.e("gps_enabled", ":2:" + gps_enabled);
         return gps_enabled;
     }
 }

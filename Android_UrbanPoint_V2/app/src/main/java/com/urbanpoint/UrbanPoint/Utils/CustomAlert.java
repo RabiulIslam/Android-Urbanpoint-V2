@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.urbanpoint.UrbanPoint.R;
 
 
-
 public class CustomAlert {
     private boolean isCustomAlertDialogCancelable = true;
 
@@ -194,7 +193,7 @@ public class CustomAlert {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.setContentView(R.layout.dialog_app_update);
             boolean isCancelAble = !_isForcefullyUpdateActive;
-            Log.d("ISCANCELLABLE", "showAppUpdateAlertDialog: "+isCancelAble);
+            Log.d("ISCANCELLABLE", "showAppUpdateAlertDialog: " + isCancelAble);
 
             // set the custom dialog components - text
             Button cancelButton = dialog.findViewById(R.id.app_update_btn_no);
@@ -268,5 +267,40 @@ public class CustomAlert {
             }
         }
 
+    }
+
+    public void showCustomDialog(Context context, String noText, String yesText, String descriptionText, final CustomAlertConfirmationInterface customDialogConfirmationListener) {
+        if (context != null) {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.dialog_custom_message);
+            dialog.setCanceledOnTouchOutside(false);
+
+            // set the custom dialog components - text
+            TextView description = dialog.findViewById(R.id.description);
+            Button no = dialog.findViewById(R.id.noButton);
+            Button yes = dialog.findViewById(R.id.yesButton);
+            description.setText(descriptionText);
+            no.setText(noText);
+            yes.setText(yesText);
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    if (customDialogConfirmationListener != null)
+                        customDialogConfirmationListener.callConfirmationDialogNegative();
+                }
+            });
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    if (customDialogConfirmationListener != null)
+                        customDialogConfirmationListener.callConfirmationDialogPositive();
+                }
+            });
+            dialog.show();
+        }
     }
 }

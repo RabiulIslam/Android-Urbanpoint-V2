@@ -40,8 +40,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.facebook.appevents.AppEventsLogger;
-//import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.CommonFragments.OfferDetailFragment;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.FavoriteOffersFragment;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.HomeFragments.NewOffersFragment;
@@ -68,6 +66,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.facebook.appevents.AppEventsLogger;
+//import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -387,9 +388,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
 //                    requestCheckEligibility(phone);
 //                } else {
-                    AppConfig.getInstance().mUser.setEligible(false);
-                    navToSubscriptionFragment();
-              //  }
+                AppConfig.getInstance().mUser.setEligible(false);
+                navToSubscriptionFragment();
+                //  }
                 // navToSubscriptionEligibleFragment();
                 break;
 
@@ -615,7 +616,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onWebException(Exception ex) {
-                Log.e("home_exceptn","ex",ex);
+                Log.e("home_exceptn", "ex", ex);
 
                 progressDilogue.stopiOSLoader();
                 if (customAlert != null)
@@ -752,9 +753,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-    public void printKeyHash()
-    {
+    public void printKeyHash() {
         try {
             PackageInfo info = getActivity().getPackageManager().getPackageInfo(
                     "com.s.bikeandtaxi",
@@ -770,6 +769,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
     private void updateGridVwData() {
 
         //Updating Home Screen Msg
@@ -841,7 +841,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         // Updating Home MostLoved Offers list
 
-        Log.e("most_loved_offers_size", Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size()+"");
+        Log.e("most_loved_offers_size", Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size() + "");
         if (Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size() > 0) {
             for (int i = 0; i < Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().size(); i++) {
@@ -856,10 +856,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getId(),
                         Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getName(),
                         //"0",
-                       Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getSpecial(),
+                        Home_WebHit_Post_homeApi.responseObject.getData().getMostLovedOffers().get(i).getSpecial(),
                         "",
                         dist,
-                        false,Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().
+                        false, Float.parseFloat(Home_WebHit_Post_homeApi.responseObject.getData().
                         getMostLovedOffers().get(i).getApproxSaving())
                 ));
             }
@@ -872,18 +872,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void updateBadges() {
 
-        Log.e("email_verified_status",AppConfig.getInstance().mUser.EmailVerified+"");
+        Log.e("email_verified_status", AppConfig.getInstance().mUser.EmailVerified + "");
 
-        Log.e("subscription1",AppConfig.getInstance().mUser.isSubscribed+
-                "&"+AppConfig.getInstance().mUser.isPremierUser);
-        if (AppConfig.getInstance().mUser.isSubscribed )
-        {
-            Log.e("test","1");
+        Log.e("subscription1", AppConfig.getInstance().mUser.isSubscribed +
+                "&" + AppConfig.getInstance().mUser.isPremierUser);
+        if (AppConfig.getInstance().mUser.isSubscribed) {
+            Log.e("test", "1");
             btnGainAccess.setVisibility(View.GONE);
-        }
-        else
-        {
-            Log.e("test","2");
+        } else {
+            Log.e("test", "2");
             btnGainAccess.setVisibility(View.VISIBLE);
         }
 
@@ -916,7 +913,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         //Updating MenuIcon Badge
         String nationality = "";
-        String EmailVerified="";
+        String EmailVerified = "";
         if (AppConfig.getInstance().mUser.getmNationality() != null &&
                 AppConfig.getInstance().mUser.getmNationality().length() > 0) {
             nationality = AppConfig.getInstance().mUser.getmNationality();
@@ -940,21 +937,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((MainActivity) getContext()).setReviewCount(AppConfig.getInstance().mUserBadges.getReviewCount());
 
         //Updating Profile Completion Badge
-        if (nationality.length() > 0  && EmailVerified.length()>0 &&
+        if (nationality.length() > 0 && EmailVerified.length() > 0 &&
                 EmailVerified.equalsIgnoreCase("1")) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
-        }
-        else if ((EmailVerified.equalsIgnoreCase("1") && nationality.length()<=0)||
-                (nationality.length()>0 && EmailVerified.equalsIgnoreCase("0")))
-        {
+        } else if ((EmailVerified.equalsIgnoreCase("1") && nationality.length() <= 0) ||
+                (nationality.length() > 0 && EmailVerified.equalsIgnoreCase("0"))) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
 
             ((MainActivity) getContext()).setProfileCount("90%");
 
 
-        }
-        else if ( EmailVerified.equalsIgnoreCase("0") && nationality.length()==0 )
-        {
+        } else if (EmailVerified.equalsIgnoreCase("0") && nationality.length() == 0) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
             ((MainActivity) getContext()).setProfileCount("80%");
 
@@ -1009,7 +1002,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        loadOldPrefrencLog();
 //        Checking if Update Dialog is required
 
-        Log.e("resume","resume");
+        Log.e("resume", "resume");
 
         String tag = ((MainActivity) getActivity()).returnStackFragment();
         if (tag.equalsIgnoreCase(AppConstt.FRGTAG.HomeFragment)) {

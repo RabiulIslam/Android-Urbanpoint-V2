@@ -6,21 +6,15 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.DModel_Badges;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.DModel_User;
-
-import java.sql.Ref;
-
 
 
 public class AppConfig {
@@ -61,7 +55,8 @@ public class AppConfig {
     public int badgeCounter;
     public boolean isSpaceRequiredToShow;
     public boolean isEligible;
-//    public static String mSignupUsername="";
+
+    //    public static String mSignupUsername="";
 //    public static String mSignupAge="";
 //    public static String mSignupGender="";
 //    public static String mSignupEmail="";
@@ -77,15 +72,13 @@ public class AppConfig {
             this.marginToast = (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10
                     , mContext.getResources().getDisplayMetrics()));
 
-            this.SignupData=mContext.getSharedPreferences("signup_pref",Context.MODE_PRIVATE);
-            this.SignupEditor=SignupData.edit();
+            this.SignupData = mContext.getSharedPreferences("signup_pref", Context.MODE_PRIVATE);
+            this.SignupEditor = SignupData.edit();
 
             initUserSessionData();
 
         }
     }
-
-
 
     private void initUserSessionData() {
         mNotificationStatus = -1;
@@ -129,8 +122,6 @@ public class AppConfig {
         return ourInstance;
     }
 
-
-
     public void loadOldPrefrnceData() {
         mUser.mUserId = sharedPref.getString("CUSTOMER_ID", "");
         mUser.mName = sharedPref.getString("user_name", "");
@@ -140,8 +131,8 @@ public class AppConfig {
         mUser.mNationality = sharedPref.getString("nationality", "");
         mUser.mPinCode = sharedPref.getString("pinCode", "");
         mUser.mPhoneNumber = sharedPref.getString("msisdn_id", "");
-        mUser.mReferralCode= sharedPref.getString("referral_code","");
-        mUser.zone=sharedPref.getString("zone","");
+        mUser.mReferralCode = sharedPref.getString("referral_code", "");
+        mUser.zone = sharedPref.getString("zone", "");
         String isSubscribed = "";
         isSubscribed = sharedPref.getString("key_user_subscribe_status", "");
         if (isSubscribed.equalsIgnoreCase("true")) {
@@ -151,9 +142,9 @@ public class AppConfig {
         }
         String gender = sharedPref.getString("gender", "");
         if (gender.equalsIgnoreCase("1")) {
-            mUser.mGender ="male";
-         } else {
-            mUser.mGender ="female";
+            mUser.mGender = "male";
+        } else {
+            mUser.mGender = "female";
         }
         String ooredoo = "", voda = "";
         ooredoo = sharedPref.getString("OPERATOR_TYPE_OOREDOO", "");
@@ -165,81 +156,80 @@ public class AppConfig {
         }
     }
 
-    public  void clearSignupData()
-    {
+    public void clearSignupData() {
         SignupEditor.clear();
         SignupEditor.commit();
     }
 
 
-    public  void setUsername(String username)
-    {
-        SignupEditor.putString("name",username);
-        SignupEditor.commit();
-    }
-    public void setEmail(String Email)
-    {
-        SignupEditor.putString("email",Email);
-        SignupEditor.commit();
-    }
-    public  void  setOccupation(String Occupation)
-    {
-        SignupEditor.putString("occupation",Occupation);
-        SignupEditor.commit();
-    }
-    public void setGender(String Gender)
-    {
-        SignupEditor.putString("gender",Gender);
+    public void setUsername(String username) {
+        SignupEditor.putString("name", username);
         SignupEditor.commit();
     }
 
-    public void setAge(String Age)
-    {
-        SignupEditor.putString("age",Age);
+    public void setEmail(String Email) {
+        SignupEditor.putString("email", Email);
         SignupEditor.commit();
     }
-    public void setReferralCode(String ReferralCode)
-    {
+
+    public void setOccupation(String Occupation) {
+        SignupEditor.putString("occupation", Occupation);
+        SignupEditor.commit();
+    }
+
+    public void setGender(String Gender) {
+        SignupEditor.putString("gender", Gender);
+        SignupEditor.commit();
+    }
+
+    public void setAge(String Age) {
+        SignupEditor.putString("age", Age);
+        SignupEditor.commit();
+    }
+
+    public void setReferralCode(String ReferralCode) {
         SignupEditor.putString("Refcode", ReferralCode);
         SignupEditor.commit();
     }
-    public void setPin(String Pin)
-    {
+
+    public void setPin(String Pin) {
         SignupEditor.putString("Pin", Pin);
         SignupEditor.commit();
     }
 
-    public void setZone(String zone)
-    {
-        SignupEditor.putString("zone",zone);
+    public void setZone(String zone) {
+        SignupEditor.putString("zone", zone);
         SignupEditor.commit();
     }
 
-    public String getName()
-    {
-        return  SignupData.getString("name","");
+    public String getName() {
+        return SignupData.getString("name", "");
     }
-    public String getAge()
-    {
-        return  SignupData.getString("age","");
+
+    public String getAge() {
+        return SignupData.getString("age", "");
     }
-    public String getOccupation()
-    {
-        return  SignupData.getString("occupation","");
+
+    public String getOccupation() {
+        return SignupData.getString("occupation", "");
     }
-    public String getEmail()
-    {
-      return  SignupData.getString("email","");
+
+    public String getEmail() {
+        return SignupData.getString("email", "");
     }
-    public String getPin(){return SignupData.getString("Pin","");}
-    public String getReferralCode()
-    {
-       return SignupData.getString("Refcode","");
+
+    public String getPin() {
+        return SignupData.getString("Pin", "");
     }
-    public String getGender()
-    {
-       return SignupData.getString("gender","");
+
+    public String getReferralCode() {
+        return SignupData.getString("Refcode", "");
     }
+
+    public String getGender() {
+        return SignupData.getString("gender", "");
+    }
+
     public void loadUserData() {
         mUser.setmUserId(sharedPref.getString("key_user_id", ""));
         mUser.setmName(sharedPref.getString("key_name", ""));
@@ -262,8 +252,8 @@ public class AppConfig {
         mUser.setPremierUser(sharedPref.getBoolean("key_is_premier_user", false));
         mUser.setUberRequired(sharedPref.getBoolean("key_is_uber_required", false));
         mUserBadges.setFavoriteCount(sharedPref.getInt("key_favorites_count", 0));
-        mUser.setmReferralCode(sharedPref.getString("referral_code",""));
-        mUser.setZone(sharedPref.getString("zone",""));
+        mUser.setmReferralCode(sharedPref.getString("referral_code", ""));
+        mUser.setZone(sharedPref.getString("zone", ""));
     }
 
     public void saveUserData() {
@@ -288,8 +278,8 @@ public class AppConfig {
         editor.putBoolean("key_is_premier_user", mUser.isPremierUser());
         editor.putBoolean("key_is_uber_required", mUser.isUberRequired());
         editor.putInt("key_favorites_count", mUserBadges.getFavoriteCount());
-        editor.putString("referral_code",mUser.getmReferralCode());
-        editor.putString("zone",mUser.getZone());
+        editor.putString("referral_code", mUser.getmReferralCode());
+        editor.putString("zone", mUser.getZone());
         editor.commit();
     }
 
@@ -310,6 +300,15 @@ public class AppConfig {
         editor.commit();
     }
 
+    public void saveInstalled(boolean firstInstall) {
+        editor.putBoolean("key_firstInstall", firstInstall);
+        editor.commit();
+    }
+
+    public boolean isFirstInstall() {
+        return sharedPref.getBoolean("key_firstInstall", false);
+    }
+
     public void clearSharedPreferance() {
         editor.clear();
         editor.commit();
@@ -325,20 +324,19 @@ public class AppConfig {
         String locationProviders;
 
         //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-           if (checkPermission(context)) {
-               LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-               if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                   return true;
-               } else {
+        if (checkPermission(context)) {
+            LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                return true;
+            } else {
 
-                   return false;
-               }
+                return false;
+            }
 
-           }
+        }
 
-           return false;
+        return false;
     }
-
 
 
     public static boolean checkPermission(Context mContext) {

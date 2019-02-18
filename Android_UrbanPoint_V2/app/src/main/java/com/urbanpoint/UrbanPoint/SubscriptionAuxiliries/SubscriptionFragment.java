@@ -36,7 +36,7 @@ import java.util.List;
 
 public class SubscriptionFragment extends Fragment implements View.OnClickListener {
     private Button  btnAccessCode;
-   // private CellNoEntryView mMobileNumberEntry;
+    // private CellNoEntryView mMobileNumberEntry;
     private String enteredMobileNumber = "";
     private ExpandableHeightGridView lsv1, lsv2;
     private LinearLayout llParentLayout;
@@ -79,7 +79,7 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
             lstStrings = new ArrayList();
             for (int i = 0; i < Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size(); i++) {
                 lstStrings.add(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(i).getText());
-             //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
+                //   Spanned spanned = Html.fromHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText());
                 txvSubsText.setHtml(Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().get(0).getText(), new HtmlResImageGetter(txvSubsText));
             }
 
@@ -145,32 +145,32 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
 
             case R.id.frg_subscription_btn1:
                 in.putExtra("type","1");
-                in.putExtra("subtotal","Tk 9.99");
-                in.putExtra("package","Daily");
-                in.putExtra("vat","Tk 1.49");
-                in.putExtra("total","Tk 11.48");
-               startActivity(in);
-                ((MainActivity)getActivity()).finish();
+                in.putExtra("subtotal","Tk 99.99");
+                in.putExtra("package","Monthly");
+                in.putExtra("vat","Tk 14.99");
+                in.putExtra("total","Tk 114.98");
+                startActivity(in);
+               // ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn2:
                 in.putExtra("type","2");
-                in.putExtra("subtotal","Tk 49.99");
-                in.putExtra("package","Weekly");
-                in.putExtra("vat","Tk 07.49");
-                in.putExtra("total","Tk 57.48");
+                in.putExtra("subtotal","Tk 599.00");
+                in.putExtra("package","Half Yearly");
+                in.putExtra("vat","Tk 89.85");
+                in.putExtra("total","Tk 688.85");
                 startActivity(in);
-                ((MainActivity)getActivity()).finish();
+              //  ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn3:
                 in.putExtra("type","3");
-                in.putExtra("subtotal","Tk 99.00");
-                in.putExtra("package","Monthly");
-                in.putExtra("vat","Tk 14.85");
-                in.putExtra("total","Tk 113.85");
+                in.putExtra("subtotal","Tk 1099.00");
+                in.putExtra("package","Yearly");
+                in.putExtra("vat","Tk 164.85");
+                in.putExtra("total","Tk 1263.85");
                 startActivity(in);
-                ((MainActivity)getActivity()).finish();
+              //  ((MainActivity)getActivity()).finish();
 
-            break;
+                break;
             case R.id.frg_subscription_btn_access_code:
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 Bundle b1 = new Bundle();
