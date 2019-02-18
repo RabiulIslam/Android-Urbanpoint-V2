@@ -35,7 +35,7 @@ public class ReviewOrders_Webhit_Get_addReview {
         params.put("review", _review);
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

@@ -84,7 +84,6 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sign_up_step_six, null);
-        // View view = inflater.inflate(R.layout.fragment_change_pin, null);
         this.mActivity = getActivity();
         this.mContext = mActivity.getApplicationContext();
         this.mRootView = view;

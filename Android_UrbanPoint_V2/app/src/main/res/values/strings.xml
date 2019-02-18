@@ -22,7 +22,7 @@
     <string name="sign_up_get_startd">Get Started</string>
     <string name="save">Save</string>
     <string name="button_text_allow">Allow</string>
-    <string name="get_started">Registered? Sign Up</string>
+    <string name="get_started">Sign Up</string>
 
     <!--Fragments Title-->
     <string name="frg_Home">Home</string>
@@ -425,7 +425,7 @@
     <string name="finish">Finish</string>
     <string name="continue_button">Continue</string>
     <string name="sign_up_step_one_message">Hi! Nice to meet you, tell us your name</string>
-    <string name="sign_up_step_two_message">Select your gender</string>
+    <string name="sign_up_step_two_message">Are you Male or Female?</string>
     <string name="sign_up_step_three_message">Tell us your interests so that we can get you what you like</string>
 
     <string name="sign_up_step_four_message">Are you a Vodafone Qatar customer?</string>
@@ -519,5 +519,9 @@
     <string name="resend_sms">Resend SMS</string>
     <string name="change_phone_number">Want to update Number?</string>
     <string name="phone_number_activity_thank_you">Thank you</string>
-    <string name="the_biyog_company">The Biyog Company</string>
+    <string name="the_biyog_company">Biyog Pvt. Ltd.</string>
+    <string name="phone_number_activity_code">Please, type your code</string>
+    <string name="otp_error_code">OTP Error</string>
+    <string name="invalid_otp_code">"Invalid OTP"</string>
+    <string name="sent_otp_code">We have already sent an OTP Code</string>
 </resources>

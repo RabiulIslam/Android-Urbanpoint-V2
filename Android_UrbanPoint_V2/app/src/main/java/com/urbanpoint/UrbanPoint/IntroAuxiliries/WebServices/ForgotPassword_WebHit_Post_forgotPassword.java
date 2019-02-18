@@ -37,9 +37,9 @@ public class ForgotPassword_WebHit_Post_forgotPassword {
         RequestParams params = new RequestParams();
         params.put("email", _emailId);
       Log.e("f_params",params+"");
-        mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
-        Log.e("header",AppConstt.HeadersValue.Authorization);
+        mClient.addHeader(ApiMethod.HEADER.Authorization, ApiMethod.HeadersValue.Authorization);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
+        Log.e("header",ApiMethod.HeadersValue.Authorization);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

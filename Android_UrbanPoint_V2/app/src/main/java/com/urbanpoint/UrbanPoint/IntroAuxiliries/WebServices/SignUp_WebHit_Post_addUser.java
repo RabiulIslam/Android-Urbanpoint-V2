@@ -54,10 +54,10 @@ public class SignUp_WebHit_Post_addUser {
         params.put("token", _fcmToken);
         params.put("device_token",android_id);
         Log.e("params",params+"");
-        Log.e("header",AppConstt.HeadersValue.Authorization);
+        Log.e("header",ApiMethod.HeadersValue.Authorization);
         Log.e("register_url",myUrl);
-        mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader(ApiMethod.HEADER.Authorization, ApiMethod.HeadersValue.Authorization);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

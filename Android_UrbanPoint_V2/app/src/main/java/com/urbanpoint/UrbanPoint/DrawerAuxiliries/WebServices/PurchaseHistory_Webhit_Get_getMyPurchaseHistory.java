@@ -30,7 +30,7 @@ public class PurchaseHistory_Webhit_Get_getMyPurchaseHistory {
         Log.e("get_purchase_hostory",myUrl);
         this.mContext = _context;
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.get(myUrl, new AsyncHttpResponseHandler() {

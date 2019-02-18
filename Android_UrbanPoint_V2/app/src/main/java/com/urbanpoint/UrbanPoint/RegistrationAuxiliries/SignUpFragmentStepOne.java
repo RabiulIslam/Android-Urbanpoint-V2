@@ -9,11 +9,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -109,6 +111,18 @@ public class SignUpFragmentStepOne extends Fragment implements View.OnClickListe
                 {
                     mSignUpReferralCode.setHint("");
                 }
+            }
+        });
+        mSignUpUserName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    Utility.hideVirtualKeyboard(getActivity());
+                    textView.clearFocus();
+                    mSignUpOccupation.requestFocus();
+                    mSignUpOccupation.performClick();
+                }
+                return true;
             }
         });
         OccupationAdapter=new ArrayAdapter(getActivity(),R.layout.simple_dropdown_item,

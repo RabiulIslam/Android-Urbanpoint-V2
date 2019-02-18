@@ -41,6 +41,9 @@ public interface ApiMethod {
         String addReview = "addReview";
         String readNotification = "readNotification";
         String updatePermission = "updatePermission";
+
+        String SEND_OTP = "sendOtp";
+        String VERIFY_OTP = "verifyOtp";
      }
 
     interface PATCH {
@@ -52,6 +55,12 @@ public interface ApiMethod {
         String Access_Token = "Access-Token";
         String Authorization = "Authorization";
         String app_id = "app_id ";
+        String CONTENT_TYPE = "Content-Type";
+    }
+    interface HeadersValue {
+        String Authorization = "UP!and$";
+        String app_id = "1";
+        String CONTENT_TYPE = "application/json";
     }
 }
 

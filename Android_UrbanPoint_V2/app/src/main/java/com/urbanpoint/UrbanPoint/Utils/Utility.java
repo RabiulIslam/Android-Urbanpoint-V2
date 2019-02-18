@@ -477,7 +477,7 @@ public class Utility {
      *
      * @param mContext contains context of application
      */
-    public void hideVirtualKeyboard(Context mContext) {
+    public static void hideVirtualKeyboard(Context mContext) {
 
         try {
 

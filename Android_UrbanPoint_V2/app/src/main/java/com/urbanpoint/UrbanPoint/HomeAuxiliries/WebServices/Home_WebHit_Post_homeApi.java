@@ -36,11 +36,11 @@ public class Home_WebHit_Post_homeApi {
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.homeApi;
         Log.e("homeApi",myUrl);
         RequestParams requestParams = new RequestParams();
-        requestParams.put("app_version",AppConfig.getInstance().mUser.mAppVersion);
+        requestParams.put("app_version",AppConfig.getInstance().mUser.getmAppVersion());
          Log.e("home_params",requestParams+"");
          Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, requestParams,new AsyncHttpResponseHandler() {
                     @Override

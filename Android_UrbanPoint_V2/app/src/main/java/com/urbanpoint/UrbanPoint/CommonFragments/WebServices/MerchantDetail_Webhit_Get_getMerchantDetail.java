@@ -38,7 +38,7 @@ public class MerchantDetail_Webhit_Get_getMerchantDetail {
         Log.e("mrchnt_detail_params",params+"");
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         Log.e("header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, params, new AsyncHttpResponseHandler() {

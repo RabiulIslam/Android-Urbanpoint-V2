@@ -44,7 +44,6 @@
                 android:orientation="vertical">
 
                 <EditText
-
                     android:textCursorDrawable="@null"
                     android:id="@+id/signUpUserName"
                     android:layout_width="match_parent"

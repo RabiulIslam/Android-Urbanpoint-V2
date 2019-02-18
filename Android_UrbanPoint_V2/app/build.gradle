@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.biyog.Biyog"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -26,7 +26,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            proguardFiles 'proguard-rules.pro'
         }
@@ -57,7 +57,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 //    implementation 'com.google.android.gms:play-services-analytics:16.0.5'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-gcm:16.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation files('libs/universal-image-loader-1.9.4-SNAPSHOT.jar')
     implementation files('libs/cwac-sacklist-1.0.2.jar')
@@ -73,7 +74,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 //    implementation 'com.facebook.android:facebook-core:[4,5)'
 //    implementation 'com.facebook.android:facebook-marketing:[4,5)'
-  //  implementation 'com.google.android.gms:play-services-auth-api-phone:11.0.4'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:16.0.0'
     implementation 'com.facebook.android:account-kit-sdk:4.39.0'
     //) {
 //        exclude group: 'com.google.android.gms', module: 'play-services-auth-api-phone'

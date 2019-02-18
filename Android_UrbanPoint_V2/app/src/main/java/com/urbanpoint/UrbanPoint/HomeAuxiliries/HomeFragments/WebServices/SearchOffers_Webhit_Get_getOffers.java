@@ -35,7 +35,7 @@ public class SearchOffers_Webhit_Get_getOffers {
         params.put("search", _searchKey);
 
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.get(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

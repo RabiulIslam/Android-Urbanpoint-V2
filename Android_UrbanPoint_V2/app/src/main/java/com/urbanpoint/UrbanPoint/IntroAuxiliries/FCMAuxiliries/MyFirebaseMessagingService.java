@@ -31,6 +31,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        AppConfig.getInstance().saveFCMToken(s);
+    }
+    @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM

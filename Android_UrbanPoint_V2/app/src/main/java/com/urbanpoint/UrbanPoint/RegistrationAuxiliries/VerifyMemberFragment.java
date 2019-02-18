@@ -1,10 +1,12 @@
 package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -70,6 +72,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
 import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
@@ -116,7 +119,12 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initialize(view);
 
-
+        if (checkSelfPermission(getActivity(), Manifest.permission.RECEIVE_SMS)
+                != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(getActivity(),
+                        Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.RECEIVE_SMS}, 0);
+        }
         return view;
     }
 

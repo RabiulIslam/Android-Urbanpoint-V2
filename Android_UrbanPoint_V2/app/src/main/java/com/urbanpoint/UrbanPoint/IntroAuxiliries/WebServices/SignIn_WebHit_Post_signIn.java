@@ -44,9 +44,9 @@ public class SignIn_WebHit_Post_signIn {
         Log.e("OldDataIs", "FCM :" + AppConfig.getInstance().loadFCMToken());
 
 
-        mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
-        Log.e("header",AppConstt.HeadersValue.Authorization);
+        mClient.addHeader(ApiMethod.HEADER.Authorization, ApiMethod.HeadersValue.Authorization);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
+        Log.e("header",ApiMethod.HeadersValue.Authorization);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

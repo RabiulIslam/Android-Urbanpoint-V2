@@ -3,17 +3,23 @@ package com.urbanpoint.UrbanPoint.Utils;
 
 public interface AppConstt {
 
-//    Live Server
-  //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
-//    String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+    //   Live Server
+    //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
+
+    //    DEV Server
+    // String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+    // String BASE_URL_OTP="http://34.219.2.69:9010/api/";
+    //   Production Server
+    String BASE_URL_OTP="http://52.37.72.27:9010/api/";
     String BASE_URL="https://cms.biyog.com/up_qatar/api/v1/";
+
     String BASE_URL_MOBILE = BASE_URL + "mobile/";
     String BASE_URL_SUBSCRIPTION = BASE_URL_MOBILE + "subsribeuser";
     String BASE_URL_IMAGES = "http://cms.biyog.com/up_qatar/uploads/";
     String mSignupUsername="";
     String mSignupAge="";
-     String mSignupGender="";
-   String mSignupEmail="";
+    String mSignupGender="";
+    String mSignupEmail="";
 
 //    Staging Server
 
@@ -34,10 +40,6 @@ public interface AppConstt {
     static String DeviceType = "android";
     static String NetworkType = "ooredoo";
 
-    interface HeadersValue {
-        String Authorization = "UP!and$";
-        String app_id = "1";
-    }
 
     interface UberRideEstimate {
         String CLIENT_ID = "4t0OnuFW8ukSYSn3HbiX_2C7dadRbTb-";
@@ -193,6 +195,7 @@ public interface AppConstt {
         short BAD_GATEWAY = 502;
         short HTTP_VERSION_NOTSUPPORTED = 505;
         short NETWORK_ERROR = 0;
+        short ERROR = 104;
 
     }
 
@@ -237,7 +240,7 @@ public interface AppConstt {
         String userId="userId";
     }
 
-//    public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
+    //    public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
 //            "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia",
 //            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
 //            "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Bouvet Island", "Brazil",
@@ -266,13 +269,13 @@ public interface AppConstt {
 //            "Tuvalu", "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uraguay", "United States",
 //            "U.S. Outlying Islands", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara",
 //            "Yemen", "Zambia", "Zimbabwe"};
-public static String[] arrFlags ={"Dhaka North","Dhaka South","Others"};
+    public static String[] arrFlags ={"Dhaka North","Dhaka South","Others"};
 
-public  static String[] arrNorthZone={"Adabor","Agargaon","Asad Gate","Badda","Banani","Baridhara",
-"Bashundhara","Dakshinkhan","Darus Salam","Dhaka- Cantonment","Dhamrai","Farmgate","Gulshan 1","Gulshan 2",
-"Kallyanpur","Karwan Bazar","Khilgaon","Khilkhet","Kuril","Mirpur 1","Mirpur 10","Mirpur 11-13","Mirpur 60 Feet",
- "Mirpur Cantonment","Mirpur DOHS","Mirpur Kazipara","Mirpur Shewrapara","Mohakhali","Mohammadpur","Monipur para","Niketon",
-"Sher-e-Bangla Nagar","Shyamoli","Tejgaon","Tejgaon Industrial Area","Uttara"};
+    public  static String[] arrNorthZone={"Adabor","Agargaon","Asad Gate","Badda","Banani","Baridhara",
+            "Bashundhara","Dakshinkhan","Darus Salam","Dhaka- Cantonment","Dhamrai","Farmgate","Gulshan 1","Gulshan 2",
+            "Kallyanpur","Karwan Bazar","Khilgaon","Khilkhet","Kuril","Mirpur 1","Mirpur 10","Mirpur 11-13","Mirpur 60 Feet",
+            "Mirpur Cantonment","Mirpur DOHS","Mirpur Kazipara","Mirpur Shewrapara","Mohakhali","Mohammadpur","Monipur para","Niketon",
+            "Sher-e-Bangla Nagar","Shyamoli","Tejgaon","Tejgaon Industrial Area","Uttara"};
     public  static String[] arrSouthZone={"Azimpur","Bangabhaban","Bangshal","Basabo","Bijoy Nagar","Chawk Bazar",
             "Demra","Dhanmondi","Dhanmondi","Elephant Road","Gendaria","Gulistan","Hazaribagh","Jatrabari","Kakrail",
             "Kalabagan","Kamlapur","Keraniganj Sadar","Lalbagh","Matuail","Moghbazar","Motijheel","Nawabganj",
@@ -322,5 +325,12 @@ public  static String[] arrNorthZone={"Adabor","Agargaon","Asad Gate","Badda","B
 
         public static final long MIN_TIME_BW_UPDATES = 1000 * 5;
         public static final float MIN_DISTANCE_BW_UPDATES = 5;
+    }
+
+    class ACTIONS{
+        public static final String SMS_RECEIVED = "com.urbanpoint.UrbanPoint.SMS_RECEIVED";
+    }
+    class EXTRAS{
+        public static final String OTP_CODE = "OTP_CODE";
     }
 }

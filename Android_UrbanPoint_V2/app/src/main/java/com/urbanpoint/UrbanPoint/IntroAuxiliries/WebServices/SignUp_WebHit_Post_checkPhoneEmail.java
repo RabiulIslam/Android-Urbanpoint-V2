@@ -44,10 +44,10 @@ public class SignUp_WebHit_Post_checkPhoneEmail {
 
             Log.e("step2_params",params+"");
         Log.e("step2_url",myUrl+"");
-        Log.e("step2_header",AppConstt.HeadersValue.Authorization+"");
+        Log.e("step2_header",ApiMethod.HeadersValue.Authorization+"");
 
-        mClient.addHeader(ApiMethod.HEADER.Authorization, AppConstt.HeadersValue.Authorization);
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader(ApiMethod.HEADER.Authorization, ApiMethod.HeadersValue.Authorization);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {
                     @Override

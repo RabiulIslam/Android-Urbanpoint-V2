@@ -39,7 +39,7 @@ public class Subscribe_WebHit_Post_subscribe {
         params.put("phone",AppConfig.getInstance().mUser.getmPhoneNumber());
         Log.e("suscription_params",params+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
-        mClient.addHeader("app_id", AppConstt.HeadersValue.app_id);
+        mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         Log.e("subs_header",AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
         mClient.post(myUrl, params, new AsyncHttpResponseHandler() {

@@ -23,6 +23,7 @@ import android.widget.Toast;
 //import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.FCMAuxiliries.FirebaseInstanceId;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.ForgotPasswordFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
@@ -164,6 +165,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener
 
             case R.id.loginToApp:
                 String fcmToken = AppConfig.getInstance().loadFCMToken();
+                if (fcmToken.equalsIgnoreCase("")){
+                    fcmToken = com.google.firebase.iid.FirebaseInstanceId.getInstance().getToken();
+                    AppConfig.getInstance().saveFCMToken(fcmToken);
+                }
                 if (validatingRequired()) {
                     //utilObj.startiOSLoader(mActivity, R.drawable.image_for_rotation, getString(R.string.logging_your_account),false) }
                     progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.progress_dialog_logging_your_account), false);
@@ -191,16 +196,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener
                 if (isSuccess) {
 
 
-//                 if (strMsg.equalsIgnoreCase("Phone no. verification pending.")){
-//                        navToVerifyMemberFragment();
-//                    } else
-                   // if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
+                 if (strMsg.equalsIgnoreCase("Phone no. verification pending.")){
+                        navToVerifyMemberFragment();
+                    }else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
 //                     logFireBaseEvent();
 //                     logFaceBookEvent();
 //                     logMixPanelEvent();
                         AppConfig.getInstance().mUser.setLoggedIn(true);
                         navToMainActivity();
-                  //  }
+                    }
                 }
                 else {
                     Log.e("check_login_res","ressss");

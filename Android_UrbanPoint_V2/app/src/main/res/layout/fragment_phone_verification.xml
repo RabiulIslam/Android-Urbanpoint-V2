@@ -37,7 +37,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            app:srcCom="@drawable/ic_smartphone"
+            app:srcCompat="@drawable/ic_smartphone"
             />
         <ViewSwitcher
             android:id="@+id/viewSwitcher"
@@ -184,7 +184,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="0.00"
             android:text="@string/resend_sms"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/main_color"
             android:textStyle="bold"
             tools:ignore="InefficientWeight"
             android:visibility="gone"/>
@@ -198,7 +198,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="0.00"
             android:text="@string/change_phone_number"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/main_color"
             android:textStyle="bold"
             tools:ignore="InefficientWeight"
             android:visibility="gone"/>

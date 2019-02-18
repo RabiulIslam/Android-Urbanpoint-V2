@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.urbanpoint.UrbanPoint",
+                    getPackageName(),
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
