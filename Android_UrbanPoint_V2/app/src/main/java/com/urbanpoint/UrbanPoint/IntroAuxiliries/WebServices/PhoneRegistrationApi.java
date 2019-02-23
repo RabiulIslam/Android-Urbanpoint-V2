@@ -27,7 +27,7 @@ public class PhoneRegistrationApi {
     Context mContext;
 
 
-    public void sendPhoneNumber(Context _mContext, final IWebCallbacks iWebCallback,
+    public void sendPhoneNumber(final Context _mContext, final IWebCallbacks iWebCallback,
                                        final String _value) {
 
         this.mContext = _mContext;
@@ -56,7 +56,10 @@ public class PhoneRegistrationApi {
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
                                     break;
                                 case AppConstt.ServerStatus.INTERNAL_SERVER_ERROR:
-                                    iWebCallback.onWebResult(false, responseObject.getMessage());
+                                    iWebCallback.onWebResult(false, _mContext.getString(R.string.sent_otp_code));
+                                    break;
+                                case AppConstt.ServerStatus.ERROR_ALREADY_EXIST:
+                                    iWebCallback.onWebResult(false, _mContext.getString(R.string.number_already_exist));
                                     break;
                             }
                         } catch (Exception ex) {

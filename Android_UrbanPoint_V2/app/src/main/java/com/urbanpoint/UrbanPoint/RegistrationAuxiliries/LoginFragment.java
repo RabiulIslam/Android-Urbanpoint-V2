@@ -255,7 +255,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         } else if (fcmToken.length() == 0) {
             message = getResources().getString(R.string.networkError);
             customAlert.showCustomAlertDialog(getActivity(), null, message, null, null, false, null);
-        } else if (enteredPin.equalsIgnoreCase("")) {
+        } else if (enteredPin == null) {
             message = getResources().getString(R.string.PasswordErrorMessage);
             customAlert.showCustomAlertDialog(getActivity(), null, message, null, null, false, null);
 

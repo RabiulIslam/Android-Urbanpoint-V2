@@ -7,8 +7,8 @@ public interface AppConstt {
     //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
 
     //    DEV Server
-    // String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
-    // String BASE_URL_OTP="http://34.219.2.69:9010/api/";
+//     String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
+//     String BASE_URL_OTP="http://34.219.2.69:9010/api/";
     //   Production Server
     String BASE_URL_OTP="http://52.37.72.27:9010/api/";
     String BASE_URL="https://cms.biyog.com/up_qatar/api/v1/";
@@ -196,6 +196,7 @@ public interface AppConstt {
         short HTTP_VERSION_NOTSUPPORTED = 505;
         short NETWORK_ERROR = 0;
         short ERROR = 104;
+        short ERROR_ALREADY_EXIST = 101;
 
     }
 

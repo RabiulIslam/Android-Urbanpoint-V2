@@ -7,6 +7,9 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 
+import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,9 +22,11 @@ public class AppSignatureHelper extends ContextWrapper {
     private static final String HASH_TYPE = "SHA-256";
     public static final int NUM_HASHED_BYTES = 9;
     public static final int NUM_BASE64_CHAR = 11;
+    public Context mContext;
 
     public AppSignatureHelper(Context context) {
         super(context);
+        mContext = context;
     }
 
     /**

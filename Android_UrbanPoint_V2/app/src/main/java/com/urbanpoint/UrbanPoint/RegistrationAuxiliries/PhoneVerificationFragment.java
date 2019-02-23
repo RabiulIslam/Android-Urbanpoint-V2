@@ -1,15 +1,17 @@
 package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -24,12 +26,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.credentials.Credential;
+import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.hbb20.CountryCodePicker;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.PhoneRegistrationApi;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
@@ -41,18 +47,21 @@ import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
-public class PhoneVerificationFragment extends Fragment implements View.OnClickListener {
+import static android.app.Activity.RESULT_OK;
+
+public class PhoneVerificationFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
     private SMSBroadcastReceiver receiver;
     ProgressDilogue progressDilogue;
-    private CountryCodePicker ccp;
-    private EditText phoneNumberInput, phoneNumberCodeInput;
+    private  EditText phoneNumberCodeInput, phoneNumberInput;
     private Button confirmButton, confirmButtonSMSCode;
     private Button resendSms, changeNumber;
     private ViewSwitcher viewSwitcher;
     TextView codeMessage;
     CustomAlert customAlert;
+    private int RC_HINT = 2;
+    private GoogleApiClient apiClient;
     public PhoneVerificationFragment() {
         // Required empty public constructor
     }
@@ -90,7 +99,6 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
         customAlert = new CustomAlert();
         viewSwitcher = (ViewSwitcher) view.findViewById(R.id.viewSwitcher);
         changeNumber = (Button) view.findViewById(R.id.btnchangenumber);
-        ccp = (CountryCodePicker) view.findViewById(R.id.ccp);
         phoneNumberInput = (EditText) view.findViewById(R.id.editTextDialogPhoneInput);
         phoneNumberCodeInput = (EditText) view.findViewById(R.id.editTextDialogSMSCode);
         confirmButton = (Button) view.findViewById(R.id.btnphoneconfirm);
@@ -102,6 +110,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(phoneNumberInput.getText().toString())){
+                    smsRetriverListener();
                     sendPhoneNo();
                     viewSwitcher.showNext();
                 }
@@ -111,7 +120,8 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(phoneNumberInput.getText().toString())){
-                       sendPhoneNo();
+                    smsRetriverListener();
+                    sendPhoneNo();
                 }
             }
         });
@@ -153,13 +163,52 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                 changeNumber.setVisibility(View.GONE);
             }
         });
-
+        phoneNumberInput.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                requestHint();
+                return false;
+            }
+        });
+        apiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.CREDENTIALS_API)
+                .build();
+        requestHint();
         receiver = new SMSBroadcastReceiver();
-        smsRetriverListener();
         return view;
     }
-    private void sendPhoneNo() {
+    // Construct a request for phone numbers and show the picker
+    private void requestHint() {
+        HintRequest hintRequest = new HintRequest.Builder()
+                .setPhoneNumberIdentifierSupported(true)
+                .build();
 
+        PendingIntent intent = Auth.CredentialsApi.getHintPickerIntent(
+                apiClient, hintRequest);
+        try {
+            startIntentSenderForResult(intent.getIntentSender(),
+                    RC_HINT, null, 0, 0, 0, null);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Obtain the phone number from the result
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_HINT) {
+            if (resultCode == RESULT_OK) {
+                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
+                phoneNumberInput.setText(credential.getId());
+            }
+        }
+    }
+
+    private void sendPhoneNo() {
+        phoneNumberCodeInput.setText("");
         progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
         PhoneRegistrationApi phoneRegistrationApi = new PhoneRegistrationApi();
         phoneRegistrationApi.sendPhoneNumber(getContext(), new IWebCallbacks() {
@@ -171,7 +220,6 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                     resendSms.setVisibility(View.VISIBLE);
                     changeNumber.setVisibility(View.VISIBLE);
                 }else{
-                    viewSwitcher.showNext();
                     resendSms.setVisibility(View.VISIBLE);
                     changeNumber.setVisibility(View.VISIBLE);
                     customAlert.showCustomAlertDialog(getContext(), getString(R.string.sent_otp_code), strMsg,
@@ -361,8 +409,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
         getActivity().finish();
     }
     private String getPhoneNumber() {
-        String phoneNumber = ccp.getSelectedCountryCodeAsInt() + phoneNumberInput.getText().toString();
-        return phoneNumber;
+        return (phoneNumberInput.getText().toString().replace("+", ""));
     }
     private void smsRetriverListener(){
         // Get an instance of SmsRetrieverClient, used to start listening for a matching
@@ -398,6 +445,21 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

@@ -381,9 +381,6 @@ private void requestSignUp(String _name, String _email, String _gender, String _
                         public void run() {
                             dialog.dismiss();
                             navToVerifyMemberFragment(b);
-
-
-
                         }
                     }, 3000);
 

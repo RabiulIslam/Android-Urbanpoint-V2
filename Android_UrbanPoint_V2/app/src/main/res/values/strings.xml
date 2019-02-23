@@ -535,5 +535,6 @@
     <string name="phone_number_activity_code">Please, type your code</string>
     <string name="otp_error_code">OTP Error</string>
     <string name="invalid_otp_code">"Invalid OTP"</string>
-    <string name="sent_otp_code">We have already sent an OTP Code</string>
+    <string name="sent_otp_code">Alert!</string>
+    <string name="number_already_exist">This Phone Number already exist on the file</string>
 </resources>

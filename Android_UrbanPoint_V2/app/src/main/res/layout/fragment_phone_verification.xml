@@ -60,14 +60,6 @@
                     android:padding="@dimen/dp20"
                     />
 
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/ccp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    app:ccp_defaultNameCode="BD" />
-
                 <EditText
                     android:id="@+id/editTextDialogPhoneInput"
                     android:layout_width="match_parent"

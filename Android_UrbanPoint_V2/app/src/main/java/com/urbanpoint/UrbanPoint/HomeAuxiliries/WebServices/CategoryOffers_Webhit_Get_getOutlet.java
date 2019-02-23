@@ -84,7 +84,11 @@ public class CategoryOffers_Webhit_Get_getOutlet {
                             error) {
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
-                                iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
+                                if (mContext == null){
+                                    iWebCallbacks.onWebResult(false, "Network error, please try again.");
+                                }else {
+                                    iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
+                                }
                                 break;
 
                             case AppConstt.ServerStatus.CONFLICT:

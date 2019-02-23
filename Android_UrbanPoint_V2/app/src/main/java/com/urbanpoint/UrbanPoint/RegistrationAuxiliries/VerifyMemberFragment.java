@@ -119,12 +119,12 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initialize(view);
 
-        if (checkSelfPermission(getActivity(), Manifest.permission.RECEIVE_SMS)
-                != PackageManager.PERMISSION_GRANTED &&
-                checkSelfPermission(getActivity(),
-                        Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.RECEIVE_SMS}, 0);
-        }
+//        if (checkSelfPermission(getActivity(), Manifest.permission.RECEIVE_SMS)
+//                != PackageManager.PERMISSION_GRANTED &&
+//                checkSelfPermission(getActivity(),
+//                        Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(new String[]{Manifest.permission.RECEIVE_SMS}, 0);
+//        }
         return view;
     }
 
