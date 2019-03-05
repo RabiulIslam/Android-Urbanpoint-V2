@@ -2,15 +2,19 @@ package com.urbanpoint.UrbanPoint;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.GetStartedFragment;
+import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.PhoneVerificationFragment;
+import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import java.io.IOException;
@@ -48,9 +52,19 @@ public class SignupActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        ExitMessageDialog();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.containerIntroFragments);
+        if (fragment instanceof PhoneVerificationFragment){
+            navToMainActivity();
+        }else {
+            ExitMessageDialog();
+        }
     }
-
+    private void navToMainActivity() {
+            AppConfig.getInstance().isCommingFromSplash = true;
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
+    }
     private void ExitMessageDialog() {
         AlertDialog alertDialog;
         alertDialog =   new AlertDialog.Builder(SignupActivity.this)
@@ -58,7 +72,6 @@ public class SignupActivity extends AppCompatActivity
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                         finish();
                     }})
                 .setNegativeButton(getResources().getString(R.string.No), null)

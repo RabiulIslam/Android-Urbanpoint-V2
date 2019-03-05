@@ -37,8 +37,8 @@ public class Home_WebHit_Post_homeApi {
         Log.e("homeApi",myUrl);
         RequestParams requestParams = new RequestParams();
         requestParams.put("app_version",AppConfig.getInstance().mUser.getmAppVersion());
-         Log.e("home_params",requestParams+"");
-         Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
+        Log.e("home_params",requestParams+"");
+        Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
@@ -60,28 +60,29 @@ public class Home_WebHit_Post_homeApi {
                                 case AppConstt.ServerStatus.OK:
                                     Log.e("emailverificationstatus",responseObject.getData().emailverified);
                                     AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
-                                     AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
-                                     AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
+                                    AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
+                                    AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
+                                    AppConfig.getInstance().mUser.setPhoneVerified(responseObject.getData().phoneverified);
 //                                    if (responseObject.getData().getSubscription().getPremierUser().equalsIgnoreCase("1")) {
 //                                        //Premier User is always subscribed and not allowed to unsub
 //                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
 //                                        AppConfig.getInstance().mUser.setSubscribed(true);
 //                                        AppConfig.getInstance().mUser.setPremierUser(true);
 //                                    } else {
-                                        Log.e("home_subscription",responseObject.getData().getSubscription().getSubscription());
-                                        if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
-                                            // subscription==1 means user has access to all offers (for some no. of remaining days)
-                                            AppConfig.getInstance().mUser.setSubscribed(true);
-                                            Log.e("premium_userrrr",responseObject.getData().getSubscription().getStatus());
-                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0"))
-                                            {
-                                                AppConfig.getInstance().mUser.setPremierUser(false);
-                                            }
-                                            else
-                                            {
-                                                AppConfig.getInstance().mUser.setPremierUser(true);
-                                            }
-                                            //AppConfig.getInstance().mUser.setPremierUser(false);
+                                    Log.e("home_subscription",responseObject.getData().getSubscription().getSubscription());
+                                    if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
+                                        // subscription==1 means user has access to all offers (for some no. of remaining days)
+                                        AppConfig.getInstance().mUser.setSubscribed(true);
+                                        Log.e("premium_userrrr",responseObject.getData().getSubscription().getStatus());
+                                        if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0"))
+                                        {
+                                            AppConfig.getInstance().mUser.setPremierUser(false);
+                                        }
+                                        else
+                                        {
+                                            AppConfig.getInstance().mUser.setPremierUser(true);
+                                        }
+                                        //AppConfig.getInstance().mUser.setPremierUser(false);
 //                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
 //                                                // status==0 means user has been unsubscribed
 //                                                AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
@@ -104,13 +105,15 @@ public class Home_WebHit_Post_homeApi {
 //                                                        AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
 //                                                        break;
 //                                                }
-                                           // }
-                                        } else {
+                                        // }
+                                    } else {
 //                                            AppConfig.getInstance().mUser.setPremierUser(false);
 //                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
-                                            AppConfig.getInstance().mUser.setSubscribed(false);
-                                        }
-
+                                        AppConfig.getInstance().mUser.setSubscribed(false);
+                                    }
+                                    if (!responseObject.getData().getSubscription().getPhone().equalsIgnoreCase("")) {
+                                        AppConfig.getInstance().mUser.setmPhoneNumber(responseObject.getData().getSubscription().getPhone());
+                                    }
                                     if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber()!=null&&
                                             Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber().equalsIgnoreCase("1")) {
                                         AppConfig.getInstance().mUser.setUberRequired(true);
@@ -1009,6 +1012,7 @@ public class Home_WebHit_Post_homeApi {
 
         public class Data {
             private  String emailverified;
+            private  String phoneverified;
             private int wallet;
             private Subscription subscription;
 
@@ -1081,6 +1085,14 @@ public class Home_WebHit_Post_homeApi {
 
             public void setEmailVerified(String emailVerified) {
                 this.emailverified = emailVerified;
+            }
+
+            public String getPhoneVerified() {
+                return phoneverified;
+            }
+
+            public void setPhoneVerified(String phoneverified) {
+                this.phoneverified = phoneverified;
             }
 
             public void setUnReadNotification(int unReadNotification) {

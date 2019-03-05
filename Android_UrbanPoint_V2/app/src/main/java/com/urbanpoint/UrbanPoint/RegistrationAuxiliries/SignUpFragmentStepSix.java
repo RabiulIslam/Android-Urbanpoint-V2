@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
+import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -56,7 +57,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
     private Button mSignUpFinishView;
     private EditText mSignUpUserEmail;
     private Utility utilObj;
-//    private SignUpManager mSignUpManagerObj;
+    //    private SignUpManager mSignUpManagerObj;
     CustomAlert customAlert;
     ProgressDilogue progressDilogue;
     private PinEntryView mSignUpNewPinEntry;
@@ -88,7 +89,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
         this.mContext = mActivity.getApplicationContext();
         this.mRootView = view;
 
-       initialize();
+        initialize();
 
         return view;
     }
@@ -161,7 +162,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             @Override
             public void onPinEntered(String pin) {
                 enteredConfirmPin = pin;
-             //   utilObj.keyboardClose(mContext, mSignUpConfirmPinEntry);
+                //   utilObj.keyboardClose(mContext, mSignUpConfirmPinEntry);
                 AppConfig.getInstance().closeKeyboard(getActivity());
                 if (currentApiVersion < Build.VERSION_CODES.LOLLIPOP) {
                     mScrollViewMainLayout.fullScroll(View.FOCUS_UP);
@@ -241,7 +242,7 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
             AppConfig.getInstance().setEmail(email);
             Log.e("entered_pin",enteredNewPin);
             AppConfig.getInstance().setPin(enteredNewPin);
-           // AppConfig.getInstance().
+            // AppConfig.getInstance().
             return true;
         } else {
             return false;
@@ -266,12 +267,12 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                 fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
                 fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepThree());
                 fragmentTransaction.commit();
-               // MyApplication.getInstance().trackEvent(getResources().getString(R.string.ga_event_category_get_started_email_back), getResources().getString(R.string.ga_event_action_get_started_email_back), getResources().getString(R.string.ga_event_label_get_started_email_back));
+                // MyApplication.getInstance().trackEvent(getResources().getString(R.string.ga_event_category_get_started_email_back), getResources().getString(R.string.ga_event_action_get_started_email_back), getResources().getString(R.string.ga_event_label_get_started_email_back));
                 break;
 
             case R.id.signUpStepSixFinishButton:
 
-                    Log.e("click","finish"+validatingRequired());
+                Log.e("click","finish"+validatingRequired());
                 if ( validatingRequired()==true)
 
                 {
@@ -286,8 +287,8 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                             AppConfig.getInstance().getReferralCode());
 
 
-            }
-            break;
+                }
+                break;
             case R.id.mainParentLayout:
 
                 AppConfig.getInstance().closeKeyboard(getActivity());
@@ -303,12 +304,12 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
                 b.putString("page", AppConstt.LOGIN_RULES);
                 navToTermsAndConditionsFragment(b);
 
-                 break;
+                break;
 
 
-    }}
+        }}
 
-//    private void logFireBaseEvent() {
+    //    private void logFireBaseEvent() {
 //        Bundle params = new Bundle();
 //        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
 //        params.putString("device_type", "Android");
@@ -329,88 +330,174 @@ public class SignUpFragmentStepSix extends Fragment implements View.OnClickListe
 //        mixpanel.getPeople().set("Created at", timeStamp);
 //        mixpanel.getPeople().set("Last logged in at", timeStamp);
 //    }
-private void requestSignUp(String _name, String _email, String _gender, String _pin, String _fcmToken,
-                           String _occupation,String _age,String _referral_code) {
+    private void requestSignUp(String _name, String _email, String _gender, String _pin, String _fcmToken,
+                               String _occupation,String _age,String _referral_code) {
 
-    progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
-    SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
-    signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
-        @Override
-        public void onWebResult(boolean isSuccess, String strMsg) {
-            Log.e("register_res_boolean",isSuccess+","+strMsg);
-            progressDilogue.stopiOSLoader();
-            if (isSuccess) {
+        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+        SignUp_WebHit_Post_addUser signUp_webHit_post_addUser = new SignUp_WebHit_Post_addUser();
+        signUp_webHit_post_addUser.requestSignUp(getContext(), new IWebCallbacks() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                Log.e("register_res_boolean",isSuccess+","+strMsg);
+                progressDilogue.stopiOSLoader();
+                if (isSuccess) {
 //                logFireBaseEvent();
 ////                logFaceBookEvent();
 //                logMixPanelEvent();
-                if (SignUp_WebHit_Post_addUser.responseObject != null) {
+                    if (SignUp_WebHit_Post_addUser.responseObject != null) {
 //                    if (SignUp_WebHit_Post_addUser.responseObject.getData().getPremierUser().equalsIgnoreCase("1")) {
                         final Bundle b = new Bundle();
                         b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
 //                        b.putString(AppConstt.BundleStrings.premierUserPIN, SignUp_WebHit_Post_addUser.responseObject.getData().getVerificationCode());
-                       //navToSignUpVerificationFragment(b);
+                        //navToSignUpVerificationFragment(b);
 
-                    final Dialog dialog = new Dialog(getActivity());
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    dialog.setContentView(R.layout.custome_message_alert_box);
+                        final Dialog dialog = new Dialog(getActivity());
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        dialog.setContentView(R.layout.custome_message_alert_box);
 
-                    dialog.setCancelable(false);
-                    // set the custom dialog components - text
-                    TextView messageTitle = (TextView) dialog.findViewById(R.id.messageTitle);
-                    TextView messageText = (TextView) dialog.findViewById(R.id.dialogMessageText);
-                    Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
-                    Button okButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-
-
-                    TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
-                    TextView HorizontalSeprator=(TextView)dialog.findViewById(R.id.horizontal_seprator);
-                    HorizontalSeprator.setVisibility(View.GONE);
-                    dialogButtonSeparator.setVisibility(View.GONE);
-                    cancelButton.setVisibility(View.GONE);
-                    okButton.setVisibility(View.GONE);
-                    messageTitle.setText(getString(R.string.sign_up_enter_account_setup_heading));
-                    messageText.setText(getString(R.string.register_successfully));
-                    dialog.show();
+                        dialog.setCancelable(false);
+                        // set the custom dialog components - text
+                        TextView messageTitle = (TextView) dialog.findViewById(R.id.messageTitle);
+                        TextView messageText = (TextView) dialog.findViewById(R.id.dialogMessageText);
+                        Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+                        Button okButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 
 
-//                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading),
-//                            getResources().getString(R.string.register_successfully), null, null, false, null);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                            navToVerifyMemberFragment(b);
-                        }
-                    }, 3000);
+                        TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
+                        TextView HorizontalSeprator=(TextView)dialog.findViewById(R.id.horizontal_seprator);
+                        HorizontalSeprator.setVisibility(View.GONE);
+                        dialogButtonSeparator.setVisibility(View.GONE);
+                        cancelButton.setVisibility(View.GONE);
+                        okButton.setVisibility(View.GONE);
+                        messageTitle.setText(getString(R.string.sign_up_enter_account_setup_heading));
+                        messageText.setText(getString(R.string.register_successfully));
+                        dialog.show();
+
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                showVerifyEmailDialog(b);
+                            }
+                        }, 3000);
 
 //                    } else {
 //                        AppConfig.getInstance().isCommingFromSplash = true;
 //                        navToMainActivity();
 //                    }
+                    }
+                } else {
+                    customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
                 }
-            } else {
-                customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
             }
-        }
 
-        @Override
-        public void onWebException(Exception ex) {
-            Log.e("ex","ex",ex);
-            progressDilogue.stopiOSLoader();
-            customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
+            @Override
+            public void onWebException(Exception ex) {
+                Log.e("ex","ex",ex);
+                progressDilogue.stopiOSLoader();
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(), null, null, false, null);
 
-        }
+            }
 
-        @Override
-        public void onWebLogout() {
-            Log.e("log","out");
-            progressDilogue.stopiOSLoader();
+            @Override
+            public void onWebLogout() {
+                Log.e("log","out");
+                progressDilogue.stopiOSLoader();
 
-        }
-    }, _name, _email, _gender, _age,_occupation,_referral_code, _pin, _fcmToken);
+            }
+        }, _name, _email, _gender, _age,_occupation,_referral_code, _pin, _fcmToken);
+    }
+    private void showVerifyEmailDialog(final Bundle bundle)
+    {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.custome_message_alert_box);
 
-}
+        dialog.setCancelable(false);
+        // set the custom dialog components - text
+        TextView messageTitle = (TextView) dialog.findViewById(R.id.messageTitle);
+        TextView messageText = (TextView) dialog.findViewById(R.id.dialogMessageText);
+        Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+        Button okButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        cancelButton.setText(getString(R.string._skip));
+
+        TextView dialogButtonSeparator = (TextView) dialog.findViewById(R.id.dialogButtonSeparator);
+        dialogButtonSeparator.setVisibility(View.VISIBLE);
+//        cancelButton.setVisibility(View.GONE);
+//        okButton.setVisibility(View.GONE);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                navToVerifyMemberFragment(bundle);
+            }
+        });
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                verifyEmail(bundle);
+            }
+        });
+        messageTitle.setText(getString(R.string.verify_email));
+        messageText.setText(getString(R.string.send_link_to_verify_email));
+        dialog.show();
+    }
+    private void verifyEmail(final Bundle bundle) {
+
+        progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
+        SignUp_WebHit_Post_verifyEmail signUp_webHit_checkPhone = new SignUp_WebHit_Post_verifyEmail();
+        signUp_webHit_checkPhone.verifyEmail(getContext(), new IWebCallbacks() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                Log.e("register_res_boolean",isSuccess+","+strMsg);
+                progressDilogue.stopiOSLoader();
+                if (isSuccess) {
+//                    logFireBaseEvent();
+//                    logFaceBookEvent();
+//                    logMixPanelEvent();
+                    if (SignUp_WebHit_Post_verifyEmail.responseObject != null)
+                    {
+//                        Bundle b = new Bundle();
+//                        b.putString(AppConstt.BundleStrings.userId, AppConfig.getInstance().mUser.getmUserId());
+//                        AppConfig.getInstance().isCommingFromSplash = true;
+//                        AppConfig.getInstance().mUser.setLoggedIn(true);
+                        navToVerifyMemberFragment(bundle);
+//                        showVerifyEmailDialog();
+                    }
+                } else {
+
+                    if (strMsg.equalsIgnoreCase("Conflict")) {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), getResources().getString(R.string.already_registered), null, null, false, null);
+                    }
+                    else
+                    {
+                        customAlert.showCustomAlertDialog(getContext(), getString(R.string.sign_up_enter_account_setup_heading), strMsg, null, null, false, null);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                Log.e("ex","ex",ex);
+                progressDilogue.stopiOSLoader();
+                customAlert.showCustomAlertDialog(getActivity(), getString(R.string.sign_in_unsuccess_login_heading), ex.getMessage(),
+                        null, null, false, null);
+            }
+
+            @Override
+            public void onWebLogout() {
+                Log.e("log","out");
+                progressDilogue.stopiOSLoader();
+
+            }
+        }, AppConfig.getInstance().mUser.mUserId);
+
+    }
     private void navToTermsAndConditionsFragment(Bundle bundle) {
         Log.e("click","terms111");
         Fragment fr = new WebViewFragment();
@@ -427,7 +514,7 @@ private void requestSignUp(String _name, String _email, String _gender, String _
     private void navToVerifyMemberFragment(Bundle b) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment frg = new VerifyMemberFragment();
+        Fragment frg = new PhoneVerificationFragment();
         frg.setArguments(b);
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
         ft.replace(R.id.containerIntroFragments, frg);

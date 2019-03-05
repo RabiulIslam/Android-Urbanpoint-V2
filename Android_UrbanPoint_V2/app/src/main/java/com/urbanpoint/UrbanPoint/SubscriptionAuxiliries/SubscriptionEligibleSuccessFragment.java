@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
@@ -53,7 +52,6 @@ public class SubscriptionEligibleSuccessFragment extends Fragment implements Vie
         initialize();
         bindViews(v);
         logFireBaseEvent();
-        logFaceBookEvent();
         updateSubscriptionLists();
         return v;
     }
@@ -107,9 +105,7 @@ public class SubscriptionEligibleSuccessFragment extends Fragment implements Vie
         FirebaseAnalytics.getInstance(getActivity())
                 .logEvent(AppConstt.FireBaseEvents.Successful_Bundled_Subscription, params);
     }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Bundled_Subscription);
-    }
+
     private void navToSubscriptionFragment() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment frg = new SubscriptionFragment();

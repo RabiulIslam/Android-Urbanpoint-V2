@@ -110,13 +110,5 @@
         <item name="android:layout_width">@dimen/dp175</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="fbotptheme" parent="Theme.AccountKit">
-        <item name="com_accountkit_primary_color">@color/expndble_lst_color</item>
-        <item name="com_accountkit_secondary_color">@color/white</item>
-        <item name="com_accountkit_primary_text_color">@android:color/white</item>
-        <item name="com_accountkit_secondary_text_color">@color/expndble_lst_color</item>
-        <item name="com_accountkit_status_bar_color">@color/white</item>
-        <item name="com_accountkit_button_text_color">@android:color/white</item>
-    </style>
 </resources>
 

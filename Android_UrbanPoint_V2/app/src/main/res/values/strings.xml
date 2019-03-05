@@ -175,6 +175,7 @@
     <string name="forgot_password_button_title">Send New PIN</string>
     <string name="name_hint">User name</string>
     <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
 
 
     <!--    promo code screen-->
@@ -420,6 +421,7 @@
     <string name="confirm_pin">Confirm PIN</string>
     <string name="skip"><u>Skip</u></string>
     <string name="_skip">Skip</string>
+    <string name="_skip_verification">Verify Later</string>
     <string name="age_text">What\'s your age?</string>
     <string name="setup_your_account">Set Up Your Account</string>
     <string name="finish">Finish</string>
@@ -468,7 +470,7 @@
     <string name="FACEBOOK_APP_ID">392993371444452</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">e3d8bc180b6fa8b1f15aaf63deb9c099</string>
     <string name="select">Select</string>
-    <string name="register_successfully">You are registered successfully, now Verify your phone number to access thousands of offers</string>
+    <string name="register_successfully">You are registered successfully, now Verify your Email/Phone number to access thousands of offers</string>
      <string name="_seventy">70.00 Tk.</string>
     <string name="verify_email">Verify Email</string>
     <string name ="send_link_to_verify_email"> We will send a link to verify your email to access all the offers </string>

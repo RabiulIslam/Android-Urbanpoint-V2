@@ -16,15 +16,7 @@ import android.util.LongSparseArray;
 import android.view.WindowManager;
 
 import com.crashlytics.android.Crashlytics;
-import com.facebook.FacebookSdk;
-import com.facebook.accountkit.AccountKit;
-//import com.facebook.appevents.AppEventsLogger;
-//import com.flurry.android.FlurryAgent;
-//import com.google.android.gms.analytics.GoogleAnalytics;
-////import com.google.android.gms.analytics.Tracker;
-//import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
-import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.GPSTracker;
 
 import io.fabric.sdk.android.Fabric;
@@ -49,8 +41,6 @@ public class MyApplication extends MultiDexApplication
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         mContext = this;
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AccountKit.initialize(this);
         AppConfig.initInstance(mContext);
         setLanguageSpecificFonts(true);
 //         startService(new Intent(mContext,GPSTracker.class));

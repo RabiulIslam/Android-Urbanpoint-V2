@@ -18,28 +18,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.StatsSnapshot;
+import com.urbanpoint.UrbanPoint.CommonFragments.WebServices.OfferDetail_Webhit_Get_getOfferDetail;
+import com.urbanpoint.UrbanPoint.CommonFragments.WebServices.OfferDetail_Webhit_POST_addFavouriteOffer;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices.Home_WebHit_Post_eligibilitychecker;
+import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
+import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.SubscriptionEligibleFragment;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.SubscriptionEligibleSuccessFragment;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.SubscriptionFragment;
-import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
-import com.urbanpoint.UrbanPoint.CommonFragments.WebServices.OfferDetail_Webhit_Get_getOfferDetail;
-import com.urbanpoint.UrbanPoint.CommonFragments.WebServices.OfferDetail_Webhit_POST_addFavouriteOffer;
-import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
@@ -414,7 +409,6 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     logFireBaseEvent();
-                    logFaceBookEvent();
                     updateOfferDetailValues();
                 } else {
                     btnGetIt.setVisibility(View.GONE);
@@ -739,9 +733,6 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
         // Send the event
         FirebaseAnalytics.getInstance(getActivity())
                 .logEvent(AppConstt.FireBaseEvents.Number_Of_Offers_Viewed, params);
-    }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Number_Of_Offers_Viewed);
     }
 
     @Override

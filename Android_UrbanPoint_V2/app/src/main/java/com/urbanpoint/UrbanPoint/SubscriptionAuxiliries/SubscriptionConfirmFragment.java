@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.Signup_WEbhit_Post_validateCode;
 import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.WebServices.Subscribe_WebHit_Post_subscribe;
@@ -214,9 +213,6 @@ public class SubscriptionConfirmFragment extends Fragment implements View.OnClic
         FirebaseAnalytics.getInstance(getActivity())
                 .logEvent(AppConstt.FireBaseEvents.OTP_Generation, params);
     }
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.OTP_Generation);
-    }
     private void requestResendMT(String _phone) {
         SignUp_WebHit_Get_sendMT signUp_webHit_get_sendMT = new SignUp_WebHit_Get_sendMT();
         signUp_webHit_get_sendMT.requestResendCode(getContext(), new IWebCallbacks() {
@@ -225,7 +221,6 @@ public class SubscriptionConfirmFragment extends Fragment implements View.OnClic
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     logFireBaseEvent();
-                    logFaceBookEvent();
                     if (SignUp_WebHit_Get_sendMT.responseObject != null) {
                         serverPin = SignUp_WebHit_Get_sendMT.responseObject.getData();
                         Log.d("validateMsisdn", "onWebResult: " + serverPin);

@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Get_sendMT;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_POST_addPremierUser;
@@ -224,7 +223,6 @@ public class SignUpVerificationFragment extends Fragment implements View.OnClick
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     logFireBaseEvent();
-                    logFaceBookEvent();
                     if (SignUp_WebHit_Get_sendMT.responseObject != null) {
                         strPIN = SignUp_WebHit_Get_sendMT.responseObject.getData();
                     }
@@ -255,10 +253,6 @@ public class SignUpVerificationFragment extends Fragment implements View.OnClick
         // Send the event
         FirebaseAnalytics.getInstance(getActivity())
                 .logEvent(AppConstt.FireBaseEvents.OTP_Generation, params);
-    }
-
-    private void logFaceBookEvent() {
-        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.OTP_Generation);
     }
     private void requestAddPremierUser(String _phone) {
         SignUp_WebHit_POST_addPremierUser signUp_webHit_post_addPremierUser = new SignUp_WebHit_POST_addPremierUser();

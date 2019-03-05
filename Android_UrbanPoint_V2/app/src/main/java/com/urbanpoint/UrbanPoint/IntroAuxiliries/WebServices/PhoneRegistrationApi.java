@@ -29,12 +29,13 @@ public class PhoneRegistrationApi {
 
     public void sendPhoneNumber(final Context _mContext, final IWebCallbacks iWebCallback,
                                        final String _value) {
-
+        String deviceInfo = "Android|" + android.os.Build.VERSION.RELEASE + "|" + android.os.Build.BRAND + "|" + android.os.Build.MODEL;
         this.mContext = _mContext;
         JsonObject jsonObject = new JsonObject();
         String myUrl = AppConstt.BASE_URL_OTP+ ApiMethod.POST.SEND_OTP;
         jsonObject.addProperty("user_id", AppConfig.getInstance().mUser.getmUserId());
         jsonObject.addProperty("mobilenumber", _value);
+        jsonObject.addProperty("device_info", deviceInfo);
         StringEntity entity = null;
         try {
             entity = new StringEntity(jsonObject.toString());

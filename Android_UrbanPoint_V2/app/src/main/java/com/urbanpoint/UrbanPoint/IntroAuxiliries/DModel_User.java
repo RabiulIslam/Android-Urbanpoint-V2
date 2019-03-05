@@ -29,6 +29,7 @@ public class DModel_User {
     public boolean isLoggedIn;
     public boolean isPremierUser;
     public String EmailVerified;
+    public String PhoneVerified;
     public String mReferralCode;
     public float wallet;
     public String zone;
@@ -59,6 +60,32 @@ public class DModel_User {
         this.zone="";
     }
 
+    public void clearUserModel(){
+        this.mUserId = "";
+        this.mName = "";
+        this.mEmail = "";
+        this.mAge = "";
+        this.mDob = "";
+        this.mGender = "";
+        this.mNationality = "";
+        this.isNationalityLstDisplyd = false;
+        this.mPinCode = "";
+        this.mNetworkType = "";
+        this.mPhoneNumber = "";
+        this.mAuthorizationToken = "";
+        this.mFCMToken = "";
+        this.mAppVersion = 0;
+        this.isEligible = false;
+        this.isNeverAskActive = false;
+        this.isForcefullyUpdateActive = false;
+        this.isUberRequired = false;
+        this.isSubscribed = false;
+        this.mCanUnSubscribe = false;
+        this.masterMerchant = "";
+        this.isLoggedIn = false;
+        this.isPremierUser = false;
+        this.zone="";
+    }
 
     public String getZone() {
         return zone;
@@ -74,6 +101,14 @@ public class DModel_User {
 
     public void setEmailVerified(String emailVerified) {
         EmailVerified = emailVerified;
+    }
+
+    public String getPhoneVerified() {
+        return PhoneVerified;
+    }
+
+    public void setPhoneVerified(String phoneVerified) {
+        PhoneVerified = phoneVerified;
     }
 
     public float getWallet() {

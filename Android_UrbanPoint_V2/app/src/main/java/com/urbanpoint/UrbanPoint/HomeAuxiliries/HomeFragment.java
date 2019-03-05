@@ -871,17 +871,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateBadges() {
-
+        AppConfig.getInstance().mProfileBadgeCount = 70;
         Log.e("email_verified_status", AppConfig.getInstance().mUser.EmailVerified + "");
 
         Log.e("subscription1", AppConfig.getInstance().mUser.isSubscribed +
                 "&" + AppConfig.getInstance().mUser.isPremierUser);
-        if (AppConfig.getInstance().mUser.isSubscribed) {
-            Log.e("test", "1");
-            btnGainAccess.setVisibility(View.GONE);
-        } else {
-            Log.e("test", "2");
-            btnGainAccess.setVisibility(View.VISIBLE);
+
+        if (btnGainAccess != null) {
+            if (AppConfig.getInstance().mUser.isSubscribed) {
+                Log.e("test", "1");
+                btnGainAccess.setVisibility(View.GONE);
+            } else {
+                Log.e("test", "2");
+                btnGainAccess.setVisibility(View.VISIBLE);
+            }
         }
 
         //Updating NewOffers Badge
@@ -914,6 +917,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //Updating MenuIcon Badge
         String nationality = "";
         String EmailVerified = "";
+        String PhoneVerified = "";
         if (AppConfig.getInstance().mUser.getmNationality() != null &&
                 AppConfig.getInstance().mUser.getmNationality().length() > 0) {
             nationality = AppConfig.getInstance().mUser.getmNationality();
@@ -921,6 +925,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (AppConfig.getInstance().mUser.getEmailVerified() != null &&
                 AppConfig.getInstance().mUser.getEmailVerified().length() > 0) {
             EmailVerified = AppConfig.getInstance().mUser.getEmailVerified();
+        }
+        if (AppConfig.getInstance().mUser.getPhoneVerified() != null &&
+                AppConfig.getInstance().mUser.getPhoneVerified().length() > 0) {
+            PhoneVerified = AppConfig.getInstance().mUser.getPhoneVerified();
         }
         if ((AppConfig.getInstance().mUserBadges.getReviewCount() == 0)) {
             if ((nationality.length() > 0)) {
@@ -943,16 +951,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if ((EmailVerified.equalsIgnoreCase("1") && nationality.length() <= 0) ||
                 (nationality.length() > 0 && EmailVerified.equalsIgnoreCase("0"))) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
-
-            ((MainActivity) getContext()).setProfileCount("90%");
-
-
+            AppConfig.getInstance().mProfileBadgeCount += 10;
         } else if (EmailVerified.equalsIgnoreCase("0") && nationality.length() == 0) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
-            ((MainActivity) getContext()).setProfileCount("80%");
-
         }
-
+        if (nationality.length() > 0 && PhoneVerified.length() > 0 &&
+                PhoneVerified.equalsIgnoreCase("1")) {
+            ((MainActivity) getContext()).setProfileCountVisibility(View.GONE);
+        } else if ((PhoneVerified.equalsIgnoreCase("1") && nationality.length() <= 0) ||
+                (nationality.length() > 0 && PhoneVerified.equalsIgnoreCase("0"))) {
+            ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+            AppConfig.getInstance().mProfileBadgeCount += 10;
+        } else if (PhoneVerified.equalsIgnoreCase("0") && nationality.length() == 0) {
+            ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
+        }
+        ((MainActivity) getContext()).setProfileCount(AppConfig.getInstance().mProfileBadgeCount+"%");
         //Updating if User can Unsubscribe or not
         if (AppConfig.getInstance().mUser.ismCanUnSubscribe()) {
             ((MainActivity) getContext()).setUnSubscribeVisibility(View.VISIBLE);

@@ -20,6 +20,7 @@ import com.urbanpoint.UrbanPoint.IntroAuxiliries.DModel_User;
 public class AppConfig {
     public DModel_User mUser;
     public DModel_Badges mUserBadges;
+    public int mProfileBadgeCount = 70;
     private static AppConfig ourInstance;// = new AppConfig(null);
 
     private Context mContext;

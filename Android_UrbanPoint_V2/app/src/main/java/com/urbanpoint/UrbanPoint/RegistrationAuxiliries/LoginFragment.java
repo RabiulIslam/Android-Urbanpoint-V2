@@ -194,17 +194,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener
                 progressDilogue.stopiOSLoader();
                 Log.e("strmsg",strMsg);
                 if (isSuccess) {
-
-
-                 if (strMsg.equalsIgnoreCase("Phone no. verification pending.")){
-                        navToVerifyMemberFragment();
-                    }else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
-//                     logFireBaseEvent();
-//                     logFaceBookEvent();
-//                     logMixPanelEvent();
+//                    if (strMsg.equalsIgnoreCase("Phone no. verification pending.")){
+//                        navToVerifyMemberFragment();
+//                    }else if (strMsg.equalsIgnoreCase("User authenticated Successfully.")) {
                         AppConfig.getInstance().mUser.setLoggedIn(true);
                         navToMainActivity();
-                    }
+                   // }
                 }
                 else {
                     Log.e("check_login_res","ressss");
@@ -232,7 +227,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
     private void navToVerifyMemberFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment frg = new VerifyMemberFragment();
+        Fragment frg = VerifyMemberFragment.newInstance(R.id.containerIntroFragments);
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
         ft.replace(R.id.containerIntroFragments, frg);
         ft.commit();

@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;

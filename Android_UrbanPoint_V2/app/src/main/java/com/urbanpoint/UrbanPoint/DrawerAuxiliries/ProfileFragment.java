@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,6 +23,7 @@ import com.urbanpoint.UrbanPoint.DrawerAuxiliries.WebServices.Profile_Webhit_Pos
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.PhoneVerificationFragment;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
@@ -44,13 +44,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private RoundedImageView rmvImg;
     private List<String> lstNationality,lstZone;
-    private TextView edtEmail;
+    private TextView edtEmail, edtPhone;
     private TextView txvNationality, txvName, txvPercentage, txvOldPin, txvGender, txvNetwork,txvZone;
     private ListView lsvNationality,lsvZone;
     private NationalityListAdapter nationalityListAdapter;
     private ZoneListAdapter zoneListAdapter;
     private ImageView imvNationltiyFlag, imvFlagInRounded, imvCross;
-    private RelativeLayout rlChangePin,rlVerifyemail;
+    private RelativeLayout rlChangePin,rlVerifyemail, rlVerifynumber;
     private LinearLayout llListContainer, llProfileContainer;
     private Button btnNationalitySave, btnUpdateProfile;
     private TextView ListTitle;
@@ -76,21 +76,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         iNavBarUpdateUpdateListener.setBackBtnVisibility(View.GONE);
         iNavBarUpdateUpdateListener.setCancelBtnVisibility(View.GONE);
         iNavBarUpdateUpdateListener.setToolBarbackgroudVisibility(View.VISIBLE);
-
+        AppConfig.getInstance().mProfileBadgeCount = 70;
         initialize();
         bindViews(view);
         txvName.setText(AppConfig.getInstance().mUser.getmName());
         edtEmail.setText(AppConfig.getInstance().mUser.getmEmail());
+        edtPhone.setText(AppConfig.getInstance().mUser.getmPhoneNumber());
         txvNetwork.setText(AppConfig.getInstance().mUser.getmNetworkType());
         txvGender.setText(AppConfig.getInstance().mUser.getmGender());
         txvOldPin.setText(AppConfig.getInstance().mUser.getmPinCode());
         if (AppConfig.getInstance().mUser.getEmailVerified() != null) {
             if (AppConfig.getInstance().mUser.getEmailVerified().equalsIgnoreCase("1")) {
-                txvPercentage.setText("90%");
-            } else {
-                txvPercentage.setText("80%");
+                AppConfig.getInstance().mProfileBadgeCount += 10;
             }
         }
+        if (AppConfig.getInstance().mUser.getPhoneVerified() != null) {
+            if (AppConfig.getInstance().mUser.getPhoneVerified().equalsIgnoreCase("1")) {
+                AppConfig.getInstance().mProfileBadgeCount += 10;
+            }
+        }
+        txvPercentage.setText(AppConfig.getInstance().mProfileBadgeCount+"%");
 
         try {
 //                Log.d("IMGESLST", "list value: " + AppInstance.profileData.getNationality() + ".png");
@@ -228,6 +233,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ListTitle=frg.findViewById(R.id.frg_profile_list_view_nationality_msg);
         ZoneLayout=frg.findViewById(R.id.zone_layout);
         rlVerifyemail=frg.findViewById(R.id.frg_profile_verify_email);
+        rlVerifynumber=frg.findViewById(R.id.frg_profile_verify_number);
         llListContainer = frg.findViewById(R.id.frg_profile_ll_list_container);
         llProfileContainer = frg.findViewById(R.id.frg_profile_ll);
         imvCross = frg.findViewById(R.id.frg_profile_imv_close);
@@ -246,6 +252,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rmvImg.setImageResource(R.mipmap.nationality_2);
         txvName = frg.findViewById(R.id.frg_profile_edt_name);
         edtEmail = frg.findViewById(R.id.frg_profile_edt_email);
+        edtPhone = frg.findViewById(R.id.frg_profile_edt_number);
         txvZone=frg.findViewById(R.id.frg_profile_edt_zone);
         ChangenationalityLayout=frg.findViewById(R.id.frg_profile_rl_change_nationality);
         ChangeZoneLayout=frg.findViewById(R.id.frg_profile_rl_change_zone);
@@ -260,6 +267,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rlChangePin = frg.findViewById(R.id.frg_profile_rl_change_pin);
         rlChangePin.setOnClickListener(this);
         rlVerifyemail.setOnClickListener(this);
+        rlVerifynumber.setOnClickListener(this);
         lstNationality = Arrays.asList(AppConstt.arrFlags);
         Log.d("IMGESLST", "Unsorted: " + lstNationality);
         nationalityListAdapter = new NationalityListAdapter(getContext(), mSelectedPosition, lstNationality);
@@ -270,12 +278,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             } else {
                 rlVerifyemail.setVisibility(View.VISIBLE);
             }
-        }
-        else
-        {
+        }else{
             rlVerifyemail.setVisibility(View.VISIBLE);
         }
+        if (AppConfig.getInstance().mUser.getPhoneVerified()!=null) {
+            if (AppConfig.getInstance().mUser.getPhoneVerified().equalsIgnoreCase("1")) {
+                rlVerifynumber.setVisibility(View.GONE);
+            } else {
+                rlVerifynumber.setVisibility(View.VISIBLE);
+            }
+        }else{
+            rlVerifynumber.setVisibility(View.VISIBLE);
+        }
 
+    }
+    public void navToPhoneVerification() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        Fragment frg = new PhoneVerificationFragment();
+        ft.add(R.id.content_frame, frg, AppConstt.FRGTAG.ReferAndEarnFragment);
+        ft.addToBackStack(AppConstt.FRGTAG.ReferAndEarnFragment);
+        ft.commit();
     }
     private void verifyEmail() {
 
@@ -384,6 +406,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.frg_profile_verify_email:
                 verifyEmail();
+                break;
+            case R.id.frg_profile_verify_number:
+                navToPhoneVerification();
                 break;
             case R.id.frg_profile_imv_close:
                 llProfileContainer.setVisibility(View.VISIBLE);

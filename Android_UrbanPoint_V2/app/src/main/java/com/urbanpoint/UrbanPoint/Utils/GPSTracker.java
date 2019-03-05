@@ -1,8 +1,6 @@
 package com.urbanpoint.UrbanPoint.Utils;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,23 +13,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
-import com.android.volley.RequestQueue;
-import com.facebook.share.Share;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-
-import java.text.DecimalFormat;
 
 
 public class GPSTracker  extends JobIntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -41,11 +27,11 @@ public class GPSTracker  extends JobIntentService implements GoogleApiClient.Con
     private static final String TAG = "MyLocationService";
     public  static  double lat,lng;
     private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 1000;
+    private static final int LOCATION_INTERVAL = 600 * 1000;
     private static final float LOCATION_DISTANCE = 10f;
     SharedPreferences preferences = null;
     private static final LocationRequest REQUEST = LocationRequest.create()
-            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            .setPriority(LocationRequest.PRIORITY_LOW_POWER);
 
     private class LocationListener implements android.location.LocationListener {
         Location mLastLocation;
@@ -211,6 +197,7 @@ public class GPSTracker  extends JobIntentService implements GoogleApiClient.Con
     public static int JOB_ID=2;
     public static void enqueueWork(Context context, Intent work) {
         enqueueWork(context, GPSTracker.class, JOB_ID, work);
+
     }
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
@@ -232,10 +219,9 @@ public class GPSTracker  extends JobIntentService implements GoogleApiClient.Con
 
     private void initLocationRequest() {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(5000);
-        mLocationRequest.setFastestInterval(2000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
+        mLocationRequest.setInterval(LOCATION_INTERVAL);
+        mLocationRequest.setFastestInterval(LOCATION_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
     }
 
     private void startLocationUpdate() {

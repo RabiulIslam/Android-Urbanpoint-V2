@@ -63,9 +63,9 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     final static int REQUEST_LOCATION = 199;
     final static int MY_PERMISSIONS_REQUEST_LOCATION = 1999;
     android.location.Location mLastLocation;
-    private static int UPDATE_INTERVAL = 10000; // 10 sec
-    private static int FATEST_INTERVAL = 5000; // 5 sec
-    private static int DISPLACEMENT = 10; // 10 meters
+    private static int UPDATE_INTERVAL = 600 * 1000; // 10 sec
+    private static int FATEST_INTERVAL = 600 * 1000; // 5 sec
+    private static int DISPLACEMENT = 1000; // 10000 meters
     boolean shouldNavigate;
     Double lat, lng;
     String Id = "";
@@ -118,31 +118,20 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         } else {
             navToSplash();
         }
-        String projectToken = AppConstt.mixPanel.MIXPANEL_TOKEN; // e.g.: "1ef7e30d2a58d27f4b90c42e31d6d7ad"
-//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(this, projectToken);
 
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Log.e("checkloc", "1");
-
-            if (AppConfig.getInstance().isLocationEnabled(IntroActivity.this)) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        shouldNavigate = true;
-                        if (shouldNavigate) {
-                            if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
-                                navToHomeActivity();
-                            } else {
-                                navToSignUpFragment();
-                            }
-                        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                shouldNavigate = true;
+                if (shouldNavigate) {
+                    if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+                        navToHomeActivity();
+                    } else {
+                        navToSignUpFragment();
                     }
-                }, 2000);
-
+                }
             }
-        }
+        }, 2000);
 
     }
 
@@ -293,7 +282,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FATEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
 
@@ -319,21 +308,25 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             proceedToHomeActivity();
         } else {
             if (lat != null && lng != null) {
-                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
-                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
-                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
-                                @Override
-                                public void callConfirmationDialogPositive() {
-                                    proceedToHomeActivity();
-                                    AppConfig.getInstance().saveInstalled(true);
-                                }
+                if (getCountryName(lat, lng) != null){
+                    if (!getCountryName(lat, lng).equalsIgnoreCase("dhaka")) {
+                        new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                                , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                    @Override
+                                    public void callConfirmationDialogPositive() {
+                                        proceedToHomeActivity();
+                                        AppConfig.getInstance().saveInstalled(true);
+                                    }
 
-                                @Override
-                                public void callConfirmationDialogNegative() {
-                                    finish();
-                                }
-                            });
-                } else {
+                                    @Override
+                                    public void callConfirmationDialogNegative() {
+                                        finish();
+                                    }
+                                });
+                    } else {
+                        proceedToHomeActivity();
+                    }
+                }else {
                     proceedToHomeActivity();
                 }
             } else {
@@ -382,21 +375,25 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             proceedToSignUpActivity();
         } else {
             if (lat != null && lng != null) {
-                if (getCountryName(lat, lng) != null && !getCountryName(lat, lng).toLowerCase().equals("dhaka")) {
-                    new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
-                            , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
-                                @Override
-                                public void callConfirmationDialogPositive() {
-                                    proceedToSignUpActivity();
-                                    AppConfig.getInstance().saveInstalled(true);
-                                }
+                if (getCountryName(lat, lng) != null) {
+                    if (!getCountryName(lat, lng).equalsIgnoreCase("dhaka")) {
+                        new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
+                                , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
+                                    @Override
+                                    public void callConfirmationDialogPositive() {
+                                        proceedToSignUpActivity();
+                                        AppConfig.getInstance().saveInstalled(true);
+                                    }
 
-                                @Override
-                                public void callConfirmationDialogNegative() {
-                                    finish();
-                                }
-                            });
-                } else {
+                                    @Override
+                                    public void callConfirmationDialogNegative() {
+                                        finish();
+                                    }
+                                });
+                    } else {
+                        proceedToSignUpActivity();
+                    }
+                }else {
                     proceedToSignUpActivity();
                 }
             } else {
@@ -469,54 +466,50 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
                     // do your work here
 
 
-                } else if (Build.VERSION.SDK_INT >= 23 && !shouldShowRequestPermissionRationale(permissions[0])) {
+                } else if (permissions.length > 0) {
+                    if (Build.VERSION.SDK_INT >= 23 && !shouldShowRequestPermissionRationale(permissions[0])) {
 //                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},1);
 
-                    shouldNavigate = true;
+                        shouldNavigate = true;
 
-                    if (shouldNavigate) {
-                        if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+                        if (shouldNavigate) {
+                            if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
 
-                            navToHomeActivity();
-                        } else {
-                            navToSignUpFragment();
+                                navToHomeActivity();
+                            } else {
+                                navToSignUpFragment();
+                            }
                         }
-                    }
 
-                    // User selected the Never Ask Again Option
-                } else if (grantResults.length == 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    Log.e("inside", "insideagain");
+                        // User selected the Never Ask Again Option
+                    } else if (grantResults.length == 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                        Log.e("inside", "insideagain");
 
-                    shouldNavigate = true;
+                        shouldNavigate = true;
 
-                    if (shouldNavigate) {
-                        if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+                        if (shouldNavigate) {
+                            if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
 
-                            navToHomeActivity();
-                        } else {
-                            navToSignUpFragment();
+                                navToHomeActivity();
+                            } else {
+                                navToSignUpFragment();
+                            }
                         }
-                    }
-                } else {
-                    shouldNavigate = true;
+                    } else {
+                        shouldNavigate = true;
 
-                    if (shouldNavigate) {
-                        if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
+                        if (shouldNavigate) {
+                            if (AppConfig.getInstance().mUser.getmUserId().length() > 0) {
 
-                            navToHomeActivity();
-                        } else {
-                            navToSignUpFragment();
+                                navToHomeActivity();
+                            } else {
+                                navToSignUpFragment();
+                            }
                         }
                     }
                 }
-
                 break;
         }
-
-
-//
-
-
     }
 
 

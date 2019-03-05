@@ -31,25 +31,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.accountkit.Account;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitCallback;
-import com.facebook.accountkit.AccountKitError;
-import com.facebook.accountkit.AccountKitLoginResult;
-import com.facebook.accountkit.ui.AccountKitActivity;
-import com.facebook.accountkit.ui.AccountKitConfiguration;
-import com.facebook.accountkit.ui.LoginType;
-import com.facebook.accountkit.ui.SkinManager;
-import com.facebook.accountkit.ui.UIManager;
 //import com.facebook.appevents.AppEventsLogger;
 //import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
+import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ProfileFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
+import com.urbanpoint.UrbanPoint.SignupActivity;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
@@ -93,7 +85,7 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
 //    private List<DModelHomeGrdVw> lstFavoritesByLocation, lstFavoritesByAlphabetically;
 //    private FavoritesAdapter favoritesAdapter;
     private RelativeLayout rlAlphabetically, rlLocation;
-    private TextView Back, Continue;
+    private Button skip, Continue;
 //    private HomeManager homeManager;
 //    private MerchantManager mMerchantManager;
     private boolean isLocationSort;
@@ -101,10 +93,17 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     private boolean isSubscribed;
     private static final int PERMISSION_REQUEST_CODE = 1;
     Typeface novaThin, novaRegular;
+    private static int holderId;
 //    private CustomDialogConfirmationInterfaces contextualDialogConfirmationInterfacesLocation;
 
     public VerifyMemberFragment() {
         // Required empty public constructor
+    }
+
+    public static VerifyMemberFragment newInstance(int id){
+        holderId = id;
+        VerifyMemberFragment fragment = new VerifyMemberFragment();
+        return fragment;
     }
 
 
@@ -146,104 +145,48 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
     }
 
     private void bindViews(View view) {
-     Back=(Button)view.findViewById(R.id.back);
+     skip=(Button)view.findViewById(R.id.skip);
      Continue=(Button)view.findViewById(R.id.btn_continue);
      Continue.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
              Log.e("on","click");
            //phoneLogin();
-             phoneLoginFragment();
+             phoneLoginFragment(holderId);
+         }
+     });
+     skip.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             navToMainActivity();
          }
      });
     }
 
-    private void phoneLoginFragment(){
+    private void phoneLoginFragment(int containerId){
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment frg = new PhoneVerificationFragment();
         ft.setCustomAnimations(R.anim.left_in, R.anim.right_out);
-        ft.replace(R.id.containerIntroFragments, frg);
+        ft.replace(containerId, frg);
         ft.commit();
     }
 
-    int APP_REQUEST_CODE =99;
-    @Override
-    public void onActivityResult(
-            final int requestCode,
-            final int resultCode,
-            final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
-            if (data != null) {
-                if (data.hasExtra(AccountKitLoginResult.RESULT_KEY)) {
-                    AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-                    String toastMessage = "";
-                    if (loginResult.getError() != null) {
-                        toastMessage = loginResult.getError().getErrorType().getMessage();
-
-                    } else if (loginResult.wasCancelled()) {
-                        toastMessage = "Login Cancelled";
-                    } else {
-
-                        getaccount_info();
-                    }
-                    Log.e("result", toastMessage);
-                    // Surface the result to your user in an appropriate way.
-//            Toast.makeText(getContext(),
-//                    toastMessage,
-//                    Toast.LENGTH_LONG)
-//                    .show();
-                }
-            }
+    private void navToMainActivity() {
+        if (getActivity() instanceof SignupActivity) {
+            AppConfig.getInstance().isCommingFromSplash = true;
+            Intent i = new Intent(getActivity(), MainActivity.class);
+            startActivity(i);
+            getActivity().finish();
+        }else{
+            navToProfileFragment();
         }
     }
-
-    private void getaccount_info()
-    {
-        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
-            @Override
-            public void onSuccess(Account account)
-            {
-                Log.e("mobileno",account.getPhoneNumber()+"");
-
-                String phoneno= String.valueOf(account.getPhoneNumber());
-                phoneno=phoneno.replace("+91","");
-                verifyPhoneNo(phoneno);
-            }
-
-            @Override
-            public void onError(AccountKitError accountKitError) {
-                Log.e("account_kit_error",accountKitError+"");
-
-            }
-        });
-    }
-//    private void logFireBaseEvent() {
-//        Bundle params = new Bundle();
-//        params.putString("user_id", AppConfig.getInstance().mUser.getmUserId());
-//        params.putString("device_type", "Android");
-//        // Send the event
-//        FirebaseAnalytics.getInstance(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup, params);
-//    }
-//    private void logFaceBookEvent() {
-//        AppEventsLogger.newLogger(getActivity()).logEvent(AppConstt.FireBaseEvents.Successful_Signup);
-//    }
-//
-//    private void logMixPanelEvent() {
-//        String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
-//        MixpanelAPI mixpanel = MixpanelAPI.getInstance(getActivity(), MIXPANEL_TOKEN);
-//        mixpanel.identify(AppConfig.getInstance().mUser.getmUserId());
-//        mixpanel.getPeople().identify(AppConfig.getInstance().mUser.getmUserId());
-//        mixpanel.getPeople().set("Email", AppConfig.getInstance().mUser.getmEmail());
-//        mixpanel.getPeople().set("Gender", AppConfig.getInstance().mUser.getmGender());
-//        mixpanel.getPeople().set("Created at", timeStamp);
-//        mixpanel.getPeople().set("Last logged in at", timeStamp);
-//    }
-    private void navToMainActivity() {
-        Intent i = new Intent(getActivity(), MainActivity.class);
-        startActivity(i);
-        getActivity().finish();
+    public void navToProfileFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        Fragment frg = new ProfileFragment();
+        ft.add(R.id.content_frame, frg, AppConstt.FRGTAG.ProfileFragment);
+        ft.commit();
     }
 //    private void navToSignUpVerificationFragment(Bundle b) {
 //        FragmentManager fm = getFragmentManager();
@@ -400,27 +343,6 @@ public class VerifyMemberFragment extends Fragment implements View.OnClickListen
 
     }
 
-
-    public void phoneLogin() {
-    //    AccountKit.logOut();
-        final Intent intent = new Intent(getActivity(), AccountKitActivity.class);
-        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
-                new AccountKitConfiguration.AccountKitConfigurationBuilder(
-                        LoginType.PHONE,
-                        AccountKitActivity.ResponseType.TOKEN); // or .ResponseType.TOKEN
-        // ... perform additional configuration ...
-        UIManager uiManager=new SkinManager(SkinManager.Skin.CLASSIC,Color.parseColor("#a83664"));
-//        UIManager uiManager=new SkinManager(SkinManager.Skin.CONTEMPORARY,Color.parseColor(getActivity().
-//                getResources().getColor(R.color.expndble_lst_color),SkinManager.Tint.WHITE))
-//       U uiManager = new SkinManager(SkinManager.Skin.CONTEMPORARY,Color.parseColor("#6200EE"),
-//               SkinManager.Tint.WHITE,60);
-
-        configurationBuilder.setUIManager(uiManager);
-        intent.putExtra(
-                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
-                configurationBuilder.build());
-        startActivityForResult(intent, APP_REQUEST_CODE);
-    }
     public void setActionBar(String title, boolean showNavButton) {
 //        getActivity().getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         Animation animation = AnimationUtils.loadAnimation(getContext(),

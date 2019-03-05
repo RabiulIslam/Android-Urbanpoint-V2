@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
@@ -371,8 +370,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             float version = Float.parseFloat(pInfo.versionName);
             Log.d("AppVersion", "showAppUpdateDialogue: " + version);
             AppConfig.getInstance().mUser.setmAppVersion(version);
-
-
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

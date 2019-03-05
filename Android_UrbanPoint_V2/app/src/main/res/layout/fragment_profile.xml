@@ -110,15 +110,58 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dp20"
-
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="@dimen/dp5"
                                    android:layout_alignParentRight="true"
-
                                     android:text="@string/verify"
                                     android:textColor="@color/gray_light"
                                     android:textSize="@dimen/sp14" />
 
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/phone_number"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray_bg"
+                            android:textSize="@dimen/sp18" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/frg_profile_edt_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:background="@color/transparent"
+                                android:imeOptions="actionDone"
+                                android:inputType="textEmailAddress"
+                                android:textAlignment="center"
+                                android:textColor="@color/gray"
+                                android:textCursorDrawable="@drawable/cursor_edit_text"
+                                android:textSize="@dimen/sp14"
+                                android:focusable="false"/>
+                            <RelativeLayout
+                                android:id="@+id/frg_profile_verify_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="@dimen/dp20"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp20"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="@dimen/dp5"
+                                    android:layout_alignParentRight="true"
+                                    android:text="@string/verify"
+                                    android:textColor="@color/gray_light"
+                                    android:textSize="@dimen/sp14" />
 
                             </RelativeLayout>
 

@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 //             ft.addToBackStack(AppConstt.FRGTAG.HomeFragment);
 //             ft.commit();
 //         }
+        initiate();
+        bindViews();
+        setupDrawerToggle();
         if (!AppConfig.getInstance().isCommingFromSplash) {
             Log.e("check", "1");
             AppConfig.getInstance().isCommingFromSplash = true;
@@ -95,11 +98,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
             this.finish();//Not required in the backstack
         } else {
             Log.e("check", "2");
-            initiate();
-            bindViews();
             setDefLang("en");
             mDrawerLayout = findViewById(R.id.drawer_layout);
-            setupDrawerToggle();
             mDrawerToggle.setDrawerIndicatorEnabled(false);
             Intent intent = getIntent();
             String Id = "";
@@ -267,7 +267,6 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 break;
 
             case R.id.drawer_ll_invite_friends:
-//
                 navToReferAndEarnFragment(previousFrg);
                 mDrawerLayout.closeDrawer(llDrawerMenu);
                 break;
@@ -418,11 +417,13 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
 
     public void clearMyBackStack() {
         int count = 0;
-        if (mFrgmgr.getBackStackEntryCount() > 0) {
-            count = mFrgmgr.getBackStackEntryCount();
-        }
-        for (int i = 0; i < count; ++i) {
-            mFrgmgr.popBackStackImmediate();
+        if (mFrgmgr != null) {
+            if (mFrgmgr.getBackStackEntryCount() > 0) {
+                count = mFrgmgr.getBackStackEntryCount();
+            }
+            for (int i = 0; i < count; ++i) {
+                mFrgmgr.popBackStackImmediate();
+            }
         }
     }
 
@@ -597,6 +598,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     AppConfig.getInstance().deleteUserData(AppConfig.getInstance().loadFCMToken());
+                    AppConfig.getInstance().mUser.clearUserModel();
                     AppConfig.getInstance().isComingFromLogout = true;
                     navToLogin();
                 } else {
