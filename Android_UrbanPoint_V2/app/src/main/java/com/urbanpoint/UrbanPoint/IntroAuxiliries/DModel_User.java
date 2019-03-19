@@ -33,6 +33,11 @@ public class DModel_User {
     public String mReferralCode;
     public float wallet;
     public String zone;
+
+    //Changes by Rashmi
+    public String expiryDate;
+    public String phnoVerified;
+
     public DModel_User() {
         this.mUserId = "";
         this.mName = "";
@@ -57,10 +62,13 @@ public class DModel_User {
         this.masterMerchant = "";
         this.isLoggedIn = false;
         this.isPremierUser = false;
-        this.zone="";
+        this.zone = "";
+
+        this.expiryDate = "";
+        this.phnoVerified = "";
     }
 
-    public void clearUserModel(){
+    public void clearUserModel() {
         this.mUserId = "";
         this.mName = "";
         this.mEmail = "";
@@ -84,7 +92,26 @@ public class DModel_User {
         this.masterMerchant = "";
         this.isLoggedIn = false;
         this.isPremierUser = false;
-        this.zone="";
+        this.zone = "";
+
+        this.expiryDate = "";
+        this.phnoVerified = "";
+    }
+
+    public String getPhnoVerified() {
+        return phnoVerified;
+    }
+
+    public void setPhnoVerified(String phnoVerified) {
+        this.phnoVerified = phnoVerified;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     public String getZone() {

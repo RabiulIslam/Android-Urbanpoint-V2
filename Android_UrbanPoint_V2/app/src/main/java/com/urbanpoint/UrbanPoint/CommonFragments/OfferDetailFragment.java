@@ -43,6 +43,7 @@ import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,7 +65,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
     private String callNumber, outletId;
     private String directionlattitude, directionLongitute;
     private FragmentManager fragmentManager;
-    private String navBarTitle, offerName, merchantName, merchantImage, merchantLogo, merchantPhone, merchantAddress, merchantDescription, merchantTimmings, startDate, merchantPIN,merchantId,orderId, totalSaving;
+    private String navBarTitle, offerName, merchantName, merchantImage, merchantLogo, merchantPhone, merchantAddress, merchantDescription, merchantTimmings, startDate, merchantPIN, merchantId, orderId, totalSaving;
     private Bundle bundle;
     private int roundedSavings;
     CustomAlert customAlert;
@@ -73,6 +74,8 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
     private DisplayImageOptions options;
 
     INavBarUpdateUpdateListener iNavBarUpdateUpdateListener;
+
+    String expirydate;
 
     @Nullable
     @Override
@@ -105,6 +108,45 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
         }
 
         getNextMonth();
+
+        //Changes by Rashmi VPN
+        /*Manage visibility of lock icon on GET IT button*/
+        expirydate = AppConfig.getInstance().mUser.getExpiryDate();
+        Date current_date = Calendar.getInstance().getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Log.e("date===", dateFormat.format(current_date));
+
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date currDate = dateFormat.parse(dateFormat.format(current_date));
+
+            if (expirydate != null) {
+                Date expiry_date = dateFormat1.parse(expirydate);
+
+                Log.e("expiryDate",expiry_date.toString());
+
+                if (currDate.before(expiry_date) || currDate.equals(expiry_date)) {
+                    imvGetItLock.setVisibility(View.GONE);
+                } else {
+                    imvGetItLock.setVisibility(View.VISIBLE);
+                }
+            } /*else {
+
+                String dtStart = "2019-03-12 20:54:21";
+                Date expireDate = dateFormat1.parse(dtStart);
+
+                if (currDate.before(expireDate) || currDate.equals(expireDate)) {
+                    imvGetItLock.setVisibility(View.GONE);
+                } else {
+                    imvGetItLock.setVisibility(View.VISIBLE);
+                }
+            }*/
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return v;
     }
 
@@ -264,13 +306,11 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
 //                        AppConfig.getInstance().mUser.setEligible(false);
 //                        navToSubscriptionFragment();
 //                    }
-                if (! AppConfig.getInstance().mUser.isSubscribed()
-                    & (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0)
-                        .getApproxSaving()) > AppConfig.getInstance().mUser.getWallet()))
-                 {
-                     navToSubscriptionFragment();
-                 }
-                  else {
+                if (expirydate == null || !AppConfig.getInstance().mUser.isSubscribed()
+                        & (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0)
+                        .getApproxSaving()) > AppConfig.getInstance().mUser.getWallet())) {
+                    navToSubscriptionFragment();
+                } else {
                     bundle = new Bundle();
                     bundle.putString(AppConstt.BundleStrings.offerId, offerId + "");
                     bundle.putString(AppConstt.BundleStrings.offerName, offerName);
@@ -534,7 +574,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
 
                             @Override
                             public void onError(Exception e) {
-                                Log.d("Picass2", "onError Picasso: "+e.getMessage());
+                                Log.d("Picass2", "onError Picasso: " + e.getMessage());
                             }
                         });
 
@@ -548,39 +588,33 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
 //                    .get(0).getApproxSaving())+","+ AppConfig.getInstance().mUser.getWallet());
             if (AppConfig.getInstance().mUser.isSubscribed()
                     || (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
-                    <= AppConfig.getInstance().mUser.getWallet()))
-            {
-                Log.e("check","lock");
+                    <= AppConfig.getInstance().mUser.getWallet())) {
+                Log.e("check", "lock");
                 imvGetItLock.setVisibility(View.GONE);
 
-                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0)
-                {
+                if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
                     btnGetIt.setText(getResources().getString(R.string.btn_used));
                     btnGetIt.setEnabled(false);
                     btnGetIt.setClickable(false);
                     btnGetIt.setBackground(getResources().getDrawable(R.drawable.btn_redeem_slc));
                     txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_2));
                     txvExpiryTime.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                     txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
                     txvExpiryTime.setVisibility(View.VISIBLE);
                 }
 
-            }
-            else if(Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
-                    > AppConfig.getInstance().mUser.getWallet())
-            {
+            } else if (Float.parseFloat(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving())
+                    > AppConfig.getInstance().mUser.getWallet()) {
                 String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                 imvGetItLock.setVisibility(View.VISIBLE);
                 btnGetIt.setEnabled(true);
                 btnGetIt.setClickable(true);
                 txvExpiryTime.setText(getResources().getString(R.string.offer_detail_expires_on_1) + " " + newDate);
                 txvExpiryTime.setVisibility(View.VISIBLE);
-            }
-            else
-            { String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
+            } else {
+                String newDate = convertDate(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getEndDatetime());
                 if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getIsRedeeme() == 0) {
                     btnGetIt.setText(getResources().getString(R.string.btn_used));
                 }
@@ -615,7 +649,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             txvApproxSaving.setVisibility(View.VISIBLE);
             float savings = Float.parseFloat(String.valueOf(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getApproxSaving()));
             roundedSavings = (int) savings;
-            txvApproxSavingPrice.setText(roundedSavings+ " " +getResources().getString(R.string.txv_qatar_riyal) );
+            txvApproxSavingPrice.setText(roundedSavings + " " + getResources().getString(R.string.txv_qatar_riyal));
             txvApproxSavingPrice.setVisibility(View.VISIBLE);
             txvValidFor.setText(OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getValidFor());
             txvValidFor.setVisibility(View.VISIBLE);
@@ -625,10 +659,7 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
             txvTiming.setVisibility(View.VISIBLE);
             btnAddToFav.setVisibility(View.VISIBLE);
             btnGetIt.setVisibility(View.VISIBLE);
-        Log.e("offer_subscription",AppConfig.getInstance().mUser.isSubscribed()+"");
-
-
-
+            Log.e("offer_subscription", AppConfig.getInstance().mUser.isSubscribed() + "");
 
 
             if (OfferDetail_Webhit_Get_getOfferDetail.responseObject.getData().get(0).getRenew().equalsIgnoreCase("0")) {

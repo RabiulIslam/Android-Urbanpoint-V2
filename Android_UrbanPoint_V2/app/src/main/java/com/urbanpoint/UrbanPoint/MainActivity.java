@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
         initiate();
         bindViews();
         setupDrawerToggle();
+        //Log.e("app_version","");
+
         if (!AppConfig.getInstance().isCommingFromSplash) {
             Log.e("check", "1");
             AppConfig.getInstance().isCommingFromSplash = true;

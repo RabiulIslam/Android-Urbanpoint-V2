@@ -64,7 +64,11 @@ import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 //import com.facebook.appevents.AppEventsLogger;
@@ -747,9 +751,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             grdvw1.setAdapter(horizontalGridViewAdapter1);
             grdvw2.setNumColumns(lstGrids2.size());
             grdvw2.setAdapter(horizontalGridViewAdapter2);
-
         }
-
     }
 
 
@@ -887,6 +889,49 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }
 
+        //Changes by Rashmi VPN
+        /*Manage visibility of GAIN ACCESS button*/
+        String expirydate = Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getExpiry_datetime();
+
+        Date current_date = Calendar.getInstance().getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Log.e("date===", dateFormat.format(current_date));
+
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+
+            Date currDate = dateFormat.parse(dateFormat.format(current_date));
+
+            if (expirydate != null) {
+                Date expiry_date = dateFormat1.parse(expirydate);
+                //Date expiryDate = dateFormat.parse(dateFormat.format(expiry_date));
+                //Date expiryDate = new Date("13/02/2019");
+
+                Log.e("expiryDate", expiry_date.toString());
+
+                if (currDate.before(expiry_date) || currDate.equals(expiry_date)) {
+                    btnGainAccess.setVisibility(View.GONE);
+                } else {
+                    btnGainAccess.setVisibility(View.VISIBLE);
+                }
+            } /*else {
+
+                String dtStart = "2019-03-12 20:54:21";
+                //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                Date expireDate = dateFormat1.parse(dtStart);
+
+                if (currDate.before(expireDate) || currDate.equals(expireDate)) {
+                    btnGainAccess.setVisibility(View.GONE);
+                } else {
+                    btnGainAccess.setVisibility(View.VISIBLE);
+                }
+            }*/
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         //Updating NewOffers Badge
         if (AppConfig.getInstance().mUserBadges.getNewOfferCount() > 0) {
             imvNewOffer.setVisibility(View.VISIBLE);
@@ -965,7 +1010,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if (PhoneVerified.equalsIgnoreCase("0") && nationality.length() == 0) {
             ((MainActivity) getContext()).setProfileCountVisibility(View.VISIBLE);
         }
-        ((MainActivity) getContext()).setProfileCount(AppConfig.getInstance().mProfileBadgeCount+"%");
+        ((MainActivity) getContext()).setProfileCount(AppConfig.getInstance().mProfileBadgeCount + "%");
         //Updating if User can Unsubscribe or not
         if (AppConfig.getInstance().mUser.ismCanUnSubscribe()) {
             ((MainActivity) getContext()).setUnSubscribeVisibility(View.VISIBLE);
