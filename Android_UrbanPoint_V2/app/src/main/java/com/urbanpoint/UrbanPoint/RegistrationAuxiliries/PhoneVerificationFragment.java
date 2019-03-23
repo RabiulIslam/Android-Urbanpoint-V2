@@ -134,16 +134,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(phoneNumberInput.getText().toString())) {
-
-                    //Changes by Rashmi VPN
-                    String phoneNumber = ccp.getSelectedCountryCode() + phoneNumberInput.getText().toString();
-                    Log.e("phone number", "" + phoneNumber);
-
-                    AppConfig.getInstance().mUser.setmPhoneNumber(phoneNumber);
-                    AppConfig.getInstance().saveUserData();
-
                     sendPhoneNo();
-                    viewSwitcher.showNext();
                 }
             }
         });
@@ -232,13 +223,23 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                 Log.e("register_res_boolean", isSuccess + "," + strMsg);
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
+                    /*Changes by Rashmi VPN*/
+                    String phoneNumber = ccp.getSelectedCountryCode() + phoneNumberInput.getText().toString();
+                    Log.e("phone number", "" + phoneNumber);
+
+                    AppConfig.getInstance().mUser.setmPhoneNumber(phoneNumber);
+                    AppConfig.getInstance().saveUserData();
+                    viewSwitcher.showNext();
+
                     resendSms.setVisibility(View.VISIBLE);
                     changeNumber.setVisibility(View.VISIBLE);
                     skip.setVisibility(View.VISIBLE);
                 } else {
-                    resendSms.setVisibility(View.VISIBLE);
+                    /*Changes by Rashmi VPN*/
+                    /*resendSms.setVisibility(View.VISIBLE);
                     changeNumber.setVisibility(View.VISIBLE);
-                    skip.setVisibility(View.VISIBLE);
+                    skip.setVisibility(View.VISIBLE);*/
+
                     customAlert.showCustomAlertDialog(getContext(), getString(R.string.sent_otp_code), strMsg,
                             null, null, false, null);
                 }
@@ -306,7 +307,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                         AppConfig.getInstance().isCommingFromSplash = true;
                         AppConfig.getInstance().mUser.setLoggedIn(true);
                         AppConfig.getInstance().mUser.setPhoneVerified("1");
-                        AppConfig.getInstance().mUser.setPhnoVerified("1");
+//                        AppConfig.getInstance().mUser.setPhnoVerified("1");
                         AppConfig.getInstance().saveUserData();
                         navToMainActivity();
                     } else {

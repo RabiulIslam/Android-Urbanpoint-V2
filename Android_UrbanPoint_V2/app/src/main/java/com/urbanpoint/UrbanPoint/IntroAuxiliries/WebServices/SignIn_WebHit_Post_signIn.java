@@ -81,10 +81,10 @@ public class SignIn_WebHit_Post_signIn {
                                     AppConfig.getInstance().mUser.setmEmail(responseObject.getData().getEmail());
                                     if (responseObject.getData().getPhone() != null) {
                                         AppConfig.getInstance().mUser.setmPhoneNumber(responseObject.getData().getPhone());
-                                        AppConfig.getInstance().mUser.setPhnoVerified("1");
-                                    }else {
+//                                        AppConfig.getInstance().mUser.setPhnoVerified("1");
+                                    }/*else {
                                         AppConfig.getInstance().mUser.setPhnoVerified("0");
-                                    }
+                                    }*/
                                     AppConfig.getInstance().mUser.setmGender(responseObject.getData().getGender());
                                     AppConfig.getInstance().mUser.setmDob(responseObject.getData().getDOB());
 //                                    AppConfig.getInstance().mUser.setmNetworkType(responseObject.getData().getNetwork());

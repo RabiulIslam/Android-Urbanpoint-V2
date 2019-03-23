@@ -36,6 +36,7 @@ public class PhoneRegistrationApi {
         jsonObject.addProperty("user_id", AppConfig.getInstance().mUser.getmUserId());
         jsonObject.addProperty("mobilenumber", _value);
         jsonObject.addProperty("device_info", deviceInfo);
+        Log.e("sendPhNo", "" + jsonObject.toString());
         StringEntity entity = null;
         try {
             entity = new StringEntity(jsonObject.toString());
@@ -52,10 +53,10 @@ public class PhoneRegistrationApi {
                             strResponse = new String(responseBody, "UTF-8");
                             responseObject = gson.fromJson(strResponse, ResponseModel.class);
                             Log.e("response==", strResponse);
-                            Log.e("step2_response: OTP", responseObject.data.OTP + "");
                             switch (responseObject.status) {
                                 case AppConstt.ServerStatus.OK:
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
+                                    Log.e("step2_response: OTP", responseObject.data.OTP + "");
                                     break;
                                 case AppConstt.ServerStatus.INTERNAL_SERVER_ERROR:
                                     iWebCallback.onWebResult(false, _mContext.getString(R.string.sent_otp_code));
@@ -122,12 +123,14 @@ public class PhoneRegistrationApi {
         jsonObject.addProperty("mobilenumber", _value);
         jsonObject.addProperty("otp", otp);
         StringEntity entity = null;
+        Log.e("verifyOTP", "" + jsonObject.toString());
         try {
             entity = new StringEntity(jsonObject.toString());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
+//        mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, 2);
         mClient.post(_mContext, myUrl, entity, ApiMethod.HeadersValue.CONTENT_TYPE, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

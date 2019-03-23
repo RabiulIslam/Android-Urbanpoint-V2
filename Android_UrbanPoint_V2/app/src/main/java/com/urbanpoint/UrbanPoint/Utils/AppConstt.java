@@ -10,15 +10,15 @@ public interface AppConstt {
 //     String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
 //     String BASE_URL_OTP="http://34.219.2.69:9010/api/";
     //   Production Server
-    String BASE_URL_OTP = "http://52.37.72.27:9010/api/";
-    String BASE_URL = "https://cms.biyog.com/up_qatar/api/v1/";
+//    String BASE_URL_OTP = "http://52.37.72.27:9010/api/";
+//    String BASE_URL = "https://cms.biyog.com/up_qatar/api/v1/";
 
 //    String BASE_URL_OTP = "http://34.218.241.37:9010/api/";
 //    String BASE_URL = "http://34.218.241.37/up_qatar/api/v1/";
 
     //VPN
-//    String BASE_URL_OTP = "http://192.168.29.214:3000/api/";
-//    String BASE_URL = "http://192.168.29.195/biyog/up_qatar/api/v1/";
+    String BASE_URL_OTP = "http://192.168.29.214:3000/api/";
+    String BASE_URL = "http://192.168.29.195/biyog/up_qatar/api/v1/";
 
     //String BASE_URL = "http://34.219.2.69/up_qatar/api/v1/";
 

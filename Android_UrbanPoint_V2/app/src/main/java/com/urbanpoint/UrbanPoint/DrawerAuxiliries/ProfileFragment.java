@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         txvName.setText(AppConfig.getInstance().mUser.getmName());
         edtEmail.setText(AppConfig.getInstance().mUser.getmEmail());
 
-        //Changes by Rashmi
+        //Changes by Rashmi VPN
         /*Set phone number*/
         String phNo = AppConfig.getInstance().mUser.getmPhoneNumber();
         Log.e("phoneNo======", phNo);
@@ -126,7 +126,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 AppConfig.getInstance().mProfileBadgeCount += 10;
             }
         }
+
         txvPercentage.setText(AppConfig.getInstance().mProfileBadgeCount + "%");
+        ((MainActivity) getContext()).setProfileCount(AppConfig.getInstance().mProfileBadgeCount + "%");
 
         try {
 //                Log.d("IMGESLST", "list value: " + AppInstance.profileData.getNationality() + ".png");
@@ -308,7 +310,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
         /*Changes by Rashmi VPN*/
-        if (AppConfig.getInstance().mUser.getPhnoVerified() != null) {
+        /*if (AppConfig.getInstance().mUser.getPhnoVerified() != null) {
             if (AppConfig.getInstance().mUser.getPhnoVerified().equalsIgnoreCase("1")) {
                 rlVerifynumber.setVisibility(View.GONE);
             } else {
@@ -316,9 +318,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         } else {
             rlVerifynumber.setVisibility(View.VISIBLE);
-        }
+        }*/
 
-        /*if (AppConfig.getInstance().mUser.getPhoneVerified() != null) {
+        if (AppConfig.getInstance().mUser.getPhoneVerified() != null) {
             if (AppConfig.getInstance().mUser.getPhoneVerified().equalsIgnoreCase("1")) {
                 rlVerifynumber.setVisibility(View.GONE);
             } else {
@@ -326,7 +328,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         } else {
             rlVerifynumber.setVisibility(View.VISIBLE);
-        }*/
+        }
 
     }
 
