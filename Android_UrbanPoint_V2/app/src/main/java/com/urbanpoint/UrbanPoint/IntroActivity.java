@@ -65,7 +65,7 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
     android.location.Location mLastLocation;
     private static int UPDATE_INTERVAL = 600 * 1000; // 10 sec
     private static int FATEST_INTERVAL = 600 * 1000; // 5 sec
-    private static int DISPLACEMENT = 1000; // 10000 meters
+    private static int DISPLACEMENT = 1000; // 1000 meters
     boolean shouldNavigate;
     Double lat, lng;
     String Id = "";
@@ -362,7 +362,9 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             if (addresses != null && !addresses.isEmpty()) {
 
                 Log.e("IntroActivity", "getLocality " + addresses.get(0).getLocality());
-                return addresses.get(0).getLocality().toLowerCase();
+                if (addresses.get(0).getLocality()!= null) {
+                    return addresses.get(0).getLocality().toLowerCase();
+                }
             }
         } catch (IOException ioe) {
         }

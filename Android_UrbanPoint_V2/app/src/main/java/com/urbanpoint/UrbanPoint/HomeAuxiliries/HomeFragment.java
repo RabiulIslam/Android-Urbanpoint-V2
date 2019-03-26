@@ -888,12 +888,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         //Updating NewOffers Badge
-        if (AppConfig.getInstance().mUserBadges.getNewOfferCount() > 0) {
-            imvNewOffer.setVisibility(View.VISIBLE);
-        } else {
-            imvNewOffer.setVisibility(View.GONE);
+        if (imvNewOffer != null) {
+            if (AppConfig.getInstance().mUserBadges.getNewOfferCount() > 0) {
+                imvNewOffer.setVisibility(View.VISIBLE);
+            } else {
+                imvNewOffer.setVisibility(View.GONE);
+            }
         }
-
         //Updating Favorites Badge
         if (AppConfig.getInstance().mUserBadges.getFavoriteCount() > 0) {
             imvFavorite.setVisibility(View.VISIBLE);
