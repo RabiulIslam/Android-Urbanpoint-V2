@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.GetStartedFragment;
 import com.urbanpoint.UrbanPoint.RegistrationAuxiliries.PhoneVerificationFragment;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
@@ -19,31 +20,32 @@ import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import java.io.IOException;
 
-public class SignupActivity extends AppCompatActivity
-{
+import io.fabric.sdk.android.Fabric;
+
+public class SignupActivity extends AppCompatActivity {
     private ScalableVideoView mAppIntroVideo;
 
     private FragmentManager mSupportFragmentManager;
     private FragmentTransaction mFragmentTransaction;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_signup);
         initView();
         startVideo();
     }
 
-    private void initView()
-    {
+    private void initView() {
 
-        mAppIntroVideo=(ScalableVideoView)findViewById(R.id.appIntroVideoView);
+        mAppIntroVideo = (ScalableVideoView) findViewById(R.id.appIntroVideoView);
 
         mSupportFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mSupportFragmentManager.beginTransaction();
 
 
-            mFragmentTransaction.add(R.id.containerIntroFragments, new GetStartedFragment());
+        mFragmentTransaction.add(R.id.containerIntroFragments, new GetStartedFragment());
 
 
         mFragmentTransaction.commit();
@@ -53,27 +55,30 @@ public class SignupActivity extends AppCompatActivity
     public void onBackPressed() {
 //        super.onBackPressed();
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.containerIntroFragments);
-        if (fragment instanceof PhoneVerificationFragment){
+        if (fragment instanceof PhoneVerificationFragment) {
             navToMainActivity();
-        }else {
+        } else {
             ExitMessageDialog();
         }
     }
+
     private void navToMainActivity() {
-            AppConfig.getInstance().isCommingFromSplash = true;
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            finish();
+        AppConfig.getInstance().isCommingFromSplash = true;
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
+
     private void ExitMessageDialog() {
         AlertDialog alertDialog;
-        alertDialog =   new AlertDialog.Builder(SignupActivity.this)
+        alertDialog = new AlertDialog.Builder(SignupActivity.this)
                 .setMessage(getResources().getString(R.string.exit_app))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
-                    }})
+                    }
+                })
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);

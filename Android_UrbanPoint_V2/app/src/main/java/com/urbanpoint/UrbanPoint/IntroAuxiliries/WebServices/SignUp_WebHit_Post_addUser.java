@@ -103,8 +103,7 @@ public class SignUp_WebHit_Post_addUser {
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
-                            error) {
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         Log.e("failure_status_code",statusCode+"");
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:

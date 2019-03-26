@@ -134,6 +134,8 @@ public class AppConfig {
         mUser.mPhoneNumber = sharedPref.getString("msisdn_id", "");
         mUser.mReferralCode = sharedPref.getString("referral_code", "");
         mUser.zone = sharedPref.getString("zone", "");
+        mUser.expiryDate = sharedPref.getString("expiryDate", "");
+
         String isSubscribed = "";
         isSubscribed = sharedPref.getString("key_user_subscribe_status", "");
         if (isSubscribed.equalsIgnoreCase("true")) {
@@ -255,6 +257,9 @@ public class AppConfig {
         mUserBadges.setFavoriteCount(sharedPref.getInt("key_favorites_count", 0));
         mUser.setmReferralCode(sharedPref.getString("referral_code", ""));
         mUser.setZone(sharedPref.getString("zone", ""));
+
+        //Changes by Rashmi
+        mUser.setExpiryDate(sharedPref.getString("expiryDate", ""));
     }
 
     public void saveUserData() {
@@ -281,6 +286,9 @@ public class AppConfig {
         editor.putInt("key_favorites_count", mUserBadges.getFavoriteCount());
         editor.putString("referral_code", mUser.getmReferralCode());
         editor.putString("zone", mUser.getZone());
+
+        editor.putString("expiryDate", mUser.expiryDate);
+
         editor.commit();
     }
 

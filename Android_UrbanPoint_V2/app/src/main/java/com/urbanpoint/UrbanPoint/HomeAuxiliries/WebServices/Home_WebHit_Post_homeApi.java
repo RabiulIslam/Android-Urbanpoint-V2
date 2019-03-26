@@ -1,6 +1,7 @@
 package com.urbanpoint.UrbanPoint.HomeAuxiliries.WebServices;
 
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -30,19 +31,25 @@ public class Home_WebHit_Post_homeApi {
     private AsyncHttpClient mClient = new AsyncHttpClient();
     public static ResponseModel responseObject = null;
     Context mContext;
+
     public void requestHomeApi(Context _mContext, final IWebCallbacks iWebCallback) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
 
         this.mContext = _mContext;
         String myUrl = AppConstt.BASE_URL_MOBILE + ApiMethod.POST.homeApi;
-        Log.e("homeApi",myUrl);
+        Log.e("homeApi", myUrl);
         RequestParams requestParams = new RequestParams();
-        requestParams.put("app_version",AppConfig.getInstance().mUser.getmAppVersion());
-        Log.e("home_params",requestParams+"");
-        Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken()+"");
+        requestParams.put("app_version", AppConfig.getInstance().mUser.getmAppVersion());
+        Log.e("home_params", requestParams + "");
+        Log.e("header,", AppConfig.getInstance().mUser.getmAuthorizationToken() + "");
         mClient.addHeader(ApiMethod.HEADER.Authorization, AppConfig.getInstance().mUser.getmAuthorizationToken());
         mClient.addHeader("app_id", ApiMethod.HeadersValue.app_id);
+        Log.e("app_id", ApiMethod.HeadersValue.app_id);
         mClient.setMaxRetriesAndTimeout(AppConstt.LIMIT_API_RETRY, AppConstt.LIMIT_TIMOUT_MILLIS);
-        mClient.get(myUrl, requestParams,new AsyncHttpResponseHandler() {
+        mClient.get(myUrl, requestParams, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -54,11 +61,15 @@ public class Home_WebHit_Post_homeApi {
 //                            JsonReader reader = new JsonReader(new StringReader(strResponse.trim()));
 //                            reader.setLenient(true);
 
+                            Log.e("response----",strResponse);
+
                             responseObject = gson.fromJson(strResponse.trim(), ResponseModel.class);
-                            Log.e("res_object",responseObject+"");
+                            Log.e("response", strResponse);
+                            Log.e("res_object", responseObject + "");
                             switch (statusCode) {
                                 case AppConstt.ServerStatus.OK:
-                                    Log.e("emailverificationstatus",responseObject.getData().emailverified);
+                                    Log.e("emailverificationstatus", responseObject.getData().emailverified);
+                                    //Log.e("phoneverificationstatus", responseObject.getData().phoneverified);
                                     AppConfig.getInstance().mUser.setmReferralCode(responseObject.getData().refferelcode);
                                     AppConfig.getInstance().mUser.setWallet(responseObject.getData().wallet);
                                     AppConfig.getInstance().mUser.setEmailVerified(responseObject.getData().emailverified);
@@ -69,19 +80,18 @@ public class Home_WebHit_Post_homeApi {
 //                                        AppConfig.getInstance().mUser.setSubscribed(true);
 //                                        AppConfig.getInstance().mUser.setPremierUser(true);
 //                                    } else {
-                                    Log.e("home_subscription",responseObject.getData().getSubscription().getSubscription());
+                                    Log.e("home_subscription", responseObject.getData().getSubscription().getSubscription());
                                     if (responseObject.getData().getSubscription().getSubscription().equalsIgnoreCase("1")) {
                                         // subscription==1 means user has access to all offers (for some no. of remaining days)
                                         AppConfig.getInstance().mUser.setSubscribed(true);
-                                        Log.e("premium_userrrr",responseObject.getData().getSubscription().getStatus());
-                                        if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0"))
-                                        {
+
+                                        Log.e("premium_userrrr", responseObject.getData().getSubscription().getStatus());
+                                        if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
                                             AppConfig.getInstance().mUser.setPremierUser(false);
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             AppConfig.getInstance().mUser.setPremierUser(true);
                                         }
+
                                         //AppConfig.getInstance().mUser.setPremierUser(false);
 //                                            if (responseObject.getData().getSubscription().getStatus().equalsIgnoreCase("0")) {
 //                                                // status==0 means user has been unsubscribed
@@ -111,28 +121,35 @@ public class Home_WebHit_Post_homeApi {
 //                                            AppConfig.getInstance().mUser.setmCanUnSubscribe(false);
                                         AppConfig.getInstance().mUser.setSubscribed(false);
                                     }
-                                    if (!responseObject.getData().getSubscription().getPhone().equalsIgnoreCase("")) {
+                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getPhone() != null &&
+                                            !responseObject.getData().getSubscription().getPhone().equalsIgnoreCase("")) {
                                         AppConfig.getInstance().mUser.setmPhoneNumber(responseObject.getData().getSubscription().getPhone());
                                     }
-                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber()!=null&&
+                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber() != null &&
                                             Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getUber().equalsIgnoreCase("1")) {
                                         AppConfig.getInstance().mUser.setUberRequired(true);
                                     } else {
                                         AppConfig.getInstance().mUser.setUberRequired(false);
                                     }
-                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getForcefullyUpdated()!=null&&
+                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getForcefullyUpdated() != null &&
                                             Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getVersion().getForcefullyUpdated().equalsIgnoreCase("1")) {
                                         AppConfig.getInstance().mUser.setForcefullyUpdateActive(true);
                                     } else {
                                         AppConfig.getInstance().mUser.setForcefullyUpdateActive(false);
                                     }
                                     AppConfig.getInstance().mUser.setMasterMerchant(Home_WebHit_Post_homeApi.responseObject.getData().getSuper_access_pin());
-                                    if (Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getPhone()!=null) {
+
+                                    /*Changes by Rashmi*/
+                                    /*if (Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getPhone() != null) {
                                         AppConfig.getInstance().mUser.setmPhoneNumber(Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getPhone());
-                                    }
+                                    }*/
                                     AppConfig.getInstance().mUserBadges.setNewOfferCount(Home_WebHit_Post_homeApi.responseObject.getData().getNewOffer());
                                     AppConfig.getInstance().mUserBadges.setNotificationCount(Home_WebHit_Post_homeApi.responseObject.getData().getUnReadNotification());
                                     AppConfig.getInstance().mUserBadges.setReviewCount(Home_WebHit_Post_homeApi.responseObject.getData().getReview());
+
+                                    //Changes by Rashmi
+                                    /*Add expiry date in User Data*/
+                                    AppConfig.getInstance().mUser.setExpiryDate(Home_WebHit_Post_homeApi.responseObject.getData().getSubscription().getExpiry_datetime());
 
                                     AppConfig.getInstance().saveUserData();
                                     iWebCallback.onWebResult(true, responseObject.getMessage());
@@ -149,7 +166,7 @@ public class Home_WebHit_Post_homeApi {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
-                            Log.e("exception","ex",ex);
+                            Log.e("exception", "ex", ex);
                             iWebCallback.onWebException(ex);
                         }
                     }
@@ -157,7 +174,7 @@ public class Home_WebHit_Post_homeApi {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
-                        Log.e("errr",error.getMessage()+","+statusCode);
+                        Log.e("errr", error.getMessage() + "," + statusCode);
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
@@ -281,6 +298,17 @@ public class Home_WebHit_Post_homeApi {
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            //Changes by Rashmi
+            private String expiry_datetime;
+
+            public String getExpiry_datetime() {
+                return expiry_datetime;
+            }
+
+            public void setExpiry_datetime(String expiry_datetime) {
+                this.expiry_datetime = expiry_datetime;
             }
         }
 
@@ -1011,18 +1039,16 @@ public class Home_WebHit_Post_homeApi {
         }
 
         public class Data {
-            private  String emailverified;
-            private  String phoneverified;
+            private String emailverified;
+            private String phoneverified;
             private int wallet;
             private Subscription subscription;
 
-            public int getWallet()
-            {
+            public int getWallet() {
                 return wallet;
             }
 
-            public void setWallet(int wallet)
-            {
+            public void setWallet(int wallet) {
                 this.wallet = wallet;
             }
 
@@ -1033,6 +1059,7 @@ public class Home_WebHit_Post_homeApi {
             public void setSubscription(Subscription subscription) {
                 this.subscription = subscription;
             }
+
             private String refferelcode;
 
             public String getRefferelcode() {

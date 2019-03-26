@@ -10,16 +10,25 @@ public interface AppConstt {
 //     String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
 //     String BASE_URL_OTP="http://34.219.2.69:9010/api/";
     //   Production Server
-    String BASE_URL_OTP="http://52.37.72.27:9010/api/";
-    String BASE_URL="https://cms.biyog.com/up_qatar/api/v1/";
+//    String BASE_URL_OTP = "http://52.37.72.27:9010/api/";
+//    String BASE_URL = "https://cms.biyog.com/up_qatar/api/v1/";
+
+    String BASE_URL_OTP = "http://34.218.241.37:9010/api/";
+    String BASE_URL = "http://34.218.241.37/up_qatar/api/v1/";
+
+    //VPN
+//    String BASE_URL_OTP = "http://192.168.29.214:3000/api/";
+//    String BASE_URL = "http://192.168.29.195/biyog/up_qatar/api/v1/";
+
+    //String BASE_URL = "http://34.219.2.69/up_qatar/api/v1/";
 
     String BASE_URL_MOBILE = BASE_URL + "mobile/";
     String BASE_URL_SUBSCRIPTION = BASE_URL_MOBILE + "subsribeuser";
     String BASE_URL_IMAGES = "http://cms.biyog.com/up_qatar/uploads/";
-    String mSignupUsername="";
-    String mSignupAge="";
-    String mSignupGender="";
-    String mSignupEmail="";
+    String mSignupUsername = "";
+    String mSignupAge = "";
+    String mSignupGender = "";
+    String mSignupEmail = "";
 
 //    Staging Server
 
@@ -33,8 +42,8 @@ public interface AppConstt {
     int LIMIT_TIMOUT_MILLIS = 30000;
     public static final String LOGIN_RULES = "privacyStatementAndTermsofUseBiyog.html";
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
-    public static final String TERMS_OF_SALES ="Terms_of_Sales.html";
-    public static final String REFER_AND_EARN="Refer &amp; Earn";
+    public static final String TERMS_OF_SALES = "Terms_of_Sales.html";
+    public static final String REFER_AND_EARN = "Refer &amp; Earn";
     String ARABIC = "ar";
     String ENGLISH = "en";
     static String DeviceType = "android";
@@ -75,7 +84,7 @@ public interface AppConstt {
         String SubscriptionFragment = "SubscriptionFragment";
         String SubscriptionEligibleFragment = "SubscriptionEligibleFragment";
         String SubscriptionConfirmFragment = "SubscriptionConfirmFragment";
-        String OrderDetailFragment="OrderDetailFragment";
+        String OrderDetailFragment = "OrderDetailFragment";
         String SubscriptionSuccessFragment = "SubscriptionSuccessFragment";
         String SubscriptionEligibleSuccessFragment = "SubscriptionEligibleSuccessFragment";
         String OfferDetailFragment = "OfferDetailFragment";
@@ -238,7 +247,7 @@ public interface AppConstt {
         String notificationMessage = "notificationMessage";
         String notificationDate = "notificationDate";
         String backBtnVisibility = "backBtnVisibility";
-        String userId="userId";
+        String userId = "userId";
     }
 
     //    public static String[] arrFlags = {"Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
@@ -270,18 +279,18 @@ public interface AppConstt {
 //            "Tuvalu", "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uraguay", "United States",
 //            "U.S. Outlying Islands", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara",
 //            "Yemen", "Zambia", "Zimbabwe"};
-    public static String[] arrFlags ={"Dhaka North","Dhaka South","Others"};
+    public static String[] arrFlags = {"Dhaka North", "Dhaka South", "Others"};
 
-    public  static String[] arrNorthZone={"Adabor","Agargaon","Asad Gate","Badda","Banani","Baridhara",
-            "Bashundhara","Dakshinkhan","Darus Salam","Dhaka- Cantonment","Dhamrai","Farmgate","Gulshan 1","Gulshan 2",
-            "Kallyanpur","Karwan Bazar","Khilgaon","Khilkhet","Kuril","Mirpur 1","Mirpur 10","Mirpur 11-13","Mirpur 60 Feet",
-            "Mirpur Cantonment","Mirpur DOHS","Mirpur Kazipara","Mirpur Shewrapara","Mohakhali","Mohammadpur","Monipur para","Niketon",
-            "Sher-e-Bangla Nagar","Shyamoli","Tejgaon","Tejgaon Industrial Area","Uttara"};
-    public  static String[] arrSouthZone={"Azimpur","Bangabhaban","Bangshal","Basabo","Bijoy Nagar","Chawk Bazar",
-            "Demra","Dhanmondi","Dhanmondi","Elephant Road","Gendaria","Gulistan","Hazaribagh","Jatrabari","Kakrail",
-            "Kalabagan","Kamlapur","Keraniganj Sadar","Lalbagh","Matuail","Moghbazar","Motijheel","Nawabganj",
-            "New Market","Palamganj","Pallabi","Palton","Ramna","Rampura","Sabujbagh","Sarulia","Shahbagh","Shantinagar",
-            "Sutrapur","Wari"};
+    public static String[] arrNorthZone = {"Adabor", "Agargaon", "Asad Gate", "Badda", "Banani", "Baridhara",
+            "Bashundhara", "Dakshinkhan", "Darus Salam", "Dhaka- Cantonment", "Dhamrai", "Farmgate", "Gulshan 1", "Gulshan 2",
+            "Kallyanpur", "Karwan Bazar", "Khilgaon", "Khilkhet", "Kuril", "Mirpur 1", "Mirpur 10", "Mirpur 11-13", "Mirpur 60 Feet",
+            "Mirpur Cantonment", "Mirpur DOHS", "Mirpur Kazipara", "Mirpur Shewrapara", "Mohakhali", "Mohammadpur", "Monipur para", "Niketon",
+            "Sher-e-Bangla Nagar", "Shyamoli", "Tejgaon", "Tejgaon Industrial Area", "Uttara"};
+    public static String[] arrSouthZone = {"Azimpur", "Bangabhaban", "Bangshal", "Basabo", "Bijoy Nagar", "Chawk Bazar",
+            "Demra", "Dhanmondi", "Dhanmondi", "Elephant Road", "Gendaria", "Gulistan", "Hazaribagh", "Jatrabari", "Kakrail",
+            "Kalabagan", "Kamlapur", "Keraniganj Sadar", "Lalbagh", "Matuail", "Moghbazar", "Motijheel", "Nawabganj",
+            "New Market", "Palamganj", "Pallabi", "Palton", "Ramna", "Rampura", "Sabujbagh", "Sarulia", "Shahbagh", "Shantinagar",
+            "Sutrapur", "Wari"};
 
 
     /**
@@ -328,10 +337,11 @@ public interface AppConstt {
         public static final float MIN_DISTANCE_BW_UPDATES = 5;
     }
 
-    class ACTIONS{
+    class ACTIONS {
         public static final String SMS_RECEIVED = "com.urbanpoint.UrbanPoint.SMS_RECEIVED";
     }
-    class EXTRAS{
+
+    class EXTRAS {
         public static final String OTP_CODE = "OTP_CODE";
     }
 }
