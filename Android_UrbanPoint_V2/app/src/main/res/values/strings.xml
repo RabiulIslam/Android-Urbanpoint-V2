@@ -427,7 +427,7 @@
     <string name="finish">Finish</string>
     <string name="continue_button">Continue</string>
     <string name="sign_up_step_one_message">Hi! Nice to meet you, tell us your name</string>
-    <string name="sign_up_step_two_message">Are you Male or Female?</string>
+    <string name="sign_up_step_two_message">Are you Female or Male?</string>
     <string name="sign_up_step_three_message">Tell us your interests so that we can get you what you like</string>
 
     <string name="sign_up_step_four_message">Are you a Vodafone Qatar customer?</string>

@@ -134,7 +134,9 @@ public class SignUpFragmentStepOne extends Fragment implements View.OnClickListe
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 TextView textView = (TextView) mSignUpOccupation.getSelectedView();
-                textView.setTextColor(Color.WHITE);
+                if (textView != null) {
+                    textView.setTextColor(Color.WHITE);
+                }
                 occupation= getResources().getStringArray(R.array.occupation)[position];
             }
 

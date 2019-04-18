@@ -308,8 +308,9 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             proceedToHomeActivity();
         } else {
             if (lat != null && lng != null) {
-                if (getCountryName(lat, lng) != null){
-                    if (!getCountryName(lat, lng).equalsIgnoreCase("dhaka")) {
+                String location = getCountryName(lat, lng);
+                if (location != null){
+                    if (!location.equalsIgnoreCase("dhaka")) {
                         new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
                                 , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
                                     @Override
@@ -377,8 +378,9 @@ public class IntroActivity extends AppCompatActivity implements INavBarUpdateUpd
             proceedToSignUpActivity();
         } else {
             if (lat != null && lng != null) {
-                if (getCountryName(lat, lng) != null) {
-                    if (!getCountryName(lat, lng).equalsIgnoreCase("dhaka")) {
+                String location = getCountryName(lat, lng);
+                if (location != null) {
+                    if (!location.equalsIgnoreCase("dhaka")) {
                         new CustomAlert().showCustomDialog(this, getResources().getString(R.string.exit), getResources().getString(R.string.proceed)
                                 , getResources().getString(R.string.msg_not_dhake_city), new CustomAlertConfirmationInterface() {
                                     @Override

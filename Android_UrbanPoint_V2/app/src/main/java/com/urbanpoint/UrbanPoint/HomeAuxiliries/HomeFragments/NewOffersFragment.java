@@ -603,6 +603,7 @@ public class NewOffersFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Location   mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);

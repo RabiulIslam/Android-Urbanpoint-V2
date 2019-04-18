@@ -42,8 +42,8 @@ public interface ApiMethod {
         String readNotification = "readNotification";
         String updatePermission = "updatePermission";
 
-        String SEND_OTP = "sendOtp";
-        String VERIFY_OTP = "verifyOtp";
+        String SEND_OTP = "sendotp.php";
+        String VERIFY_OTP = "verifyotp.php";
      }
 
     interface PATCH {

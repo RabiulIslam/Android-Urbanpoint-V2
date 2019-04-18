@@ -18,8 +18,8 @@ android {
         applicationId "com.biyog.Biyog"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 11
-        versionName "1.11"
+        versionCode 13
+        versionName "1.13"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

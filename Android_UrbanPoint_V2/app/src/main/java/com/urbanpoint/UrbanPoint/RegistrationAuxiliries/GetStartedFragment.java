@@ -75,7 +75,7 @@ public class GetStartedFragment extends Fragment implements View.OnClickListener
                 fragmentTransaction.detach(this);
                 fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepOne());
 //                fragmentTransaction.replace(R.id.containerIntroFragments, new SignUpFragmentStepThree());
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
              //   MyApplication.getInstance().trackEvent(getString(R.string.ga_get_started_btn_click_category),getString(R.string.ga_get_started_btn_click_action),getString(R.string.ga_get_started_btn_click_action));
                 break;
             case R.id.loginButton:

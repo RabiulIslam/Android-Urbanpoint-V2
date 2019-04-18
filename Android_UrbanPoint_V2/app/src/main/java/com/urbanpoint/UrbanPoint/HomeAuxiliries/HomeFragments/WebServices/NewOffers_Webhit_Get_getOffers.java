@@ -86,7 +86,11 @@ public class NewOffers_Webhit_Get_getOffers {
                         Log.e("fvt_offers_error",error.getMessage()+"");
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
-                                iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
+                                if (mContext != null) {
+                                    iWebCallbacks.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));
+                                }else{
+                                    iWebCallbacks.onWebResult(false, "Network error, please try again.");
+                                }
                                 break;
 
                             case AppConstt.ServerStatus.CONFLICT:

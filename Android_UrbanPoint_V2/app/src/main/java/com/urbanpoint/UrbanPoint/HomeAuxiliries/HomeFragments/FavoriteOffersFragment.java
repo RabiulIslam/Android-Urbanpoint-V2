@@ -14,8 +14,10 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -27,6 +29,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,13 +62,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 import static android.support.v4.content.ContextCompat.checkSelfPermission;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteOffersFragment extends Fragment implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class FavoriteOffersFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private LocationRequest mLocationRequest;
     public GoogleApiClient mGoogleApiClient;
     final static int REQUEST_LOCATION = 199;
@@ -272,34 +274,29 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
 //                    }
 //                }
 
-                    if( AppConfig.getInstance().checkPermission(getActivity()))
-                    {
-                        Log.e("checkloc","1");
+                    if (AppConfig.getInstance().checkPermission(getActivity())) {
+                        Log.e("checkloc", "1");
                         if (AppConfig.getInstance().isLocationEnabled(getActivity())) {
-                            Log.e("checkloc","2");
+                            Log.e("checkloc", "2");
                             lat = GPSTracker.lat;
                             lng = GPSTracker.lng;
                             if (lat != 0) {
-                                Log.e("checkloc","3");
+                                Log.e("checkloc", "3");
                                 strSortBy = AppConstt.DEFAULT_VALUES.SORT_BY_LOCATION;
                                 requestNewOffers(page, strSortBy, lat, lng, true);
 
                             } else {
-                                Log.e("checkloc","4");
+                                Log.e("checkloc", "4");
 
                                 displayLocation();
                             }
-                        }
-                        else
-                        {
+                        } else {
                             turnGPSOn();
                             customAlert.showCustomAlertDialog(getActivity(), getString(R.string.gps_connection_heading), getString(R.string.gps_connection_message), null, null, false, null);
 //
 //                            GPSTracker.enqueueWork(getActivity(),new Intent());
                         }
-                    }
-                    else
-                    {
+                    } else {
                         requestPermission();
                     }
 
@@ -320,7 +317,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
     }
 
     private void requestNewOffers(int _page, String _sortBy, final double lat, double lng, boolean _shouldClearLst) {
-        if (_shouldClearLst) {
+        if (_shouldClearLst && getActivity() != null) {
             progressDilogue.startiOSLoader(getActivity(), R.drawable.image_for_rotation, getString(R.string.please_wait), false);
             lstNewOffers.clear();
             offersAdapter = null;
@@ -428,7 +425,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
         }
 
         boolean isDistanceRequired;
-        if (_lat>0) {
+        if (_lat > 0) {
             isDistanceRequired = true;
         } else {
             isDistanceRequired = false;
@@ -454,7 +451,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                     festival = "";
                 }
                 double distance;
-                if (NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getDistance() >0) {
+                if (NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getDistance() > 0) {
                     distance = (NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getDistance());
                 } else {
                     distance = -1;
@@ -471,7 +468,7 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getName(),
                         NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getSpecial(),
                         festival, (int) distance, isDistanceRequired,
-                        Float.parseFloat( NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getApproxSaving())
+                        Float.parseFloat(NewOffers_Webhit_Get_getOffers.responseObject.getData().get(i).getApproxSaving())
                 ));
             }
 
@@ -521,23 +518,15 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
     }
 
 
-
-
-
-
-
-
-
-    protected void createLocationRequest()
-    {
+    protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FATEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
-    protected synchronized void buildGoogleApiClient()
-    {
+
+    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -558,6 +547,18 @@ public class FavoriteOffersFragment extends Fragment implements View.OnClickList
                         if (mGoogleApiClient.isConnected()) {
 
 
+                            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+                                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+                                return;
+                            }
                             Location mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
                             if (mLocation == null) {

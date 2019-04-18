@@ -74,7 +74,6 @@ public class PhoneRegistrationApi {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                             error) {
-                        Log.e("apisendotp error == ", error.getMessage());
                         switch (statusCode) {
                             case AppConstt.ServerStatus.NETWORK_ERROR:
                                 iWebCallback.onWebResult(false, mContext.getResources().getString(R.string.MSG_ERROR_NETWORK));

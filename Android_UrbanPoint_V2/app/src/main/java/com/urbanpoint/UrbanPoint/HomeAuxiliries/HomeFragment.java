@@ -911,10 +911,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 Log.e("expiryDate", expiry_date.toString());
 
-                if (currDate.before(expiry_date) || currDate.equals(expiry_date)) {
-                    btnGainAccess.setVisibility(View.GONE);
-                } else {
-                    btnGainAccess.setVisibility(View.VISIBLE);
+                if (btnGainAccess != null) {
+                    if (currDate.before(expiry_date) || currDate.equals(expiry_date)) {
+                        btnGainAccess.setVisibility(View.GONE);
+                    } else {
+                        btnGainAccess.setVisibility(View.VISIBLE);
+                    }
                 }
             } /*else {
 
