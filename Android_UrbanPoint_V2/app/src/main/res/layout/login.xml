@@ -44,6 +44,7 @@
                 android:layout_gravity="center"
                 android:paddingBottom="@dimen/dp5"
                 android:paddingTop="@dimen/dp5"
+                android:imeOptions="actionNext"
                 android:background="@drawable/custom_round_button"
                 android:contentDescription="@string/enter_email_message"
                 android:inputType="textEmailAddress"
@@ -81,7 +82,7 @@
                     app:applyDigitTextSize="true"
                     app:digitBackground="@drawable/pin_custom_square_button"
                     app:digitHeight="@dimen/dp35"
-
+                    app:numDigits="4"
                     app:digitSpacing="@dimen/dp15"
                     app:digitTextColor="@color/white"
                     app:digitTextSize="@dimen/dp8"

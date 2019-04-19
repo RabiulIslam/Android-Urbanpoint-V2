@@ -18,8 +18,8 @@ android {
         applicationId "com.biyog.Biyog"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 13
-        versionName "1.13"
+        versionCode 14
+        versionName "1.14"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -57,7 +57,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.mikhaellopez:circularimageview:3.0.1'
     implementation 'com.loopj.android:android-async-http:1.4.9'
-    implementation 'com.hbb20:ccp:1.8'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'

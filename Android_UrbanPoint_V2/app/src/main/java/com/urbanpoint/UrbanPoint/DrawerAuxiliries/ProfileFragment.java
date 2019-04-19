@@ -108,7 +108,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
         if (phoneNo != null && countryCode != null && !phoneNo.isEmpty()) {
-            edtPhone.setText("+" + countryCode + " " + phoneNo);
+            edtPhone.setText("+" + countryCode + phoneNo);
         }
 
         //edtPhone.setText(AppConfig.getInstance().mUser.getmPhoneNumber());

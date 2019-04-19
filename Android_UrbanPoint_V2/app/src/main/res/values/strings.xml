@@ -524,11 +524,7 @@
 
     <string name="grupup_msg">Verify your phone number. </string>
     <string name="confirm">Confirm</string>
-    <string name="phone_dialog_title">
-        Hi, we see that there is no phone number
-        on file, please update your contact details
-        below
-    </string>
+    <string name="phone_dialog_title">Please enter your number below</string>
     <string name="thank_you">Thank you</string>
     <string name="resend_sms">Resend SMS</string>
     <string name="change_phone_number">Want to update Number?</string>

@@ -1,19 +1,11 @@
 package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,16 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.credentials.Credential;
-import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.common.ConnectionResult;
@@ -41,13 +29,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import com.hbb20.CountryCodePicker;
-import com.uber.sdk.android.core.auth.LoginActivity;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ProfileFragment;
-import com.urbanpoint.UrbanPoint.IntroActivity;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.PhoneRegistrationApi;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.SignupActivity;
@@ -56,22 +40,20 @@ import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
-
-import static android.app.Activity.RESULT_OK;
+import com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView;
 
 public class PhoneVerificationFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
     // private SMSBroadcastReceiver receiver;
     ProgressDilogue progressDilogue;
-    private EditText phoneNumberCodeInput, phoneNumberInput;
+    private EditText phoneNumberCodeInput;
+    private PinEntryView pinEntryPhNumber;
     private Button confirmButton, confirmButtonSMSCode;
     private Button resendSms, changeNumber, skip;
     private ViewSwitcher viewSwitcher;
-    private CountryCodePicker ccp;
+    private TextView ccp;
     CustomAlert customAlert;
-    private int RC_HINT = 2;
-    private GoogleApiClient apiClient;
     String phoneNo;
 
     public PhoneVerificationFragment() {
@@ -97,9 +79,9 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
         customAlert = new CustomAlert();
         viewSwitcher = (ViewSwitcher) view.findViewById(R.id.viewSwitcher);
         changeNumber = (Button) view.findViewById(R.id.btnchangenumber);
-        ccp = (CountryCodePicker) view.findViewById(R.id.ccp);
+        ccp = (TextView) view.findViewById(R.id.ccp);
         skip = (Button) view.findViewById(R.id.skip);
-        phoneNumberInput = (EditText) view.findViewById(R.id.editTextDialogPhoneInput);
+        pinEntryPhNumber = (PinEntryView) view.findViewById(R.id.pinEntryPhNumber);
         phoneNumberCodeInput = (EditText) view.findViewById(R.id.editTextDialogSMSCode);
         confirmButton = (Button) view.findViewById(R.id.btnphoneconfirm);
         confirmButtonSMSCode = (Button) view.findViewById(R.id.btnphoneconfirmSMSCode);
@@ -127,13 +109,14 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
         }
 
         if (phNo != null) {
-            phoneNumberInput.setText(phoneNo);
+           // phoneNumberInput.setText(phoneNo);
         }
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(phoneNumberInput.getText().toString())) {
+                String cNumber = pinEntryPhNumber.getText().toString();
+                if (!TextUtils.isEmpty(cNumber)) {
                     sendPhoneNo();
                 }
             }
@@ -141,12 +124,13 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
         resendSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(phoneNumberInput.getText().toString())) {
+                String cNumber = pinEntryPhNumber.getText().toString();
+                if (!TextUtils.isEmpty(cNumber)) {
                     sendPhoneNo();
                 }
             }
         });
-        phoneNumberInput.addTextChangedListener(new TextWatcher() {
+        pinEntryPhNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -191,26 +175,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                 navToMainActivity();
             }
         });
-        if (apiClient != null) {
-            apiClient = new GoogleApiClient.Builder(getActivity())
-                    .addConnectionCallbacks(this)
-                    .enableAutoManage(getActivity(), this)
-                    .addApi(Auth.CREDENTIALS_API)
-                    .build();
-        }
         return view;
-    }
-
-    // Obtain the phone number from the result
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_HINT) {
-            if (resultCode == RESULT_OK) {
-                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
-                phoneNumberInput.setText(credential.getId());
-            }
-        }
     }
 
     private void sendPhoneNo() {
@@ -224,7 +189,7 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
                 progressDilogue.stopiOSLoader();
                 if (isSuccess) {
                     /*Changes by Rashmi VPN*/
-                    String phoneNumber = ccp.getSelectedCountryCode() + phoneNumberInput.getText().toString();
+                    String phoneNumber = getPhoneNumber();
                     Log.e("phone number", "" + phoneNumber);
 
                     AppConfig.getInstance().mUser.setmPhoneNumber(phoneNumber);
@@ -359,11 +324,11 @@ public class PhoneVerificationFragment extends Fragment implements View.OnClickL
     }
 
     private String getPhoneNumber() {
-        String phoneNumber = ccp.getSelectedCountryCode() + phoneNumberInput.getText().toString();
+        String BDCode = "88";
+        String cNumber =pinEntryPhNumber.getText().toString();
+        String phoneNumber = BDCode + cNumber;
         Log.e("phone number", "" + phoneNumber);
 
-//        AppConfig.getInstance().mUser.setmPhoneNumber(phoneNumber);
-//        AppConfig.getInstance().saveUserData();
         return phoneNumber;
     }
 
