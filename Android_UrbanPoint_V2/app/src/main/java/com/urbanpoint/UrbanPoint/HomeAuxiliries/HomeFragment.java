@@ -943,10 +943,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }
         //Updating Favorites Badge
-        if (AppConfig.getInstance().mUserBadges.getFavoriteCount() > 0) {
-            imvFavorite.setVisibility(View.VISIBLE);
-        } else {
-            imvFavorite.setVisibility(View.GONE);
+        if (imvFavorite != null) {
+            if (AppConfig.getInstance().mUserBadges.getFavoriteCount() > 0) {
+                imvFavorite.setVisibility(View.VISIBLE);
+            } else {
+                imvFavorite.setVisibility(View.GONE);
+            }
         }
 
         //Updatisng UnRead Notification Badge
