@@ -1,23 +1,18 @@
 package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 
-import android.Manifest;
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,14 +24,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 //import com.facebook.appevents.AppEventsLogger;
 //import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.DrawerAuxiliries.ProfileFragment;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.SignUpVerificationFragment;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_addUser;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_checkPhoneEmail;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Post_verifyEmail;
 import com.urbanpoint.UrbanPoint.MainActivity;
@@ -56,16 +48,8 @@ import com.urbanpoint.UrbanPoint.Utils.Utility;
 //import com.urbanpoint.UrbanPoint.managers.categoryScreens.MerchantManager;
 //import com.urbanpoint.UrbanPoint.utils.AppPreference;
 //import com.urbanpoint.UrbanPoint.utils.Constants;
-import com.urbanpoint.UrbanPoint.Utils.Utility;
-import com.urbanpoint.UrbanPoint.MyApplication;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * A simple {@link Fragment} subclass.

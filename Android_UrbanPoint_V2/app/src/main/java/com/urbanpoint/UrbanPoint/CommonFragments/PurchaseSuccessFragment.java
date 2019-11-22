@@ -1,8 +1,8 @@
 package com.urbanpoint.UrbanPoint.CommonFragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +25,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
  * Created by Danish on 3/7/2018.

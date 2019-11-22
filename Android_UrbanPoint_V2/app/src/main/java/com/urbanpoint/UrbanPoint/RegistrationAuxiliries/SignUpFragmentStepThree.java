@@ -3,12 +3,11 @@ package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import android.widget.TextView;
 
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
-import com.urbanpoint.UrbanPoint.Utils.AppConstt;
-import com.urbanpoint.UrbanPoint.Utils.AppInstance;
 import com.urbanpoint.UrbanPoint.Utils.HoloCircleSeekBar;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 //import com.urbanpoint.UrbanPoint.dataobject.AppInstance;

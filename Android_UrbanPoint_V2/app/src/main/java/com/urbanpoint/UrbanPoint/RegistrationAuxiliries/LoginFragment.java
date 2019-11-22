@@ -4,10 +4,10 @@ package com.urbanpoint.UrbanPoint.RegistrationAuxiliries;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,12 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 //
 //import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.FCMAuxiliries.FirebaseInstanceId;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.ForgotPasswordFragment;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
@@ -32,17 +30,12 @@ import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
 import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
-import com.urbanpoint.UrbanPoint.Utils.PinEntry;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 import com.urbanpoint.UrbanPoint.Utils.Utility;
 import com.urbanpoint.UrbanPoint.customViews.pinEntry.PinEntryView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
  * A simple {@link Fragment} subclass.

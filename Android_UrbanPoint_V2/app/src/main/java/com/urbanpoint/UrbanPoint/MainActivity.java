@@ -1,21 +1,18 @@
 package com.urbanpoint.UrbanPoint;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements INavBarUpdateUpda
     private LinearLayout llDrawerMenu;
     private FragmentManager mFrgmgr;
     private LinearLayout llToolBarContainer, llHome, llInviteFriends, llProfile, llHowToUse, llMyReviews, llAccessCode, llUnSubscribe, llPurchaseHistory, llContactUs, llLogout;
-    android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
+    androidx.appcompat.app.ActionBarDrawerToggle mDrawerToggle;
 
     CustomAlert customAlert;
     ProgressDilogue progressDilogue;

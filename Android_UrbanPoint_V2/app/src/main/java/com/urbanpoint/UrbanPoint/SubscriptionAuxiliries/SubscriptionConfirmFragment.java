@@ -1,9 +1,9 @@
 package com.urbanpoint.UrbanPoint.SubscriptionAuxiliries;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.Signup_WEbhit_Post_validateCode;
-import com.urbanpoint.UrbanPoint.SubscriptionAuxiliries.WebServices.Subscribe_WebHit_Post_subscribe;
 import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignUp_WebHit_Get_sendMT;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;

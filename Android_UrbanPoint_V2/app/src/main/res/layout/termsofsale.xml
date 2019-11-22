@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/app_br_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -49,7 +49,7 @@
                 android:textSize="@dimen/fontsize_medium" />
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"

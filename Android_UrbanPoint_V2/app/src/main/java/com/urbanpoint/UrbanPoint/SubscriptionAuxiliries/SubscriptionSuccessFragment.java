@@ -1,9 +1,9 @@
 package com.urbanpoint.UrbanPoint.SubscriptionAuxiliries;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +11,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 //import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
-import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.INavBarUpdateUpdateListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
  * Created by Danish on 2/19/2018.

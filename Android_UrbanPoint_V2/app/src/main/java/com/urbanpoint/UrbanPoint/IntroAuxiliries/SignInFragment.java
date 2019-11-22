@@ -3,9 +3,9 @@ package com.urbanpoint.UrbanPoint.IntroAuxiliries;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,23 +17,16 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 //import com.mixpanel.android.mpmetrics.MixpanelAPI;
-import com.urbanpoint.UrbanPoint.HomeAuxiliries.WebViewFragment;
-import com.urbanpoint.UrbanPoint.IntroAuxiliries.WebServices.SignIn_WebHit_Post_signIn;
 import com.urbanpoint.UrbanPoint.MainActivity;
 import com.urbanpoint.UrbanPoint.R;
 import com.urbanpoint.UrbanPoint.Utils.AppConfig;
 import com.urbanpoint.UrbanPoint.Utils.AppConstt;
 import com.urbanpoint.UrbanPoint.Utils.CustomAlert;
-import com.urbanpoint.UrbanPoint.Utils.IWebCallbacks;
 import com.urbanpoint.UrbanPoint.Utils.PinEntry;
 import com.urbanpoint.UrbanPoint.Utils.ProgressDilogue;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.urbanpoint.UrbanPoint.Utils.AppConstt.MIXPANEL_TOKEN;
 
 /**
  * A simple {@link Fragment} subclass.

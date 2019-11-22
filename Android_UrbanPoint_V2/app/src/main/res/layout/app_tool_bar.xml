@@ -7,7 +7,7 @@
     android:background="@color/transparent"
     android:fitsSystemWindows="true">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/app_br_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -101,7 +101,7 @@
         </RelativeLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:layout_width="match_parent"
