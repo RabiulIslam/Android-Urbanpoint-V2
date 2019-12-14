@@ -48,14 +48,12 @@ public class GatewayCallbackActivity extends AppCompatActivity {
                     } else {
                         switch (txnstatus) {
                             case "1000":
-//                                    TransactionDetails.setText("Transaction Success");
-                                //        finish();
-                                if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("114.98")) {
-                                    type = "1";
-                                } else if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("688.85")) {
-                                    type = "2";
-                                } else {
+                                if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("199.99")) {
                                     type = "3";
+                                } else if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("599.00")) {
+                                    type = "4";
+                                } else if (jsonObject.getString("merchant_req_amount").equalsIgnoreCase("1199.00")) {
+                                    type = "5";
                                 }
 
                                 String date = jsonObject.getString("txn_time");
@@ -75,7 +73,6 @@ public class GatewayCallbackActivity extends AppCompatActivity {
                                 break;
                         }
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
 //                        TransactionDetails.setText("exception:" + e.getMessage());
@@ -92,9 +89,6 @@ public class GatewayCallbackActivity extends AppCompatActivity {
                 progressDilogue.stopiOSLoader();
                 Log.e("subsribe responseee", isSuccess + "," + strMsg);
                 if (isSuccess) {
-//                    if (AppConfig.getInstance().mUser.isEligible()) {
-//                        navToSubscriptionEligibleSuccessFragment();
-//                    } else {
                     Log.e("successss", isSuccess + " resbool");
                     AppConfig.getInstance().isCommingFromSplash = true;
                     Intent i = new Intent(GatewayCallbackActivity.this, PaymentSuccess.class);

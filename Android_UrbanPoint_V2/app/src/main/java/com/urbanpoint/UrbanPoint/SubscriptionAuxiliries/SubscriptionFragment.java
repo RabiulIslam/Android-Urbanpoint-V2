@@ -70,8 +70,7 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         return v;
     }
 
-    private void updateSubscriptionLists()
-    {
+    private void updateSubscriptionLists(){
         if (Home_WebHit_Post_homeApi.responseObject != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1() != null &&
                 Home_WebHit_Post_homeApi.responseObject.getData().getDefaults().getSubscriptionText1().size() > 0) {
@@ -143,29 +142,29 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.frg_subscription_btn1:
-                in.putExtra("type","1");
-                in.putExtra("subtotal","Tk 99.99");
+                in.putExtra("type","3");
+                in.putExtra("subtotal", getResources().getString(R.string.monthly_price));
                 in.putExtra("package","Monthly");
-                in.putExtra("vat","Tk 14.99");
-                in.putExtra("total","Tk 114.98");
+                //in.putExtra("vat","Tk 14.99");
+                in.putExtra("total", getResources().getString(R.string.monthly_price));
                 startActivity(in);
                // ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn2:
-                in.putExtra("type","2");
-                in.putExtra("subtotal","Tk 599.00");
+                in.putExtra("type","4");
+                in.putExtra("subtotal", getResources().getString(R.string.half_yearly_price));
                 in.putExtra("package","Half Yearly");
-                in.putExtra("vat","Tk 89.85");
-                in.putExtra("total","Tk 688.85");
+                //in.putExtra("vat","Tk 89.85");
+                in.putExtra("total", getResources().getString(R.string.half_yearly_price));
                 startActivity(in);
               //  ((MainActivity)getActivity()).finish();
                 break;
             case R.id.frg_subscription_btn3:
-                in.putExtra("type","3");
-                in.putExtra("subtotal","Tk 1099.00");
+                in.putExtra("type","5");
+                in.putExtra("subtotal", getResources().getString(R.string.yearly_price));
                 in.putExtra("package","Yearly");
-                in.putExtra("vat","Tk 164.85");
-                in.putExtra("total","Tk 1263.85");
+                //in.putExtra("vat","Tk 164.85");
+                in.putExtra("total", getResources().getString(R.string.yearly_price));
                 startActivity(in);
               //  ((MainActivity)getActivity()).finish();
 
@@ -192,7 +191,6 @@ public class SubscriptionFragment extends Fragment implements View.OnClickListen
         ft.addToBackStack(AppConstt.FRGTAG.SubscriptionConfirmFragment);
         ft.hide(this);
         ft.commit();
-
     }
 
     public void navToAccessCodeFragment(Bundle _b) {

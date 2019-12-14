@@ -83,7 +83,7 @@ public class OrderDetail extends Fragment implements View.OnClickListener {
         OrderDate=(TextView)view.findViewById(R.id.tv_orderdate);
         Total=(TextView)view.findViewById(R.id.tv_total);
         Subtotal=(TextView)view.findViewById(R.id.tv_subtotal);
-        Vat=(TextView)view.findViewById(R.id.tv_vat);
+        //Vat=(TextView)view.findViewById(R.id.tv_vat);
         Agree=(CheckBox)view.findViewById(R.id.agree_checkbox);
         et_Address=(EditText)view.findViewById(R.id.et_address);
         ProceedPayment=(Button)view.findViewById(R.id.btn_payment);
@@ -114,7 +114,7 @@ public class OrderDetail extends Fragment implements View.OnClickListener {
         }
         Cell.setText(AppConfig.getInstance().mUser.getmPhoneNumber());
         Package.setText(getArguments().getString("package"));
-        Vat.setText(getArguments().getString("vat"));
+        //Vat.setText(getArguments().getString("vat"));
         Subtotal.setText(getArguments().getString("subtotal"));
         Total.setText(getArguments().getString("total"));
 

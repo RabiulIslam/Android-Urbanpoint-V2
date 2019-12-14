@@ -130,8 +130,8 @@ public class WebViewFragment extends Fragment implements View.OnClickListener {
 
         else if (strExtra.equalsIgnoreCase(AppConstt.REFER_AND_EARN))
         {
-            webView.loadUrl("file:///android_asset/refer_earn.html");
-            strTitle = "Refer & Earn";
+            webView.loadUrl("file:///android_asset/Refer_Unlock.html");
+            strTitle = "Refer & Unlock";
             imvBack1.setVisibility(View.GONE);
             try
             {

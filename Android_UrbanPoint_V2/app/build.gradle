@@ -12,17 +12,16 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.biyog.Biyog"
         minSdkVersion 18
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.15"
+        versionCode 16
+        versionName "1.16"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {

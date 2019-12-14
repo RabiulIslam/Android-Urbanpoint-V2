@@ -46,17 +46,16 @@ public class PaymentSuccess extends AppCompatActivity
     private void updateSubscriptionLists() {
 
         lstStrings = new ArrayList();
-        if (getIntent().getStringExtra("type").equalsIgnoreCase("1"))
-        {
+        if (getIntent().getStringExtra("type").equalsIgnoreCase("1")){
             lstStrings.add("You are now subscribed for today to\nBiyog!");
-        }
-        else if (getIntent().getStringExtra("type").equalsIgnoreCase("2"))
-        {
+        }else if (getIntent().getStringExtra("type").equalsIgnoreCase("2")){
             lstStrings.add("You are now subscribed for 1 week to\nBiyog!");
-        }
-        else
-        {
+        }else if (getIntent().getStringExtra("type").equalsIgnoreCase("3")){
             lstStrings.add("You are now subscribed for 1 month to\nBiyog!");
+        }else if (getIntent().getStringExtra("type").equalsIgnoreCase("4")){
+            lstStrings.add("You are now subscribed for 6 months to\nBiyog!");
+        }else if (getIntent().getStringExtra("type").equalsIgnoreCase("5")){
+            lstStrings.add("You are now subscribed for 1 year to\nBiyog!");
         }
 
         lstStrings.add(getString(R.string.subscription_eligible_success_enjoy));

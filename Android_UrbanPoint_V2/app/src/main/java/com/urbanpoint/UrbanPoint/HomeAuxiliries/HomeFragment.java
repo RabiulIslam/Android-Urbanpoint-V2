@@ -592,7 +592,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onWebLogout() {
                 progressDilogue.stopiOSLoader();
-
             }
         }, _fcmToken);
     }
@@ -881,10 +880,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (btnGainAccess != null) {
             if (AppConfig.getInstance().mUser.isSubscribed) {
-                Log.e("test", "1");
                 btnGainAccess.setVisibility(View.GONE);
             } else {
-                Log.e("test", "2");
                 btnGainAccess.setVisibility(View.VISIBLE);
             }
         }
@@ -901,7 +898,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         try {
-
             Date currDate = dateFormat.parse(dateFormat.format(current_date));
 
             if (expirydate != null) {

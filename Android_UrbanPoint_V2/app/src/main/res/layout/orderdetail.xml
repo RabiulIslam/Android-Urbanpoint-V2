@@ -384,7 +384,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp15" />
         </RelativeLayout>
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:layout_marginTop="7dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/dp20"
@@ -409,7 +409,7 @@
                 android:id="@+id/tv_vat"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp15" />
-        </RelativeLayout>
+        </RelativeLayout>-->
         <View
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

@@ -112,7 +112,7 @@ public class ProgressDilogue {
             wlmp.gravity = Gravity.CENTER_HORIZONTAL;
             getWindow().setAttributes(wlmp);
             setTitle(null);
-            setCancelable(false);
+            setCancelable(true);
             setOnCancelListener(null);
             setContentView(R.layout.custome_progresslayout);
         }

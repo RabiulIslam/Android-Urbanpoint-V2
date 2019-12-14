@@ -57,7 +57,7 @@ public class ActivityOrderDetail extends AppCompatActivity implements View.OnCli
         OrderDate = (TextView) findViewById(R.id.tv_orderdate);
         Total = (TextView) findViewById(R.id.tv_total);
         Subtotal = (TextView) findViewById(R.id.tv_subtotal);
-        Vat = (TextView) findViewById(R.id.tv_vat);
+        //Vat = (TextView) findViewById(R.id.tv_vat);
         Agree = (CheckBox) findViewById(R.id.agree_checkbox);
         et_Address = (EditText) findViewById(R.id.et_address);
         ProceedPayment = (Button) findViewById(R.id.btn_payment);
@@ -84,7 +84,7 @@ public class ActivityOrderDetail extends AppCompatActivity implements View.OnCli
         }
         Cell.setText(AppConfig.getInstance().mUser.getmPhoneNumber());
         Package.setText(getIntent().getStringExtra("package"));
-        Vat.setText(getIntent().getStringExtra("vat"));
+        //Vat.setText(getIntent().getStringExtra("vat"));
         Subtotal.setText(getIntent().getStringExtra("subtotal"));
         Total.setText(getIntent().getStringExtra("total"));
 
@@ -157,7 +157,7 @@ public class ActivityOrderDetail extends AppCompatActivity implements View.OnCli
     private void proceedToPayment() {
 
         String totalprice = getIntent().getStringExtra("total");
-        totalprice = totalprice.replace("Tk ", "");
+        totalprice = totalprice.replace("Tk.", "");
         Log.e("total", totalprice);
         WalletmixOnlinePaymentGateway payment = new WalletmixOnlinePaymentGateway(ActivityOrderDetail.this);
         payment.setTransactionInformation(getString(R.string.merchant_id), getString(R.string.merchant_username),

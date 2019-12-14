@@ -434,25 +434,44 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp1"
-        android:layout_above="@+id/frg_offer_detail_txv_expiry"
-        android:background="@color/gray" />
-
-    <TextView
-        android:id="@+id/frg_offer_detail_txv_expiry"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp30"
+    <LinearLayout
+        android:id="@+id/llBottom"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:includeFontPadding="false"
-        android:visibility="gone"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingStart="@dimen/dp10"
-        android:paddingTop="@dimen/dp5"
-        android:text="@string/txt_expiry"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp14" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:background="@color/gray" />
 
+        <TextView
+            android:id="@+id/frg_offer_detail_txv_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp30"
+            android:background="@color/white"
+            android:includeFontPadding="false"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/dp5"
+            android:paddingStart="@dimen/dp10"
+            android:paddingTop="@dimen/dp5"
+            android:text="@string/txt_expiry"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp14" />
+        <Button
+            android:textColor="@color/white"
+            android:id="@+id/frg_home_btn_gain_access"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="@dimen/dp20"
+            android:paddingRight="@dimen/dp20"
+            android:textSize="@dimen/sp14"
+            android:fontFamily="@font/opensans_regular"
+            android:background="@drawable/rounded_edge_purple_button"
+            android:text="@string/unlock_offers" />
+    </LinearLayout>
 </RelativeLayout>

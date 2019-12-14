@@ -61,7 +61,6 @@
                         android:gravity="start"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:text="rgfg dg d gdf gd d fd gfd gf ggd"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/sp16"
                         android:visibility="visible" />
@@ -95,16 +94,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dp10"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:weightSum="3">
 
                     <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_gravity="bottom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:padding="@dimen/dp10"
+                        android:paddingStart="@dimen/dp5"
                         android:orientation="vertical">
 
                         <RelativeLayout
@@ -158,23 +158,23 @@
                             android:background="@drawable/orange_gadient_rectngle_rounded"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/select"
+                            android:text="@string/unlock_offers"
                             android:textColor="@color/white"
                             android:textSize="@dimen/fontsize_normal" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="15dp"
-                        android:padding="@dimen/dp10"
+                        android:layout_gravity="bottom"
+                        android:paddingStart="@dimen/dp5"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_height="wrap_content">
 
                             <TextView
@@ -183,8 +183,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:fontFamily="@font/opensans_regular"
-                                android:paddingLeft="@dimen/dp15"
-                                android:paddingRight="@dimen/dp15"
+                                android:paddingLeft="@dimen/dp10"
+                                android:paddingRight="@dimen/dp10"
                                 android:text="@string/_seventy"
                                 android:textColor="@color/gray_bg"
                                 android:textSize="@dimen/fontsize_normal" />
@@ -223,22 +223,24 @@
                             android:background="@drawable/orange_gadient_rectngle_rounded"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/select"
+                            android:text="@string/unlock_offers"
                             android:textColor="@color/white"
                             android:textSize="@dimen/fontsize_normal" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:padding="@dimen/dp10"
+                        android:paddingStart="@dimen/dp5"
+                        android:paddingEnd="@dimen/dp5"
+                        android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_height="wrap_content">
 
                             <TextView
@@ -247,9 +249,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:fontFamily="@font/opensans_regular"
-                                android:paddingLeft="@dimen/dp15"
-                                android:paddingRight="@dimen/dp15"
-                                android:text="@string/_300"
+                                android:paddingLeft="@dimen/dp10"
+                                android:paddingRight="@dimen/dp10"
+                                android:text="@string/_2400"
                                 android:textColor="@color/gray_bg"
                                 android:textSize="@dimen/fontsize_normal" />
 
@@ -288,7 +290,7 @@
                             android:background="@drawable/orange_gadient_rectngle_rounded"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/select"
+                            android:text="@string/unlock_offers"
                             android:textColor="@color/white"
                             android:textSize="@dimen/fontsize_normal" />
                     </LinearLayout>
@@ -308,7 +310,7 @@
                     android:textSize="@dimen/fontsize_mini"
                     android:textStyle="normal" />
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/tv_additional_vat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -318,7 +320,7 @@
                     android:text="@string/additional_vat"
                     android:textColor="@color/gray_bg"
                     android:textSize="@dimen/fontsize_mini"
-                    android:textStyle="normal" />
+                    android:textStyle="normal" />-->
                 <!--<LinearLayout-->
                 <!--android:layout_alignLeft="@+id/layout"-->
                 <!--android:layout_alignRight="@+id/layout"-->
@@ -333,7 +335,7 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/tv_additional_vat"
+                    android:layout_below="@+id/tv_condition_applies"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="25dp"
                     android:layout_weight="0.2"

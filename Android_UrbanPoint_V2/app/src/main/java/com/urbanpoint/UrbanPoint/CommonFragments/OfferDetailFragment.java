@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -56,7 +57,7 @@ import java.util.Locale;
 public class OfferDetailFragment extends Fragment implements View.OnClickListener {
 
     private ImageView imvProduct, imvGetItLock;
-    private Button btnCall, btnDirection, btnShare, btnGetIt, btnAddToFav, btnSavedtoFavs;
+    private Button btnCall, btnDirection, btnShare, btnGetIt, btnAddToFav, btnSavedtoFavs, btnGainAccess;;
     TextView txvOfferTitle, txvProductName, txvMerchantAddress, txvDescriptionTitle, txvDescription, txvTitleWhatYouNeed,
             txvApproxSaving, txvApproxSavingPrice, txvValidFor, txvAllOfferSubject, txvRulesOfPurchase, txvTimingTitle, txvTiming, txvExpiryTime;
     private CircularImageView imvMerchant;
@@ -83,7 +84,11 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
         View v = inflater.inflate(R.layout.fragment_offer_detail, container, false);
         initiate();
         bindViews(v);
-
+        if (AppConfig.getInstance().mUser.isSubscribed) {
+            btnGainAccess.setVisibility(View.GONE);
+        } else {
+            btnGainAccess.setVisibility(View.VISIBLE);
+        }
         try {
             iNavBarUpdateUpdateListener = (INavBarUpdateUpdateListener) getActivity();
         } catch (ClassCastException e) {
@@ -217,8 +222,9 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
         txvTimingTitle = v.findViewById(R.id.frg_offer_detail_txv_timing_text);
         txvTiming = v.findViewById(R.id.frg_offer_detail_txv_timing_value);
         txvExpiryTime = v.findViewById(R.id.frg_offer_detail_txv_expiry);
+        btnGainAccess = v.findViewById(R.id.frg_home_btn_gain_access);
 
-
+        btnGainAccess.setOnClickListener(this);
         btnCall.setOnClickListener(this);
         btnDirection.setOnClickListener(this);
         btnShare.setOnClickListener(this);
@@ -231,6 +237,12 @@ public class OfferDetailFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.frg_home_btn_gain_access:
+                String phone = AppConfig.getInstance().mUser.getmPhoneNumber();
+                Log.d("PHONECHECKER", "onClick: " + phone);
+                AppConfig.getInstance().mUser.setEligible(false);
+                navToSubscriptionFragment();
+                break;
             case R.id.frg_offer_detail_imvMerchant:
                 Bundle b = new Bundle();
                 b.putInt(AppConstt.BundleStrings.outletId, Integer.parseInt(outletId));

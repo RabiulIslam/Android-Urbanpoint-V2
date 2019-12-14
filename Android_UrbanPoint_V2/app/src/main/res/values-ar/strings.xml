@@ -357,7 +357,7 @@
 
 
     <!--Home Screen-->
-    <string name="unlock_offers">&#160; &#160;Gain Access&#160; &#160;</string>
+    <string name="unlock_offers">&#160;Buy Now&#160;</string>
     <string name="home_screem_member">Already a member?</string>
     <string name="home_screen_you_can_use_again">Special offers this month</string>
     <string name="home_screen_our_member_loved">Most loved by our members</string>

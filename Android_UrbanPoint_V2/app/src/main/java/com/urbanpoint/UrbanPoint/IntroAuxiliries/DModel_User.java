@@ -15,7 +15,7 @@ public class DModel_User {
     public boolean isNationalityLstDisplyd;
     public String mPinCode;
     public String mNetworkType;
-    public String mPhoneNumber;
+    public String mPhoneNumber = "0";
     public String mAuthorizationToken;
     public String mFCMToken;
     public float mAppVersion;

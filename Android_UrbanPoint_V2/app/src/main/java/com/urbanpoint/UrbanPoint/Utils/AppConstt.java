@@ -3,23 +3,28 @@ package com.urbanpoint.UrbanPoint.Utils;
 
 public interface AppConstt {
 
-    //   Live Server
-    //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
+    //   Production Server
+    String BASE_URL_OTP = "https://cms.biyog.com/sms_gateway/api/";
+    String BASE_URL = "https://cms.biyog.com/up_qatar/api/v1/";
+
+    //    DEV Server
+//    String BASE_URL_OTP = "http://52.10.227.27/sms_gateway/api/";
+//    String BASE_URL = "http://52.10.227.27/up_qatar/api/v1/";
+
+
 
     //    DEV Server
 //     String BASE_URL="http://34.219.2.69/up_qatar/api/v1/";
 //     String BASE_URL_OTP="http://34.219.2.69:9010/api/";
     //   Production Server
     //String BASE_URL_OTP = "http://52.37.72.27:9010/sms_gateway/api/";
-    String BASE_URL_OTP = "https://cms.biyog.com/sms_gateway/api/";
-    String BASE_URL = "https://cms.biyog.com/up_qatar/api/v1/";
 
 //    String BASE_URL_OTP = "http://34.218.241.37:9010/api/";
 //    String BASE_URL = "http://34.218.241.37/up_qatar/api/v1/";
-
     //String BASE_URL_OTP = "http://52.10.227.27:9010/api/";
-//    String BASE_URL_OTP = "http://52.10.227.27/sms_gateway/api/";
-//    String BASE_URL = "http://52.10.227.27/up_qatar/api/v1/";
+
+    //   Live Server
+    //  String BASE_URL = "http://18.185.217.28/up_qatar/api/v1/";
 
     //VPN
 //    String BASE_URL_OTP = "http://192.168.29.214:3000/api/";
@@ -48,7 +53,7 @@ public interface AppConstt {
     public static final String LOGIN_RULES = "privacyStatementAndTermsofUseBiyog.html";
     public static final String REDEEM_RULES = "Rules_of_Purchase.html";
     public static final String TERMS_OF_SALES = "Terms_of_Sales.html";
-    public static final String REFER_AND_EARN = "Refer &amp; Earn";
+    public static final String REFER_AND_EARN = "Refer_Unlock";
     String ARABIC = "ar";
     String ENGLISH = "en";
     static String DeviceType = "android";

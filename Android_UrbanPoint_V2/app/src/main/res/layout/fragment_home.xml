@@ -401,7 +401,6 @@
                                 android:background="@drawable/orange_gadient_rectngle_rounded"
                                 android:contentDescription="@string/unlock_offers"
                                 android:gravity="center"
-                                android:padding="@dimen/dp5"
                                 android:paddingLeft="20dp"
                                 android:paddingRight="20dp"
                                 android:text="@string/unlock_offers"
